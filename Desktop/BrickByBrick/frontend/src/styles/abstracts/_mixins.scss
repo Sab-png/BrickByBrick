@@ -1,4 +1,4 @@
-@import 'variables';
+@use 'variables' as v;
 
 // Flexbox
 @mixin flex-center {
@@ -20,29 +20,29 @@
 
 // Responsive
 @mixin mobile {
-    @media (max-width: #{$breakpoint-tablet - 1}) {
+    @media (max-width: #{v.$breakpoint-tablet - 1}) {
         @content;
     }
 }
 
 @mixin tablet {
-    @media (min-width: #{$breakpoint-tablet}) {
+    @media (min-width: #{v.$breakpoint-tablet}) {
         @content;
     }
 }
 
 @mixin desktop {
-    @media (min-width: #{$breakpoint-desktop}) {
+    @media (min-width: #{v.$breakpoint-desktop}) {
         @content;
     }
 }
 
 // Typography
 @mixin heading($size, $weight: $font-weight-bold) {
-    font-family: $font-title;
+    font-family: v.$font-title;
     font-size: $size;
     font-weight: $weight;
-    line-height: $line-height-tight;
+    line-height: v.$line-height-tight;
 }
 
 @mixin text-truncate {
@@ -128,7 +128,7 @@
     &::before {
         content: '';
         display: block;
-        padding-top: ($height / $width) * 100%;
+        padding-top: calc($height / $width) * 100%;
     }
 
     >* {
