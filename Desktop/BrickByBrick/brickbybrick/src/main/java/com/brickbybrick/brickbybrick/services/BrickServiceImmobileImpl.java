@@ -8,7 +8,7 @@ import com.brickbybrick.brickbybrick.model.Immobile;
 import com.brickbybrick.brickbybrick.repos.BrickRepoImmobile;
 
 public class BrickServiceImmobileImpl implements BrickServiceImmobile {
-    
+
     @Autowired
     private BrickRepoImmobile repoImmobile;
 
@@ -16,4 +16,5 @@ public class BrickServiceImmobileImpl implements BrickServiceImmobile {
     public List<Immobile> getImmobili() {
         return repoImmobile.findAll();
     }
+    
 }
