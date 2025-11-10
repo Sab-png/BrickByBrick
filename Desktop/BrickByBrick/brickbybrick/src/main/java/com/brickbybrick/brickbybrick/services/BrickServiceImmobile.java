@@ -7,4 +7,6 @@ public interface BrickServiceImmobile {
 
     List<Immobile> getImmobili();
 
+    Immobile addImmobile(Immobile i);
+
 }

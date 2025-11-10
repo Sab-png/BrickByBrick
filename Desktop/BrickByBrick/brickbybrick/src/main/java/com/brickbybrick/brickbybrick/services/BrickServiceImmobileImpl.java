@@ -16,5 +16,10 @@ public class BrickServiceImmobileImpl implements BrickServiceImmobile {
     public List<Immobile> getImmobili() {
         return repoImmobile.findAll();
     }
+
+    @Override
+    public Immobile addImmobile(Immobile i) {
+        return repoImmobile.save(i);
+    }
     
 }
