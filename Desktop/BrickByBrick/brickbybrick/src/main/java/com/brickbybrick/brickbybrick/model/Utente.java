@@ -36,7 +36,7 @@ public class Utente {
     private String email;
 
     @Column(name = "passw", nullable = false)
-    private String password;
+    private String passw;
 
 
     public Integer getId_utente() {
@@ -96,11 +96,11 @@ public class Utente {
     }
 
     public String getPassword() {
-        return password;
+        return passw;
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.passw = password;
     }
     
 }
