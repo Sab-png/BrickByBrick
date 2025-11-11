@@ -5,6 +5,7 @@ import About from '../pages/About'
 import Immobili from '../pages/Immobili'
 import DettaglioImmobile from '../pages/DettaglioImmobile'
 import NotFound from '../pages/NotFound'
+import ComeFunziona from '../pages/comefunziona'
 
 const routes = [
   {
@@ -23,6 +24,12 @@ const routes = [
         Component: About,
         showInNav: true,
         title: 'Chi Siamo'
+      },
+      {
+        path: 'comefunziona',
+        Component: ComeFunziona,
+        showInNav: true,
+        title: 'Come funziona'
       },
       {
         path: 'immobili',
