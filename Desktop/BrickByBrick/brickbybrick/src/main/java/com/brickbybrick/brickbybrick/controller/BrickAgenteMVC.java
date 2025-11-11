@@ -33,12 +33,12 @@ public class BrickAgenteMVC {
     @GetMapping("/agenti/add")
     public String showForm(Model model) {
         model.addAttribute("agente", new Agente());
-        return "AddAgenti";
+        return "AgentiAdd";
     }
 
     @PostMapping("/agenti/add")
     public String processForm(@ModelAttribute Agente agente) {
-        serviceAgente.addAgente(agente);
+        serviceAgente.addAgenti(agente);
         return "redirect:/agenti";
     }
     

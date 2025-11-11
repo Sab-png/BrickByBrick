@@ -8,5 +8,5 @@ public interface BrickServiceAgente {
 
     List<Agente> getAgenti();
 
-    Agente addAgente(Agente a);
+    Agente addAgenti(Agente a);
 }
