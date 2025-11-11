@@ -1,0 +1,135 @@
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as m;
+
+@use 'sass:color';
+
+.footer {
+    background-color: vars.$blue;
+    color: vars.$white;
+    font-family: vars.$font-paragraph;
+
+    hr {
+        background-color: vars.$white;
+        height: 1px;
+        border: none;
+        margin: 0 vars.$spacing-xl;
+    }
+
+    a {
+        color: vars.$white;
+        text-decoration: none;
+        transition: opacity vars.$transition-base;
+        
+        &:hover {
+            opacity: 0.7;
+        }
+    }
+
+    // Sezione social
+    &__social {
+        @include m.flex-between;
+        padding: vars.$spacing-lg vars.$spacing-xl;
+        flex-wrap: wrap;
+        gap: vars.$spacing-base;
+        margin-top: vars.$spacing-lg;
+
+        @include m.mobile {
+            @include m.flex-center;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        &-text {
+            font-weight: vars.$font-weight-bold;
+            font-size: vars.$font-size-2xl;
+        }
+
+        &-links {
+            @include m.flex-center;
+            gap: vars.$spacing-sm;
+            
+            a {
+                @include m.flex-center;
+                @include m.size(40px);
+                background-color: vars.$black;
+                border-radius: vars.$border-radius-sm;
+                font-size: vars.$font-size-lg;
+                transition: background-color vars.$transition-base;
+
+                &:hover {
+                    background-color: color.scale(vars.$blue, $lightness: 10%);
+                    opacity: 1;
+                }
+            }
+        }
+    }
+
+    // Contenuto principale
+    &__content {
+        padding: vars.$spacing-2xl vars.$spacing-xl;
+
+        @include m.mobile {
+            padding: vars.$spacing-xl vars.$spacing-base;
+        }
+    }
+
+    &__columns {
+        display: flex;
+        justify-content: space-between;
+        gap: vars.$spacing-xl;
+        max-width: vars.$container-max-width;
+        margin: 0 auto;
+
+        @include m.mobile {
+            flex-direction: column;
+            gap: vars.$spacing-lg;
+        }
+
+        @include m.tablet {
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
+
+        @include m.desktop {
+            flex-wrap: nowrap;
+            justify-content: space-between;
+        }
+    }
+
+    &__col {
+        @include m.flex-column;
+        gap: vars.$spacing-sm;
+        flex: 1;
+        min-width: 150px;
+
+        @include m.tablet {
+            flex: 0 1 calc(50% - vars.$spacing-xl);
+        }
+
+        @include m.desktop {
+            flex: 1;
+        }
+
+        h6 {
+            color: vars.$white;
+            font-family: vars.$font-title;
+            font-weight: vars.$font-weight-bold;
+            font-size: vars.$font-size-base;
+            margin-bottom: vars.$spacing-xs;
+        }
+
+        p {
+            margin: 0;
+            font-size: vars.$font-size-sm;
+            line-height: vars.$line-height-relaxed;
+            color: vars.$white;
+        }
+    }
+
+    &__bottom {
+        background-color: vars.$black;
+        padding: vars.$spacing-base;
+        font-size: vars.$font-size-sm;
+        text-align: center;
+    }
+}
