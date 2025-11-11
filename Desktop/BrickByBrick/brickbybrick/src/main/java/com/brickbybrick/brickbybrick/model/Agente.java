@@ -35,7 +35,7 @@ public class Agente {
     private String email;
 
     @Column(name = "passw", nullable = false)
-    private String password;
+    private String passw;
 
     public Integer getId_agente() {
         return Id_agente;
@@ -93,13 +93,14 @@ public class Agente {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPassw() {
+        return passw;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassw(String passw) {
+        this.passw = passw;
     }
+
 
     
 }

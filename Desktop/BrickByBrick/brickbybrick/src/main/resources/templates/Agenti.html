@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenti</title>
+    <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+>
+</head>
+<body>
+    <h1>Agenti</h1>
+            
+    <div class="">
+    <table style="width: 100%;">
+        <thead>
+        <tr>
+            <th>Id_agente</th>
+            <th>Id_ruolo</th>
+            <th>nome</th>
+            <th>cognome</th>
+            <th>telefono</th>
+            <th>città</th>
+            <th>email</th>
+            <th>password</th>
+        </tr>
+        </thead>
+        <tbody >
+        <tr class="table-row" onclick="selectRow(this)" th:each="agente : ${agenti}">
+
+            <td th:text="${agente.Id_agente}"></td>
+            <td th:text="${agente.Id_ruolo}"></td>
+            <td th:text="${agente.nome}"></td>
+            <td th:text="${agente.cognome}"></td>
+            <td th:text="${agente.telefono}"></td>
+            <td th:text="${agente.città}"></td>
+            <td th:text="${agente.email}"></td>
+            <td th:text="${agente.passw}"></td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+
+</body>
+</html>
+
+
+
+    

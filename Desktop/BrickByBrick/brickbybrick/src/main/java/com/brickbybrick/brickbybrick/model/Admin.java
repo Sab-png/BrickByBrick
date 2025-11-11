@@ -29,7 +29,7 @@ public class Admin {
     private String email;
 
     @Column(name = "passw", nullable = false)
-    private String password;
+    private String passw;
 
     public int getId_admin() {
         return Id_admin;
@@ -72,11 +72,11 @@ public class Admin {
     }
 
     public String getPassword() {
-        return password;
+        return passw;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword(String passw) {
+        this.passw = passw;
     }
 
     
