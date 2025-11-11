@@ -1,0 +1,174 @@
+// Variabili
+$color-primary: #1994a8; // Verde acqua per il pulsante CTA e Registrati
+$color-text-light: #ffffff; // Testo bianco
+$header-height: 80px;
+
+.hero-section {
+    // 1. Impostazione dello sfondo e dell'altezza
+    position: relative; // Necessario per posizionare l'overlay e il contenuto
+    min-height: 85vh; // Altezza visiva per coprire bene lo schermo
+    width: 100%;
+    overflow: hidden;
+
+    // Sfondo immagine con overlay scuro
+    background-image: 
+        // 1. Overlay scuro semi-trasparente per migliorare la leggibilità
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.4)), 
+        // 2. Immagine di Torino
+        url('/path/to/hero-section.jpg'); 
+        
+    background-size: cover;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    color: $color-text-light;
+
+    // 2. Struttura del Header/Navbar
+    &__header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: $header-height;
+        padding: 0 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 10; // Assicura che sia sopra l'overlay
+
+        // Stile del logo
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        // Stile della navigazione principale (link)
+        .hero-section__nav {
+            ul {
+                list-style: none;
+                padding: 0;
+                display: flex;
+                gap: 20px;
+                
+                a {
+                    color: $color-text-light;
+                    text-decoration: none;
+                    font-size: 0.95rem;
+                    transition: color 0.2s;
+                    &:hover { color: lighten($color-primary, 20%); }
+                }
+            }
+        }
+        
+        // Stile delle azioni a destra
+        &__actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+            .action-link {
+                background: none;
+                border: none;
+                color: $color-text-light;
+                cursor: pointer;
+                font-size: 0.95rem;
+            }
+
+            .action-primary {
+                background-color: $color-primary;
+                color: $color-text-light;
+                border: none;
+                border-radius: 4px;
+                padding: 8px 15px;
+                font-weight: bold;
+                cursor: pointer;
+                transition: background-color 0.2s;
+                
+                &:hover {
+                    background-color: darken($color-primary, 10%);
+                }
+            }
+
+            .search-icon {
+                background: none;
+                border: none;
+                color: $color-text-light;
+                cursor: pointer;
+                font-size: 1rem;
+            }
+        }
+    }
+
+    // 3. Contenuto principale (Testo e Pulsante CTA)
+    &__content-wrapper {
+        position: absolute;
+        top: $header-height + 50px; // Sotto l'header
+        left: 5%;
+        z-index: 5; 
+        max-width: 650px; // Limita la larghezza del testo per leggibilità
+    }
+
+    &__title {
+        font-size: 3.5rem;
+        font-weight: 800;
+        line-height: 1.2;
+        margin-bottom: 30px;
+        // Ombra leggera per staccare dal background
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); 
+    }
+
+    &__cta-button {
+        background-color: $color-primary;
+        color: $color-text-light;
+        border: 2px solid $color-primary; // Bordo solido
+        border-radius: 4px;
+        padding: 15px 30px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: darken($color-primary, 10%);
+        }
+    }
+    
+    // 4. Responsività (Media Queries)
+    @media (max-width: 1024px) {
+        &__title {
+            font-size: 3rem;
+        }
+        
+        .hero-section__nav ul {
+            gap: 10px; // Riduci lo spazio tra i link
+        }
+    }
+
+    @media (max-width: 768px) {
+        min-height: 60vh;
+        
+        // Nascondi la navigazione per dispositivi mobili (solitamente sostituita da un hamburger menu)
+        .hero-section__nav {
+            display: none;
+        }
+        
+        // Centra il testo su schermi piccoli
+        &__content-wrapper {
+            width: 90%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        &__title {
+            font-size: 2rem;
+            margin-top: 50px; // Spazio extra se la nav è vicina
+        }
+        
+        // Ri-centra il pulsante CTA
+        &__cta-button {
+            display: block;
+            margin: 0 auto;
+        }
+    }
+}

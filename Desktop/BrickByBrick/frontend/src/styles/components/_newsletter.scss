@@ -1,0 +1,114 @@
+// Variabili per mantenere la coerenza
+$color-bg: #b0c4de;          // Lo sfondo azzurro chiaro del box
+$color-button: #208e9a;      // Il verde acqua del pulsante
+$color-text: #36454f;        // Colore scuro per il testo
+$border-radius: 2.5rem 2.5rem 0 0;
+
+.newsletter {
+    // 1. Stile del contenitore principale
+    background-color: $color-bg;
+    border-radius: $border-radius;
+    padding: 40px 60px;
+    
+    
+    
+    // Layout Flexbox per affiancare illustrazione, testo e form
+    display: flex;
+    flex-wrap: wrap; // Permette il wrapping su schermi piccoli
+    
+    justify-content: space-between;
+    gap: 3rem;
+
+    
+    // 2. Illustrazione (Primo div)
+    &__illustration-box {
+        // Assegna uno spazio fisso all'illustrazione
+        flex-shrink: 0;
+        width: 250px; 
+        
+        .newsletter__image {
+             max-width: 100%;
+             height: auto;
+        }
+    }
+
+    // 3. Contenuto (Titolo e Paragrafo - Secondo div)
+    &__content {
+        flex-grow: 1; // Permette al contenuto di riempire lo spazio
+        max-width: 600px; // Limita la larghezza del testo
+        color: $color-text;
+        align-items: center;
+    }
+    
+    &__title {
+        font-size: 3rem;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+        text-align: left;
+    }
+    
+    // 4. Form (Input e Button - Terzo div/Form)
+    &__form {
+        display: flex; // Per affiancare input e pulsante
+        // Se non è specificato in SCSS, aggiungi un margine per staccare dal testo
+        margin-top: 20px; 
+        gap: 10px;
+        
+        
+        // Stile dell'input
+        .newsletter__input {
+            padding: 12px 15px;
+            
+            border-radius: 4px 4px 4px 4px;
+            flex-grow: 1; // L'input riempie lo spazio disponibile
+            min-width: 150px; // Larghezza minima per l'input
+            font-size: 1rem;
+            border: black 5px solid;
+            
+        }
+        
+        // Stile del pulsante
+        .newsletter__button {
+            background-color: $color-button;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px 4px 4px 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            gap: 1rem;
+            
+            &:hover:not(:disabled) {
+                background-color: darken($color-button, 10%);
+            }
+            
+            &:disabled {
+                background-color: lighten($color-button, 20%);
+                cursor: not-allowed;
+            }
+        }
+    }
+
+    // 5. Media Queries per la responsività
+    @media (max-width: 768px) {
+        // Sotto una certa larghezza, impila gli elementi verticalmente
+        flex-direction: column;
+        text-align: center;
+        padding: 30px 20px;
+        
+        &__illustration-box {
+            width: 150px; 
+        }
+        
+        &__form {
+            width: 100%; // Il form occupa tutta la larghezza
+            justify-content: center;
+            
+            .newsletter__input,
+            .newsletter__button {
+                // Potresti volere che l'input si estenda di più
+            }
+        }
+    }
+}
