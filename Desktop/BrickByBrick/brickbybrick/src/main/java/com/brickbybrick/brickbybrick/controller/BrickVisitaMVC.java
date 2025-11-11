@@ -1,7 +1,6 @@
 package com.brickbybrick.brickbybrick.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.brickbybrick.brickbybrick.model.Visita;
-import com.brickbybrick.brickbybrick.repos.BrickRepoVisita;
+import com.brickbybrick.brickbybrick.services.BrickServiceVisita;
 
 @RestController
 @RequestMapping("/api/visite")
@@ -25,13 +24,13 @@ import com.brickbybrick.brickbybrick.repos.BrickRepoVisita;
 public class BrickVisitaMVC {
 
     @Autowired
-    private BrickRepoVisita BrickRepoVisita;
+    private BrickServiceVisita visitaService;
 
     // GET - Recupera tutte le visite
     @GetMapping
     public ResponseEntity<List<Visita>> getAllVisite() {
         try {
-            List<Visita> visite = BrickRepoVisita.findAll();
+            List<Visita> visite = visitaService.getVisite();
             if (visite.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -44,10 +43,10 @@ public class BrickVisitaMVC {
     // GET - Recupera una visita per ID
     @GetMapping("/{id}")
     public ResponseEntity<Visita> getVisitaById(@PathVariable("id") Integer id) {
-        Optional<Visita> visitaData = BrickRepoVisita.findById(id);
+        Visita visita = visitaService.getVisitaById(id);
         
-        if (visitaData.isPresent()) {
-            return new ResponseEntity<>(visitaData.get(), HttpStatus.OK);
+        if (visita != null) {
+            return new ResponseEntity<>(visita, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -57,7 +56,7 @@ public class BrickVisitaMVC {
     @GetMapping("/immobile/{idImmobile}")
     public ResponseEntity<List<Visita>> getVisiteByImmobile(@PathVariable("idImmobile") Integer idImmobile) {
         try {
-            List<Visita> visite = BrickRepoVisita.findByIdImmobile(idImmobile);
+            List<Visita> visite = visitaService.getVisiteByImmobile(idImmobile);
             if (visite.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -71,7 +70,7 @@ public class BrickVisitaMVC {
     @GetMapping("/agente/{idAgente}")
     public ResponseEntity<List<Visita>> getVisiteByAgente(@PathVariable("idAgente") Integer idAgente) {
         try {
-            List<Visita> visite = BrickRepoVisita.findByIdAgente(idAgente);
+            List<Visita> visite = visitaService.getVisiteByAgente(idAgente);
             if (visite.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -85,7 +84,7 @@ public class BrickVisitaMVC {
     @PostMapping
     public ResponseEntity<Visita> createVisita(@RequestBody Visita visita) {
         try {
-            Visita nuovaVisita = BrickRepoVisita.save(visita);
+            Visita nuovaVisita = visitaService.addVisita(visita);
             return new ResponseEntity<>(nuovaVisita, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -95,15 +94,10 @@ public class BrickVisitaMVC {
     // PUT - Aggiorna una visita esistente
     @PutMapping("/{id}")
     public ResponseEntity<Visita> updateVisita(@PathVariable("id") Integer id, @RequestBody Visita visita) {
-        Optional<Visita> visitaData = BrickRepoVisita.findById(id);
+        Visita visitaAggiornata = visitaService.updateVisita(id, visita);
         
-        if (visitaData.isPresent()) {
-            Visita visitaAggiornata = visitaData.get();
-            visitaAggiornata.setId_immobile(visita.getId_immobile());
-            visitaAggiornata.setId_agente(visita.getId_agente());
-            visitaAggiornata.setData(visita.getData());
-            
-            return new ResponseEntity<>(BrickRepoVisita.save(visitaAggiornata), HttpStatus.OK);
+        if (visitaAggiornata != null) {
+            return new ResponseEntity<>(visitaAggiornata, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -113,7 +107,7 @@ public class BrickVisitaMVC {
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteVisita(@PathVariable("id") Integer id) {
         try {
-            BrickRepoVisita.deleteById(id);
+            visitaService.deleteVisita(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -124,7 +118,7 @@ public class BrickVisitaMVC {
     @DeleteMapping
     public ResponseEntity<HttpStatus> deleteAllVisite() {
         try {
-            BrickRepoVisita.deleteAll();
+            visitaService.deleteAllVisite();
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
