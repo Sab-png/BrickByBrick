@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Immobili</title>
+    <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+>
+</head>
+<body>
+    <h1>Immobili</h1>
+            
+    <div class="">
+    <table style="width: 100%;">
+        <thead>
+        <tr>
+            <th>foto</th>
+            <th>regione</th>
+            <th>cap</th>
+            <th>città</th>
+            <th>indirizzo</th>
+            <th>prezzo</th>
+            <th>locali</th>
+            <th>superficie</th>
+            <th>descrizione</th>
+            <th>Id_caratteristiche</th>
+            <th>planimetria</th>
+            <th>mappa</th>
+        </tr>
+        </thead>
+        <tbody >
+        <tr class="table-row" onclick="selectRow(this)" th:each="immobile : ${immobili}">
+
+            <td th:text="${immobile.foto}"></td>
+            <td th:text="${immobile.regione}"></td>
+            <td th:text="${immobile.cap}"></td>
+            <td th:text="${immobile.citta}"></td>
+            <td th:text="${immobile.indirizzo}"></td>
+            <td th:text="${immobile.prezzo}"></td>
+            <td th:text="${immobile.locali}"></td>
+            <td th:text="${immobile.superficie}"></td>
+            <td th:text="${immobile.descrizione}"></td>
+            <td th:text="${immobile.id_caratteristiche}"></td>
+            <td th:text="${immobile.planimetria}"></td>
+            <td th:text="${immobile.mappa}"></td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+
+</body>
+</html>
+
+
+
+    
