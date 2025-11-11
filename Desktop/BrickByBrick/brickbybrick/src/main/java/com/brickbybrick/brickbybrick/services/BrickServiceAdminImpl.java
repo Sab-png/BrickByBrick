@@ -17,5 +17,5 @@ public class BrickServiceAdminImpl implements BrickServiceAdmin {
     public List<Admin> getAdmins() {
         return repoAdmin.findAll();
     }
-
+    
 }

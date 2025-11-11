@@ -71,11 +71,11 @@ public class Admin {
         this.email = email;
     }
 
-    public String getPassword() {
+    public String getPassw() {
         return passw;
     }
 
-    public void setPassword(String passw) {
+    public void setPassw(String passw) {
         this.passw = passw;
     }
 
