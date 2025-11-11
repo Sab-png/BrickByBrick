@@ -95,12 +95,12 @@ public class Utente {
         this.email = email;
     }
 
-    public String getPassword() {
+    public String getPassw() {
         return passw;
     }
 
-    public void setPassword(String password) {
-        this.passw = password;
+    public void setPassw(String passw) {
+        this.passw = passw;
     }
     
 }
