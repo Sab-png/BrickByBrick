@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.brickbybrick.brickbybrick.model.Agente;
-import com.brickbybrick.brickbybrick.model.Immobile;
 import com.brickbybrick.brickbybrick.repos.BrickRepoAgente;
 import com.brickbybrick.brickbybrick.services.BrickServiceAgente;
 
