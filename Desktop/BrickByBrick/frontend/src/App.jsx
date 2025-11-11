@@ -1,10 +1,10 @@
-import './App.scss'
+import './styles/main.scss'
 
 function App() {
 
   return (
     <>
-      <div className="prova">
+      <div>
         <h1>Prova</h1>
       </div>
     </>
