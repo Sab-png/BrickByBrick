@@ -13,7 +13,8 @@ public class BrickAdminMVC {
 
     @Autowired
     private BrickServiceAdminImpl serviceAdmin;
-    public BrickAdminMVC(BrickRepoAdmin repoAdmin) {
+
+    public BrickAdminMVC(BrickRepoAdmin repoAdmin, BrickServiceAdminImpl serviceAdmin) {
         this.repoAdmin = repoAdmin;
     }
 }

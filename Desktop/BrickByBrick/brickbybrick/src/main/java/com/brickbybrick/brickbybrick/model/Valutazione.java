@@ -18,12 +18,12 @@ public class Valutazione {
 
     @Column(name = "Id_utente", nullable = false)
     private Integer Id_utente;
-
+    
     @Column(name = "regione", nullable = false)
     private String regione;
 
     @Column(name = "cap", nullable = false)
-    private Integer cap;
+    private String cap;
 
     @Column(name = "citta", nullable = false)
     private String citta;
@@ -35,7 +35,7 @@ public class Valutazione {
     private String tipologia;
 
     @Column(name = "piano", nullable = false)
-    private String piano;
+    private Integer piano;
 
     @Column(name = "locali", nullable = false)
     private Integer locali;
@@ -82,11 +82,11 @@ public class Valutazione {
         this.regione = regione;
     }
 
-    public Integer getCap() {
+    public String getCap() {
         return cap;
     }
 
-    public void setCap(Integer cap) {
+    public void setCap(String cap) {
         this.cap = cap;
     }
 
@@ -114,11 +114,11 @@ public class Valutazione {
         this.tipologia = tipologia;
     }
 
-    public String getPiano() {
+    public Integer getPiano() {
         return piano;
     }
 
-    public void setPiano(String piano) {
+    public void setPiano(Integer piano) {
         this.piano = piano;
     }
 

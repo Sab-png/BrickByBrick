@@ -23,7 +23,7 @@ public class Immobile {
     private String regione;
 
     @Column(name = "cap", nullable = false)
-    private Integer cap;
+    private String cap;
 
     @Column(name = "citta", nullable = false)
     private String citta;
@@ -76,11 +76,11 @@ public class Immobile {
         this.regione = regione;
     }
 
-    public Integer getCap() {
+    public String getCap() {
         return cap;
     }
 
-    public void setCap(Integer cap) {
+    public void setCap(String cap) {
         this.cap = cap;
     }
 
