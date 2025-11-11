@@ -1,7 +1,7 @@
 package com.brickbybrick.brickbybrick.model;
 
-import org.springframework.boot.actuate.autoconfigure.metrics.MetricsProperties.Data;
 
+import java.util.Date;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,7 +25,7 @@ public class Visita {
     private Integer Id_agente;
 
     @Column(name = "data", nullable = false)
-    private Data data;
+    private Date data;
 
     public Integer getId_visita() {
         return Id_visita;
@@ -51,11 +51,11 @@ public class Visita {
         Id_agente = id_agente;
     }
 
-    public Data getData() {
+    public Date getData() {
         return data;
     }
 
-    public void setData(Data data) {
+    public void setData(Date data) {
         this.data = data;
     }
 
