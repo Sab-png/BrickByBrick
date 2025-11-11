@@ -97,7 +97,7 @@ CREATE TABLE valutazione (
     anno_costruzione INT,
     ascensore boolean,
     classe_energetica VARCHAR(10),
-    FOREIGN KEY (Id_utente) REFERENCES utente(Id_utente),
+    FOREIGN KEY (Id_utente) REFERENCES utente(Id_utente)
 );
 
 -- Creazione della tabella 'Visita'
