@@ -1,0 +1,94 @@
+// _faq-variables.scss
+
+$background-color: #e6eff2; // Azzurro/Grigio chiaro per lo sfondo
+$primary-text-color: #333;
+$secondary-text-color: #555;
+$border-color: black;
+$accent-color: red; // Blu di esempio per l'accento
+$radius-large: 2rem;
+$radius-small: 4px;
+
+.faq-background {
+  // Sfondo esterno che riempie lo schermo
+  background-color: $background-color;
+  padding: 50px 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.faq-header {
+  text-align: center;
+  margin-bottom: 30px;
+
+  h1 {
+    font-size: 2.5rem;
+    color: $primary-text-color;
+    margin-bottom: 5px;
+  }
+
+  p {
+    color: $secondary-text-color;
+    font-size: 1.1rem;
+  }
+}
+
+.faq-container {
+  // Il "blocco" arrotondato che contiene le FAQ
+  background-color: white;
+  border-radius: $radius-large;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); // Ombra leggera
+  max-width: 800px;
+  width: 100%;
+  padding: 30px 40px;
+  
+}
+
+.faq-tabs {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  border-bottom: 2px solid $border-color;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+
+  .tab-button {
+    background: none;
+    border: none;
+    padding: 10px 15px;
+    margin-right: 15px;
+    cursor: pointer;
+    font-size: 1rem;
+    color: $secondary-text-color;
+    position: relative;
+    transition: color 0.3s;
+
+    &:hover:not(.active) {
+      color: lighten($primary-text-color, 10%);
+    }
+
+    &.active {
+      color: $primary-text-color;
+      font-weight: 600;
+
+      // La linea blu sotto la tab attiva
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -11px;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background-color: $accent-color;
+        border-radius: $radius-small $radius-small 0 0;
+      }
+    }
+  }
+}
+
+.no-faqs {
+  text-align: center;
+  color: $secondary-text-color;
+  padding: 20px;
+}
