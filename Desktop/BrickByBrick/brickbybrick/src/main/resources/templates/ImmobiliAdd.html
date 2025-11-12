@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Immobili</title>
+        <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+>
+</head>
+<body>
+     <form id="" method="post" th:action="@{/immobili/add}">
+                
+                    
+                    <div class="form-group">
+                        <label for="foto">Foto</label>
+                        <input type="text" class="form-control" id="foto" name="foto" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="regione">Regione</label>
+                        <input type="text" class="form-control" id="regione" name="regione" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cap">Cap</label>
+                        <input type="number" class="form-control" id="cap" name="cap" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="citta">Città</label>
+                        <input type="text" class="form-control" id="citta" name="citta" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="indirizzo">Indirizzo</label>
+                        <input type="text" class="form-control" id="indirizzo" name="indirizzo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="prezzo">Prezzo</label>
+                        <input type="number" step="0.01" class="form-control" id="prezzo" name="prezzo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="locali">Locali</label>
+                        <input type="number" class="form-control" id="locali" name="locali" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="superficie">Superficie</label>
+                        <input type="number" class="form-control" id="superficie" name="superficie" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="descrizione">Descrizione</label>
+                        <input type="text" class="form-control" id="descrizione" name="descrizione" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="id_caratteristiche">Id_caratteristiche</label>
+                        <input type="number" class="form-control" id="id_caratteristiche" name="id_caratteristiche" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="planimetria">Planimetria</label>
+                        <input type="text" class="form-control" id="planimetria" name="planimetria" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mappa">Mappa</label>
+                        <input type="text" class="form-control" id="mappa" name="mappa" required>
+                    </div>
+                    
+
+                    <button type="submit" class="btn-primary">Aggiungi Immobile</button>
+                </form>
+</body>
+</html>

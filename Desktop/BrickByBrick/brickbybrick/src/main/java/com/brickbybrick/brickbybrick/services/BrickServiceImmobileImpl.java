@@ -23,5 +23,15 @@ public class BrickServiceImmobileImpl implements BrickServiceImmobile {
     public Immobile addImmobile(Immobile i) {
         return repoImmobile.save(i);
     }
+
+    // @Override
+    // public Immobile save(Immobile i) {
+    //     return repoImmobile.save(i);
+    // }
+
+    @Override
+    public Immobile getImmobileById(int id) {
+        return repoImmobile.findById(id).orElse(null);
+    }
     
 }
