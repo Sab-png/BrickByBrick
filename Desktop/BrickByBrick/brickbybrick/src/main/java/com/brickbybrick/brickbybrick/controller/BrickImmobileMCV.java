@@ -72,4 +72,10 @@ public class BrickImmobileMCV {
         return "redirect:/immobili";
     }
 
+    @GetMapping("/immobili/delete/{id}")
+    public String deleteImmobile(@PathVariable("id") int id) {
+        serviceImmobile.deleteImmobile(id);
+        return "redirect:/immobili";
+    }
+
 }

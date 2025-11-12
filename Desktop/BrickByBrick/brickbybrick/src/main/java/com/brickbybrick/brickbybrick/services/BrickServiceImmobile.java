@@ -11,4 +11,6 @@ public interface BrickServiceImmobile {
 
     Immobile getImmobileById(int id);
 
+    void deleteImmobile(int id);
+
 }
