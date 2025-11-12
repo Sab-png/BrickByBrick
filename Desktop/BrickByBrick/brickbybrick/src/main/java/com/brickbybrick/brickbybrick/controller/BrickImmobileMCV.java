@@ -65,11 +65,11 @@ public class BrickImmobileMCV {
         esistente.setLocali(aggiornato.getLocali());
         esistente.setSuperficie(aggiornato.getSuperficie());
         esistente.setDescrizione(aggiornato.getDescrizione());
-        esistente.setId_caratteristiche(aggiornato.getId_caratteristiche());
+        // esistente.setId_caratteristiche(aggiornato.getId_caratteristiche());
         esistente.setPlanimetria(aggiornato.getPlanimetria());
         esistente.setMappa(aggiornato.getMappa());
         serviceImmobile.addImmobile(esistente);
-        return "redirect:/immobile/edit";
+        return "redirect:/immobili";
     }
 
 }
