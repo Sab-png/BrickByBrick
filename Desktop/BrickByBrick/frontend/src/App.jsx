@@ -1,14 +1,14 @@
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+
 import './styles/main.scss'
+
+import routes from './routes/routes'
 
 function App() {
 
-  return (
-    <>
-      <div>
-        <h1>Prova</h1>
-      </div>
-    </>
-  )
+  return <RouterProvider router={router} />
 }
+
+const router = createBrowserRouter(routes)
 
 export default App
