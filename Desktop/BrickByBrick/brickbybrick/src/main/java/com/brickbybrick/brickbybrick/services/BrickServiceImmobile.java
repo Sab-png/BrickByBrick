@@ -9,4 +9,6 @@ public interface BrickServiceImmobile {
 
     Immobile addImmobile(Immobile i);
 
+    Immobile getImmobileById(int id);
+
 }

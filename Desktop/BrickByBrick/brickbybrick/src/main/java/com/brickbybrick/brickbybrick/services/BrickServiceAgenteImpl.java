@@ -20,7 +20,7 @@ public class BrickServiceAgenteImpl implements BrickServiceAgente {
     }
 
     @Override
-    public Agente addAgente(Agente a) {
+    public Agente addAgenti(Agente a) {
         return repoAgente.save(a);
     }
 }
