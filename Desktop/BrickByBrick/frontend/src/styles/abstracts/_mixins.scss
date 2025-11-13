@@ -58,41 +58,6 @@
     overflow: hidden;
 }
 
-// Button -- da lavorare
-@mixin button($bg-color: $turquoise, $text-color: $white) {
-    background-color: $bg-color;
-    color: $text-color;
-    padding: $spacing-sm $spacing-lg;
-    border: none;
-    border-radius: $border-radius-md;
-    font-family: $font-title;
-    font-weight: $font-weight-semibold;
-    cursor: pointer;
-    transition: all $transition-base $transition-ease;
-
-    &:hover {
-        background-color: darken($bg-color, 10%);
-        transform: translateY(-2px);
-        box-shadow: $shadow-lg;
-    }
-
-    &:active {
-        transform: translateY(0);
-    }
-}
-
-// Card --da lavorare
-@mixin card($padding: $spacing-lg) {
-    background-color: $white;
-    border-radius: $border-radius-lg;
-    padding: $padding;
-    box-shadow: $shadow-md;
-    transition: box-shadow $transition-base $transition-ease;
-
-    &:hover {
-        box-shadow: $shadow-xl;
-    }
-}
 
 // Sizing
 @mixin size($width, $height: $width) {
