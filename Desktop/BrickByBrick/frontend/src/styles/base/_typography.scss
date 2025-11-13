@@ -146,10 +146,6 @@ a {
     color: vars.$sky-blue;
   }
   
-  &:focus {
-    outline: 2px solid vars.$turquoise;
-    outline-offset: 2px;
-  }
 }
 
 // Lists
