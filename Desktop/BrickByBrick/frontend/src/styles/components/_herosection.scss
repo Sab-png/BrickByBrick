@@ -1,99 +1,145 @@
-// Variabili
-$color-primary: #1994a8; // Verde acqua per il pulsante CTA e Registrati
-$color-text-light: #ffffff; // Testo bianco
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as m;
+@use 'sass:color';
+
+// Variabili locali specifiche per l'hero section
 $header-height: 80px;
+$overlay-opacity: 0.5;
 
 .hero-section {
-    // 1. Impostazione dello sfondo e dell'altezza
-    position: relative; // Necessario per posizionare l'overlay e il contenuto
-    min-height: 85vh; // Altezza visiva per coprire bene lo schermo
+    // Impostazione dello sfondo e dell'altezza
+    position: relative;
+    min-height: 100vh; 
     width: 100%;
     overflow: hidden;
+    @include m.flex-center;
+    align-items: flex-start;
 
     // Sfondo immagine con overlay scuro
     background-image: 
-        // 1. Overlay scuro semi-trasparente per migliorare la leggibilità
-        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.4)), 
-        // 2. Immagine di Torino
-        url('/path/to/hero-section.jpg'); 
+        linear-gradient(rgba(vars.$black, $overlay-opacity), rgba(vars.$black, 0.4)), 
+        var(--bg-image-url); 
         
     background-size: cover;
     background-position: center bottom;
     background-repeat: no-repeat;
-    color: $color-text-light;
+    color: vars.$white;
 
-    
-    // 3. Contenuto principale (Testo e Pulsante CTA)
+    // Contenuto principale (Testo e Pulsante CTA)
     &__content-wrapper {
         position: absolute;
-        top: $header-height + 50px; // Sotto l'header
+        top: $header-height + vars.$spacing-3xl; // Sotto l'header con spacing consistente
         left: 5%;
         z-index: 5; 
-        max-width: 650px; // Limita la larghezza del testo per leggibilità
-    }
+        max-width: 650px;
+        padding: vars.$spacing-lg;
 
-    &__title {
-        font-size: 3.5rem;
-        font-weight: 800;
-        line-height: 1.2;
-        margin-bottom: 30px;
-        // Ombra leggera per staccare dal background
-        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); 
-    }
-
-    &__cta-button {
-        background-color: $color-primary;
-        color: $color-text-light;
-        border: 2px solid $color-primary; // Bordo solido
-        border-radius: 4px;
-        padding: 15px 30px;
-        font-size: 1.1rem;
-        font-weight: bold;
-        cursor: pointer;
-        transition: background-color 0.3s;
-
-        &:hover {
-            background-color: darken($color-primary, 10%);
-        }
-    }
-    
-    // 4. Responsività (Media Queries)
-    @media (max-width: 1024px) {
-        &__title {
-            font-size: 3rem;
-        }
-        
-        .hero-section__nav ul {
-            gap: 10px; // Riduci lo spazio tra i link
-        }
-    }
-
-    @media (max-width: 768px) {
-        min-height: 60vh;
-        
-        // Nascondi la navigazione per dispositivi mobili (solitamente sostituita da un hamburger menu)
-        .hero-section__nav {
-            display: none;
-        }
-        
-        // Centra il testo su schermi piccoli
-        &__content-wrapper {
-            width: 90%;
+        @include m.mobile {
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
+            width: 90%;
+            padding: vars.$spacing-base;
         }
 
-        &__title {
-            font-size: 2rem;
-            margin-top: 50px; // Spazio extra se la nav è vicina
+        @include m.tablet {
+            max-width: 700px;
+            padding: vars.$spacing-xl;
         }
-        
-        // Ri-centra il pulsante CTA
-        &__cta-button {
+
+        @include m.desktop {
+            max-width: 750px;
+        }
+    }
+
+    &__title {
+        font-family: vars.$font-title; // Poppins
+        font-size: vars.$font-size-4xl; // mobile: 36px
+        font-weight: vars.$font-weight-bold; // 700
+        line-height: vars.$line-height-tight; // 1.2
+        margin-bottom: vars.$spacing-base; // 16px
+        color: vars.$white;
+        text-shadow: 2px 2px 8px rgba(vars.$black, 0.7);
+
+        @include m.tablet {
+            font-size: vars.$font-size-5xl; // tablet: 48px
+            margin-bottom: vars.$spacing-lg; // 24px
+        }
+
+        @include m.desktop {
+            font-size: 3.5rem; // desktop: 56px
+            margin-bottom: vars.$spacing-xl;
+        }
+    }
+
+    &__subtitle {
+        font-family: vars.$font-paragraph; // Montserrat
+        font-size: vars.$font-size-base; // 16px
+        font-weight: vars.$font-weight-regular;
+        color: vars.$white;
+        line-height: vars.$line-height-relaxed;
+        margin-bottom: vars.$spacing-xl;
+        text-shadow: 1px 1px 4px rgba(vars.$black, 0.6);
+
+        @include m.tablet {
+            font-size: vars.$font-size-lg; // 18px
+            margin-bottom: vars.$spacing-2xl;
+        }
+    }
+
+    &__cta-button {
+        background-color: vars.$turquoise;
+        color: vars.$white;
+        border: vars.$border-width-thick solid vars.$turquoise;
+        border-radius: vars.$border-radius-sm;
+        padding: vars.$spacing-base vars.$spacing-xl; // 16px 32px
+        font-family: vars.$font-title; // Poppins
+        font-size: vars.$font-size-base; // 16px
+        font-weight: vars.$font-weight-bold;
+        cursor: pointer;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        transition: all vars.$transition-base vars.$transition-ease;
+        box-shadow: vars.$shadow-md;
+
+        &:hover {
+            background-color: color.scale(vars.$turquoise, $lightness: -10%);
+            border-color: color.scale(vars.$turquoise, $lightness: -10%);
+            transform: translateY(-2px);
+            box-shadow: vars.$shadow-lg;
+        }
+
+        &:active {
+            transform: translateY(0);
+            box-shadow: vars.$shadow-sm;
+        }
+
+        @include m.mobile {
             display: block;
-            margin: 0 auto;
+            width: 100%;
+            padding: vars.$spacing-base vars.$spacing-lg;
+            font-size: vars.$font-size-sm;
+        }
+
+        @include m.tablet {
+            font-size: vars.$font-size-lg;
+            padding: vars.$spacing-lg vars.$spacing-2xl;
+        }
+    }
+
+    // Media Queries per ottimizzazione
+    @include m.tablet {
+        &__content-wrapper {
+            top: $header-height + vars.$spacing-2xl;
+        }
+    }
+
+    @include m.mobile {
+        min-height: 60vh;
+        
+        &__title {
+            margin-top: vars.$spacing-2xl;
         }
     }
 }
