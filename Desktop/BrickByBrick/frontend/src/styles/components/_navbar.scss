@@ -1,0 +1,247 @@
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as m;
+@use 'sass:color';
+
+.navbar {
+    background-color: vars.$white;
+    box-shadow: vars.$shadow-sm;
+    position: sticky;
+    top: 0;
+    z-index: vars.$z-index-header;
+    width: 100%;
+
+    &__container {
+        @include m.flex-between;
+        max-width: vars.$container-max-width;
+        margin: 0 auto;
+        padding: vars.$spacing-base vars.$spacing-lg;
+
+        @include m.tablet {
+            padding: vars.$spacing-base vars.$spacing-xl;
+        }
+
+        @include m.desktop {
+            padding: vars.$spacing-lg vars.$spacing-2xl;
+        }
+    }
+
+    // Logo
+    &__logo {
+        @include m.flex-center;
+        gap: vars.$spacing-sm;
+        text-decoration: none;
+        z-index: 2;
+    }
+
+    &__logo-image {
+        height: 32px;
+        width: auto;
+
+        @include m.tablet {
+            height: 40px;
+        }
+    }
+
+    &__logo-text {
+        font-family: vars.$font-title;
+        font-size: vars.$font-size-lg;
+        font-weight: vars.$font-weight-bold;
+        color: vars.$blue;
+
+        @include m.mobile {
+            display: none;
+        }
+
+        @include m.tablet {
+            display: inline;
+        }
+    }
+
+    // Hamburger Menu - Work In Progress
+    // &__hamburger {
+    //     display: flex;
+    //     flex-direction: column;
+    //     justify-content: space-between;
+    //     width: 28px;
+    //     height: 21px;
+    //     background: transparent;
+    //     border: none;
+    //     cursor: pointer;
+    //     padding: 0;
+    //     z-index: 2;
+
+    //     @include m.tablet {
+    //         display: none;
+    //     }
+
+    //     span {
+    //         width: 100%;
+    //         height: 3px;
+    //         background-color: vars.$blue;
+    //         border-radius: 2px;
+    //         transition: all vars.$transition-base vars.$transition-ease;
+    //     }
+
+    //     &--active {
+    //         span:nth-child(1) {
+    //             transform: rotate(45deg) translateY(10px);
+    //         }
+    //         span:nth-child(2) {
+    //             opacity: 0;
+    //         }
+    //         span:nth-child(3) {
+    //             transform: rotate(-45deg) translateY(-10px);
+    //         }
+    //     }
+    // }
+
+    // Navigation
+    &__nav {
+        @include m.flex-center;
+        gap: vars.$spacing-lg;
+
+        @include m.mobile {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: vars.$white;
+            flex-direction: column;
+            justify-content: center;
+            transform: translateX(-100%);
+            transition: transform vars.$transition-base vars.$transition-ease;
+        }
+
+        &--open {
+            transform: translateX(0);
+        }
+
+        @include m.tablet {
+            position: static;
+            flex-direction: row;
+            height: auto;
+            background-color: transparent;
+            transform: none;
+        }
+    }
+
+    &__link {
+        font-family: vars.$font-paragraph;
+        font-size: vars.$font-size-base;
+        font-weight: vars.$font-weight-medium;
+        color: vars.$blue;
+        text-decoration: none;
+        transition: color vars.$transition-base vars.$transition-ease;
+        position: relative;
+
+        &:hover {
+            color: vars.$turquoise;
+        }
+
+        &.active {
+            color: vars.$turquoise;
+            
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: -4px;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background-color: vars.$turquoise;
+            }
+        }
+
+        @include m.mobile {
+            font-size: vars.$font-size-xl;
+            padding: vars.$spacing-base 0;
+        }
+
+        @include m.tablet {
+            font-size: vars.$font-size-sm;
+        }
+    }
+
+    // Actions
+    &__actions {
+        @include m.flex-center;
+        gap: vars.$spacing-base;
+
+        @include m.mobile {
+            gap: vars.$spacing-sm;
+        }
+    }
+
+    &__search-btn {
+        @include m.flex-center;
+        @include m.size(40px);
+        background-color: transparent;
+        border: 1px solid vars.$light-gray;
+        border-radius: vars.$border-radius-sm;
+        color: vars.$blue;
+        cursor: pointer;
+        transition: all vars.$transition-base vars.$transition-ease;
+
+        &:hover {
+            background-color: vars.$turquoise;
+            color: vars.$white;
+            border-color: vars.$turquoise;
+        }
+
+        i {
+            font-size: vars.$font-size-base;
+        }
+    }
+
+    &__login-btn {
+        font-family: vars.$font-paragraph;
+        font-size: vars.$font-size-sm;
+        font-weight: vars.$font-weight-medium;
+        color: vars.$blue;
+        text-decoration: none;
+        padding: vars.$spacing-sm vars.$spacing-base;
+        transition: color vars.$transition-base vars.$transition-ease;
+
+        &:hover {
+            color: vars.$turquoise;
+        }
+
+        @include m.mobile {
+            display: none;
+        }
+
+        @include m.tablet {
+            display: inline-block;
+        }
+    }
+
+    &__register-btn {
+        font-family: vars.$font-title;
+        font-size: vars.$font-size-sm;
+        font-weight: vars.$font-weight-semibold;
+        color: vars.$white;
+        background-color: vars.$turquoise;
+        text-decoration: none;
+        padding: vars.$spacing-2xl;
+        border-radius: vars.$border-radius-full;
+        transition: all vars.$transition-base vars.$transition-ease;
+
+        &:hover {
+            background-color: color.scale(vars.$turquoise, $lightness: -10%);
+            color: vars.$white;
+            transform: translateY(-2px);
+            box-shadow: vars.$shadow-md;
+        }
+
+        @include m.mobile {
+            font-size: vars.$font-size-xs;
+            padding: vars.$spacing-xs vars.$spacing-sm;
+        }
+
+        @include m.tablet {
+            font-size: vars.$font-size-sm;
+            padding: vars.$spacing-sm vars.$spacing-lg;
+        }
+    }
+}
