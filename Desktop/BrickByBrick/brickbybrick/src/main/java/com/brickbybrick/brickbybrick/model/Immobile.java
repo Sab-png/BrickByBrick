@@ -1,10 +1,13 @@
 package com.brickbybrick.brickbybrick.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -43,8 +46,9 @@ public class Immobile {
     @Column(name = "descrizione", nullable = false)
     private String descrizione;
 
-    @Column(name = "Id_caratteristiche", nullable = false)
-    private Integer Id_caratteristiche;
+    @OneToOne(cascade = CascadeType.ALL)  
+    @JoinColumn(name = "Id_caratteristiche", referencedColumnName = "Id_caratteristiche")
+    private CaratteristicheImmobile caratteristiche;
 
     @Column(name = "planimetria", nullable = false)
     private String planimetria;
@@ -132,12 +136,12 @@ public class Immobile {
         this.descrizione = descrizione;
     }
 
-    public Integer getId_caratteristiche() {
-        return Id_caratteristiche;
+    public CaratteristicheImmobile getCaratteristiche() {
+        return caratteristiche;
     }
 
-    public void setId_caratteristiche(Integer id_caratteristiche) {
-        Id_caratteristiche = id_caratteristiche;
+    public void setCaratteristiche(CaratteristicheImmobile caratteristiche) {
+        this.caratteristiche = caratteristiche;
     }
 
     public String getPlanimetria() {
@@ -155,6 +159,7 @@ public class Immobile {
     public void setMappa(String mappa) {
         this.mappa = mappa;
     }
+
 
 
 }

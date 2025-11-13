@@ -18,4 +18,20 @@ public class BrickServiceCaratteristicheImmobileImpl implements BrickServiceCara
     public List<CaratteristicheImmobile> getCaratteristiche() {
         return repoCaratteristicheImmobile.findAll();
     }
+
+    @Override
+    public CaratteristicheImmobile addCaratteristica(CaratteristicheImmobile a) {
+        return repoCaratteristicheImmobile.save(a);
+    }
+
+    
+    @Override
+    public CaratteristicheImmobile getCaratteristicaById(int id) {
+        return repoCaratteristicheImmobile.findById(id).orElse(null);
+    }
+
+    @Override
+    public void deleteCaratteristica(int id) {
+        repoCaratteristicheImmobile.deleteById(id);
+    }
 }

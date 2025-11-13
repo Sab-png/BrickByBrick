@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
+import com.brickbybrick.brickbybrick.model.CaratteristicheImmobile;
 import com.brickbybrick.brickbybrick.model.Immobile;
 import com.brickbybrick.brickbybrick.repos.BrickRepoImmobile;
 import com.brickbybrick.brickbybrick.services.BrickServiceImmobile;
@@ -33,19 +34,21 @@ public class BrickImmobileMCV {
         return "Immobili";
     }
 
+
     @GetMapping("/immobili/add")
     public String showForm(Model model) {
-        model.addAttribute("immobile", new Immobile());
+        Immobile immobile = new Immobile();
+        immobile.setCaratteristiche(new CaratteristicheImmobile()); 
+        model.addAttribute("immobile", immobile);
         return "ImmobiliAdd";
     }
 
     @PostMapping("/immobili/add")
     public String processForm(@ModelAttribute Immobile immobile) {
-        serviceImmobile.addImmobile(immobile);
+        serviceImmobile.addImmobile(immobile); 
         return "redirect:/immobili";
     }
-    
-    
+
     @GetMapping("/immobili/edit/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
         Immobile immobile = serviceImmobile.getImmobileById(id);
