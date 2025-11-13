@@ -9,4 +9,8 @@ public interface BrickServiceAgente {
     List<Agente> getAgenti();
 
     Agente addAgenti(Agente a);
+
+    Agente getAgenteById(int id);
+
+    void deleteAgente(int id);
 }

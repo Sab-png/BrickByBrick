@@ -34,4 +34,8 @@ public class BrickServiceImmobileImpl implements BrickServiceImmobile {
         return repoImmobile.findById(id).orElse(null);
     }
     
+    @Override
+    public void deleteImmobile(int id) {
+        repoImmobile.deleteById(id);
+    }
 }

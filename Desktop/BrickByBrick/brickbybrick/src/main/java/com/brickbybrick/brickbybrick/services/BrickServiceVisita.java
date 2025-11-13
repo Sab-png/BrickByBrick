@@ -1,8 +1,10 @@
 package com.brickbybrick.brickbybrick.services;
 
 import java.util.List;
-
 import com.brickbybrick.brickbybrick.model.Visita;
+
+
+
 
 public interface BrickServiceVisita {
     
@@ -16,3 +18,4 @@ public interface BrickServiceVisita {
     
     void deleteVisita(Integer id);
 }
+
