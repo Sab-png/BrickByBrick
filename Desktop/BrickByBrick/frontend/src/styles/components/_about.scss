@@ -1,0 +1,711 @@
+// Pagina About - Hero Section
+$color-primary: #1994a8;
+$color-text-light: #ffffff;
+
+.about-page {
+    width: 100%;
+    background-color: #D4E3EE;
+}
+
+.about-hero {
+    position: relative;
+    min-height: 85vh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    // Sfondo con immagine e overlay scuro
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.4)),
+        url('/img/img header home.avif');
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    &__content {
+        max-width: 800px;
+        text-align: center;
+        padding: 0 20px;
+        z-index: 5;
+    }
+
+    &__title {
+        font-family: 'Poppins', sans-serif;
+        font-size: 3.5rem;
+        font-weight: 700;
+        color: $color-text-light;
+        margin-bottom: 25px;
+        line-height: 1.2;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+    }
+
+    &__subtitle {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: $color-text-light;
+        margin-bottom: 35px;
+        line-height: 1.5;
+        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+    }
+
+    &__button {
+        background-color: $color-primary;
+        color: $color-text-light;
+        border: 2px solid $color-primary;
+        border-radius: 4px;
+        padding: 16px 40px;
+        font-size: 1rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        letter-spacing: 0.5px;
+
+        &:hover {
+            background-color: darken($color-primary, 10%);
+            border-color: darken($color-primary, 10%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(25, 148, 168, 0.4);
+        }
+
+        &:active {
+            transform: translateY(0);
+        }
+    }
+
+    // Responsività
+    @media (max-width: 1024px) {
+        &__title {
+            font-size: 3rem;
+        }
+
+        &__subtitle {
+            font-size: 1.2rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        min-height: 70vh;
+
+        &__content {
+            padding: 0 15px;
+        }
+
+        &__title {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+
+        &__subtitle {
+            font-size: 1rem;
+            margin-bottom: 30px;
+        }
+
+        &__button {
+            padding: 14px 30px;
+            font-size: 0.9rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        min-height: 60vh;
+
+        &__title {
+            font-size: 1.8rem;
+        }
+
+        &__subtitle {
+            font-size: 0.9rem;
+        }
+
+        &__button {
+            padding: 12px 25px;
+            font-size: 0.85rem;
+        }
+    }
+}
+
+// Sezione "La nostra storia"
+.about-story {
+    padding: 80px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    &__title {
+        font-family: 'Poppins', sans-serif;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #333;
+        text-align: center;
+        margin-bottom: 60px;
+    }
+
+    &__container {
+        position: relative;
+        max-width: 900px;
+        margin: 0 auto;
+        min-height: 400px;
+    }
+
+    &__text-card {
+        background-color: #ffffff;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: flex-end;
+        z-index: 2;
+        position: absolute;
+        width: 65%;
+        margin-left: 0;
+        bottom: 0;
+        left: 0;
+
+        p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+        }
+    }
+
+    &__image-card {
+        background-color: #f5f5f5;
+        border-radius: 40px 0 20px 0;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        position: absolute;
+        z-index: 1;
+        right: 0;
+        bottom: 0;
+        width: 55%;
+        height: 350px;
+    }
+
+    &__image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        display: block;
+    }
+
+    // Responsività
+    @media (max-width: 1024px) {
+        padding: 60px 20px;
+
+        &__title {
+            font-size: 2rem;
+            margin-bottom: 40px;
+        }
+
+        &__container {
+            min-height: 350px;
+        }
+
+        &__text-card {
+            padding: 30px;
+            width: 60%;
+
+            p {
+                font-size: 1rem;
+            }
+        }
+
+        &__image-card {
+            width: 60%;
+            height: 320px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        padding: 40px 15px;
+
+        &__title {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+        }
+
+        &__container {
+            min-height: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        &__text-card {
+            padding: 25px;
+            width: 100%;
+            position: relative;
+            margin-bottom: -50px;
+            z-index: 2;
+
+            p {
+                font-size: 0.95rem;
+            }
+        }
+
+        &__image-card {
+            position: relative;
+            transform: none;
+            width: 100%;
+            height: 300px;
+            margin-left: auto;
+            margin-right: 0;
+            margin-top: 0;
+        }
+    }
+
+    @media (max-width: 480px) {
+        padding: 30px 15px;
+
+        &__title {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+        }
+
+        &__text-card {
+            padding: 20px;
+            margin-bottom: -30px;
+
+            p {
+                font-size: 0.9rem;
+                line-height: 1.6;
+            }
+        }
+
+        &__image-card {
+            min-height: 250px;
+        }
+    }
+}
+
+// Sezione "Mission e Valori"
+.about-mission {
+    padding: 80px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    &__title {
+        font-family: 'Poppins', sans-serif;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #333;
+        text-align: center;
+        margin-bottom: 60px;
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+        max-width: 900px;
+        margin: 0 auto;
+
+        // La terza card occupa entrambe le colonne
+        .about-mission__card:last-child {
+            grid-column: 1 / -1;
+            max-width: 450px;
+            margin: 0 auto;
+            width: 100%;
+        }
+    }
+
+    &__card {
+        background-color: #ffffff;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        text-align: center;
+
+        &:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+    }
+
+    &__card-icon {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 25px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    &__card-title {
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: $color-primary;
+        margin-bottom: 15px;
+    }
+
+    &__card-text {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1rem;
+        line-height: 1.7;
+        color: #555;
+    }
+
+    // Responsività
+    @media (max-width: 768px) {
+        padding: 60px 20px;
+
+        &__title {
+            font-size: 2rem;
+            margin-bottom: 40px;
+        }
+
+        &__grid {
+            grid-template-columns: 1fr;
+            gap: 20px;
+
+            .about-mission__card:last-child {
+                grid-column: 1;
+                max-width: 100%;
+            }
+        }
+
+        &__card {
+            padding: 30px;
+        }
+
+        &__card-title {
+            font-size: 1.3rem;
+        }
+
+        &__card-text {
+            font-size: 0.95rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        padding: 40px 15px;
+
+        &__title {
+            font-size: 1.6rem;
+            margin-bottom: 30px;
+        }
+
+        &__card {
+            padding: 25px;
+        }
+
+        &__card-title {
+            font-size: 1.2rem;
+        }
+
+        &__card-text {
+            font-size: 0.9rem;
+        }
+    }
+}
+
+// Sezione "I nostri agenti"
+.about-agents {
+    padding: 80px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    &__title {
+        font-family: 'Poppins', sans-serif;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #333;
+        text-align: center;
+        margin-bottom: 60px;
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    &__card {
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        text-align: center;
+
+        &:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+    }
+
+    &__card-image {
+        width: 100%;
+        height: 280px;
+        object-fit: cover;
+        display: block;
+    }
+
+    &__card-name {
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #333;
+        margin: 20px 15px 8px;
+    }
+
+    &__card-location {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1rem;
+        color: #777;
+        margin: 0 15px 20px;
+        font-weight: 500;
+    }
+
+    // Responsività
+    @media (max-width: 1024px) {
+        padding: 60px 20px;
+
+        &__title {
+            font-size: 2rem;
+            margin-bottom: 40px;
+        }
+
+        &__grid {
+            gap: 25px;
+        }
+
+        &__card-image {
+            height: 250px;
+        }
+
+        &__card-name {
+            font-size: 1.2rem;
+        }
+
+        &__card-location {
+            font-size: 0.95rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        padding: 50px 15px;
+
+        &__title {
+            font-size: 1.8rem;
+            margin-bottom: 35px;
+        }
+
+        &__grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        &__card-image {
+            height: 220px;
+        }
+
+        &__card-name {
+            font-size: 1.1rem;
+            margin: 15px 15px 6px;
+        }
+
+        &__card-location {
+            font-size: 0.9rem;
+            margin: 0 15px 15px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        padding: 40px 15px;
+
+        &__title {
+            font-size: 1.6rem;
+            margin-bottom: 30px;
+        }
+
+        &__grid {
+            grid-template-columns: 1fr;
+            gap: 20px;
+            max-width: 350px;
+        }
+
+        &__card-image {
+            height: 300px;
+        }
+
+        &__card-name {
+            font-size: 1.2rem;
+        }
+
+        &__card-location {
+            font-size: 0.95rem;
+        }
+    }
+}
+
+// Sezione Newsletter
+.about-newsletter {
+    padding: 80px 20px;
+    background-color: #ffffff;
+
+    &__container {
+        max-width: 1000px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 60px;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        padding: 60px;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    &__icon {
+        flex-shrink: 0;
+    }
+
+    &__icon-image {
+        width: 200px;
+        height: 200px;
+        object-fit: contain;
+        display: block;
+    }
+
+    &__content {
+        flex: 1;
+        text-align: left;
+    }
+
+    &__title {
+        font-family: 'Poppins', sans-serif;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 20px;
+        line-height: 1.2;
+    }
+
+    &__text {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.2rem;
+        line-height: 1.7;
+        color: #555;
+        margin-bottom: 30px;
+    }
+
+    &__button {
+        background-color: $color-primary;
+        color: $color-text-light;
+        border: 2px solid $color-primary;
+        border-radius: 4px;
+        padding: 16px 40px;
+        font-size: 1rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        letter-spacing: 0.5px;
+
+        &:hover {
+            background-color: darken($color-primary, 10%);
+            border-color: darken($color-primary, 10%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(25, 148, 168, 0.4);
+        }
+
+        &:active {
+            transform: translateY(0);
+        }
+    }
+
+    // Responsività
+    @media (max-width: 1024px) {
+        padding: 60px 20px;
+
+        &__container {
+            gap: 40px;
+            padding: 50px 40px;
+        }
+
+        &__icon-image {
+            width: 160px;
+            height: 160px;
+        }
+
+        &__title {
+            font-size: 2rem;
+        }
+
+        &__text {
+            font-size: 1.1rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        padding: 50px 15px;
+
+        &__container {
+            flex-direction: column;
+            text-align: center;
+            gap: 30px;
+            padding: 40px 30px;
+        }
+
+        &__content {
+            text-align: center;
+        }
+
+        &__icon-image {
+            width: 140px;
+            height: 140px;
+        }
+
+        &__title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        &__text {
+            font-size: 1rem;
+            margin-bottom: 25px;
+        }
+
+        &__button {
+            padding: 14px 30px;
+            font-size: 0.9rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        padding: 40px 15px;
+
+        &__container {
+            gap: 25px;
+            padding: 30px 20px;
+        }
+
+        &__icon-image {
+            width: 120px;
+            height: 120px;
+        }
+
+        &__title {
+            font-size: 1.5rem;
+        }
+
+        &__text {
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        &__button {
+            padding: 12px 25px;
+            font-size: 0.85rem;
+        }
+    }
+}
