@@ -1,0 +1,129 @@
+// _featuresSection.scss
+
+// Variabili (consigliate per mantenere la coerenza)
+$color-background: #E8F1F8; // Colore azzurro chiaro dello sfondo
+$color-card-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+$color-primary-dark: #212529;
+
+.features-section {
+    // Stile del contenitore principale (lo sfondo azzurro chiaro)
+    background-color: $color-background;
+    padding: 60px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+// ------------------------------------
+// Stile Titolo e Sottotitolo
+// ------------------------------------
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: $color-primary-dark;
+    margin-bottom: 20px;
+}
+
+.section-subtitle {
+    font-size: 1.1rem;
+    color: $color-primary-dark;
+    max-width: 650px;
+    margin-bottom: 40px;
+}
+
+// ------------------------------------
+// Stile Contenuto (Immagine + Lista)
+// ------------------------------------
+
+.features-section__content-wrapper {
+    display: flex;
+    // Imposta la spaziatura tra i due lati
+    gap: 30px; 
+    align-items: center; // Allinea verticalmente al centro
+    max-width: 1200px;
+    width: 100%;
+    margin-top: 20px;
+    
+    // Media Query per dispositivi mobili: impila gli elementi
+    @media (max-width: 992px) {
+        flex-direction: column;
+    }
+}
+
+// Stile Immagine Sinistra
+.features-section__image-container {
+    flex: 1;
+    // Mantiene la proporzione e arrotonda i bordi come nell'esempio
+    border-radius: 8px;
+    overflow: hidden;
+    
+    // Nascondi sui dispositivi mobili per focalizzarsi sui punti
+    @media (max-width: 992px) {
+        display: none;
+    }
+}
+
+.features-section__main-image {
+    width: 100%;
+    height: auto;
+    display: block; // Rimuove lo spazio extra sotto l'immagine
+}
+
+// Stile Card Destra (Lista Punti)
+.features-section__list-card {
+    flex: 1;
+    text-align: left; // Allinea il testo all'interno della card a sinistra
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: $color-card-shadow;
+    max-width: 500px; // Limita la larghezza della card
+    
+    // Per i dispositivi mobili, rendi la card larga
+    @media (max-width: 992px) {
+        width: 90%;
+        max-width: 600px;
+    }
+}
+
+// ------------------------------------
+// Stile Punti Lista (FeatureItem)
+// ------------------------------------
+
+.feature-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 25px;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.feature-item__icon-wrapper {
+    margin-right: 15px;
+    padding-top: 5px; // Allinea meglio l'icona con il testo
+}
+
+.feature-item__icon {
+    width: 30px;
+    height: auto;
+    // Colore per le icone (se sono SVG o font)
+    color: #4A90E2; 
+}
+
+.feature-item__title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin: 0;
+    margin-bottom: 5px;
+    color: $color-primary-dark;
+}
+
+.feature-item__description {
+    font-size: 0.95rem;
+    color: #555;
+    margin: 0;
+}

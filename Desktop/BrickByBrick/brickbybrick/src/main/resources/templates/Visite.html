@@ -19,15 +19,14 @@
             <th>Id_visita</th>
             <th>Id_immobile</th>
             <th>Id_agente</th>
-            <th>data</th>
+            <th>Data</th>
         </tr>
         </thead>
-        <tbody >
+        <tbody>
         <tr class="table-row" onclick="selectRow(this)" th:each="visita : ${visite}">
-
-            <td th:text="${visita.id_visita}"></td>
-            <td th:text="${visita.id_immobile}"></td>
-            <td th:text="${visita.id_agente}"></td>
+            <td th:text="${visita.idVisita}"></td>
+            <td th:text="${visita.idImmobile}"></td>
+            <td th:text="${visita.idAgente}"></td>
             <td th:text="${visita.data}"></td>
         </tr>
         </tbody>
@@ -36,37 +35,3 @@
 
 </body>
 </html>
-
-            <th>password</th>
-            CREATE TABLE visita (
-    Id_visita INT PRIMARY KEY AUTO_INCREMENT,
-    Id_immobile INT NOT NULL,
-    Id_agente INT NOT NULL,
-    data DATETIME NOT NULL,
-    CONSTRAINT fk_visita_immobile FOREIGN KEY (Id_immobile) REFERENCES immobile(Id_immobile),
-    CONSTRAINT fk_visita_agente FOREIGN KEY (Id_agente) REFERENCES utente(Id_utente)
-);
-        </tr>
-        </thead>
-        <tbody >
-        <tr class="table-row" onclick="selectRow(this)" th:each="utente : ${utenti}">
-
-            <td th:text="${utente.id_utente}"></td>
-            <td th:text="${utente.id_ruolo}"></td>
-            <td th:text="${utente.nome}"></td>
-            <td th:text="${utente.cognome}"></td>
-            <td th:text="${utente.telefono}"></td>
-            <td th:text="${utente.codice_fiscale}"></td>
-            <td th:text="${utente.email}"></td>
-            <td th:text="${utente.passw}"></td>
-        </tr>
-        </tbody>
-    </table>
-    </div>
-
-</body>
-</html>
-
-
-
-    
