@@ -5,7 +5,7 @@ import About from '../pages/About'
 import Immobili from '../pages/Immobili'
 import DettaglioImmobile from '../pages/DettaglioImmobile'
 import NotFound from '../pages/NotFound'
-import ComeFunziona from '../pages/ComeFunziona'
+import Valuta from '../pages/Valuta';
 
 const routes = [
   {
@@ -26,10 +26,10 @@ const routes = [
         title: 'Chi Siamo'
       },
       {
-        path: 'come-funziona',
-        Component: ComeFunziona,
+        path: 'valuta',
+        Component: Valuta,
         showInNav: true,
-        title: 'Come funziona'
+        title: 'Valuta'
       },
       {
         path: 'immobili',
