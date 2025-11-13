@@ -31,7 +31,6 @@
         padding: vars.$spacing-lg vars.$spacing-xl;
         flex-wrap: wrap;
         gap: vars.$spacing-base;
-        margin-top: vars.$spacing-lg;
 
         @include m.mobile {
             @include m.flex-center;
@@ -127,7 +126,7 @@
     }
 
     &__bottom {
-        background-color: vars.$black;
+        background-color: vars.$dark-blue;
         padding: vars.$spacing-base;
         font-size: vars.$font-size-sm;
         text-align: center;
