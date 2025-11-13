@@ -1,0 +1,43 @@
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as m;
+@use 'sass:color';
+
+.cta-button {
+    background-color: vars.$turquoise;
+    color: vars.$white;
+    border: vars.$border-width-thick solid vars.$turquoise;
+    border-radius: vars.$border-radius-sm;
+    padding: vars.$spacing-base vars.$spacing-xl; // 16px 32px
+    font-family: vars.$font-title; // Poppins
+    font-size: vars.$font-size-base; // 16px
+    font-weight: vars.$font-weight-bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all vars.$transition-base vars.$transition-ease;
+    box-shadow: vars.$shadow-md;
+
+    &:hover {
+        background-color: color.scale(vars.$turquoise, $lightness: -10%);
+        border-color: color.scale(vars.$turquoise, $lightness: -10%);
+        transform: translateY(-2px);
+        box-shadow: vars.$shadow-lg;
+    }
+
+    &:active {
+        transform: translateY(0);
+        box-shadow: vars.$shadow-sm;
+    }
+
+    @include m.mobile {
+        display: block;
+        width: 100%;
+        padding: vars.$spacing-base vars.$spacing-lg;
+        font-size: vars.$font-size-sm;
+    }
+
+    @include m.tablet {
+        font-size: vars.$font-size-lg;
+        padding: vars.$spacing-lg vars.$spacing-2xl;
+    }
+}
