@@ -43,21 +43,22 @@ public class BrickAgenteMVC {
         return "redirect:/agenti";
     }
     
-
     @GetMapping("/agenti/edit/{id}")
-    public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        Agente agente = serviceAgente.getAgenteById(id);
+    public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
+        Agente agente = serviceAgente.getAgenteById(id).orElse(null);
+        if (agente == null) {
+            return "redirect:/agenti";
+        }
         model.addAttribute("agente", agente);
         return "AgentiEdit";
     }
 
     @PostMapping("/agenti/update/{id}")
-    public String updateAgente(@PathVariable("id") int id, @ModelAttribute("agente") Agente aggiornato) {
-        System.out.println("=== POST RICEVUTA ===");
-        System.out.println("ID: " + id);
-        System.out.println("Agente: " + aggiornato.getNome() + " " + aggiornato.getCognome());
-        
-        Agente esistente = serviceAgente.getAgenteById(id);
+    public String updateAgente(@PathVariable("id") Integer id, @ModelAttribute("agente") Agente aggiornato) {
+        Agente esistente = serviceAgente.getAgenteById(id).orElse(null);
+        if (esistente == null) {
+            return "redirect:/agenti";
+        }
         esistente.setNome(aggiornato.getNome());
         esistente.setCognome(aggiornato.getCognome());
         esistente.setTelefono(aggiornato.getTelefono());
@@ -68,7 +69,7 @@ public class BrickAgenteMVC {
     }
 
     @GetMapping("/agenti/delete/{id}")
-    public String deleteAgente(@PathVariable("id") int id) {
+    public String deleteAgente(@PathVariable("id") Integer id) {
         serviceAgente.deleteAgente(id);
         return "redirect:/agenti";
     }
