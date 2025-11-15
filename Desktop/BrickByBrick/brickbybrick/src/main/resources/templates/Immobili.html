@@ -1,60 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Immobili</title>
     <link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
->
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    >
 </head>
 <body>
     <h1>Immobili</h1>
-            
-    <div class="">
-    <table style="width: 100%;">
-        <thead>
-        <tr>
-            <th>foto</th>
-            <th>regione</th>
-            <th>cap</th>
-            <th>città</th>
-            <th>indirizzo</th>
-            <th>prezzo</th>
-            <th>locali</th>
-            <th>superficie</th>
-            <th>descrizione</th>
-            <th>Id_caratteristiche</th>
-            <th>planimetria</th>
-            <th>mappa</th>
-        </tr>
-        </thead>
-        <tbody >
-        <tr class="table-row" onclick="selectRow(this)" th:each="immobile : ${immobili}">
 
-            <td th:text="${immobile.foto}"></td>
-            <td th:text="${immobile.regione}"></td>
-            <td th:text="${immobile.cap}"></td>
-            <td th:text="${immobile.citta}"></td>
-            <td th:text="${immobile.indirizzo}"></td>
-            <td th:text="${immobile.prezzo}"></td>
-            <td th:text="${immobile.locali}"></td>
-            <td th:text="${immobile.superficie}"></td>
-            <td th:text="${immobile.descrizione}"></td>
-            <!-- <td th:text="${immobile.id_caratteristiche}"></td> -->
-            <td th:text="${immobile.caratteristiche.id_caratteristiche}"></td>
+    <!-- FORM FILTRI -->
+    <form th:action="@{/immobili/filtra}" method="get">
+        <div class="grid">
+            <input type="text" name="regione" placeholder="Regione" th:value="${regione}">
+            <input type="text" name="citta" placeholder="Città" th:value="${citta}">
+            <input type="text" name="cap" placeholder="CAP" th:value="${cap}">
+            <input type="text" name="indirizzo" placeholder="Indirizzo" th:value="${indirizzo}">
+            <input type="number" step="0.01" name="prezzo" placeholder="Prezzo max" th:value="${prezzo}">
+            <input type="number" name="locali" placeholder="Locali min" th:value="${locali}">
+            <input type="number" step="0.01" name="superficie" placeholder="Superficie min" th:value="${superficie}">
+        </div>
+        <button type="submit">Filtra</button>
+        <a href="/immobili">Reset</a>
+    </form>
 
-            <td th:text="${immobile.planimetria}"></td>
-            <td th:text="${immobile.mappa}"></td>
-        </tr>
-        </tbody>
-    </table>
+    <!-- TABELLA IMMOBILI -->
+    <div>
+        <table style="width: 100%;">
+            <thead>
+            <tr>
+                <th>Foto</th>
+                <th>Regione</th>
+                <th>CAP</th>
+                <th>Città</th>
+                <th>Indirizzo</th>
+                <th>Prezzo</th>
+                <th>Locali</th>
+                <th>Superficie</th>
+                <th>Descrizione</th>
+                <th>Id Caratteristiche</th>
+                <th>Planimetria</th>
+                <th>Mappa</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="immobile : ${immobili}">
+                <td th:text="${immobile.foto}"></td>
+                <td th:text="${immobile.regione}"></td>
+                <td th:text="${immobile.cap}"></td>
+                <td th:text="${immobile.citta}"></td>
+                <td th:text="${immobile.indirizzo}"></td>
+                <td th:text="${immobile.prezzo}"></td>
+                <td th:text="${immobile.locali}"></td>
+                <td th:text="${immobile.superficie}"></td>
+                <td th:text="${immobile.descrizione}"></td>
+                <td th:text="${immobile.caratteristiche.id_caratteristiche}"></td>
+                <td th:text="${immobile.planimetria}"></td>
+                <td th:text="${immobile.mappa}"></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 
 </body>
 </html>
-
-
-
-    

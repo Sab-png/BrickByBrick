@@ -1,5 +1,7 @@
 package com.brickbybrick.brickbybrick.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -79,6 +81,25 @@ public class BrickImmobileMCV {
     public String deleteImmobile(@PathVariable("id") int id) {
         serviceImmobile.deleteImmobile(id);
         return "redirect:/immobili";
+    }
+
+    @GetMapping("/immobili/filtra")
+    public String filtraImmobili(
+            @RequestParam(required = false) String regione,
+            @RequestParam(required = false) String cap,
+            @RequestParam(required = false) String citta,
+            @RequestParam(required = false) String indirizzo,
+            @RequestParam(required = false) Double prezzo,
+            @RequestParam(required = false) Integer locali,
+            @RequestParam(required = false) Double superficie,
+            // qui potresti filtrare anche per le caratteristiche dell'immobile
+            Model model
+
+
+    ) {
+        List<Immobile> immobiliFiltrati = serviceImmobile.filtraImmobili(regione, cap, citta, indirizzo, prezzo, locali, superficie);
+        model.addAttribute("immobili", immobiliFiltrati);
+        return "Immobili"; 
     }
 
 }
