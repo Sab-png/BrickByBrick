@@ -5,6 +5,7 @@ import About from '../pages/About'
 import Immobili from '../pages/Immobili'
 import DettaglioImmobile from '../pages/DettaglioImmobile'
 import Valuta from '../pages/valuta'
+import Vendi from '../pages/vendi'
 import NotFound from '../pages/NotFound'
 
 const routes = [
@@ -41,6 +42,12 @@ const routes = [
         Component: Valuta,
         showInNav: true,
         title: 'Valuta'
+      },
+      {
+        path: 'vendi',
+        Component: Vendi,
+        showInNav: true,
+        title: 'Vendi'
       },
 
       {
