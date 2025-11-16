@@ -72,7 +72,7 @@ export default function About() {
                 <div className="about-agents__grid">
                     <div className="about-agents__card">
                         <img
-                            src="/img/agent1.jpg"
+                            src="/img/jeppe-monster-qIZNyuZe638-unsplash.jpg"
                             alt="Marco Rossi"
                             className="about-agents__card-image"
                         />
@@ -81,7 +81,7 @@ export default function About() {
                     </div>
                     <div className="about-agents__card">
                         <img
-                            src="/img/agent2.jpg"
+                            src="/img/alex-starnes-PK_t0Lrh7MM-unsplash.jpg"
                             alt="Laura Bianchi"
                             className="about-agents__card-image"
                         />
@@ -90,7 +90,7 @@ export default function About() {
                     </div>
                     <div className="about-agents__card">
                         <img
-                            src="/img/agent3.jpg"
+                            src="/img/photo-1560250097-0b93528c311a.avif"
                             alt="Giuseppe Verdi"
                             className="about-agents__card-image"
                         />
@@ -99,7 +99,7 @@ export default function About() {
                     </div>
                     <div className="about-agents__card">
                         <img
-                            src="/img/agent4.jpg"
+                            src="/img/clay-elliot-mpDV4xaFP8c-unsplash.jpg"
                             alt="Sofia Martini"
                             className="about-agents__card-image"
                         />
@@ -108,7 +108,7 @@ export default function About() {
                     </div>
                     <div className="about-agents__card">
                         <img
-                            src="/img/agent5.jpg"
+                            src="/img/ernest-flowers-lrcTvNUrhUc-unsplash.jpg"
                             alt="Andrea Colombo"
                             className="about-agents__card-image"
                         />
@@ -117,7 +117,7 @@ export default function About() {
                     </div>
                     <div className="about-agents__card">
                         <img
-                            src="/img/agent6.jpg"
+                            src="/img/christina-wocintechchat-com-SJvDxw0azqw-unsplash.jpg"
                             alt="Giulia Romano"
                             className="about-agents__card-image"
                         />

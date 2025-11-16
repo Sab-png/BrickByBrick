@@ -1,4 +1,6 @@
 // Variabili
+@use "sass:color";
+
 $color-primary: #1994a8; // Verde acqua per il pulsante CTA e Registrati
 $color-text-light: #ffffff; // Testo bianco
 $header-height: 80px;
@@ -53,7 +55,7 @@ $header-height: 80px;
         transition: background-color 0.3s;
 
         &:hover {
-            background-color: darken($color-primary, 10%);
+            background-color: color.adjust($color-primary, $lightness: -10%);
         }
     }
     

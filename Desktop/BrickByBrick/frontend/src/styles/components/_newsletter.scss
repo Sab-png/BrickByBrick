@@ -1,4 +1,6 @@
 // Variabili per mantenere la coerenza
+@use "sass:color";
+
 $color-bg: #b0c4de;          // Lo sfondo azzurro chiaro del box
 $color-button: #208e9a;      // Il verde acqua del pulsante
 $color-text: #36454f;        // Colore scuro per il testo
@@ -81,11 +83,11 @@ $border-radius: 2.5rem 2.5rem 0 0;
             gap: 1rem;
             
             &:hover:not(:disabled) {
-                background-color: darken($color-button, 10%);
+                background-color: color.adjust($color-button, $lightness: -10%);
             }
-            
+
             &:disabled {
-                background-color: lighten($color-button, 20%);
+                background-color: color.adjust($color-button, $lightness: 20%);
                 cursor: not-allowed;
             }
         }

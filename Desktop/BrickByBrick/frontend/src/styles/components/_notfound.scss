@@ -1,4 +1,5 @@
 // NotFound Page Styles
+@use "sass:color";
 
 .not-found-container {
   display: flex;
@@ -58,7 +59,7 @@
   &:hover {
     transform: translateY(-2px);
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-    background: darken(#239B9B, 5%);
+    background: color.adjust(#239B9B, $lightness: -5%);
   }
 
   &:active {
