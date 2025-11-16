@@ -1,0 +1,83 @@
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as m;
+@use 'sass:color';
+
+.search-bar {
+  @include m.flex-column;
+  gap: vars.$spacing-base;
+  width: 100%;
+
+  &__form {
+    display: flex;
+    gap: vars.$spacing-sm;
+    width: 100%;
+
+    @include m.mobile {
+      flex-direction: column;
+    }
+  }
+
+  &__input {
+    flex: 1;
+    padding: vars.$spacing-base vars.$spacing-lg;
+    border: 2px solid vars.$light-gray;
+    border-radius: vars.$border-radius-md;
+    font-family: vars.$font-paragraph;
+    font-size: vars.$font-size-base;
+    background-color: vars.$white;
+    transition: border-color vars.$transition-base;
+
+    &:focus {
+      outline: none;
+      border-color: vars.$turquoise;
+    }
+
+    &::placeholder {
+      color: vars.$light-gray;
+    }
+  }
+
+  &__button {
+    @include m.flex-center;
+    gap: vars.$spacing-xs;
+    padding: vars.$spacing-base vars.$spacing-xl;
+    background-color: vars.$turquoise;
+    color: vars.$white;
+    border: none;
+    border-radius: vars.$border-radius-md;
+    font-family: vars.$font-title;
+    font-weight: vars.$font-weight-semibold;
+    font-size: vars.$font-size-base;
+    cursor: pointer;
+    transition: all vars.$transition-base vars.$transition-ease;
+
+    &:hover {
+      background-color: color.scale(vars.$turquoise, $lightness: -10%);
+      transform: translateY(-2px);
+      box-shadow: vars.$shadow-md;
+    }
+
+    @include m.mobile {
+      width: 100%;
+    }
+  }
+
+  &__advanced-toggle {
+    @include m.flex-center;
+    gap: vars.$spacing-xs;
+    padding: vars.$spacing-sm vars.$spacing-base;
+    background-color: vars.$blue;
+    color: vars.$white;
+    border: 1px solid vars.$light-gray;
+    border-radius: vars.$border-radius-md;
+    font-family: vars.$font-paragraph;
+    font-size: vars.$font-size-sm;
+    cursor: pointer;
+    transition: all vars.$transition-base;
+    align-self: flex-start;
+
+    i {
+      font-size: vars.$font-size-xs;
+    }
+  }
+}
