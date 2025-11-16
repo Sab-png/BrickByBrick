@@ -1,0 +1,96 @@
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as m;
+
+.dettaglio-immobile {
+  &__header {
+    background-color: vars.$sky-blue;
+    padding: vars.$spacing-xl vars.$spacing-lg;
+    @include m.tablet {
+      padding: vars.$spacing-2xl vars.$spacing-xl;
+    }
+  }
+
+  &__header-content {
+    max-width: vars.$container-max-width;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: vars.$spacing-lg;
+    align-items: center;
+    @include m.mobile {
+      grid-template-columns: auto 1fr;
+      grid-template-rows: auto auto;
+    }
+  }
+
+  &__back-btn {
+    @include m.flex-center;
+    @include m.size(44px);
+    background-color: rgba(vars.$white, 0.2);
+    border: none;
+    border-radius: vars.$border-radius-full;
+    color: vars.$white;
+    cursor: pointer;
+    transition: all vars.$transition-base;
+    &:hover {
+      background-color: rgba(vars.$white, 0.3);
+      transform: scale(1.1);
+    }
+    i {
+      font-size: vars.$font-size-lg;
+    }
+  }
+
+  &__header-text {
+    @include m.flex-column;
+    gap: vars.$spacing-xs;
+    @include m.mobile {
+      grid-column: 1 / -1;
+    }
+  }
+
+  &__title {
+    font-family: vars.$font-title;
+    font-size: vars.$font-size-2xl;
+    font-weight: vars.$font-weight-bold;
+    color: vars.$white;
+    margin: 0;
+    @include m.tablet {
+      font-size: vars.$font-size-4xl;
+    }
+  }
+
+  &__location {
+    @include m.flex-center;
+    justify-content: flex-start;
+    gap: vars.$spacing-xs;
+    font-family: vars.$font-paragraph;
+    font-size: vars.$font-size-sm;
+    color: rgba(vars.$white, 0.9);
+    margin: 0;
+    @include m.tablet {
+      font-size: vars.$font-size-base;
+    }
+  }
+
+  &__price-box {
+    @include m.flex-center;
+    padding: vars.$spacing-sm vars.$spacing-lg;
+    background-color: rgba(vars.$white, 0.15);
+    border-radius: vars.$border-radius-lg;
+    @include m.mobile {
+      grid-column: 1 / -1;
+      justify-self: start;
+    }
+  }
+
+  &__price {
+    font-family: vars.$font-title;
+    font-size: vars.$font-size-2xl;
+    font-weight: vars.$font-weight-bold;
+    color: vars.$white;
+    @include m.tablet {
+      font-size: vars.$font-size-3xl;
+    }
+  }
+}
