@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import '../styles/components/_faqItem.scss'
-
+import '../styles/components/_faqItem.scss';
 
 const FAQItem = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,22 +8,21 @@ const FAQItem = ({ question, answer }) => {
     setIsOpen(!isOpen);
   };
 
-
   const icon = isOpen ? '-' : '+';
 
   return (
     <div className="faq-item">
       <div className="faq-question" onClick={toggleItem}>
-        {/* La domanda come nell'immagine */}
         <span>{question}</span>
-        {/* L'icona a destra */}
         <span className="faq-icon">{icon}</span>
       </div>
-      
-   
+
       {isOpen && (
         <div className="faq-answer">
-          <p>{answer}</p>
+          <div
+            className="faq-answer-text"
+            dangerouslySetInnerHTML={{ __html: answer }}
+          />
         </div>
       )}
     </div>

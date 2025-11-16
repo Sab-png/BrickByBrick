@@ -5,6 +5,7 @@ import About from '../pages/About'
 import Immobili from '../pages/Immobili'
 import DettaglioImmobile from '../pages/DettaglioImmobile'
 import FAQSupport from '../pages/FAQSupport'
+import StepMultiForm from '../pages/StepMultiForm'
 import NotFound from '../pages/NotFound'
 import { Component } from 'react'
 
@@ -38,6 +39,12 @@ const routes = [
         showInNav: true,
         title: 'FAQ & Supporto'
 
+      },
+      {
+        path: 'step-multi-form',
+        Component: StepMultiForm,
+        showInNav: true,
+        title: 'Step Multi Form'
       },
       {
         path: 'immobili/:id',
