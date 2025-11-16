@@ -5,7 +5,6 @@ export default function About() {
                 <div className="about-hero__content">
                     <h1 className="about-hero__title">Esperti locali, risultati misurabili</h1>
                     <p className="about-hero__subtitle">Acquisiamo e vendiamo immobili in esclusiva con metodo digitale e competenza territoriale</p>
-                    <button className="about-hero__button">VALUTA IL TUO IMMOBILE</button>
                 </div>
             </div>
 

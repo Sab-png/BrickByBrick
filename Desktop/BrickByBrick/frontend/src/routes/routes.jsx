@@ -4,6 +4,7 @@ import Homepage from '../pages/Homepage'
 import About from '../pages/About'
 import Immobili from '../pages/Immobili'
 import DettaglioImmobile from '../pages/DettaglioImmobile'
+import Valuta from '../pages/valuta'
 import NotFound from '../pages/NotFound'
 
 const routes = [
@@ -34,6 +35,12 @@ const routes = [
         path: 'immobili/:id',
         Component: DettaglioImmobile,
         showInNav: false
+      },
+      {
+        path: 'valuta',
+        Component: Valuta,
+        showInNav: true,
+        title: 'Valuta'
       },
 
       {

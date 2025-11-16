@@ -1,0 +1,517 @@
+// Pagina Valuta - Hero Section
+@use "sass:color";
+
+$color-primary: #1994a8;
+$color-text-light: #ffffff;
+
+.valuta-page {
+    width: 100%;
+    background-color: #D4E3EE;
+}
+
+.valuta-hero {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    // Sfondo con immagine e overlay scuro
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.4)),
+        url('/img/img header valuta.avif');
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    &__content {
+        max-width: 800px;
+        text-align: center;
+        padding: 0 20px;
+        z-index: 5;
+    }
+
+    &__title {
+        font-family: 'Poppins', sans-serif;
+        font-size: 3.5rem;
+        font-weight: 700;
+        color: $color-text-light;
+        margin-bottom: 25px;
+        line-height: 1.2;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+    }
+
+    &__subtitle {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: $color-text-light;
+        margin-bottom: 35px;
+        line-height: 1.5;
+        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+    }
+
+    &__button {
+        background-color: $color-primary;
+        color: $color-text-light;
+        border: 2px solid $color-primary;
+        border-radius: 4px;
+        padding: 16px 40px;
+        font-size: 1rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        letter-spacing: 0.5px;
+
+        &:hover {
+            background-color: color.adjust($color-primary, $lightness: -10%);
+            border-color: color.adjust($color-primary, $lightness: -10%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(25, 148, 168, 0.4);
+        }
+
+        &:active {
+            transform: translateY(0);
+        }
+    }
+
+    // Responsività
+    @media (max-width: 1024px) {
+        &__title {
+            font-size: 3rem;
+        }
+
+        &__subtitle {
+            font-size: 1.2rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        min-height: 70vh;
+
+        &__content {
+            padding: 0 15px;
+        }
+
+        &__title {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+
+        &__subtitle {
+            font-size: 1rem;
+            margin-bottom: 30px;
+        }
+
+        &__button {
+            padding: 14px 30px;
+            font-size: 0.9rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        min-height: 60vh;
+
+        &__title {
+            font-size: 1.8rem;
+        }
+
+        &__subtitle {
+            font-size: 0.9rem;
+        }
+
+        &__button {
+            padding: 12px 25px;
+            font-size: 0.85rem;
+        }
+    }
+}
+
+// Sezione Passaggi
+.valuta-steps {
+    padding: 80px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    &__title {
+        font-family: 'Poppins', sans-serif;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #333;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    &__cta-button {
+        background-color: $color-primary;
+        color: $color-text-light;
+        border: 2px solid $color-primary;
+        border-radius: 4px;
+        padding: 16px 40px;
+        font-size: 1rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        letter-spacing: 0.5px;
+        display: block;
+        margin: 80px auto 10px;
+
+        &:hover {
+            background-color: color.adjust($color-primary, $lightness: -10%);
+            border-color: color.adjust($color-primary, $lightness: -10%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(25, 148, 168, 0.4);
+        }
+
+        &:active {
+            transform: translateY(0);
+        }
+    }
+
+    &__row {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+        margin-bottom: 60px;
+
+        &--left {
+            justify-content: flex-start;
+            padding-left: 0;
+
+            .valuta-steps__image {
+                order: 1;
+            }
+
+            .valuta-steps__card {
+                order: 2;
+            }
+        }
+
+        &--right {
+            justify-content: flex-end;
+            padding-right: 0;
+
+            .valuta-steps__image {
+                order: 2;
+            }
+
+            .valuta-steps__card {
+                order: 1;
+            }
+        }
+    }
+
+    &__image {
+        flex: 0 0 45%;
+        max-width: 45%;
+
+        img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+
+            &:hover {
+                transform: scale(1.02);
+            }
+        }
+
+        // Stile speciale per step 1 - angoli personalizzati e allineamento
+        &--step1 {
+            align-self: flex-end; // Allinea l'immagine al bordo inferiore della card
+
+            img {
+                // Angolo alto a sinistra e basso a destra retti (0px)
+                // Angoli alto a destra e basso a sinistra più curvi (40px)
+                border-radius: 0 40px 0 40px;
+            }
+        }
+
+        // Stile speciale per step 2 - angoli personalizzati e allineamento
+        &--step2 {
+            align-self: flex-end; // Allinea l'immagine al bordo inferiore della card
+
+            img {
+                // Angolo alto a destra e basso a sinistra retti (0px)
+                // Angoli alto a sinistra e basso a destra più curvi (40px)
+                border-radius: 40px 0 40px 0;
+            }
+        }
+
+        // Stile speciale per step 3 - angoli personalizzati e allineamento
+        &--step3 {
+            align-self: flex-end; // Allinea l'immagine al bordo inferiore della card
+
+            img {
+                // Angolo alto a sinistra e basso a destra retti (0px)
+                // Angoli alto a destra e basso a sinistra più curvi (40px)
+                border-radius: 0 40px 0 40px;
+            }
+        }
+    }
+
+    &__card {
+        flex: 0 0 45%;
+        max-width: 45%;
+        background: white;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+
+        &:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+        }
+    }
+
+    &__card-title {
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: $color-primary;
+        margin-bottom: 20px;
+    }
+
+    &__card-text {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #555;
+    }
+
+    // Responsività
+    @media (max-width: 768px) {
+        padding: 60px 20px;
+
+        &__title {
+            font-size: 2rem;
+            margin-bottom: 40px;
+        }
+
+        &__row {
+            flex-direction: column;
+            gap: 25px;
+            margin-bottom: 50px;
+
+            &--left,
+            &--right {
+                justify-content: center;
+                padding: 0;
+
+                .valuta-steps__image,
+                .valuta-steps__card {
+                    order: unset;
+                }
+            }
+        }
+
+        &__image,
+        &__card {
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+
+        &__card {
+            padding: 30px;
+        }
+
+        &__card-title {
+            font-size: 1.3rem;
+        }
+
+        &__card-text {
+            font-size: 0.95rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        padding: 40px 15px;
+
+        &__title {
+            font-size: 1.6rem;
+            margin-bottom: 30px;
+        }
+
+        &__card {
+            padding: 25px;
+        }
+
+        &__card-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        &__card-text {
+            font-size: 0.9rem;
+        }
+    }
+}
+
+// Sezione Newsletter
+.valuta-newsletter {
+    padding: 80px 20px;
+    background-color: #D4E3EE;
+
+    &__container {
+        max-width: 1000px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 60px;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        padding: 60px;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    &__icon {
+        flex-shrink: 0;
+    }
+
+    &__icon-image {
+        width: 200px;
+        height: 200px;
+        object-fit: contain;
+        display: block;
+    }
+
+    &__content {
+        flex: 1;
+        text-align: left;
+    }
+
+    &__title {
+        font-family: 'Poppins', sans-serif;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 20px;
+        line-height: 1.2;
+    }
+
+    &__text {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.2rem;
+        line-height: 1.7;
+        color: #555;
+        margin-bottom: 30px;
+    }
+
+    &__button {
+        background-color: $color-primary;
+        color: $color-text-light;
+        border: 2px solid $color-primary;
+        border-radius: 4px;
+        padding: 16px 40px;
+        font-size: 1rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        letter-spacing: 0.5px;
+
+        &:hover {
+            background-color: color.adjust($color-primary, $lightness: -10%);
+            border-color: color.adjust($color-primary, $lightness: -10%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(25, 148, 168, 0.4);
+        }
+
+        &:active {
+            transform: translateY(0);
+        }
+    }
+
+    // Responsività
+    @media (max-width: 1024px) {
+        padding: 60px 20px;
+
+        &__container {
+            gap: 40px;
+            padding: 50px 40px;
+        }
+
+        &__icon-image {
+            width: 160px;
+            height: 160px;
+        }
+
+        &__title {
+            font-size: 2rem;
+        }
+
+        &__text {
+            font-size: 1.1rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        padding: 50px 15px;
+
+        &__container {
+            flex-direction: column;
+            text-align: center;
+            gap: 30px;
+            padding: 40px 30px;
+        }
+
+        &__content {
+            text-align: center;
+        }
+
+        &__icon-image {
+            width: 140px;
+            height: 140px;
+        }
+
+        &__title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        &__text {
+            font-size: 1rem;
+            margin-bottom: 25px;
+        }
+
+        &__button {
+            padding: 14px 30px;
+            font-size: 0.9rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        padding: 40px 15px;
+
+        &__container {
+            gap: 25px;
+            padding: 30px 20px;
+        }
+
+        &__icon-image {
+            width: 120px;
+            height: 120px;
+        }
+
+        &__title {
+            font-size: 1.5rem;
+        }
+
+        &__text {
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        &__button {
+            padding: 12px 25px;
+            font-size: 0.85rem;
+        }
+    }
+}
