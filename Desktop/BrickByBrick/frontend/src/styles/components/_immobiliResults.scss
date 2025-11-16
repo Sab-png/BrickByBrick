@@ -1,0 +1,116 @@
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as m;
+@use 'sass:color';
+
+.immobili-results {
+  width: 100%;
+  background-color: vars.$light-blue;
+  padding: vars.$spacing-3xl 0;
+
+  &__container {
+    max-width: vars.$container-max-width;
+    margin: 0 auto;
+    padding: 0 vars.$spacing-lg;
+
+    @include m.tablet {
+      padding: 0 vars.$spacing-xl;
+    }
+
+    @include m.desktop {
+      padding: 0 vars.$spacing-2xl;
+    }
+  }
+
+  &__content {
+    @include m.flex-column;
+    gap: vars.$spacing-xl;
+  }
+
+  &__title {
+    font-family: vars.$font-title;
+    font-size: vars.$font-size-3xl;
+    font-weight: vars.$font-weight-bold;
+    color: vars.$blue;
+    text-align: center;
+    margin: 0;
+
+    @include m.tablet {
+      font-size: vars.$font-size-4xl;
+    }
+  }
+
+  &__count {
+    font-size: vars.$font-size-lg;
+    font-weight: vars.$font-weight-regular;
+    color: vars.$light-gray;
+    margin-left: vars.$spacing-sm;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: vars.$spacing-xl;
+
+    @include m.tablet {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include m.desktop {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &__no-results {
+    @include m.flex-column;
+    @include m.flex-center;
+    justify-content: center;
+    gap: vars.$spacing-base;
+    padding: vars.$spacing-3xl;
+    text-align: center;
+    grid-column: 1 / -1;
+
+    i {
+      font-size: vars.$font-size-5xl;
+      color: vars.$light-gray;
+    }
+
+    p {
+      font-family: vars.$font-paragraph;
+      font-size: vars.$font-size-lg;
+      color: vars.$blue;
+      margin: 0;
+    }
+  }
+
+  &__load-more {
+    text-align: center;
+    padding-top: vars.$spacing-xl;
+  }
+
+  &__load-more-btn {
+    @include m.flex-center;
+    gap: vars.$spacing-xs;
+    padding: vars.$spacing-base vars.$spacing-2xl;
+    background-color: transparent;
+    color: vars.$sky-blue;
+    border: 2px solid vars.$sky-blue;
+    border-radius: vars.$border-radius-full;
+    font-family: vars.$font-title;
+    font-size: vars.$font-size-base;
+    font-weight: vars.$font-weight-semibold;
+    cursor: pointer;
+    transition: all vars.$transition-base vars.$transition-ease;
+    margin: 0 auto;
+
+    &:hover {
+      background-color: vars.$sky-blue;
+      color: vars.$white;
+      transform: translateY(-2px);
+      box-shadow: vars.$shadow-md;
+    }
+
+    i {
+      font-size: vars.$font-size-sm;
+    }
+  }
+}
