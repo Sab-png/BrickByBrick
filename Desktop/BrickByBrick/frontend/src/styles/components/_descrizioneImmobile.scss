@@ -1,0 +1,35 @@
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as m;
+
+.dettaglio-immobile {
+  &__description-section {
+    @include m.flex-column;
+    gap: vars.$spacing-lg;
+  }
+
+  &__description {
+    font-family: vars.$font-paragraph;
+    font-size: vars.$font-size-base;
+    line-height: vars.$line-height-relaxed;
+    color: vars.$blue;
+    margin: 0 0 vars.$spacing-base 0;
+    @include m.tablet {
+      font-size: vars.$font-size-lg;
+    }
+  }
+
+  &__description-extra {
+    font-family: vars.$font-paragraph;
+    font-size: vars.$font-size-sm;
+    line-height: vars.$line-height-relaxed;
+    color: vars.$light-gray;
+    margin: 0;
+    strong {
+      color: vars.$blue;
+      font-weight: vars.$font-weight-semibold;
+    }
+    @include m.tablet {
+      font-size: vars.$font-size-base;
+    }
+  }
+}
