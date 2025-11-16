@@ -13,9 +13,25 @@
 @use './components/newsletter';
 @use './components/stepItem';
 @use './components/card';
+@use './components/searchBar';
+@use './components/advancedFilters';
+@use './components/immobileCard';
+@use './components/mapSection';
+@use './components/headerImmobile';
+@use './components/immobileGallery';
+@use './components/informazioneImmobile';
+@use './components/infoEdificioImmobile';
+@use './components/featureImmobile';
+@use './components/descrizioneImmobile';
+
 
 // Components that use other Components
 @use './components/herosection';
 @use './components/featuresSection';
 @use './components/stepSection';
 @use './components/cardSection';
+@use './components/filters';
+@use './components/immobiliResults';
+
+
+@use './pages/dettaglioImmobile';
