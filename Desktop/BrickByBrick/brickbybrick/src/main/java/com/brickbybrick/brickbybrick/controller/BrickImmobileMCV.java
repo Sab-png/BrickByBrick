@@ -1,5 +1,7 @@
 package com.brickbybrick.brickbybrick.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -80,5 +82,46 @@ public class BrickImmobileMCV {
         serviceImmobile.deleteImmobile(id);
         return "redirect:/immobili";
     }
+
+@GetMapping("/immobili/filtra")
+public String filtraImmobili(
+        @RequestParam(required = false) String regione,
+        @RequestParam(required = false) String cap,
+        @RequestParam(required = false) String citta,
+        @RequestParam(required = false) String indirizzo,
+        @RequestParam(required = false) Double prezzo,
+        @RequestParam(required = false) Integer locali,
+        @RequestParam(required = false) Double superficie,
+        @RequestParam(required = false) String tipologia,
+        @RequestParam(required = false) Integer piano,
+        @RequestParam(required = false) Boolean ascensore,
+        @RequestParam(required = false) Boolean arredato,
+        @RequestParam(required = false) String disponibilita,
+        @RequestParam(required = false) String contratto,
+        @RequestParam(required = false) Integer piani_edificio,
+        @RequestParam(required = false) Integer anno_costruzione,
+        @RequestParam(required = false) String classe_energetica,
+        @RequestParam(required = false) Boolean accesso_disabili,
+        @RequestParam(required = false) Integer camere,
+        @RequestParam(required = false) Integer bagni,
+        @RequestParam(required = false) Integer balcone,
+        @RequestParam(required = false) String riscaldamento,
+        @RequestParam(required = false) Boolean terrazzo,
+        @RequestParam(required = false) Boolean giardino,
+        @RequestParam(required = false) Integer box_auto,
+        @RequestParam(required = false) Boolean cantina,
+        Model model
+) {
+    List<Immobile> immobiliFiltrati = serviceImmobile.filtraImmobili(
+        regione, cap, citta, indirizzo, prezzo, locali, superficie,
+        tipologia, piano, ascensore, arredato, disponibilita,
+        contratto, piani_edificio, anno_costruzione, classe_energetica, accesso_disabili,
+        camere, bagni, balcone, riscaldamento, terrazzo, giardino,
+        box_auto, cantina
+    );
+
+    model.addAttribute("immobili", immobiliFiltrati);
+    return "Immobili";
+}
 
 }

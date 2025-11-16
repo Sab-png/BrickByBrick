@@ -1,8 +1,9 @@
 package com.brickbybrick.brickbybrick.services;
 
 import java.util.List;
-import com.brickbybrick.brickbybrick.model.Agente;
+import java.util.Optional;
 
+import com.brickbybrick.brickbybrick.model.Agente;
 
 public interface BrickServiceAgente {
 
@@ -10,7 +11,9 @@ public interface BrickServiceAgente {
 
     Agente addAgenti(Agente a);
 
-    Agente getAgenteById(int id);
+    Optional<Agente> getAgenteById(Integer id);
 
-    void deleteAgente(int id);
+    void deleteAgente(Integer id);
+    
+    boolean existsById(Integer id);
 }
