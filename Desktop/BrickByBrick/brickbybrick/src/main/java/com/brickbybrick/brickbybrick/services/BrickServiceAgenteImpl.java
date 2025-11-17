@@ -1,6 +1,7 @@
 package com.brickbybrick.brickbybrick.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,22 @@ public class BrickServiceAgenteImpl implements BrickServiceAgente {
     }
 
     @Override
-    public Agente addAgente(Agente a) {
+    public Agente addAgenti(Agente a) {
         return repoAgente.save(a);
+    }
+
+    @Override
+    public Optional<Agente> getAgenteById(Integer id) {
+        return repoAgente.findById(id);
+    }
+
+    @Override
+    public void deleteAgente(Integer id) {
+        repoAgente.deleteById(id);
+    }
+
+    @Override
+    public boolean existsById(Integer id) {
+        return repoAgente.existsById(id);
     }
 }
