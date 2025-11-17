@@ -8,6 +8,7 @@ import FAQSupport from '../pages/FAQSupport'
 import StepMultiForm from '../pages/StepMultiForm'
 import NotFound from '../pages/NotFound'
 import { Component } from 'react'
+import Dashboard from '../back-office/pages/dashboard'
 
 const routes = [
   {
@@ -50,6 +51,13 @@ const routes = [
         path: 'immobili/:id',
         Component: DettaglioImmobile,
         showInNav: false
+      },
+      {
+        path: 'dashboard-admin',
+        Component: Dashboard,
+        showInNav: true,
+        title: 'Dashboard Admin'
+
       },
 
       {
