@@ -182,19 +182,19 @@ const StepForm = () => {
     // Abilita: step precedenti completati (backward), step futuri se step corrente è completato (forward)
     const getClickableSteps = () => {
         const clickable = [];
-        
+
         // Aggiungi tutti gli step precedenti (sempre cliccabili per tornare indietro)
         for (let i = 1; i < currentStep; i++) {
             clickable.push(i);
         }
-        
+
         // Se lo step corrente è completato, permetti di saltare agli step futuri
         if (isStepCompleted(currentStep)) {
             for (let i = currentStep + 1; i <= totalSteps; i++) {
                 clickable.push(i);
             }
         }
-        
+
         return clickable;
     };
 
@@ -222,18 +222,28 @@ const StepForm = () => {
             case 1: // Dove si trova l'immobile
                 if (!formData.indirizzo.trim()) {
                     newErrors.indirizzo = 'Indirizzo obbligatorio';
+                } else if (!/^[a-zA-Z0-9\s,.'-]{3,}$/i.test(formData.indirizzo)) {
+                    newErrors.indirizzo = 'Indirizzo non valido';
                 }
+
                 if (!formData.citta.trim()) {
                     newErrors.citta = 'Città obbligatoria';
+                } else if (!/^[a-zA-ZÀ-ÿ\s'-]{2,}$/i.test(formData.citta)) {
+                    newErrors.citta = 'Città non valida';
                 }
+
                 if (!formData.provincia.trim()) {
                     newErrors.provincia = 'Provincia obbligatoria';
+                } else if (!/^[A-Z]{2}$/i.test(formData.provincia)) {
+                    newErrors.provincia = 'Provincia deve essere 2 lettere';
                 }
+
                 if (!formData.cap.trim()) {
                     newErrors.cap = 'CAP obbligatorio';
                 } else if (!/^\d{5}$/.test(formData.cap)) {
                     newErrors.cap = 'CAP deve essere di 5 cifre';
                 }
+
                 break;
 
             /**
@@ -302,21 +312,32 @@ const StepForm = () => {
             case 5: // Dati personali
                 if (!formData.nome.trim()) {
                     newErrors.nome = 'Nome obbligatorio';
+                } else if (!/^[a-zA-ZÀ-ÿ\s'-]{2,}$/i.test(formData.nome)) {
+                    newErrors.nome = 'Nome non valido';
                 }
+
                 if (!formData.cognome.trim()) {
                     newErrors.cognome = 'Cognome obbligatorio';
+                } else if (!/^[a-zA-ZÀ-ÿ\s'-]{2,}$/i.test(formData.cognome)) {
+                    newErrors.cognome = 'Cognome non valido';
                 }
+
                 if (!formData.email.trim()) {
                     newErrors.email = 'Email obbligatoria';
                 } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
                     newErrors.email = 'Email non valida';
                 }
+
                 if (!formData.telefono.trim()) {
                     newErrors.telefono = 'Telefono obbligatorio';
+                } else if (!/^\+?[\d\s\-()]{6,15}$/.test(formData.telefono)) {
+                    newErrors.telefono = 'Telefono non valido';
                 }
+
                 if (!formData.privacy) {
                     newErrors.privacy = 'Devi accettare la privacy policy';
                 }
+
                 break;
 
             default:
@@ -419,14 +440,14 @@ const StepForm = () => {
             setErrors({});
             return;
         }
-        
+
         // Se va avanti, valida lo step corrente e TUTTI gli step intermedi
         if (targetStep > currentStep) {
             // Valida lo step corrente
             if (!validateStep(currentStep)) {
                 return; // Blocca il salto se lo step corrente non è valido
             }
-            
+
             // Valida tutti gli step intermedi dal primo al target
             for (let i = 1; i < targetStep; i++) {
                 if (!isStepCompleted(i)) {
@@ -434,13 +455,13 @@ const StepForm = () => {
                     return;
                 }
             }
-            
+
             // Tutti gli step sono validi, permetti il salto
             setCurrentStep(targetStep);
             setErrors({});
             return;
         }
-        
+
         // Se clicca sul passo corrente, non fare nulla
     };
 
@@ -497,7 +518,7 @@ const StepForm = () => {
 
         // Qui puoi inserire la chiamata API reale. Per ora loggo e mostro un alert.
         console.log('Form Data:', formData);
-        
+
         // Resetta il form dopo l'invio
         setFormData({
             indirizzo: '',
@@ -519,7 +540,7 @@ const StepForm = () => {
         });
         setCurrentStep(1);
         setErrors({});
-        
+
         // Rimuovi i dati salvati — l'utente ha inviato il form
         try { localStorage.removeItem(STORAGE_KEY); } catch (e) { /* ignore */ }
         alert('Ricerca immobile inviata! Controlla la console per i dati.');
@@ -758,6 +779,7 @@ const StepForm = () => {
                             onChange={(e) => updateFormData('superficie', e.target.value)}
                             className="form-input"
                             placeholder="inserisci la superficie"
+                            min ="1"
                         />
                         {errors.superficie && <p className="error-message">{errors.superficie}</p>}
                     </div>
@@ -770,6 +792,7 @@ const StepForm = () => {
                             onChange={(e) => updateFormData('pianoAbitazione', e.target.value)}
                             className="form-input"
                             placeholder="inserisci il piano"
+                            min = "1"
                         />
                         {errors.pianoAbitazione && <p className="error-message">{errors.pianoAbitazione}</p>}
                     </div>
