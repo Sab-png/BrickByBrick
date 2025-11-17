@@ -47,12 +47,6 @@ const routes = [
 
       },
       {
-        path: 'step-multi-form',
-        Component: StepMultiForm,
-        showInNav: true,
-        title: 'Step Multi Form'
-      },
-      {
         path: 'immobili/:id',
         Component: DettaglioImmobile,
         showInNav: false
@@ -63,6 +57,12 @@ const routes = [
         Component: NotFound
       }
     ]
+  },
+  {
+    path: 'valuta-immobile',
+    Component: StepMultiForm,
+    showInNav: false,
+    title: 'Step Multi Form'
   }
 ]
 
