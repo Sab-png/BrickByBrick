@@ -20,7 +20,7 @@ public class CaratteristicheImmobile {
     private String tipologia;
 
     @Column(name = "piano", nullable = false)
-    private Integer piano;
+    private String piano;
 
     @Column(name = "ascensore", nullable = false)
     private Boolean ascensore;
@@ -65,7 +65,7 @@ public class CaratteristicheImmobile {
     private Boolean giardino;
 
     @Column(name = "box_auto", nullable = false)
-    private Integer box_auto;
+    private Boolean box_auto;
 
     @Column(name = "cantina", nullable = false)
     private Boolean cantina;
@@ -89,11 +89,11 @@ public class CaratteristicheImmobile {
         this.tipologia = tipologia;
     }
 
-    public Integer getPiano() {
+    public String getPiano() {
         return piano;
     }
 
-    public void setPiano(Integer piano) {
+    public void setPiano(String piano) {
         this.piano = piano;
     }
 
@@ -209,11 +209,11 @@ public class CaratteristicheImmobile {
         this.giardino = giardino;
     }
 
-    public Integer getBox_auto() {
+    public Boolean getBox_auto() {
         return box_auto;
     }
 
-    public void setBox_auto(Integer box_auto) {
+    public void setBox_auto(Boolean box_auto) {
         this.box_auto = box_auto;
     }
 
