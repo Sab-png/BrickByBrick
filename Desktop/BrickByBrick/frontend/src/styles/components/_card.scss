@@ -1,56 +1,59 @@
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as m;
 
-$card-width: 300px;
-$card-padding: 30px;
-$color-primary-text: #333;
-$color-secondary-text: #666;
-$shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-$border-radius: 20px;
+$card-width: 360px;
 
-
-.card-container {
-  display: flex;
-  flex-direction: column;
+.card {
+  @include m.flex-column;
   align-items: center;
   text-align: center;
-  
-  // Utilizzo delle variabili
+
   width: $card-width;
   max-width: 90%;
-  padding: $card-padding;
-  border-radius: $border-radius;
-  box-shadow: $shadow;
-  background-color: white;
-  margin: 20px;
-  
- 
-  
-  // Stile dell'Immagine/Icona
-  .card-image-wrapper {
-    margin-bottom: 20px;
+  padding: vars.$spacing-2xl;
+  border-radius: vars.$border-radius-lg;
+  box-shadow: vars.$shadow-md;
+  background-color: vars.$white;
 
-    .card-image {
-      width: 100px;
+
+  transition: transform vars.$transition-base vars.$transition-ease, 
+              box-shadow vars.$transition-base vars.$transition-ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: vars.$shadow-xl;
+  }
+
+  // --- IMMAGINE ---
+  &__image-wrapper {
+    margin-bottom: vars.$spacing-base;
+    @include m.flex-center;
+
+    .card__image {
+      width: 120px;
       height: auto;
-      // Nesting per media queries (rende l'immagine più piccola sui dispositivi mobili)
-      @media (max-width: 480px) {
-        width: 80px;
+      object-fit: contain;
+
+      @include m.mobile {
+        width: 90px;
       }
     }
   }
 
-  // Stile del Sottotitolo (h3)
-  .card-subtitle {
-    font-size: 1.8rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: $color-primary-text;
+  // --- SOTTOTITOLO ---
+  &__subtitle {
+    @include m.heading(vars.$font-size-2xl, vars.$font-weight-semibold);
+    color: vars.$blue;
+    margin-bottom: vars.$spacing-sm;
+    text-align: center;
   }
 
-  // Stile del Testo descrittivo (p)
-  .card-text {
-    font-size: 1rem;
-    color: $color-secondary-text;
-    line-height: 1.5;
-    padding: 0 10px;
+  // --- TESTO ---
+  &__text {
+    font-family: vars.$font-paragraph;
+    font-size: vars.$font-size-base;
+    color: vars.$light-gray;
+    line-height: vars.$line-height-normal;
+    max-width: 90%;
   }
 }

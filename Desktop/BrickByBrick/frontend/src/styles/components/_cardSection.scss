@@ -1,44 +1,40 @@
-// CardSection.module.scss
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as m;
 
-// 1. Stile della Sezione (contenitore principale)
 .card-section {
-  padding: 80px 20px;
-  background-color: #239B9B; // Sfondo leggero per evidenziare la sezione
+  padding: vars.$spacing-3xl vars.$spacing-lg;
   width: 100%;
-  
-  // Assicura che tutti gli elementi interni si allineino centralmente
-  display: flex;
-  flex-direction: column;
-  align-items: center; 
-}
+  @include m.flex-column;
+  align-items: center;
+  background-color: vars.$light-blue;
 
-// 2. Stile del Titolo Principale
-.section-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #1a1a1a;
-  margin-bottom: 50px;
-  text-align: center;
-  max-width: 800px; // Limita la larghezza del titolo se è troppo lungo
-}
+  &__title {
+    @include m.heading(vars.$font-size-4xl, vars.$font-weight-bold);
+    color: vars.$blue;
+    margin-bottom: vars.$spacing-2xl;
+    text-align: center;
+    max-width: 800px;
+  }
 
-// 3. Stile del Contenitore delle Card (Grid/Flexbox)
-.cards-grid {
-  display: flex;
-  flex-wrap: wrap; // Permette alle card di andare a capo su schermi più piccoli
-  gap: 30px; // Spazio tra le card
-  
-  // Centra il gruppo di card all'interno della pagina
-  justify-content: center;
-  width: 100%;
-  max-width: 1200px; // Larghezza massima della sezione content
-  
-  // Responsive: Permette alle card di impilarsi su schermi molto stretti
-  @media (max-width: 800px) {
-    flex-direction: column;
-    align-items: center; // Centra le card quando sono impilate
+  &__grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: vars.$spacing-xl;
+    justify-content: center;
+    width: 100%;
+    max-width: vars.$container-max-width;
+
+    @include m.mobile {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    @include m.desktop {
+      @include m.flex-row;
+
+      .card {
+        flex: 0 0 calc((100% - (2 * vars.$spacing-xl)) / 3);
+      }
+    }
   }
 }
-
-// Nota: Gli stili individuali delle card (dimensioni, ombre, ecc.)
-// rimarranno gestiti all'interno del file Card.module.scss

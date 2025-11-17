@@ -7,6 +7,7 @@ body {
   font-size: vars.$font-size-sm; // mobile
   line-height: vars.$line-height-normal;
   color: vars.$black;
+  background-color: vars.$light-blue;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   
@@ -23,7 +24,7 @@ body {
 h1 {
   @include m.heading(vars.$font-size-3xl, vars.$font-weight-bold); // mobile: 30px
   margin-bottom: vars.$spacing-base;
-  color: vars.$blue;
+  color: vars.$black;
   
   @include m.tablet {
     font-size: vars.$font-size-4xl; // tablet: 36px
@@ -39,7 +40,7 @@ h1 {
 h2 {
   @include m.heading(vars.$font-size-2xl, vars.$font-weight-bold); // mobile: 24px
   margin-bottom: vars.$spacing-sm;
-  color: vars.$blue;
+  color: vars.$black;
   
   @include m.tablet {
     font-size: vars.$font-size-3xl; // tablet: 30px
@@ -55,7 +56,7 @@ h2 {
 h3 {
   @include m.heading(vars.$font-size-xl, vars.$font-weight-semibold); // mobile: 20px
   margin-bottom: vars.$spacing-sm;
-  color: vars.$blue;
+  color: vars.$black;
   
   @include m.tablet {
     font-size: vars.$font-size-2xl; // tablet: 24px
@@ -71,7 +72,7 @@ h3 {
 h4 {
   @include m.heading(vars.$font-size-lg, vars.$font-weight-semibold); // mobile: 18px
   margin-bottom: vars.$spacing-xs;
-  color: vars.$blue;
+  color: vars.$black;
   
   @include m.tablet {
     font-size: vars.$font-size-xl; // tablet: 20px
@@ -146,10 +147,6 @@ a {
     color: vars.$sky-blue;
   }
   
-  &:focus {
-    outline: 2px solid vars.$turquoise;
-    outline-offset: 2px;
-  }
 }
 
 // Lists

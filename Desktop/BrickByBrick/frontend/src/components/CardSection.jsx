@@ -1,40 +1,31 @@
-
-
-import React from 'react';
 import Card from './Card';
 
-import '../styles/components/_cardSection.scss'; 
-
-
-
+import cardOneImg from '../assets/images/card-one-home.svg';
+import cardTwoImg from '../assets/images/card-two-home.svg';
+import cardThreeImg from '../assets/images/card-three-home.svg';
 
 export default function CardSection() {
-    return (
+  return (
+    <section className="card-section">
+      <h2 className="card-section__title">Come funziona</h2>
 
-        <section className="card-section"> 
-
-            <h2 className="section-title">
-                Come funziona
-            </h2>
-
-            <div className="cards-grid">
-                <Card
-                    image=""
-                    subtitle="Valuta Online"
-                    text="Ricevi la prima stima e l'analisi di mercato entro 72 ore."
-                />
-                <Card
-                    image=""
-                    subtitle="Proposta su misura"
-                    text="Il nostro consulente ti contatta con la proposta di vendita in esclusiva e la strategia marketing dedicata."
-                />
-                <Card
-                    image=""
-                    subtitle="Vendi rapidamente"
-                    text="Gestiamo noi tutte le trattative e le procedure legali per finalizzare la vendita al miglior prezzo."
-                />
-
-            </div>
-        </section>
-    );
+      <div className="card-section__grid">
+        <Card
+          image={cardOneImg}
+          subtitle="Valuta Online"
+          text="Ricevi la prima stima e l'analisi di mercato entro 72 ore."
+        />
+        <Card
+          image={cardTwoImg}
+          subtitle="Proposta su misura"
+          text="Il nostro consulente ti contatta con la proposta di vendita in esclusiva e la strategia marketing dedicata."
+        />
+        <Card
+          image={cardThreeImg}
+          subtitle="Vendi rapidamente"
+          text="Gestiamo noi tutte le trattative e le procedure legali per finalizzare la vendita al miglior prezzo."
+        />
+      </div>
+    </section>
+  );
 }

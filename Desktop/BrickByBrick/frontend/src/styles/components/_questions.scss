@@ -1,0 +1,167 @@
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as m;
+@use 'sass:color';
+
+.contact {
+
+  &__background {
+    background-color: vars.$light-blue;
+    padding: vars.$spacing-3xl vars.$spacing-lg;
+
+    @include m.flex-column;
+    align-items: center;
+
+    @include m.mobile {
+      padding: vars.$spacing-xl vars.$spacing-base;
+    }
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: vars.$spacing-2xl;
+    max-width: 600px;
+
+    h2 {
+      @include m.heading(vars.$font-size-4xl, vars.$font-weight-bold);
+      color: vars.$dark-blue;
+      margin-bottom: vars.$spacing-base;
+
+      @include m.mobile {
+        font-size: vars.$font-size-2xl;
+      }
+    }
+
+    p {
+      font-family: vars.$font-paragraph;
+      color: vars.$light-gray;
+      font-size: vars.$font-size-base;
+      line-height: vars.$line-height-normal;
+      margin-bottom: vars.$spacing-sm;
+    }
+  }
+
+  &__container {
+    background-color: vars.$white;
+    border-radius: vars.$border-radius-xl;
+    box-shadow: vars.$shadow-lg;
+    max-width: 800px;
+    width: 100%;
+    padding: vars.$spacing-2xl vars.$spacing-3xl;
+
+    @include m.mobile {
+      padding: vars.$spacing-xl vars.$spacing-lg;
+    }
+  }
+
+  &__form {
+    @include m.flex-column;
+
+    .form-group {
+      margin-bottom: vars.$spacing-lg;
+
+      label {
+        display: block;
+        margin-bottom: vars.$spacing-sm;
+        font-family: vars.$font-paragraph;
+        font-weight: vars.$font-weight-semibold;
+        color: vars.$dark-blue;
+        font-size: vars.$font-size-sm;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: vars.$spacing-base;
+        border: vars.$border-width solid rgba(vars.$black, 0.15);
+        border-radius: vars.$border-radius-md;
+        font-family: vars.$font-paragraph;
+        font-size: vars.$font-size-base;
+
+        transition: border-color vars.$transition-base vars.$transition-ease,
+                    box-shadow vars.$transition-base vars.$transition-ease;
+
+        &::placeholder {
+          color: vars.$light-gray;
+        }
+
+        &:focus {
+          border-color: vars.$turquoise;
+          box-shadow: 0 0 0 vars.$border-width-thick vars.$turquoise;
+          outline: none;
+        }
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 120px;
+      }
+    }
+
+    .form-row {
+      @include m.flex-row;
+      align-items: flex-end;
+      gap: vars.$spacing-lg;
+      margin-bottom: vars.$spacing-lg;
+
+      .half-width {
+        width: 50%;
+      }
+    }
+
+    &__submit-button {
+      align-self: flex-start;
+      background-color: vars.$turquoise;
+      color: vars.$white;
+      border: none;
+      padding: vars.$spacing-base vars.$spacing-xl;
+      border-radius: vars.$border-radius-md;
+      font-family: vars.$font-paragraph;
+      font-size: vars.$font-size-base;
+      font-weight: vars.$font-weight-semibold;
+      cursor: pointer;
+
+      transition: background-color vars.$transition-base vars.$transition-ease,
+                  transform vars.$transition-base vars.$transition-ease,
+                  box-shadow vars.$transition-base vars.$transition-ease;
+
+      &:hover {
+        background-color: color.scale(vars.$turquoise, $lightness: -10%);
+        transform: translateY(-2px);
+        box-shadow: vars.$shadow-md;
+      }
+    }
+  }
+
+  &__visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+
+  @include m.mobile {
+    &__form {
+      .form-row {
+        flex-direction: column;
+        gap: 0;
+        margin-bottom: 0;
+        align-items: stretch;
+
+        .half-width {
+          width: 100%;
+          margin-bottom: vars.$spacing-lg;
+        }
+      }
+
+      .hide-label-on-mobile {
+        label {
+          display: none;
+        }
+      }
+    }
+  }
+}

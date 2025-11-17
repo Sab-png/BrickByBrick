@@ -1,0 +1,201 @@
+@use '../abstracts/variables' as v;
+@use '../abstracts/mixins' as m;
+@use 'sass:color';
+
+.advanced-filters {
+  background-color: v.$blue;
+  padding: v.$spacing-xl;
+  border-radius: v.$border-radius-lg;
+  margin: 0 auto;
+  margin-top: v.$spacing-base;
+  max-width: 100%;
+  box-sizing: border-box;
+  animation: slideDown 0.3s ease-out;
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  &__wrapper {
+    @include m.flex-row;
+    flex-wrap: wrap;
+    gap: v.$spacing-lg;
+    margin-bottom: v.$spacing-xl;
+
+    .advanced-filters__item {
+      flex: 1 1 calc(25% - v.$spacing-lg);
+      min-width: 120px;
+      @include m.flex-column;
+      gap: v.$spacing-xs;
+    }
+
+    @include m.mobile {
+      gap: v.$spacing-xl;
+
+      .advanced-filters__item {
+        flex: 1 1 100%;
+      }
+    }
+
+    @include m.tablet {
+      .advanced-filters__item {
+        flex: 1 1 calc(50% - v.$spacing-xl);
+      }
+    }
+
+    @include m.desktop {
+      .advanced-filters__item {
+        flex: 1 1 calc(25% - v.$spacing-lg);
+      }
+    }
+  }
+
+  &__label {
+    @include m.flex-center;
+    justify-content: flex-start;
+    gap: v.$spacing-xs;
+    font-family: v.$font-paragraph;
+    font-size: v.$font-size-sm;
+    font-weight: v.$font-weight-medium;
+    color: v.$white;
+
+    i {
+      font-size: v.$font-size-sm;
+    }
+  }
+
+  &__select,
+  &__input {
+    padding: v.$spacing-sm v.$spacing-base;
+    border: 1px solid rgba(v.$white, 0.3);
+    border-radius: v.$border-radius-sm;
+    background-color: rgba(v.$white, 0.1);
+    color: v.$white;
+    font-family: v.$font-paragraph;
+    font-size: v.$font-size-sm;
+    transition: all v.$transition-base;
+
+    &:focus {
+      outline: none;
+      border-color: v.$turquoise;
+      background-color: rgba(v.$white, 0.15);
+    }
+
+    &::placeholder {
+      color: rgba(v.$white, 0.6);
+    }
+
+    option {
+      background-color: v.$blue;
+      color: v.$white;
+    }
+  }
+
+  &__range {
+    @include m.flex-center;
+    gap: v.$spacing-xs;
+
+    @include m.mobile {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    span {
+      color: v.$white;
+      font-size: v.$font-size-sm;
+
+      @include m.mobile {
+        display: none;
+      }
+    }
+
+    input {
+      flex: 1;
+      min-width: 0;
+    }
+  }
+
+  &__checkboxes {
+    @include m.flex-column;
+    gap: v.$spacing-xs;
+  }
+
+  &__checkbox {
+    @include m.flex-center;
+    justify-content: flex-start;
+    gap: v.$spacing-xs;
+    cursor: pointer;
+    padding: v.$spacing-xs v.$spacing-sm;
+    border-radius: v.$border-radius-sm;
+    transition: all v.$transition-base ease-in-out;
+
+    span {
+      color: v.$white;
+      font-size: v.$font-size-sm;
+      transition: color v.$transition-base;
+    }
+
+    /* stato attivo */
+    input[type="checkbox"]:checked+span {
+      font-weight: v.$font-weight-bold;
+      font-size: v.$font-size-xl
+    }
+
+  }
+
+
+  &__actions {
+    @include m.flex-center;
+    gap: v.$spacing-base;
+    padding-top: v.$spacing-lg;
+
+    @include m.mobile {
+      flex-direction: column;
+      width: 100%;
+    }
+  }
+
+  &__button {
+    padding: v.$spacing-sm v.$spacing-xl;
+    border: none;
+    border-radius: v.$border-radius-md;
+    font-family: v.$font-title;
+    font-size: v.$font-size-sm;
+    font-weight: v.$font-weight-semibold;
+    cursor: pointer;
+    transition: all v.$transition-base v.$transition-ease;
+
+    @include m.mobile {
+      width: 100%;
+    }
+
+    &--primary {
+      background-color: v.$turquoise;
+      color: v.$white;
+
+      &:hover {
+        background-color: color.scale(v.$turquoise, $lightness: -10%);
+        transform: translateY(-2px);
+        box-shadow: v.$shadow-md;
+      }
+    }
+
+    &--secondary {
+      background-color: transparent;
+      color: v.$white;
+      border: 1px solid v.$white;
+
+      &:hover {
+        background-color: rgba(v.$white, 0.1);
+      }
+    }
+  }
+}

@@ -1,0 +1,108 @@
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as m;
+
+.step-item {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    grid-template-rows: auto auto;
+    column-gap: vars.$spacing-lg;
+    row-gap: vars.$spacing-base;
+    align-items: start;
+    max-width: 500px;
+
+    @include m.mobile {
+        grid-template-columns: 48px 1fr;
+        column-gap: vars.$spacing-base;
+    }
+
+    @include m.tablet {
+        max-width: 550px;
+    }
+
+    @include m.desktop {
+        max-width: 600px;
+    }
+
+    // Allineamento a destra per il secondo step
+    &--right {
+        @include m.desktop {
+            justify-self: end;
+        }
+    }
+
+    // Numero dello step
+    &__number {
+        font-family: vars.$font-title; // Poppins
+        font-size: vars.$font-size-4xl; // 36px
+        font-weight: vars.$font-weight-bold; // 700
+        color: vars.$sky-blue;
+        line-height: 1;
+        text-align: right;
+        grid-row: 1 / span 2;
+        align-self: start;
+        padding-top: vars.$spacing-xs;
+
+        @include m.mobile {
+            font-size: vars.$font-size-3xl; // 30px
+        }
+
+        @include m.tablet {
+            font-size: vars.$font-size-5xl; // 48px
+        }
+    }
+
+    // Immagine
+    &__media {
+        grid-column: 2;
+        grid-row: 1;
+        width: 100%;
+        border-radius: vars.$border-radius-lg;
+        overflow: hidden;
+        box-shadow: vars.$shadow-md;
+    }
+
+    &__image {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: cover;
+        border-radius: vars.$border-radius-lg;
+    }
+
+    // Contenuto testuale
+    &__content {
+        grid-column: 2;
+        grid-row: 2;
+        @include m.flex-column;
+        gap: vars.$spacing-xs;
+    }
+
+    &__title {
+        font-family: vars.$font-title; // Poppins
+        font-size: vars.$font-size-lg; // 18px
+        font-weight: vars.$font-weight-bold; // 700
+        color: vars.$blue;
+        margin: 0;
+        line-height: vars.$line-height-tight;
+
+        @include m.tablet {
+            font-size: vars.$font-size-xl; // 20px
+        }
+
+        @include m.desktop {
+            font-size: vars.$font-size-2xl; // 24px
+        }
+    }
+
+    &__description {
+        font-family: vars.$font-paragraph; // Montserrat
+        font-size: vars.$font-size-sm; // 14px
+        color: vars.$blue;
+        margin: 0;
+        line-height: vars.$line-height-relaxed; // 1.75
+
+        @include m.tablet {
+            font-size: vars.$font-size-base; // 16px
+        }
+    }
+}

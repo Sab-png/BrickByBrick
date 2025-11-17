@@ -1,0 +1,31 @@
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as m;
+
+.filters {
+  width: 100%;
+  background-color: vars.$blue;
+  padding: vars.$spacing-xl 0;
+  box-shadow: vars.$shadow-sm;
+
+  &__container {
+    max-width: vars.$container-max-width;
+    margin: 0 auto;
+    padding: 0 vars.$spacing-lg;
+    @include m.flex-column;
+    gap: vars.$spacing-base;
+    
+    /* FIX DEFINITIVO:
+      Questo previene che il padding del contenitore si aggiunga
+      alla sua larghezza, risolvendo l'overflow su mobile.
+    */
+    box-sizing: border-box;
+
+    @include m.tablet {
+      padding: 0 vars.$spacing-xl;
+    }
+
+    @include m.desktop {
+      padding: 0 vars.$spacing-2xl;
+    }
+  }
+}

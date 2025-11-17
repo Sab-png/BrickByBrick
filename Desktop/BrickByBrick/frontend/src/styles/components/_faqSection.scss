@@ -1,0 +1,125 @@
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as m;
+
+.faq-background {
+  // Sfondo esterno azzurro chiaro
+  background-color: vars.$light-blue;
+  padding: vars.$spacing-3xl vars.$spacing-lg;
+  
+  @include m.flex-column;
+  align-items: center;
+
+  // Su mobile, riduciamo il padding verticale
+  @include m.mobile {
+    padding: vars.$spacing-xl vars.$spacing-base;
+  }
+}
+
+.faq-header {
+  text-align: center;
+  margin-bottom: vars.$spacing-xl;
+
+  h1 {
+    // Usiamo il mixin per gli heading
+    @include m.heading(vars.$font-size-5xl, vars.$font-weight-bold);
+    color: vars.$dark-blue;
+    margin-bottom: vars.$spacing-sm;
+
+    @include m.mobile {
+      font-size: vars.$font-size-3xl; // Riduciamo il titolo su mobile
+    }
+  }
+
+  p {
+    color: vars.$light-gray;
+    font-family: vars.$font-paragraph;
+    font-size: vars.$font-size-lg;
+
+    @include m.mobile {
+      font-size: vars.$font-size-base;
+    }
+  }
+}
+
+.faq-container {
+  // Blocco bianco arrotondato
+  background-color: vars.$white;
+  border-radius: vars.$border-radius-xl; // 16px
+  box-shadow: vars.$shadow-lg; // Ombra più morbida e ampia
+  max-width: 800px;
+  width: 100%;
+  padding: vars.$spacing-xl vars.$spacing-2xl;
+  
+  // Responsive: Riduciamo il padding interno su mobile
+  @include m.mobile {
+    padding: vars.$spacing-lg vars.$spacing-lg;
+  }
+}
+
+.faq-tabs {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  // Linea grigia chiara di separazione
+  border-bottom: vars.$border-width solid rgba(vars.$black, 0.1); 
+  margin-bottom: vars.$spacing-lg; // Spazio tra tab e prime FAQ
+  
+
+  // Responsive: Su mobile, permettiamo lo scroll orizzontale dei tab
+  @include m.mobile {
+    justify-content: flex-start;
+    overflow-x: auto;
+    
+    // Nascondiamo la scrollbar per un look più pulito
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;     /* Firefox */
+    &::-webkit-scrollbar {
+      display: none;             /* Chrome, Safari, Opera */
+    }
+  }
+
+  .tab-button {
+    background: none;
+    border: none;
+    padding: vars.$spacing-sm vars.$spacing-base;
+    padding-bottom: vars.$spacing-lg; // Più spazio per la linea
+    margin-right: vars.$spacing-lg;
+    cursor: pointer;
+    font-family: vars.$font-paragraph;
+    font-size: vars.$font-size-base;
+    font-weight: vars.$font-weight-medium;
+    color: vars.$light-gray;
+    position: relative;
+    transition: color vars.$transition-base vars.$transition-ease;
+    flex-shrink: 0; // Impedisce ai tab di stringersi su mobile
+    white-space: nowrap; // Evita che i nomi dei tab vadano a capo
+
+    &:hover:not(.active) {
+      color: vars.$dark-blue;
+    }
+
+    &.active {
+      color: vars.$dark-blue;
+      font-weight: vars.$font-weight-semibold;
+
+      // Linea d'accento (turchese)
+      &::after {
+        content: '';
+        position: absolute;
+        // Si posiziona sopra il border-bottom del contenitore
+        bottom: - (vars.$border-width); 
+        left: 0;
+        width: 100%;
+        height: 2px; // Linea d'accento spessa 2px
+        background-color: vars.$turquoise; // Colore accento
+      }
+    }
+  }
+}
+
+.no-faqs {
+  text-align: center;
+  color: vars.$light-gray;
+  font-family: vars.$font-paragraph;
+  padding: vars.$spacing-lg;
+}

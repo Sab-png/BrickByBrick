@@ -1,129 +1,131 @@
-// _featuresSection.scss
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as m;
 
-// Variabili (consigliate per mantenere la coerenza)
-$color-background: #E8F1F8; // Colore azzurro chiaro dello sfondo
-$color-card-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-$color-primary-dark: #212529;
 
 .features-section {
-    // Stile del contenitore principale (lo sfondo azzurro chiaro)
-    background-color: $color-background;
-    padding: 60px 20px;
-    display: flex;
-    flex-direction: column;
+    padding: vars.$spacing-3xl vars.$spacing-lg; // 64px 24px
+    @include m.flex-column;
     align-items: center;
-    text-align: center;
-}
 
-// ------------------------------------
-// Stile Titolo e Sottotitolo
-// ------------------------------------
+    @include m.tablet {
+        padding: vars.$spacing-3xl vars.$spacing-xl; // 64px 32px
+    }
 
-.section-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: $color-primary-dark;
-    margin-bottom: 20px;
-}
+    @include m.desktop {
+        padding: calc(vars.$spacing-3xl * 1.5) vars.$spacing-2xl; // 96px 48px
+    }
 
-.section-subtitle {
-    font-size: 1.1rem;
-    color: $color-primary-dark;
-    max-width: 650px;
-    margin-bottom: 40px;
-}
+    // Header (Titolo e Sottotitolo)
+    &__header {
+        @include m.flex-column;
+        align-items: center;
+        text-align: center;
+        margin-bottom: vars.$spacing-2xl; // 48px
 
-// ------------------------------------
-// Stile Contenuto (Immagine + Lista)
-// ------------------------------------
+        @include m.tablet {
+            margin-bottom: vars.$spacing-3xl; // 64px
+        }
+    }
 
-.features-section__content-wrapper {
-    display: flex;
-    // Imposta la spaziatura tra i due lati
-    gap: 30px; 
-    align-items: center; // Allinea verticalmente al centro
-    max-width: 1200px;
-    width: 100%;
-    margin-top: 20px;
-    
-    // Media Query per dispositivi mobili: impila gli elementi
-    @media (max-width: 992px) {
+    &__title {
+        font-family: vars.$font-title; // Poppins
+        font-size: vars.$font-size-3xl; // 30px
+        font-weight: vars.$font-weight-bold; // 700
+        color: vars.$black;
+        margin-bottom: vars.$spacing-base; // 16px
+        line-height: vars.$line-height-tight; // 1.2
+
+        @include m.tablet {
+            font-size: vars.$font-size-4xl; // 36px
+            margin-bottom: vars.$spacing-lg; // 24px
+        }
+
+        @include m.desktop {
+            font-size: vars.$font-size-5xl; // 48px
+        }
+    }
+
+    &__subtitle {
+        font-family: vars.$font-paragraph; // Montserrat
+        font-size: vars.$font-size-base; // 16px
+        color: vars.$black;
+        line-height: vars.$line-height-relaxed; // 1.75
+        max-width: 650px;
+        margin: 0;
+
+        @include m.tablet {
+            font-size: vars.$font-size-lg; // 18px
+            max-width: 750px;
+        }
+    }
+
+    // Contenuto (Immagine + Card)
+    &__content-wrapper {
+        display: flex;
+        gap: vars.$spacing-2xl; // 48px
+        align-items: stretch; // Altezza uguale
+        justify-content: center;
+        max-width: vars.$container-max-width; // 1200px
+        width: 100%;
+
+        @include m.mobile {
+            flex-direction: column;
+            gap: vars.$spacing-xl; // 32px
+            align-items: center;
+        }
+
+        @include m.tablet {
+            gap: vars.$spacing-xl;
+        }
+    }
+
+    // Immagine Sinistra
+    &__image-container {
+        flex: 1;
+        border-radius: vars.$border-radius-lg; // 12px
+        overflow: hidden;
+        box-shadow: vars.$shadow-md;
+        display: flex; // Per mantenere l'altezza
+        min-height: 100%; // Altezza uguale alla card
+
+        @include m.mobile {
+            display: none;
+        }
+
+        @include m.tablet {
+            max-width: 600px;
+        }
+    }
+
+    &__main-image {
+        max-width: 100%;
+        height: auto; // Riempie il contenitore
+        display: block;
+        object-fit: cover;
+        object-position: right center;
+    }
+
+    // Card Destra (Lista Punti)
+    &__list-card {
+        flex: 1;
+        background-color: vars.$white;
+        padding: vars.$spacing-xl; // 32px
+        border-radius: vars.$border-radius-lg; // 12px
+        box-shadow: vars.$shadow-lg;
+        max-width: 550px;
+        display: flex;
         flex-direction: column;
+        justify-content: center; // Centra verticalmente il contenuto
+
+        @include m.mobile {
+            width: 100%;
+            max-width: 100%;
+            padding: vars.$spacing-lg; // 24px
+        }
+
+        @include m.tablet {
+            padding: vars.$spacing-2xl; // 48px
+            min-width: 700px;
+        }
     }
-}
-
-// Stile Immagine Sinistra
-.features-section__image-container {
-    flex: 1;
-    // Mantiene la proporzione e arrotonda i bordi come nell'esempio
-    border-radius: 8px;
-    overflow: hidden;
-    
-    // Nascondi sui dispositivi mobili per focalizzarsi sui punti
-    @media (max-width: 992px) {
-        display: none;
-    }
-}
-
-.features-section__main-image {
-    width: 100%;
-    height: auto;
-    display: block; // Rimuove lo spazio extra sotto l'immagine
-}
-
-// Stile Card Destra (Lista Punti)
-.features-section__list-card {
-    flex: 1;
-    text-align: left; // Allinea il testo all'interno della card a sinistra
-    background-color: white;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: $color-card-shadow;
-    max-width: 500px; // Limita la larghezza della card
-    
-    // Per i dispositivi mobili, rendi la card larga
-    @media (max-width: 992px) {
-        width: 90%;
-        max-width: 600px;
-    }
-}
-
-// ------------------------------------
-// Stile Punti Lista (FeatureItem)
-// ------------------------------------
-
-.feature-item {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 25px;
-
-    &:last-child {
-        margin-bottom: 0;
-    }
-}
-
-.feature-item__icon-wrapper {
-    margin-right: 15px;
-    padding-top: 5px; // Allinea meglio l'icona con il testo
-}
-
-.feature-item__icon {
-    width: 30px;
-    height: auto;
-    // Colore per le icone (se sono SVG o font)
-    color: #4A90E2; 
-}
-
-.feature-item__title {
-    font-size: 1.1rem;
-    font-weight: bold;
-    margin: 0;
-    margin-bottom: 5px;
-    color: $color-primary-dark;
-}
-
-.feature-item__description {
-    font-size: 0.95rem;
-    color: #555;
-    margin: 0;
 }

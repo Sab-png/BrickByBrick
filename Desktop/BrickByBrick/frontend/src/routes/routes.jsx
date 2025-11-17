@@ -4,7 +4,10 @@ import Homepage from '../pages/Homepage'
 import About from '../pages/About'
 import Immobili from '../pages/Immobili'
 import DettaglioImmobile from '../pages/DettaglioImmobile'
+import FAQSupport from '../pages/FAQSupport'
+import StepMultiForm from '../pages/StepMultiForm'
 import NotFound from '../pages/NotFound'
+import Valuta from '../pages/Valuta';
 
 const routes = [
   {
@@ -25,10 +28,23 @@ const routes = [
         title: 'Chi Siamo'
       },
       {
+        path: 'valuta',
+        Component: Valuta,
+        showInNav: true,
+        title: 'Valuta'
+      },
+      {
         path: 'immobili',
         Component: Immobili,
         showInNav: true,
         title: 'Immobili'
+      },
+      {
+        path: 'support',
+        Component: FAQSupport,
+        showInNav: true,
+        title: 'Supporto'
+
       },
       {
         path: 'immobili/:id',
@@ -41,6 +57,12 @@ const routes = [
         Component: NotFound
       }
     ]
+  },
+  {
+    path: 'valuta-immobile',
+    Component: StepMultiForm,
+    showInNav: false,
+    title: 'Step Multi Form'
   }
 ]
 
