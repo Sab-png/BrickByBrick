@@ -1,6 +1,7 @@
 package com.brickbybrick.brickbybrick.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
@@ -31,8 +32,8 @@ public class BrickServiceImmobileImpl implements BrickServiceImmobile {
     // }
 
     @Override
-    public Immobile getImmobileById(int id) {
-        return repoImmobile.findById(id).orElse(null);
+    public Optional<Immobile> getImmobileById(int id) {
+        return repoImmobile.findById(id);
     }
     
     @Override
@@ -282,6 +283,10 @@ public List<Immobile> filtraImmobili(
             .and(cantinaIs(cantina));
 
     return repoImmobile.findAll(spec);
+}
+@Override
+public boolean existsById(Integer id) {
+    return repoImmobile.existsById(id);
 }
 
 
