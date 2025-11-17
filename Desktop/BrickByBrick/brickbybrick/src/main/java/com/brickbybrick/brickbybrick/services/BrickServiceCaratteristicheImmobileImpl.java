@@ -1,10 +1,8 @@
 package com.brickbybrick.brickbybrick.services;
-
 import java.util.List;
-
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.brickbybrick.brickbybrick.model.CaratteristicheImmobile;
 import com.brickbybrick.brickbybrick.repos.BrickRepoCaratteristicheImmobile;
 
@@ -24,14 +22,17 @@ public class BrickServiceCaratteristicheImmobileImpl implements BrickServiceCara
         return repoCaratteristicheImmobile.save(a);
     }
 
-    
     @Override
-    public CaratteristicheImmobile getCaratteristicaById(int id) {
-        return repoCaratteristicheImmobile.findById(id).orElse(null);
+    public Optional<CaratteristicheImmobile> getCaratteristicaById(Integer id) {
+        return repoCaratteristicheImmobile.findById(id);
+    }
+    @Override
+    public void deleteCaratteristica(Integer id) {
+        repoCaratteristicheImmobile.deleteById(id);
     }
 
     @Override
-    public void deleteCaratteristica(int id) {
-        repoCaratteristicheImmobile.deleteById(id);
+    public boolean existsById(Integer id) {
+        return repoCaratteristicheImmobile.existsById(id);
     }
 }

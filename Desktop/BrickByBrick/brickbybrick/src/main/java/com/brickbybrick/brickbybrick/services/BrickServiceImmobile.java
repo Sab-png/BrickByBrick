@@ -3,7 +3,6 @@ package com.brickbybrick.brickbybrick.services;
 import java.util.List;
 
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.brickbybrick.brickbybrick.model.Immobile;
 

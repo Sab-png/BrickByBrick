@@ -7,10 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import com.brickbybrick.brickbybrick.model.Agente;
 import com.brickbybrick.brickbybrick.model.CaratteristicheImmobile;
-import com.brickbybrick.brickbybrick.model.Immobile;
 import com.brickbybrick.brickbybrick.repos.BrickRepoCaratteristicheImmobile;
 import com.brickbybrick.brickbybrick.services.BrickServiceCaratteristicheImmobile;
 
@@ -47,7 +44,7 @@ public class BrickCaratteristicheImmobileMVC {
     
     @GetMapping("/caratteristiche/edit/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        CaratteristicheImmobile caratteristica = serviceCaratteristicheImmobile.getCaratteristicaById(id);
+        CaratteristicheImmobile caratteristica = serviceCaratteristicheImmobile.getCaratteristicaById(id).orElse(null);
         model.addAttribute("caratteristica", caratteristica);
         return "CaratteristicheEdit";
     }
@@ -55,7 +52,7 @@ public class BrickCaratteristicheImmobileMVC {
 
     @PostMapping("/caratteristiche/update/{id}")
     public String updateCaratteristica(@PathVariable("id") int id, @ModelAttribute("caratteristica") CaratteristicheImmobile aggiornata) {
-        CaratteristicheImmobile esistente = serviceCaratteristicheImmobile.getCaratteristicaById(id);
+        CaratteristicheImmobile esistente = serviceCaratteristicheImmobile.getCaratteristicaById(id).orElse(null);
         esistente.setTipologia(aggiornata.getTipologia());
         esistente.setPiano(aggiornata.getPiano());
         esistente.setAscensore(aggiornata.getAscensore());
