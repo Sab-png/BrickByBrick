@@ -39,10 +39,10 @@ const routes = [
         title: 'Immobili'
       },
       {
-        path: 'faq-support',
+        path: 'support',
         Component: FAQSupport,
         showInNav: true,
-        title: 'FAQ & Supporto'
+        title: 'Supporto'
 
       },
       {
