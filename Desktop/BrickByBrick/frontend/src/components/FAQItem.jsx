@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
-import '../styles/components/_faqItem.scss'
-
+import { useState } from 'react';
 
 const FAQItem = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false);
