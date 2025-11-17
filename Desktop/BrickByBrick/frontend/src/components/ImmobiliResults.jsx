@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState,useEffect, useMemo } from 'react';
 
 import { useContext } from 'react';
 import  FiltersContext  from '../store/filters-context';
@@ -6,16 +6,51 @@ import  FiltersContext  from '../store/filters-context';
 import MapSection from './MapSection';
 import ImmobileCard from './ImmobileCard';
 
-import { mockImmobili } from '../data/mockImmobili';
+// import { mockImmobili } from '../data/mockImmobili';
+
+
+let fetchImmobili = async () => {
+
+  try {
+
+    let res = await fetch("http://localhost:8085/api/immobili");
+
+    let data = await res.json()
+
+    return data;
+
+  } catch (error) {
+    console.error("Errore: " + error);
+  }
+
+}
+
+
+
 
 export default function ImmobiliResults() {
+
+  const [immobili, setImmobili] = useState([])
+
+  useEffect(() => {
+
+  const loadImmobili = async () => {
+
+    const immobiliFetchati = await fetchImmobili();
+
+    setImmobili(immobiliFetchati || []);
+  };
+
+  loadImmobili();
+  }, []);
 
   const { filters } = useContext(FiltersContext);
   const [showMap, setShowMap] = useState(true);
 
   // Applica i filtri agli immobili usando useMemo per performance
   const filteredImmobili = useMemo(() => {
-    let result = [...mockImmobili];
+    // let result = [...mockImmobili];
+    let result = [...immobili];
 
     // Filtro per città
     if (filters.citta) {
@@ -100,8 +135,11 @@ export default function ImmobiliResults() {
     }
 
     return result;
-  }, [filters]);
+  }, [filters, immobili]);
 
+  console.log("Stato 'immobili':", immobili);
+  console.log("Immobili filtrati:", filteredImmobili);
+  
     return (
       <div className="immobili-results">
         <div className="immobili-results__container">
