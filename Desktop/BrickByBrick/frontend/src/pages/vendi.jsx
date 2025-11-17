@@ -134,6 +134,37 @@ export default function Vendi() {
                     </div>
                 </div>
             </section>
+
+            {/* Sezione Esperto della zona */}
+            <section className="vendi-expert">
+                <div className="vendi-expert__container">
+                    <h2 className="vendi-expert__title">Vuoi parlare con un esperto della tua zona?</h2>
+                    <p className="vendi-expert__text">
+                        <strong>Prenota un appuntamento gratuito con uno dei nostri agenti. Ti aiuterà a capire meglio il valore della tua casa e il percorso di vendita più adatto. In sede, online o telefonicamente, come preferisci.</strong>
+                    </p>
+                    <button className="vendi-expert__button">PRENOTA ORA</button>
+                </div>
+            </section>
+
+            {/* Sezione Newsletter */}
+            <section className="vendi-newsletter">
+                <div className="vendi-newsletter__container">
+                    <div className="vendi-newsletter__icon">
+                        <img
+                            src="/img/newsletter.png"
+                            alt="Newsletter"
+                            className="vendi-newsletter__icon-image"
+                        />
+                    </div>
+                    <div className="vendi-newsletter__content">
+                        <h2 className="vendi-newsletter__title">Non perdere l'occasione</h2>
+                        <p className="vendi-newsletter__text">
+                            Un nostro agente è pronto ad ascoltarti e guidarti passo dopo passo nella vendita.
+                        </p>
+                        <button className="vendi-newsletter__button">CONTATTACI</button>
+                    </div>
+                </div>
+            </section>
         </div>
     )
 }
