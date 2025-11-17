@@ -38,7 +38,7 @@ export default function Valuta() {
                 title="Quali sono i passaggi?"
                 steps={steps}
                 ctaText="VALUTA IL TUO IMMOBILE"
-                ctaLink="/valuta"
+                ctaLink="/valuta-immobile"
             />
 
             <Newsletter />
