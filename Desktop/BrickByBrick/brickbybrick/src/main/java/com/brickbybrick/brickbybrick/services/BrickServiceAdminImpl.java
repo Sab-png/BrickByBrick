@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 import com.brickbybrick.brickbybrick.model.Admin;
 import com.brickbybrick.brickbybrick.repos.BrickRepoAdmin;
 
-@Service
-public class BrickServiceAdminImpl implements BrickServiceAdmin {
+    @Service
+    public class BrickServiceAdminImpl implements BrickServiceAdmin {
 
-    @Autowired
+     @Autowired
     private BrickRepoAdmin repoAdmin;
 
     @Override
@@ -26,11 +26,6 @@ public class BrickServiceAdminImpl implements BrickServiceAdmin {
     }
 
     @Override
-    public Admin saveAdmin(Admin admin) {
-        return repoAdmin.save(admin);
-    }
-
-    @Override
     public void deleteAdmin(Integer id) {
         repoAdmin.deleteById(id);
     }
@@ -39,4 +34,10 @@ public class BrickServiceAdminImpl implements BrickServiceAdmin {
     public boolean existsById(Integer id) {
         return repoAdmin.existsById(id);
     }
+
+    @Override
+    public Admin saveAdmin(Admin admin) {
+        return repoAdmin.save(admin);
+    }
+    
 }
