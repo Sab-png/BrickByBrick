@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function HeroSection({ title, subtitle, showCTA = true, bgImage }) {
 
   const heroStyle = {
@@ -19,9 +21,11 @@ export default function HeroSection({ title, subtitle, showCTA = true, bgImage }
         )}
         
         {showCTA && (
-          <button className="hero-section__cta-button">
-            VALUTA IL TUO IMMOBILE
-          </button>
+          <Link to={"/valuta-immobile"}>
+            <button className="hero-section__cta-button">
+              VALUTA IL TUO IMMOBILE
+            </button>
+          </Link>
         )}
       </div>
     </section>
