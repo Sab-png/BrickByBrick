@@ -1,6 +1,7 @@
 package com.brickbybrick.brickbybrick.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.domain.Specification;
 
@@ -12,9 +13,11 @@ public interface BrickServiceImmobile {
 
     Immobile addImmobile(Immobile i);
 
-    Immobile getImmobileById(int id);
+    Optional<Immobile>  getImmobileById(int id);
 
     void deleteImmobile(int id);
+
+    boolean existsById(Integer id);
 
     Specification<Immobile> regioneContains(String regione);
     Specification<Immobile> capEquals(String cap);
@@ -53,3 +56,4 @@ public interface BrickServiceImmobile {
     
 
     }
+

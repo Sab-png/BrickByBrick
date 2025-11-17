@@ -1,6 +1,7 @@
 package com.brickbybrick.brickbybrick.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,27 +21,22 @@ public class BrickServiceVisitaImpl implements BrickServiceVisita {
     }
 
     @Override
-    public Visita getVisitaById(Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getVisitaById'");
-    }
+    public Optional<Visita> getVisitaById(Integer id) {
+        return repoVisita.findById(id);}
 
     @Override
-    public void addVisita(Visita visita) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addVisita'");
-    }
-
-    @Override
-    public void updateVisita(Visita visita) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateVisita'");
+    public Visita saveVisita(Visita visita) {
+      return repoVisita.save(visita);
     }
 
     @Override
     public void deleteVisita(Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteVisita'");
+        repoVisita.deleteById(id);
+    }
+
+    @Override
+    public boolean existsById(Integer id){
+        return repoVisita.existsById(id);
     }
 
 }

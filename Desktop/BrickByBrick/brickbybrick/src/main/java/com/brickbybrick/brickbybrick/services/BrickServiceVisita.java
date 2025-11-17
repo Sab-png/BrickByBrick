@@ -1,6 +1,11 @@
 package com.brickbybrick.brickbybrick.services;
 
 import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.jpa.domain.Specification;
+
+import com.brickbybrick.brickbybrick.model.Immobile;
 import com.brickbybrick.brickbybrick.model.Visita;
 
 
@@ -10,12 +15,15 @@ public interface BrickServiceVisita {
     
     List<Visita> getVisite();
     
-    Visita getVisitaById(Integer id);
+    Optional<Visita> getVisitaById(Integer id);
     
-    void addVisita(Visita visita);
-    
-    void updateVisita(Visita visita);
+    Visita saveVisita(Visita visita);
     
     void deleteVisita(Integer id);
+
+    boolean existsById(Integer id);
+    
+   
+
 }
 

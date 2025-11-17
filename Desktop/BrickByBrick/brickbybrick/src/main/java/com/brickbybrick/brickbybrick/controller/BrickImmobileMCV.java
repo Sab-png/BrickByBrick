@@ -53,14 +53,14 @@ public class BrickImmobileMCV {
 
     @GetMapping("/immobili/edit/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        Immobile immobile = serviceImmobile.getImmobileById(id);
+        Immobile immobile = serviceImmobile.getImmobileById(id).orElse(null);
         model.addAttribute("immobile", immobile);
         return "ImmobiliEdit";
     }
 
     @PostMapping("/immobili/update/{id}")
     public String updateImmobile(@PathVariable("id") int id, @ModelAttribute("immobile") Immobile aggiornato) {
-        Immobile esistente = serviceImmobile.getImmobileById(id);
+        Immobile esistente = serviceImmobile.getImmobileById(id).orElse(null);
         esistente.setFoto(aggiornato.getFoto());
         esistente.setRegione(aggiornato.getRegione());
         esistente.setCap(aggiornato.getCap());
