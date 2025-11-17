@@ -1,0 +1,127 @@
+@use '../abstracts/variables' as vars;
+
+/* Stili per la pagina di gestione utenti */
+.user-management-page {
+  padding: vars.$spacing-lg 0;
+}
+
+/* Contenitore principale a forma di "card" per l'intera tabella */
+.user-table-card {
+  background-color: vars.$white;
+  border-radius: vars.$border-radius-md; // Utilizzo md al posto di lg che non c'è nelle tue var
+  box-shadow: vars.$shadow-md; // Utilizzo il tuo shadow-md
+  overflow: hidden; 
+  margin-bottom: vars.$spacing-lg;
+}
+
+/* Stili per l'header con ricerca e pulsanti */
+.table-header-controls {
+  padding: vars.$spacing-base vars.$spacing-lg; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: vars.$border-width solid #e5e7eb; // Colore generico per il bordo, non definito nelle var
+
+  .search-container {
+    display: flex;
+    align-items: center;
+    
+    input {
+      padding: vars.$spacing-sm vars.$spacing-base;
+      border: vars.$border-width solid #ccc; // Colore generico per il bordo input
+      border-radius: vars.$border-radius-sm; 
+      margin-right: vars.$spacing-sm;
+    }
+
+    button.search-btn {
+      background-color: vars.$sky-blue; // Variabile dal tuo file
+      color: vars.$white;
+      border: none;
+      padding: vars.$spacing-sm vars.$spacing-base;
+      border-radius: vars.$border-radius-sm;
+      cursor: pointer;
+      font-weight: vars.$font-weight-medium;
+
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+  }
+
+  .action-buttons {
+    button {
+      margin-left: vars.$spacing-sm; 
+      padding: vars.$spacing-sm vars.$spacing-base;
+      border: vars.$border-width solid;
+      border-radius: vars.$border-radius-sm;
+      cursor: pointer;
+      font-weight: vars.$font-weight-medium;
+    }
+
+    .add-agent-btn {
+        background-color: vars.$turquoise; // Variabile dal tuo file (es. un verde acqua)
+        color: vars.$white;
+        border-color: vars.$turquoise;
+    }
+
+    .remove-agent-btn {
+        background-color: transparent;
+        color: vars.$light-gray; // Variabile dal tuo file
+        border-color: vars.$light-gray;
+    }
+  }
+}
+
+/* Stili per la tabella riutilizzabile */
+.reusable-table {
+  width: 100%;
+  border-collapse: collapse; 
+  font-size: vars.$font-size-sm;
+
+  th, td {
+    padding: 12px vars.$spacing-lg;
+    text-align: left;
+    border-bottom: vars.$border-width solid #e5e7eb;
+  }
+  
+  th {
+    background-color: #f9fafb; 
+    font-weight: vars.$font-weight-semibold;
+    color: vars.$light-gray; // Variabile dal tuo file
+  }
+
+  tbody tr:hover {
+    background-color: #f3f4f6; 
+  }
+
+  /* Stili specifici per lo stato (Online/Offline) */
+  .status-online {
+    color: vars.$turquoise; // Colore usato per lo stato Online
+    font-weight: vars.$font-weight-bold;
+  }
+
+  .status-offline {
+    color: vars.$light-gray; // Colore usato per lo stato Offline
+    font-weight: vars.$font-weight-bold;
+  }
+  
+  // Migliora visibilità delle checkbox nella tabella
+  input[type="checkbox"] {
+    width: 1.4em;
+    height: 1.4em;
+    accent-color: vars.$turquoise;
+    border: 2px solid vars.$light-gray;
+    border-radius: 0.25em;
+    margin: 0 0.5em 0 0.2em;
+    box-shadow: 0 0 0 1px #ccc;
+    cursor: pointer;
+    appearance: auto;
+    vertical-align: middle;
+    background: #fff;
+    transition: box-shadow 0.2s;
+  }
+  input[type="checkbox"]:focus {
+    outline: 2px solid vars.$turquoise;
+    box-shadow: 0 0 0 2px vars.$turquoise;
+  }
+}

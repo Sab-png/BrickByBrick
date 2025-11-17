@@ -1,0 +1,54 @@
+@use '../abstracts/variables' as vars;
+
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.admin-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-left: 56px; // Larghezza sidebar chiusa
+  transition: margin-left vars.$transition-base vars.$transition-ease;
+}
+
+// Quando la sidebar è aperta
+.sidebar.open ~ .admin-wrapper {
+  margin-left: 220px; // Larghezza sidebar aperta
+}
+
+// Header fisso
+.admin-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: vars.$white;
+  border-bottom: 1px solid #e5e7eb;
+  height: 60px;
+}
+
+// Contenuto principale
+.admin-content {
+  flex: 1;
+  padding: vars.$spacing-lg;
+  overflow-y: auto;
+  
+  // Container per centrare contenuti larghi
+  .content-container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .admin-wrapper {
+    margin-left: 0;
+  }
+
+  .admin-content {
+    padding: vars.$spacing-base;
+  }
+}

@@ -1,5 +1,7 @@
 import Layout from '../layout/Layout'
+import AdminLayout from '../back-office/layout/AdminLayout' // Nuovo layout per admin
 
+// Pages pubbliche
 import Homepage from '../pages/Homepage'
 import About from '../pages/About'
 import Immobili from '../pages/Immobili'
@@ -7,10 +9,18 @@ import DettaglioImmobile from '../pages/DettaglioImmobile'
 import FAQSupport from '../pages/FAQSupport'
 import StepMultiForm from '../pages/StepMultiForm'
 import NotFound from '../pages/NotFound'
+
+// Pages back-office
+import Dashboard from '../back-office/pages/Dashboard'
+import Statistiche from '../back-office/pages/AdminStatistica'
+import Utenti from '../back-office/pages/AdminUtenti'
+import ImmobiliAdmin from '../back-office/pages/AdminImmobili'
+import Agenda from '../back-office/pages/AdminAgenda'
+import AddAgentPage from '../back-office/pages/AddAgent'
 import { Component } from 'react'
-import Dashboard from '../back-office/pages/dashboard'
 
 const routes = [
+  // Rotte pubbliche
   {
     path: '/',
     Component: Layout,
@@ -21,7 +31,6 @@ const routes = [
         showInNav: true,
         title: 'Home'
       },
-      // Nuove rotte
       {
         path: 'about',
         Component: About,
@@ -35,11 +44,15 @@ const routes = [
         title: 'Immobili'
       },
       {
+        path: 'immobili/:id',
+        Component: DettaglioImmobile,
+        showInNav: false
+      },
+      {
         path: 'faq-support',
         Component: FAQSupport,
         showInNav: true,
         title: 'FAQ & Supporto'
-
       },
       {
         path: 'step-multi-form',
@@ -48,21 +61,44 @@ const routes = [
         title: 'Step Multi Form'
       },
       {
-        path: 'immobili/:id',
-        Component: DettaglioImmobile,
-        showInNav: false
-      },
-      {
-        path: 'dashboard-admin',
-        Component: Dashboard,
-        showInNav: true,
-        title: 'Dashboard Admin'
-
-      },
-
-      {
         path: '*',
         Component: NotFound
+      }
+    ]
+  },
+  // Rotte back-office
+  {
+    path: '/admin',
+    Component: AdminLayout, // Layout con la SideBar
+    children: [
+      {
+        index: true,
+        Component: Dashboard, // O redirect a statistiche
+      },
+      {
+        path: 'statistiche',
+        Component: Statistiche,
+        title: 'Statistiche'
+      },
+      {
+        path: 'utenti',
+        Component: Utenti,
+        title: 'Utenti'
+      },
+      {
+        path: 'utenti/aggiungi agente',
+        Component: AddAgentPage,
+        title: 'Aggiungi agente'
+      },
+      {
+        path: 'immobili',
+        Component: ImmobiliAdmin,
+        title: 'Immobili'
+      },
+      {
+        path: 'agenda',
+        Component: Agenda,
+        title: 'Agenda'
       }
     ]
   }
