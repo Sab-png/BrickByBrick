@@ -1,57 +1,74 @@
-$background-color: #e6eff2; // Azzurro/Grigio chiaro per lo sfondo
-$primary-text-color: #333;
-$secondary-text-color: #555;
-$border-color: #eee;
-$accent-color: #1a73e8; // Blu di esempio per l'accento
-$radius-large: 20px;
-$radius-small: 4px;
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as m;
 
 .faq-item {
-  // Rimuoviamo il bordo inferiore per evitare un "doppio bordo"
-  // Sarà il bordo della domanda a definire la separazione
-  border-bottom: none; 
-  margin-bottom: 10px; // Aggiungiamo un piccolo spazio tra i blocchi
+  // Linea di separazione grigia chiara tra le domande
+  border-bottom: vars.$border-width solid rgba(vars.$black, 0.1); 
+  
+  // Aggiungiamo un po' di spazio solo alla fine dell'ultima
+  &:last-child {
+    border-bottom: none;
+  }
 }
 
 .faq-question {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  @include m.flex-between; // Usa il mixin per display: flex, justify-content, align-items
   
-  // Aggiungi il bordo nero (o grigio scuro come nell'immagine)
-  border: 1px solid #333; // Bordo nero o un grigio molto scuro
-  border-radius: 4px; // Potrebbe essere 4px o 6px per angoli leggermente arrotondati
+  // Rimuoviamo il bordo, come da immagine
+  // border: vars.$border-width solid vars.$dark-blue; (Rimosso)
   
-  padding: 15px 20px; // Aumenta il padding per dare respiro al testo
+  padding: vars.$spacing-lg vars.$spacing-base; // Spaziatura verticale generosa
   cursor: pointer;
-  font-size: 1.05rem;
-  font-weight: 500;
-  color: $primary-text-color;
-  transition: background-color 0.2s, border-color 0.2s;
   
+  // Tipografia della domanda
+  font-family: vars.$font-paragraph; // Testo più leggibile
+  font-size: vars.$font-size-base;
+  font-weight: vars.$font-weight-medium;
+  color: vars.$dark-blue;
+  
+  transition: color vars.$transition-base vars.$transition-ease;
+
   &:hover {
-    border-color: $accent-color; // Cambia colore al passaggio del mouse
+    color: vars.$turquoise; // Scurisce il testo all'hover
   }
   
   .faq-icon {
-    font-size: 1.5rem;
-    font-weight: 300; 
-    margin-left: 10px;
+    font-size: vars.$font-size-xl;
+    font-weight: vars.$font-weight-regular; 
+    margin-left: vars.$spacing-base;
+    color: vars.$light-gray; // Icona grigia
+  }
+
+  // Responsive: Riduci il padding su mobile
+  @include m.mobile {
+    padding: vars.$spacing-base vars.$spacing-xs;
+    font-size: vars.$font-size-sm;
   }
 }
 
 .faq-answer {
-  // Sposta la risposta sotto il bordo della domanda
-  padding: 10px 20px 15px; 
-  color: $secondary-text-color;
-  line-height: 1.6;
+  // Spaziatura interna per la risposta
+  // Aggiungiamo più padding a sinistra per allinearlo visivamente
+  padding: 0 vars.$spacing-base vars.$spacing-lg vars.$spacing-base; 
   
-  // Aggiungi un margine superiore negativo per "avvicinare" la risposta
-  // e allinea l'area della risposta ai bordi laterali della domanda
-  margin: -5px 0 0 0; 
-  padding-right: 30px; 
+  // Tipografia della risposta
+  color: vars.$light-gray;
+  font-family: vars.$font-paragraph;
+  font-size: vars.$font-size-sm;
+  line-height: vars.$line-height-normal;
   
   p {
     margin: 0;
+    max-width: 90%; // Evita che il testo vada sotto l'icona
+  }
+
+  // Responsive: Riduci il padding su mobile
+  @include m.mobile {
+    padding: 0 vars.$spacing-xs vars.$spacing-base vars.$spacing-xs;
+    font-size: vars.$font-size-sm;
+
+    p {
+      max-width: 100%;
+    }
   }
 }
