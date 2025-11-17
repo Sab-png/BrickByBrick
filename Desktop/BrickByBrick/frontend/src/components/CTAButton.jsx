@@ -1,7 +1,11 @@
-export default function CTAButton({content = "VALUTA IL TUO IMMOBILE"}) {
+import { Link } from "react-router-dom"
+
+export default function CTAButton({content = "VALUTA IL TUO IMMOBILE", ctaLink = "/valuta-immobile"}) {
     return (
-        <button className="cta-button">
-          {content}
-        </button>
+        <Link to={ctaLink}>
+          <button className="cta-button">
+            {content}
+          </button>
+        </Link>
     )
 } 
