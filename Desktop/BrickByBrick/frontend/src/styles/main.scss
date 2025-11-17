@@ -23,7 +23,9 @@
 @use './components/infoEdificioImmobile';
 @use './components/featureImmobile';
 @use './components/descrizioneImmobile';
-
+@use './components/faqItem';
+@use './components/faqSection';
+@use './components/questions';
 
 // Components that use other Components
 @use './components/herosection';
