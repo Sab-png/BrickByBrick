@@ -21,7 +21,7 @@ export default function StepsSection({ title, steps, ctaText, ctaLink }) {
                 </ol>
 
                 <div className="steps-section__cta">
-                    <CTAButton />
+                    <CTAButton ctaLink={ctaLink}/>
                 </div>
 
             </div>
