@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Caratteristiche</title>
+        <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+>
+</head>
+<body>
+     <form id="" method="post" th:action="@{/caratteristiche/add}">
+                
+                    <div class="form-group">
+                        <label for="tipologia">Tipologia</label>
+                        <input type="text" class="form-control" id="tipologia" name="tipologia" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="piano">Piano</label>
+                        <input type="number" class="form-control" id="piano" name="piano" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ascensore">Ascensore</label>
+                        <input type="checkbox" class="form-control" id="ascensore" name="ascensore" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="arredato">Arredato</label>
+                        <input type="checkbox" class="form-control" id="arredato" name="arredato" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="disponibilita">Disponibilità</label>
+                        <input type="checkbox" class="form-control" id="disponibilita" name="disponibilita" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contratto">Contratto</label>
+                        <input type="text" class="form-control" id="contratto" name="contratto" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="piani_edificio">Piani edificio</label>
+                        <input type="number" class="form-control" id="piani_edificio" name="piani_edificio" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="anno_costruzione">Anno costruzione</label>
+                        <input type="number" class="form-control" id="anno_costruzione" name="anno_costruzione" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="classe_energetica">Classe energetica</label>
+                        <input type="text" class="form-control" id="classe_energetica" name="classe_energetica" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="accesso_disabili">Accesso disabili</label>
+                        <input type="checkbox" class="form-control" id="accesso_disabili" name="accesso_disabili" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="camere">Camere</label>
+                        <input type="number" class="form-control" id="camere" name="camere" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bagni">Bagni</label>
+                        <input type="number" class="form-control" id="bagni" name="bagni" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="balcone">Balcone</label>
+                        <input type="number" class="form-control" id="balcone" name="balcone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="riscaldamento">Riscaldamento</label>
+                        <input type="text" class="form-control" id="riscaldamento" name="riscaldamento" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="terrazzo">Terrazzo</label>
+                        <input type="checkbox" class="form-control" id="terrazzo" name="terrazzo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="giardino">Giardino</label>
+                        <input type="checkbox" class="form-control" id="giardino" name="giardino" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="box_auto">Box auto</label>
+                        <input type="checkbox" class="form-control" id="box_auto" name="box_auto" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cantina">Cantina</label>
+                        <input type="checkbox" class="form-control" id="cantina" name="cantina" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="altre_caratteristiche">Altre caratteristiche</label>
+                        <input type="text" class="form-control" id="altre_caratteristiche" name="altre_caratteristiche" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Aggiungi Caratteristiche</button>
+                </form>
+</body>
+</html>
