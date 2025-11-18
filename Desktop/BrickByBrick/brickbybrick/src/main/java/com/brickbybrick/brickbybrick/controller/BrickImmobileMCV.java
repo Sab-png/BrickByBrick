@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 @Controller
@@ -52,15 +55,28 @@ public class BrickImmobileMCV {
         return "redirect:/immobili";
     }
 
+    @PostMapping(value = "/immobili/add", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<?> processJson(@RequestBody Immobile immobile) {
+        if (immobile == null) {
+            return ResponseEntity.badRequest().body("request body is required");
+        }
+
+        Immobile saved = serviceImmobile.addImmobile(immobile);
+        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+    }
+
     @GetMapping("/immobili/edit/{id}")
-    public String showUpdateForm(@PathVariable("id") int id, Model model) {
+    public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         Immobile immobile = serviceImmobile.getImmobileById(id).orElse(null);
+        if(immobile == null) {
+            return "redirect:/immobili";
+        }
         model.addAttribute("immobile", immobile);
         return "ImmobiliEdit";
     }
 
     @PostMapping("/immobili/update/{id}")
-    public String updateImmobile(@PathVariable("id") int id, @ModelAttribute("immobile") Immobile aggiornato) {
+    public String updateImmobile(@PathVariable("id") Integer id, @ModelAttribute("immobile") Immobile aggiornato) {
         Immobile esistente = serviceImmobile.getImmobileById(id).orElse(null);
         esistente.setFoto(aggiornato.getFoto());
         esistente.setRegione(aggiornato.getRegione());
