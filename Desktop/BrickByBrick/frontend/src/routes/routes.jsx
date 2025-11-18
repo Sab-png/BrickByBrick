@@ -4,10 +4,7 @@ import Homepage from '../pages/Homepage'
 import About from '../pages/About'
 import Immobili from '../pages/Immobili'
 import DettaglioImmobile from '../pages/DettaglioImmobile'
-import FAQSupport from '../pages/FAQSupport'
-import StepMultiForm from '../pages/StepMultiForm'
 import NotFound from '../pages/NotFound'
-import Valuta from '../pages/Valuta';
 
 const routes = [
   {
@@ -50,6 +47,18 @@ const routes = [
         path: 'immobili/:id',
         Component: DettaglioImmobile,
         showInNav: false
+      },
+      {
+        path: 'valuta',
+        Component: Valuta,
+        showInNav: true,
+        title: 'Valuta'
+      },
+      {
+        path: 'vendi',
+        Component: Vendi,
+        showInNav: true,
+        title: 'Vendi'
       },
 
       {
