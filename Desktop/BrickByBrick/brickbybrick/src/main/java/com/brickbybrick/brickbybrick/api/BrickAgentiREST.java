@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,15 +43,15 @@ public class BrickAgentiREST {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping
-    public ResponseEntity<Agente> createAgente(@RequestBody Agente agente) {
+    @PostMapping("/add")
+    public ResponseEntity<Agente> createAgente(@Valid @RequestBody Agente agente) {
         Agente nuovoAgente = serviceAgente.addAgenti(agente);
         return ResponseEntity.status(HttpStatus.CREATED).body(nuovoAgente);
     }
 
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Agente> updateAgente(@PathVariable Integer id, @RequestBody Agente agente) {
+    @PutMapping("/edit/{id}")
+    public ResponseEntity<Agente> updateAgente(@PathVariable Integer id, @Valid @RequestBody Agente agente) {
         if (!serviceAgente.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
@@ -60,8 +61,8 @@ public class BrickAgentiREST {
     }
 
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteAgente(@PathVariable Integer id) {
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Agente> deleteAgente(@PathVariable Integer id) {
         if (!serviceAgente.existsById(id)) {
             return ResponseEntity.notFound().build();
         }

@@ -1,8 +1,15 @@
 package com.brickbybrick.brickbybrick.controller;
 
+import java.net.http.HttpClient;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.validation.BindingResult;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,9 +45,19 @@ public class BrickAgenteMVC {
     }
 
     @PostMapping("/agenti/add")
-    public String processForm(@ModelAttribute Agente agente) {
+    public String processForm(@Valid @ModelAttribute("agente") Agente agente, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("agente", agente);
+            return "AgentiAdd";
+        }
         serviceAgente.addAgenti(agente);
         return "redirect:/agenti";
+    }
+
+    @PostMapping(value = "/agenti/add", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Agente> processJson(@Valid @RequestBody Agente agente) {
+        Agente saved = serviceAgente.addAgenti(agente);
+        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
     
     @GetMapping("/agenti/edit/{id}")
