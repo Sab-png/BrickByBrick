@@ -1,5 +1,9 @@
 package com.brickbybrick.brickbybrick.model;
 
+import com.brickbybrick.brickbybrick.model.enums.ClasseEnergetica;
+import com.brickbybrick.brickbybrick.model.enums.Condizione;
+import com.brickbybrick.brickbybrick.model.enums.Tipologia;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,9 +22,6 @@ public class Valutazione {
 
     @Column(name = "Id_utente", nullable = false)
     private Integer Id_utente;
-    
-    // @Column(name = "regione", nullable = false)
-    // private String regione;
 
     @Column(name = "cap", nullable = false)
     private String cap;
@@ -32,10 +33,10 @@ public class Valutazione {
     private String indirizzo;
 
     @Column(name = "tipologia", nullable = false)
-    private String tipologia;
+    private Tipologia tipologia;
 
     @Column(name = "piano", nullable = false)
-    private String piano;
+    private Integer piano;
 
     @Column(name = "locali", nullable = false)
     private Integer locali;
@@ -44,7 +45,7 @@ public class Valutazione {
     private Integer superficie;
 
     @Column(name = "condizioni", nullable = false)
-    private String condizioni;
+    private Condizione condizioni;
 
     @Column(name = "bagni", nullable = false)
     private Integer bagni;
@@ -56,25 +57,11 @@ public class Valutazione {
     private Boolean ascensore;
 
     @Column(name = "classe_energetica", nullable = false)
-    private String classe_energetica;
+    private ClasseEnergetica classe_energetica;
 
-    @Column(name = "giardino", nullable = false)
-    private Boolean giardino;
+    @Column(name = "dotazioni_esterne", nullable = false)
+    private DotazioniEsterne dotazioni_esterne;
 
-    @Column(name = "cantina", nullable = false)
-    private Boolean cantina;
-
-    @Column(name = "terrazzo", nullable = false)
-    private Boolean terrazzo;
-
-    @Column(name = "balcone", nullable = false)
-    private Boolean balcone;
-
-    @Column(name = "piscina", nullable = false)
-    private Boolean piscina;
-
-    @Column(name = "garage", nullable = false)
-    private Boolean garage;
 
     public Integer getId_valutazione() {
         return Id_valutazione;
@@ -116,19 +103,19 @@ public class Valutazione {
         this.indirizzo = indirizzo;
     }
 
-    public String getTipologia() {
+    public Tipologia getTipologia() {
         return tipologia;
     }
 
-    public void setTipologia(String tipologia) {
+    public void setTipologia(Tipologia tipologia) {
         this.tipologia = tipologia;
     }
 
-    public String getPiano() {
+    public Integer getPiano() {
         return piano;
     }
 
-    public void setPiano(String piano) {
+    public void setPiano(Integer piano) {
         this.piano = piano;
     }
 
@@ -148,11 +135,11 @@ public class Valutazione {
         this.superficie = superficie;
     }
 
-    public String getCondizioni() {
+    public Condizione getCondizioni() {
         return condizioni;
     }
 
-    public void setCondizioni(String condizioni) {
+    public void setCondizioni(Condizione condizioni) {
         this.condizioni = condizioni;
     }
 
@@ -180,60 +167,20 @@ public class Valutazione {
         this.ascensore = ascensore;
     }
 
-    public String getClasse_energetica() {
+    public ClasseEnergetica getClasse_energetica() {
         return classe_energetica;
     }
 
-    public void setClasse_energetica(String classe_energetica) {
+    public void setClasse_energetica(ClasseEnergetica classe_energetica) {
         this.classe_energetica = classe_energetica;
     }
 
-    public Boolean getGiardino() {
-        return giardino;
+    public DotazioniEsterne getDotazioni_esterne() {
+        return dotazioni_esterne;
     }
 
-    public void setGiardino(Boolean giardino) {
-        this.giardino = giardino;
-    }
-
-    public Boolean getCantina() {
-        return cantina;
-    }
-
-    public void setCantina(Boolean cantina) {
-        this.cantina = cantina;
-    }
-
-    public Boolean getTerrazzo() {
-        return terrazzo;
-    }
-
-    public void setTerrazzo(Boolean terrazzo) {
-        this.terrazzo = terrazzo;
-    }
-
-    public Boolean getBalcone() {
-        return balcone;
-    }
-
-    public void setBalcone(Boolean balcone) {
-        this.balcone = balcone;
-    }
-
-    public Boolean getPiscina() {
-        return piscina;
-    }
-
-    public void setPiscina(Boolean piscina) {
-        this.piscina = piscina;
-    }
-
-    public Boolean getGarage() {
-        return garage;
-    }
-
-    public void setGarage(Boolean garage) {
-        this.garage = garage;
+    public void setDotazioni_esterne(DotazioniEsterne dotazioni_esterne) {
+        this.dotazioni_esterne = dotazioni_esterne;
     }
 
     

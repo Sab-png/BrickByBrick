@@ -87,7 +87,6 @@ CREATE TABLE immobile (
 CREATE TABLE valutazione (
     Id_valutazione INT PRIMARY KEY,
     Id_utente INT,
-    regione VARCHAR(100),
     citta VARCHAR(100),
     cap VARCHAR(10),
     indirizzo VARCHAR(255),
