@@ -19,8 +19,8 @@ public class Valutazione {
     @Column(name = "Id_utente", nullable = false)
     private Integer Id_utente;
     
-    @Column(name = "regione", nullable = false)
-    private String regione;
+    // @Column(name = "regione", nullable = false)
+    // private String regione;
 
     @Column(name = "cap", nullable = false)
     private String cap;
@@ -58,11 +58,29 @@ public class Valutazione {
     @Column(name = "classe_energetica", nullable = false)
     private String classe_energetica;
 
-    public int getId_valutazione() {
+    @Column(name = "giardino", nullable = false)
+    private Boolean giardino;
+
+    @Column(name = "cantina", nullable = false)
+    private Boolean cantina;
+
+    @Column(name = "terrazzo", nullable = false)
+    private Boolean terrazzo;
+
+    @Column(name = "balcone", nullable = false)
+    private Boolean balcone;
+
+    @Column(name = "piscina", nullable = false)
+    private Boolean piscina;
+
+    @Column(name = "garage", nullable = false)
+    private Boolean garage;
+
+    public Integer getId_valutazione() {
         return Id_valutazione;
     }
 
-    public void setId_valutazione(int id_valutazione) {
+    public void setId_valutazione(Integer id_valutazione) {
         Id_valutazione = id_valutazione;
     }
 
@@ -72,14 +90,6 @@ public class Valutazione {
 
     public void setId_utente(Integer id_utente) {
         Id_utente = id_utente;
-    }
-
-    public String getRegione() {
-        return regione;
-    }
-
-    public void setRegione(String regione) {
-        this.regione = regione;
     }
 
     public String getCap() {
@@ -176,6 +186,54 @@ public class Valutazione {
 
     public void setClasse_energetica(String classe_energetica) {
         this.classe_energetica = classe_energetica;
+    }
+
+    public Boolean getGiardino() {
+        return giardino;
+    }
+
+    public void setGiardino(Boolean giardino) {
+        this.giardino = giardino;
+    }
+
+    public Boolean getCantina() {
+        return cantina;
+    }
+
+    public void setCantina(Boolean cantina) {
+        this.cantina = cantina;
+    }
+
+    public Boolean getTerrazzo() {
+        return terrazzo;
+    }
+
+    public void setTerrazzo(Boolean terrazzo) {
+        this.terrazzo = terrazzo;
+    }
+
+    public Boolean getBalcone() {
+        return balcone;
+    }
+
+    public void setBalcone(Boolean balcone) {
+        this.balcone = balcone;
+    }
+
+    public Boolean getPiscina() {
+        return piscina;
+    }
+
+    public void setPiscina(Boolean piscina) {
+        this.piscina = piscina;
+    }
+
+    public Boolean getGarage() {
+        return garage;
+    }
+
+    public void setGarage(Boolean garage) {
+        this.garage = garage;
     }
 
     
