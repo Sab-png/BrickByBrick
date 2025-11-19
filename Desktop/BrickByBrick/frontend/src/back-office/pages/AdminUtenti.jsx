@@ -1,94 +1,71 @@
-// UserManagementPage.jsx
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import ReusableTable from '../components/TableReusable';
-// Importa la lista chiamandola 'utenti'
-import { users as utenti } from '../dati_fittizzi/users'; 
+// UsersManager.jsx
+import React, { useState, useEffect } from 'react';
+import ReusableTable from '../components/TableReusable'; // Assicurati del percorso corretto
 
-const Utenti = () => {
-    const navigate = useNavigate();
-  // 1. Stato per i dati (l'unica fonte di verità modificabile)
-  const [usersList, setUsersList] = useState(utenti);
-  // 2. Stato per il termine di ricerca nell'input
+const UtentiAdmin = () => {
+  // Dati fittizi per gli utenti (in un caso reale verrebbero da un'API o un file separato)
+  const mockUsers = [
+    { id: 'U001', fullName: 'Luigi Verdi', email: 'luigi@test.com', phone: '3331234567', status: 'Attivo', role: 'Cliente' },
+    { id: 'U002', fullName: 'Anna Neri', email: 'anna@test.com', phone: '3339876543', status: 'Sospeso', role: 'Cliente VIP' },
+    { id: 'U003', fullName: 'Marco Gialli', email: 'marco@test.com', phone: '3334567890', status: 'Attivo', role: 'Cliente' },
+  ];
+
+  // 1. Stato per i dati visualizzati
+  const [usersList, setUsersList] = useState(mockUsers);
+  // 2. Stato per la ricerca
   const [searchTerm, setSearchTerm] = useState('');
-  // 3. Stato per tenere traccia degli ID degli utenti selezionati
+  // 3. Stato selezione (Necessario perché ReusableTable lo richiede, anche se non cancelliamo)
   const [selectedUserIds, setSelectedUserIds] = useState([]);
 
-  // --- Logica di Filtraggio (Eseguita solo al click su "Cerca") ---
-
+  // --- Logica di Filtraggio ---
   const handleSearchClick = () => {
-    // Il filtraggio avviene utilizzando la lista 'utenti' originale
     if (searchTerm.trim() === '') {
-      // Se la ricerca è vuota, resetta alla lista iniziale 'utenti'
-      setUsersList(utenti);
+      setUsersList(mockUsers);
     } else {
-      const filtered = utenti.filter(user =>
+      const filtered = mockUsers.filter(user =>
         user.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
         user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
         user.id.toLowerCase().includes(searchTerm.toLowerCase())
       );
       setUsersList(filtered);
     }
-    // Opzionale: deseleziona tutto dopo una nuova ricerca
+    // Reset selezione dopo ricerca
     setSelectedUserIds([]); 
   };
 
-  // --- Logica Aggiungi Agente ---
-   const handleAddAgent = () => {
-    // Naviga alla nuova rotta per il form
-    navigate('/admin/utenti/aggiungi agente');
-    // La logica di creazione utente sarà gestita nel AddAgentPage.jsx
-  };
-
-  // --- Logica Rimuovi Agente ---
-   const handleRemoveAgents = () => {
-    if (selectedUserIds.length === 0) return;
-
-    if (window.confirm(`Sei sicuro di voler rimuovere ${selectedUserIds.length} agente/i?`)) {
-      const remainingUsers = usersList.filter(user => !selectedUserIds.includes(user.id));
-      setUsersList(remainingUsers);
-      setSelectedUserIds([]);
-
-      // Rimuovi anche dall'array iniziale importato (hack per fittizi)
-      selectedUserIds.forEach(id => {
-        const index = utenti.findIndex(u => u.id === id);
-        if (index > -1) utenti.splice(index, 1);
-      });
-    }
-  };
-
   // --- Logica Selezione Checkbox ---
+  // Manteniamo questa funzione perché ReusableTable si aspetta "onRowSelect"
   const toggleUserSelection = (userId) => {
     setSelectedUserIds(prevIds => {
       if (prevIds.includes(userId)) {
-        return prevIds.filter(id => id !== userId); // Deseleziona
+        return prevIds.filter(id => id !== userId);
       } else {
-        return [...prevIds, userId]; // Seleziona
+        return [...prevIds, userId];
       }
     });
   };
 
-  // Configurazione delle colonne passate alla tabella
+  // Configurazione colonne (Adattate per gli Utenti generici)
   const userColumns = [
-    { key: 'fullName', header: 'Nome e cognome' },
-    { key: 'id', header: 'ID Agente' },
+    { key: 'fullName', header: 'Nome Completo' },
     { key: 'email', header: 'Email' },
+    { key: 'role', header: 'Tipologia Cliente' }, // Colonna diversa dagli Agenti
     { key: 'phone', header: 'Telefono' },
     { key: 'status', header: 'Stato' },
   ];
 
   return (
     <div className="user-management-page">
-      <h1>Gestione Agenti</h1>
+      <h1>Gestione Utenti</h1>
       
       <div className="user-table-card">
         
-        {/* Header con controlli */}
-        <div className="table-header-controls">
+        {/* Header con controlli - Solo Ricerca, niente bottoni azione */}
+        <div className="table-header-controls" style={{ justifyContent: 'flex-start' }}>
             <div className="search-container">
                 <input 
                     type="text" 
-                    placeholder="Cerca da nome, ID, email" 
+                    placeholder="Cerca utente..." 
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     onKeyDown={(e) => e.key === 'Enter' && handleSearchClick()} 
@@ -97,21 +74,14 @@ const Utenti = () => {
                     Cerca
                 </button>
             </div>
-            <div className="action-buttons">
-                <button className="add-agent-btn" onClick={handleAddAgent}>
-                    Aggiungi agente
-                </button>
-                <button 
-                    className="remove-agent-btn" 
-                    onClick={handleRemoveAgents}
-                    disabled={selectedUserIds.length === 0} 
-                >
-                    Rimuovi agente
-                </button>
-            </div>
+            
+            {/* Qui abbiamo rimosso il div "action-buttons".
+               Se in futuro vorrai aggiungere azioni (es. "Esporta Utenti"), 
+               puoi rimetterlo qui.
+            */}
         </div>
         
-        {/* Passa i dati filtrati e la logica di selezione alla tabella */}
+        {/* Tabella Riutilizzabile */}
         <ReusableTable 
             data={usersList} 
             columns={userColumns} 
@@ -123,4 +93,4 @@ const Utenti = () => {
   );
 };
 
-export default Utenti;
+export default UtentiAdmin;

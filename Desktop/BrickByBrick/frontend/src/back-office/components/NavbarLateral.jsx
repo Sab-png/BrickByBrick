@@ -4,7 +4,7 @@ import '../../styles/components/_navbarlateral.scss';
 
 const navbarItems = [
     { name: "statistiche", path: "/admin/statistiche" },
-    { name: "utenti", path: "/admin/utenti" },
+    { name: "utenti", path: "/admin/gestione-utenti" },
     { name: "immobili", path: "/admin/immobili" },
     { name: "agenda", path: "/admin/agenda" }
 ];

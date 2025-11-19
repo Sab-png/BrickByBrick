@@ -13,10 +13,11 @@ import NotFound from '../pages/NotFound'
 // Pages back-office
 import Dashboard from '../back-office/pages/Dashboard'
 import Statistiche from '../back-office/pages/AdminStatistica'
-import Utenti from '../back-office/pages/AdminUtenti'
+import GestionePiattaforma from '../back-office/pages/AdminGestioneUtenti'
+import AddAgentPage from '../back-office/pages/AddAgent'
 import ImmobiliAdmin from '../back-office/pages/AdminImmobili'
 import Agenda from '../back-office/pages/AdminAgenda'
-import AddAgentPage from '../back-office/pages/AddAgent'
+
 import { Component } from 'react'
 
 const routes = [
@@ -81,12 +82,12 @@ const routes = [
         title: 'Statistiche'
       },
       {
-        path: 'utenti',
-        Component: Utenti,
-        title: 'Utenti'
+        path: 'gestione-utenti',
+        Component: GestionePiattaforma,
+        title: 'Gestione Utenti'
       },
-      {
-        path: 'utenti/aggiungi agente',
+ {
+        path: 'gestione-utenti/aggiungi-agente',
         Component: AddAgentPage,
         title: 'Aggiungi agente'
       },
