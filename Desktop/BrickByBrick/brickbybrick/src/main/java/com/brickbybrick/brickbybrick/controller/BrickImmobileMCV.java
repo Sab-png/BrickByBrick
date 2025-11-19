@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 @Controller
@@ -52,15 +55,28 @@ public class BrickImmobileMCV {
         return "redirect:/immobili";
     }
 
+    @PostMapping(value = "/immobili/add", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<?> processJson(@RequestBody Immobile immobile) {
+        if (immobile == null) {
+            return ResponseEntity.badRequest().body("request body is required");
+        }
+
+        Immobile saved = serviceImmobile.addImmobile(immobile);
+        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+    }
+
     @GetMapping("/immobili/edit/{id}")
-    public String showUpdateForm(@PathVariable("id") int id, Model model) {
+    public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         Immobile immobile = serviceImmobile.getImmobileById(id).orElse(null);
+        if(immobile == null) {
+            return "redirect:/immobili";
+        }
         model.addAttribute("immobile", immobile);
         return "ImmobiliEdit";
     }
 
     @PostMapping("/immobili/update/{id}")
-    public String updateImmobile(@PathVariable("id") int id, @ModelAttribute("immobile") Immobile aggiornato) {
+    public String updateImmobile(@PathVariable("id") Integer id, @ModelAttribute("immobile") Immobile aggiornato) {
         Immobile esistente = serviceImmobile.getImmobileById(id).orElse(null);
         esistente.setFoto(aggiornato.getFoto());
         esistente.setRegione(aggiornato.getRegione());
@@ -84,45 +100,45 @@ public class BrickImmobileMCV {
         return "redirect:/immobili";
     }
 
-@GetMapping("/immobili/filtra")
-public String filtraImmobili(
-        @RequestParam(required = false) String regione,
-        @RequestParam(required = false) String cap,
-        @RequestParam(required = false) String citta,
-        @RequestParam(required = false) String indirizzo,
-        @RequestParam(required = false) Double prezzo,
-        @RequestParam(required = false) Integer locali,
-        @RequestParam(required = false) Double superficie,
-        @RequestParam(required = false) String tipologia,
-        @RequestParam(required = false) Integer piano,
-        @RequestParam(required = false) Boolean ascensore,
-        @RequestParam(required = false) Boolean arredato,
-        @RequestParam(required = false) String disponibilita,
-        @RequestParam(required = false) String contratto,
-        @RequestParam(required = false) Integer piani_edificio,
-        @RequestParam(required = false) Integer anno_costruzione,
-        @RequestParam(required = false) String classe_energetica,
-        @RequestParam(required = false) Boolean accesso_disabili,
-        @RequestParam(required = false) Integer camere,
-        @RequestParam(required = false) Integer bagni,
-        @RequestParam(required = false) Integer balcone,
-        @RequestParam(required = false) String riscaldamento,
-        @RequestParam(required = false) Boolean terrazzo,
-        @RequestParam(required = false) Boolean giardino,
-        @RequestParam(required = false) Integer box_auto,
-        @RequestParam(required = false) Boolean cantina,
-        Model model
-) {
-    List<Immobile> immobiliFiltrati = serviceImmobile.filtraImmobili(
-        regione, cap, citta, indirizzo, prezzo, locali, superficie,
-        tipologia, piano, ascensore, arredato, disponibilita,
-        contratto, piani_edificio, anno_costruzione, classe_energetica, accesso_disabili,
-        camere, bagni, balcone, riscaldamento, terrazzo, giardino,
-        box_auto, cantina
-    );
+// @GetMapping("/immobili/filtra")
+// public String filtraImmobili(
+//         @RequestParam(required = false) String regione,
+//         @RequestParam(required = false) String cap,
+//         @RequestParam(required = false) String citta,
+//         @RequestParam(required = false) String indirizzo,
+//         @RequestParam(required = false) Double prezzo,
+//         @RequestParam(required = false) Integer locali,
+//         @RequestParam(required = false) Double superficie,
+//         @RequestParam(required = false) String tipologia,
+//         @RequestParam(required = false) Integer piano,
+//         @RequestParam(required = false) Boolean ascensore,
+//         @RequestParam(required = false) Boolean arredato,
+//         @RequestParam(required = false) String disponibilita,
+//         @RequestParam(required = false) String contratto,
+//         @RequestParam(required = false) Integer piani_edificio,
+//         @RequestParam(required = false) Integer anno_costruzione,
+//         @RequestParam(required = false) String classe_energetica,
+//         @RequestParam(required = false) Boolean accesso_disabili,
+//         @RequestParam(required = false) Integer camere,
+//         @RequestParam(required = false) Integer bagni,
+//         @RequestParam(required = false) Integer balcone,
+//         @RequestParam(required = false) String riscaldamento,
+//         @RequestParam(required = false) Boolean terrazzo,
+//         @RequestParam(required = false) Boolean giardino,
+//         @RequestParam(required = false) Integer box_auto,
+//         @RequestParam(required = false) Boolean cantina,
+//         Model model
+// ) {
+//     List<Immobile> immobiliFiltrati = serviceImmobile.filtraImmobili(
+//         regione, cap, citta, indirizzo, prezzo, locali, superficie,
+//         tipologia, piano, ascensore, arredato, disponibilita,
+//         contratto, piani_edificio, anno_costruzione, classe_energetica, accesso_disabili,
+//         camere, bagni, balcone, riscaldamento, terrazzo, giardino,
+//         box_auto, cantina
+//     );
 
-    model.addAttribute("immobili", immobiliFiltrati);
-    return "Immobili";
-}
+//     model.addAttribute("immobili", immobiliFiltrati);
+//     return "Immobili";
+// }
 
 }

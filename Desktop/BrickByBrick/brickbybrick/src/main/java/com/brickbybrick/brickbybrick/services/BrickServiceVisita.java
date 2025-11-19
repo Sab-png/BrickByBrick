@@ -1,29 +1,29 @@
-package com.brickbybrick.brickbybrick.services;
+// package com.brickbybrick.brickbybrick.services;
 
-import java.util.List;
-import java.util.Optional;
+// import java.util.List;
+// import java.util.Optional;
 
-import org.springframework.data.jpa.domain.Specification;
+// import org.springframework.data.jpa.domain.Specification;
 
-import com.brickbybrick.brickbybrick.model.Immobile;
-import com.brickbybrick.brickbybrick.model.Visita;
-
-
+// import com.brickbybrick.brickbybrick.model.Immobile;
+// import com.brickbybrick.brickbybrick.model.Visita;
 
 
-public interface BrickServiceVisita {
+
+
+// public interface BrickServiceVisita {
     
-    List<Visita> getVisite();
+//     List<Visita> getVisite();
     
-    Optional<Visita> getVisitaById(Integer id);
+//     Optional<Visita> getVisitaById(Integer id);
     
-    Visita saveVisita(Visita visita);
+//     Visita saveVisita(Visita visita);
     
-    void deleteVisita(Integer id);
+//     void deleteVisita(Integer id);
 
-    boolean existsById(Integer id);
+//     boolean existsById(Integer id);
     
    
 
-}
+// }
 
