@@ -1,0 +1,23 @@
+import React from 'react';
+import CTAButton from '../components/CTAButton'; // Assicurati del percorso
+
+export default function PrenotaVisita() {
+    return (
+        <section className="prenota-visita">
+            <div className="prenota-visita__container">
+                <h2 className="prenota-visita__title">Vuoi parlare con un esperto della tua zona?</h2>
+                <p className="prenota-visita__text">
+                    Prenota un appuntamento gratuito con uno dei nostri agenti. 
+                    Ti aiuterà a capire meglio il valore della tua casa e il percorso di vendita più adatto. 
+                    In sede, online o telefonicamente, come preferisci.
+                </p>
+                
+                {/* Uso il componente CTAButton come richiesto */}
+                <CTAButton 
+                    content="PRENOTA ORA" 
+                    ctaLink="/" 
+                />
+            </div>
+        </section>
+    );
+}
