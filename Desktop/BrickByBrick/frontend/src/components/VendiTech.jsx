@@ -1,6 +1,5 @@
 import Card from './Card';
 
-// Assicurati che questi percorsi puntino alle tue icone reali
 // import iconStima from '../assets/icons/stima-icon.svg';
 // import iconAgente from '../assets/icons/agente-icon.svg';
 // import iconTrasparenza from '../assets/icons/trasparenza-icon.svg';

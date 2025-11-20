@@ -1,5 +1,5 @@
 import React from 'react';
-import CTAButton from '../components/CTAButton'; // Assicurati del percorso
+import CTAButton from '../components/CTAButton'; 
 
 export default function PrenotaVisita() {
     return (
@@ -12,7 +12,6 @@ export default function PrenotaVisita() {
                     In sede, online o telefonicamente, come preferisci.
                 </p>
                 
-                {/* Uso il componente CTAButton come richiesto */}
                 <CTAButton 
                     content="PRENOTA ORA" 
                     ctaLink="/" 

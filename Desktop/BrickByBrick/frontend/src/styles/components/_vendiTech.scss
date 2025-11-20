@@ -6,16 +6,14 @@
   width: 100%;
   @include m.flex-column;
   align-items: center;
-  background-color: vars.$light-blue; // Sfondo azzurro come richiesto nel layout precedente
 
   &__title {
     @include m.heading(vars.$font-size-4xl, vars.$font-weight-bold);
-    color: vars.$blue; // O vars.$black se preferisci il titolo nero come detto prima
+    color: vars.$blue;
     margin-bottom: vars.$spacing-2xl;
     text-align: center;
     max-width: 800px;
     
-    // Responsive per il titolo
     @include m.mobile {
         font-size: vars.$font-size-2xl;
     }
@@ -37,7 +35,6 @@
     @include m.desktop {
       @include m.flex-row;
 
-      // Calcolo esatto per 3 colonne con gap
       .card {
         flex: 0 0 calc((100% - (2 * vars.$spacing-xl)) / 3);
       }
