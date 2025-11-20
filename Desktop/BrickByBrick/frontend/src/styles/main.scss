@@ -25,7 +25,6 @@
 @use './components/descrizioneImmobile';
 @use './components/faqItem';
 @use './components/questions';
-@use './components/notfound';
 // @use './components/about';
 @use './components/vendi';
 @use './components/storySection';
@@ -42,3 +41,4 @@
 @use './components/agentSection';
 
 @use './pages/dettaglioImmobile';
+@use './pages/notfound';
