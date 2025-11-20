@@ -25,10 +25,11 @@
 @use './components/descrizioneImmobile';
 @use './components/faqItem';
 @use './components/questions';
-// @use './components/about';
-@use './components/vendi';
 @use './components/storySection';
 @use './components/agentCard';
+@use './components/vendiTech';
+@use './components/timeline';
+@use './components/prenotaVisita';
 
 // Components that use other Components
 @use './components/herosection';
