@@ -1,24 +1,22 @@
-import { Link } from 'react-router-dom';
-import '../styles/components/_notfound.scss';
+import CTAButton from '../components/CTAButton';
+import notFoundImg from '../assets/images/not-found.svg';
 
 export default function NotFound() {
     return (
         <div className="not-found-container">
             <div className="not-found-image-wrapper">
-                <img src="/img/no-results.png" alt="Errore 404" />
+                <img src={notFoundImg} alt="Errore 404 - Non Trovato" />
             </div>
 
-            <h1 className="not-found-title">
+            <h2 className="h1 not-found-title">
                 Ops...Si è verificato un errore
-            </h1>
+            </h2>
 
             <p className="not-found-description">
                 Errore di percorso! Hai smarrito la via di casa. Torna alla Home e riprendi la ricerca.
             </p>
 
-            <Link to="/" className="not-found-button">
-                Torna alla Home
-            </Link>
+            <CTAButton content='Torna Alla Home' ctaLink='/'/>
         </div>
     );
 }
