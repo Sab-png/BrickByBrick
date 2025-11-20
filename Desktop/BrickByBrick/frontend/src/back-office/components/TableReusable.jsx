@@ -38,6 +38,7 @@ const ReusableTable = ({ data, columns, selectedUserIds, onRowSelect }) => {
                 )}
               </td>
             ))}
+            
           </tr>
         ))}
       </tbody>

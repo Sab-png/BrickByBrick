@@ -7,7 +7,6 @@ const navbarItems = [
     { name: "utenti", path: "/admin/gestione-utenti" },
     { name: "immobili", path: "/admin/immobili" },
     { name: "agenda", path: "/admin/agenda" },
-    { name: "comunicazioni", path: "/admin/comunicazioni" }
 ];
 
 export const SideBar = () => {

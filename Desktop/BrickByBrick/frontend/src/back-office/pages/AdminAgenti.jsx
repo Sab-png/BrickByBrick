@@ -57,6 +57,20 @@ const Agenti = () => {
     }
   };
 
+  // --- Logica Modifica Agente ---
+  const handleEditAgent = () => {
+    if (selectedUserIds.length === 0) {
+      window.alert('Seleziona un agente per modificarlo');
+      return;
+    }
+    if (selectedUserIds.length > 1) {
+      // Se sono selezionati più agenti, prendiamo il primo
+      if (!window.confirm('Hai selezionato più agenti. Vuoi modificare il primo selezionato?')) return;
+    }
+    const idToEdit = selectedUserIds[0];
+    navigate(`/admin/gestione-utenti/modifica-agente/${idToEdit}`);
+  };
+
   // --- Logica Selezione Checkbox ---
   const toggleUserSelection = (userId) => {
     setSelectedUserIds(prevIds => {
@@ -74,7 +88,7 @@ const Agenti = () => {
     { key: 'id', header: 'ID Agente' },
     { key: 'email', header: 'Email' },
     { key: 'phone', header: 'Telefono' },
-    { key: 'status', header: 'Stato' },
+    { key: 'cittaOperativa', header: 'Città operativa' },
   ];
 
   return (
@@ -98,25 +112,33 @@ const Agenti = () => {
                 </button>
             </div>
             <div className="action-buttons">
-                <button className="add-agent-btn" onClick={handleAddAgent}>
-                    Aggiungi agente
-                </button>
-                <button 
-                    className="remove-agent-btn" 
-                    onClick={handleRemoveAgents}
-                    disabled={selectedUserIds.length === 0} 
-                >
-                    Rimuovi agente
-                </button>
+              <button className="add-agent-btn" onClick={handleAddAgent}>
+                Aggiungi agente
+              </button>
+              <button 
+                className="edit-agent-btn" 
+                onClick={handleEditAgent}
+                disabled={selectedUserIds.length !== 1}
+              >
+                Modifica agente
+              </button>
+              <button 
+                className="remove-agent-btn" 
+                onClick={handleRemoveAgents}
+                disabled={selectedUserIds.length === 0} 
+              >
+                Rimuovi agente
+              </button>
             </div>
         </div>
         
         {/* Passa i dati filtrati e la logica di selezione alla tabella */}
         <ReusableTable 
-            data={usersList} 
-            columns={userColumns} 
-            selectedUserIds={selectedUserIds}
-            onRowSelect={toggleUserSelection}
+          data={usersList} 
+          columns={userColumns} 
+          selectedUserIds={selectedUserIds}
+          onRowSelect={toggleUserSelection}
+          onEdit={(id) => navigate(`/admin/gestione-utenti/modifica-agente/${id}`)}
         />
       </div>
     </div>

@@ -5,9 +5,9 @@ import ReusableTable from '../components/TableReusable'; // Assicurati del perco
 const UtentiAdmin = () => {
   // Dati fittizi per gli utenti (in un caso reale verrebbero da un'API o un file separato)
   const mockUsers = [
-    { id: 'U001', fullName: 'Luigi Verdi', email: 'luigi@test.com', phone: '3331234567', status: 'Attivo', role: 'Cliente' },
-    { id: 'U002', fullName: 'Anna Neri', email: 'anna@test.com', phone: '3339876543', status: 'Sospeso', role: 'Cliente VIP' },
-    { id: 'U003', fullName: 'Marco Gialli', email: 'marco@test.com', phone: '3334567890', status: 'Attivo', role: 'Cliente' },
+    { id: 'U001', fullName: 'Luigi Verdi', email: 'luigi@test.com', phone: '3331234567', age: 38, status: 'Attivo', role: 'Cliente' },
+    { id: 'U002', fullName: 'Anna Neri', email: 'anna@test.com', phone: '3339876543', age: 45, status: 'Sospeso', role: 'Cliente VIP' },
+    { id: 'U003', fullName: 'Marco Gialli', email: 'marco@test.com', phone: '3334567890', age: 29, status: 'Attivo', role: 'Cliente' },
   ];
 
   // 1. Stato per i dati visualizzati
@@ -51,8 +51,18 @@ const UtentiAdmin = () => {
     { key: 'email', header: 'Email' },
     { key: 'role', header: 'Tipologia Cliente' }, // Colonna diversa dagli Agenti
     { key: 'phone', header: 'Telefono' },
-    { key: 'status', header: 'Stato' },
+    { key: 'age', header: 'Età' },
   ];
+
+  // --- Logica Rimuovi Utenti ---
+  const handleRemoveUsers = () => {
+    if (selectedUserIds.length === 0) return;
+    if (!window.confirm(`Sei sicuro di voler rimuovere ${selectedUserIds.length} utente/i?`)) return;
+
+    const remaining = usersList.filter(u => !selectedUserIds.includes(u.id));
+    setUsersList(remaining);
+    setSelectedUserIds([]);
+  };
 
   return (
     <div className="user-management-page">
@@ -75,10 +85,15 @@ const UtentiAdmin = () => {
                 </button>
             </div>
             
-            {/* Qui abbiamo rimosso il div "action-buttons".
-               Se in futuro vorrai aggiungere azioni (es. "Esporta Utenti"), 
-               puoi rimetterlo qui.
-            */}
+            <div className="action-buttons">
+              <button 
+                className="remove-user-btn" 
+                onClick={handleRemoveUsers}
+                disabled={selectedUserIds.length === 0}
+              >
+                Elimina utente
+              </button>
+            </div>
         </div>
         
         {/* Tabella Riutilizzabile */}

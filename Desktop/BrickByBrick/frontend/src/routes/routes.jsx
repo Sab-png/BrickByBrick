@@ -15,8 +15,8 @@ import Dashboard from '../back-office/pages/Dashboard'
 import Statistiche from '../back-office/pages/AdminStatistica'
 import GestionePiattaforma from '../back-office/pages/AdminGestioneUtenti'
 import AddAgentPage from '../back-office/pages/AddAgent'
+import ModifyAgent from '../back-office/pages/ModifyAgent'
 import ImmobiliAdmin from '../back-office/pages/AdminImmobili'
-import CommunicationsPage from '../back-office/pages/AdminComunicazioni'
 import Agenda from '../back-office/pages/AdminAgenda'
 
 import { Component } from 'react'
@@ -93,6 +93,11 @@ const routes = [
         title: 'Aggiungi agente'
       },
       {
+        path: 'gestione-utenti/modifica-agente/:id',
+        Component: ModifyAgent,
+        title: 'Modifica agente'
+      },
+      {
         path: 'immobili',
         Component: ImmobiliAdmin,
         title: 'Immobili'
@@ -101,11 +106,6 @@ const routes = [
         path: 'agenda',
         Component: Agenda,
         title: 'Agenda'
-      },
-      {
-        path : 'comunicazioni',
-        Component: CommunicationsPage,
-        title: 'Comunicazioni'
       },
     ]
   }
