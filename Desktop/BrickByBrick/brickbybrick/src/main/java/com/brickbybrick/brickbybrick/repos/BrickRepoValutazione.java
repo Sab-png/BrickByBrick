@@ -6,3 +6,5 @@ import com.brickbybrick.brickbybrick.model.Valutazione;
 public interface BrickRepoValutazione extends JpaRepository<Valutazione, Integer> {
 
 }
+
+
