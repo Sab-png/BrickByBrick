@@ -46,7 +46,7 @@ public class Immobile {
     @Column(name = "descrizione", nullable = false)
     private String descrizione;
 
-    @OneToOne(cascade = CascadeType.ALL)  
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)  
     @JoinColumn(name = "Id_caratteristiche", referencedColumnName = "Id_caratteristiche")
     private CaratteristicheImmobile caratteristiche;
 
@@ -55,6 +55,8 @@ public class Immobile {
 
     @Column(name = "mappa", nullable = false)
     private String mappa;
+
+    
 
     public Integer getId_immobile() {
         return Id_immobile;

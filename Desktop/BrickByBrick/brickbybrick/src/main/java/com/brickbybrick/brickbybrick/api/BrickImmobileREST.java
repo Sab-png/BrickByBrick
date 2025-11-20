@@ -3,6 +3,7 @@ package com.brickbybrick.brickbybrick.api;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,13 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.brickbybrick.brickbybrick.model.Immobile;
+import com.brickbybrick.brickbybrick.services.BrickServiceCaratteristicheImmobile;
 import com.brickbybrick.brickbybrick.services.BrickServiceImmobile;
+
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
-
-
-
 
 
 @RestController
@@ -28,6 +30,8 @@ public class BrickImmobileREST {
 
     @Autowired
     private BrickServiceImmobile serviceImmobile;
+
+
 
     @GetMapping
     public ResponseEntity<List<Immobile>> getImmobili() {
@@ -42,14 +46,15 @@ public class BrickImmobileREST {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
-    @PostMapping
+
+    @PostMapping("/add")
     public ResponseEntity<Immobile> createImmobile(@RequestBody Immobile immobile) {
         Immobile nuovoImmobile = serviceImmobile.addImmobile(immobile);
-        return ResponseEntity.status(201).body(nuovoImmobile);
+        return ResponseEntity.status(HttpStatus.CREATED).body(nuovoImmobile);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Immobile> updateImmobile(@PathVariable Integer id, @RequestBody Immobile immobile) {
+    @PutMapping("/edit/{id}")
+    public ResponseEntity<Immobile> updateImmobile(@PathVariable Integer id, @Valid @RequestBody Immobile immobile) {
         if (!serviceImmobile.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
@@ -57,11 +62,12 @@ public class BrickImmobileREST {
         Immobile immobileAggiornato = serviceImmobile.addImmobile(immobile);
         return ResponseEntity.ok(immobileAggiornato);
     }
-    @DeleteMapping("/{id}")
+
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteImmobile(@PathVariable Integer id) {
-        if (!serviceImmobile.existsById(id)) {
+        if (!serviceImmobile.existsById(id) ) {
             return ResponseEntity.notFound().build();
-        }
+        }   
         serviceImmobile.deleteImmobile(id);
         return ResponseEntity.noContent().build();
     }

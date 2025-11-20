@@ -14,7 +14,7 @@ public class Valutazione {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_valutazione")
-    private int Id_valutazione;
+    private Integer Id_valutazione;
 
     @Column(name = "Id_utente", nullable = false)
     private Integer Id_utente;
@@ -35,7 +35,7 @@ public class Valutazione {
     private String tipologia;
 
     @Column(name = "piano", nullable = false)
-    private Integer piano;
+    private String piano;
 
     @Column(name = "locali", nullable = false)
     private Integer locali;
@@ -114,11 +114,11 @@ public class Valutazione {
         this.tipologia = tipologia;
     }
 
-    public Integer getPiano() {
+    public String getPiano() {
         return piano;
     }
 
-    public void setPiano(Integer piano) {
+    public void setPiano(String piano) {
         this.piano = piano;
     }
 
