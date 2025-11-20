@@ -58,11 +58,6 @@ const routes = [
         showInNav: true,
         title: 'Vendi'
       },
-
-      {
-        path: '*',
-        Component: NotFound
-      }
     ]
   },
   {
@@ -70,6 +65,10 @@ const routes = [
     Component: StepMultiForm,
     showInNav: false,
     title: 'Step Multi Form'
+  },
+  {
+    path: '*',
+    Component: NotFound
   }
 ]
 
