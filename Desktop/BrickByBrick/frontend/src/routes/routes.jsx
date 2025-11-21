@@ -18,7 +18,7 @@ const routes = [
       {
         index: true,
         Component: Homepage,
-        showInNav: true,
+        showInNav: false,
         title: 'Home'
       },
       // Nuove rotte
