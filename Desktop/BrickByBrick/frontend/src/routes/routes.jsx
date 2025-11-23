@@ -17,6 +17,7 @@ import Utenti from '../back-office/pages/AdminUtenti'
 import ImmobiliAdmin from '../back-office/pages/AdminImmobili'
 import Agenda from '../back-office/pages/AdminAgenda'
 import AddAgentPage from '../back-office/pages/AddAgent'
+import AddImmobile from '../back-office/pages/AddImmobile'
 import { Component } from 'react'
 
 const routes = [
@@ -94,6 +95,16 @@ const routes = [
         path: 'immobili',
         Component: ImmobiliAdmin,
         title: 'Immobili'
+      },
+      {
+        path: 'immobili/aggiungi',
+        Component: AddImmobile,
+        title: 'Aggiungi Immobile'
+      },
+      {
+        path: 'immobili/modifica/:id',
+        Component: AddImmobile,
+        title: 'Modifica Immobile'
       },
       {
         path: 'agenda',

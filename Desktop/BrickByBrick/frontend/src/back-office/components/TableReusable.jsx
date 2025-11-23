@@ -29,7 +29,13 @@ const ReusableTable = ({ data, columns, selectedUserIds, onRowSelect }) => {
 
             {columns.map((column) => (
               <td key={`${item.id}-${column.key}`}>
-                {column.key === 'status' ? (
+                {column.isImage ? (
+                  <img
+                    src={item[column.key]}
+                    alt={`Foto ${item.titolo || item.nome || ''}`}
+                    className="table-image-circle"
+                  />
+                ) : column.key === 'status' ? (
                   <span className={`status-${item.status.toLowerCase()}`}>
                     {item[column.key]}
                   </span>

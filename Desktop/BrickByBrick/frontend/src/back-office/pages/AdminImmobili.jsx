@@ -1,5 +1,7 @@
+import SearchImmobiliForm from '../components/SearchImmobiliForm';
+
 export default function ImmobiliAdmin(){
     return(
-        <p>qua ci saranno gli immobili</p>
+        <SearchImmobiliForm />
     )
 }
