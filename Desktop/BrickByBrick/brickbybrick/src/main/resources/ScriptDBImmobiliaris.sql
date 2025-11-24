@@ -1,119 +1,127 @@
 create database Immobiliaris;
 
 use Immobiliaris;
-drop database Immobiliaris;
-CREATE TABLE ruolo (
-Id_ruolo INT PRIMARY KEY,
-nome VARCHAR(10)
-);
-CREATE TABLE utente (
-    Id_utente INT PRIMARY KEY,
-    Id_ruolo INT,
-    nome VARCHAR(100),
-    cognome VARCHAR(100),
-    email VARCHAR(100),
-    passw varchar (100),
-    numero_di_telefono VARCHAR(15),
-    codice_fiscale CHAR(16),
-    FOREIGN KEY (Id_ruolo) REFERENCES ruolo(Id_ruolo)
-);
 
--- Creazione della tabella 'Admin'
+
+CREATE TABLE ruolo (
+    Id_ruolo INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(10) NOT NULL
+);
 CREATE TABLE admin (
     Id_admin INT PRIMARY KEY AUTO_INCREMENT,
     Id_ruolo INT,
-    nome VARCHAR(100),
-    cognome VARCHAR(100),
-    email VARCHAR(100),
-    passw varchar (100),
+    nome VARCHAR(100) NOT NULL,
+    cognome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    passw VARCHAR(255) NOT NULL,
     FOREIGN KEY (Id_ruolo) REFERENCES ruolo(Id_ruolo)
 );
 
--- Creazione della tabella 'Agente'
+
+
 CREATE TABLE agente (
-    Id_agente INT PRIMARY KEY,
-    Id_ruolo int,
-    nome VARCHAR(100),
-    cognome VARCHAR(100),
-    email VARCHAR(100),
-    passw varchar (100),
-    numero_di_telefono VARCHAR(15),
-    citta VARCHAR(50),
+    Id_agente INT PRIMARY KEY AUTO_INCREMENT,
+    Id_ruolo INT NOT NULL,
+    nome VARCHAR(255) NOT NULL,
+    cognome VARCHAR(255) NOT NULL,
+    telefono VARCHAR(15),
+    città VARCHAR(16),
+    email VARCHAR(100) NOT NULL UNIQUE,
+    passw VARCHAR(255) NOT NULL,
     FOREIGN KEY (Id_ruolo) REFERENCES ruolo(Id_ruolo)
-   
 );
--- Creazione della tabella 'Caratteristiche_Immobile'
+
 CREATE TABLE caratteristiche_immobile (
-    Id_caratteristiche INT PRIMARY KEY,
-    tipologia VARCHAR(50),
-    piano varchar(50),
-    ascensore boolean, 
-    arredato varchar(50),
-    disponibilita VARCHAR(50),
-    contratto VARCHAR(50),
-    piani_edificio INT,
-    anno_di_costruzione INT,
-    classe_energetica VARCHAR(10),
-    accesso_a_disabili boolean,
-    camere_da_letto INT,
-    bagni INT,
-    balcone int,
-    riscaldamento varchar(50),
-    terrazzo boolean,
-    giardino boolean,
-    box_auto int,
-    cantina boolean,
-    altre_caratteristiche TEXT
+    Id_caratteristiche INT PRIMARY KEY AUTO_INCREMENT,
+    tipologia VARCHAR(255) NOT NULL,
+    piano VARCHAR(255) NOT NULL,
+    ascensore BOOLEAN NOT NULL,
+    arredato BOOLEAN NOT NULL,
+    disponibilita VARCHAR(255) NOT NULL,
+    contratto VARCHAR(255) NOT NULL,
+    piani_edificio INT NOT NULL,
+    anno_costruzione INT NOT NULL,
+    classe_energetica VARCHAR(255) NOT NULL,
+    accesso_disabili BOOLEAN NOT NULL,
+    camere INT NOT NULL,
+    bagni INT NOT NULL,
+    balcone INT NOT NULL,
+    riscaldamento VARCHAR(255) NOT NULL,
+    terrazzo BOOLEAN NOT NULL,
+    giardino BOOLEAN NOT NULL,
+    box_auto BOOLEAN NOT NULL,
+    cantina BOOLEAN NOT NULL,
+    altre_caratteristiche TEXT NOT NULL
 );
 
--- Creazione della tabella 'Immobili'
 CREATE TABLE immobile (
-    Id_immobile INT PRIMARY KEY,
-    foto BLOB, -- Usa BLOB se desideri memorizzare immagini direttamente nel DB
-    cap VARCHAR(10),
-    citta VARCHAR(100),
-    indirizzo VARCHAR(255),
-    prezzo DECIMAL(10, 2),
-    locali INT,
-    superficie INT,
-    descrizione TEXT,
-    Id_caratteristiche INT,
-    FOREIGN KEY (Id_caratteristiche) REFERENCES caratteristiche_immobile(Id_caratteristiche)
+    Id_immobile INT PRIMARY KEY AUTO_INCREMENT,
+    foto VARCHAR(1000) NOT NULL,
+    cap INT NOT NULL,
+    citta VARCHAR(100) NOT NULL,
+    indirizzo VARCHAR(255) NOT NULL,
+    prezzo DOUBLE NOT NULL,
+    locali INT NOT NULL,
+    superficie INT NOT NULL,
+    descrizione TEXT NOT NULL,
+    Id_caratteristiche INT NOT NULL,
+    planimetria VARCHAR(255) NOT NULL,
+    mappa VARCHAR(255) NOT NULL,
+    CONSTRAINT fk_caratteristiche FOREIGN KEY (Id_caratteristiche) REFERENCES caratteristiche_immobile(Id_caratteristiche)
 );
 
+CREATE TABLE utente (
+    Id_utente INT PRIMARY KEY AUTO_INCREMENT,
+    Id_ruolo INT NOT NULL,
+    nome VARCHAR(100) NOT NULL,
+    cognome VARCHAR(100) NOT NULL,
+    telefono VARCHAR(15),
+    codice_fiscale VARCHAR(16),
+    email VARCHAR(100) NOT NULL UNIQUE,
+    passw VARCHAR(255) NOT NULL,
+    CONSTRAINT fk_utente_ruolo FOREIGN KEY (Id_ruolo) REFERENCES ruolo(Id_ruolo)
+);
 
-
--- Creazione della tabella 'Valutazione'
 CREATE TABLE valutazione (
-    Id_valutazione INT PRIMARY KEY,
-    Id_utente INT,
-    citta VARCHAR(100),
-    cap VARCHAR(10),
-    indirizzo VARCHAR(255),
-    tipologia_immobile VARCHAR(50),
-    piano INT,
-    locali INT,
-    superficie INT,
-    condizioni VARCHAR(50),
-    bagno INT,
-    anno_costruzione INT,
-    ascensore boolean,
-    classe_energetica VARCHAR(10),
-    terrazzo boolean,
-    giardino boolean,
-    box_auto int,
-    cantina boolean,
-    balcone boolean,
-    piscina boolean,
-    FOREIGN KEY (Id_utente) REFERENCES utente(Id_utente)
+    Id_valutazione INT PRIMARY KEY AUTO_INCREMENT,
+    Id_utente INT NOT NULL,
+    cap VARCHAR(5) NOT NULL,
+    citta VARCHAR(100) NOT NULL,
+    indirizzo VARCHAR(255) NOT NULL,
+    tipologia ENUM ('APPARTAMENTO', 'CASA_INDIPENDENTE') NOT NULL,
+    piano VARCHAR(50) NOT NULL,
+    locali INT NOT NULL,
+    superficie INT NOT NULL,
+    condizioni ENUM ('NUOVO', 'RISTRUTTURATO', 'DA_RISTRUTTURARE') NOT NULL,
+    bagni INT NOT NULL,
+    anno_costruzione INT NOT NULL,
+    classe_energetica ENUM('A4', 'A3', 'A2', 'A1', 'B', 'C', 'D', 'E', 'F', 'G') NOT NULL,
+    dotazioni_cantina BOOLEAN,
+    dotazioni_terrazzo BOOLEAN,
+    dotazioni_balcone BOOLEAN,
+    dotazioni_garage BOOLEAN,
+    dotazioni_piscina BOOLEAN,
+    dotazioni_giardino BOOLEAN,
+    dotazioni_ascensore BOOLEAN,
+    CONSTRAINT fk_valutazione_utente FOREIGN KEY (Id_utente) REFERENCES utente(Id_utente)
 );
 
--- Creazione della tabella 'Visita'
--- CREATE TABLE visita (
---     Id_visita INT PRIMARY KEY,
---     Id_immobile INT,
---     Id_agente INT,
---     data DATE,
---     FOREIGN KEY (Id_immobile) REFERENCES immobile(Id_immobile),
---     FOREIGN KEY (Id_agente) REFERENCES agente(Id_agente)
--- );
+
+
+CREATE TABLE visita (
+    Id_visita INT PRIMARY KEY AUTO_INCREMENT,
+    Id_immobile INT NOT NULL,
+    Id_agente INT NOT NULL,
+    data DATETIME NOT NULL,
+    CONSTRAINT fk_visita_immobile FOREIGN KEY (Id_immobile) REFERENCES immobile(Id_immobile),
+    CONSTRAINT fk_visita_agente FOREIGN KEY (Id_agente) REFERENCES utente(Id_utente)
+);
+
+CREATE TABLE prezzo_mercato(
+	cap VARCHAR(10) PRIMARY KEY,
+    prezzo_min_mq DOUBLE,
+    prezzo_max_mq DOUBLE,
+    prezzo_medio_mq DOUBLE
+);
+
+
