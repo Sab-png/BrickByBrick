@@ -24,8 +24,12 @@
 @use './components/featureImmobile';
 @use './components/descrizioneImmobile';
 @use './components/faqItem';
-@use './components/faqSection';
 @use './components/questions';
+@use './components/storySection';
+@use './components/agentCard';
+@use './components/vendiTech';
+@use './components/timeline';
+@use './components/prenotaVisita';
 
 // Components that use other Components
 @use './components/herosection';
@@ -34,6 +38,8 @@
 @use './components/cardSection';
 @use './components/filters';
 @use './components/immobiliResults';
-
+@use './components/faqSection';
+@use './components/agentSection';
 
 @use './pages/dettaglioImmobile';
+@use './pages/notfound';

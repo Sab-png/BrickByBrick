@@ -4,10 +4,11 @@ import Homepage from '../pages/Homepage'
 import About from '../pages/About'
 import Immobili from '../pages/Immobili'
 import DettaglioImmobile from '../pages/DettaglioImmobile'
-import FAQSupport from '../pages/FAQSupport'
-import StepMultiForm from '../pages/StepMultiForm'
-import NotFound from '../pages/NotFound'
+import FAQSupport from '../pages/FAQSupport';
+import Vendi from '../pages/Vendi';
 import Valuta from '../pages/Valuta';
+import NotFound from '../pages/NotFound'
+import StepMultiForm from '../pages/StepMultiForm';
 
 const routes = [
   {
@@ -17,7 +18,7 @@ const routes = [
       {
         index: true,
         Component: Homepage,
-        showInNav: true,
+        showInNav: false,
         title: 'Home'
       },
       // Nuove rotte
@@ -51,11 +52,12 @@ const routes = [
         Component: DettaglioImmobile,
         showInNav: false
       },
-
       {
-        path: '*',
-        Component: NotFound
-      }
+        path: 'vendi',
+        Component: Vendi,
+        showInNav: true,
+        title: 'Vendi'
+      },
     ]
   },
   {
@@ -63,6 +65,10 @@ const routes = [
     Component: StepMultiForm,
     showInNav: false,
     title: 'Step Multi Form'
+  },
+  {
+    path: '*',
+    Component: NotFound
   }
 ]
 

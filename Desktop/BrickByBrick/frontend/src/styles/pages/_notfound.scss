@@ -1,0 +1,58 @@
+@use "../abstracts/variables" as v;
+@use "../abstracts/mixins" as m;
+@use "sass:color";
+
+// Raggruppo tutto sotto il namespace 'not-found' per sfruttare il nesting
+.not-found {
+
+  &-container {
+    @include m.flex-column;
+    justify-content: center;
+    align-items: center;
+    
+    min-height: 80vh;
+    padding: v.$spacing-2xl v.$spacing-lg; // 48px 24px
+    text-align: center;
+
+
+    $bg-end-color: color.change(v.$turquoise, $alpha: 0.05);
+    @include m.gradient-bg(v.$white, $bg-end-color, 135deg);
+  }
+
+  &-image-wrapper {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: v.$spacing-2xl;
+
+    img {
+      width: 100%;
+      height: auto;
+      display: block; 
+    }
+  }
+
+  &-title {
+    // Mixin heading: gestisce font-family, weight e line-height
+    @include m.heading(v.$font-size-3xl, v.$font-weight-bold);
+    color: v.$blue;
+    margin-bottom: v.$spacing-base; // 16px
+
+    // Responsive: riduco leggermente su mobile se necessario
+    @include m.mobile {
+      font-size: v.$font-size-2xl;
+    }
+  }
+
+  &-description {
+    font-family: v.$font-paragraph;
+    font-size: v.$font-size-base; // 16px
+    color: v.$black;
+    line-height: v.$line-height-relaxed;
+    
+    margin-bottom: v.$spacing-2xl; // 48px
+    max-width: 500px;
+    
+    // Responsive: assicura che il testo non tocchi i bordi su schermi piccoli
+    width: 100%; 
+  }
+}
