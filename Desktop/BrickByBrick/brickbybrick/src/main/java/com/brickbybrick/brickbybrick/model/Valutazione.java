@@ -1,10 +1,16 @@
 package com.brickbybrick.brickbybrick.model;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,6 +25,9 @@ public class Valutazione {
     @Column(name = "Id_utente", nullable = false)
     private Integer Id_utente;
     
+    @Column(name = "Id_agente")
+    private Integer Id_agente;
+
     @Column(name = "regione", nullable = false)
     private String regione;
 
@@ -58,6 +67,19 @@ public class Valutazione {
     @Column(name = "classe_energetica", nullable = false)
     private String classe_energetica;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "stato", nullable = false, length = 30)
+    private StatoValutazione stato = StatoValutazione.NUOVA;
+
+    @Column(name = "note", length = 1000)
+    private String note;
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
     public int getId_valutazione() {
         return Id_valutazione;
     }
@@ -72,6 +94,14 @@ public class Valutazione {
 
     public void setId_utente(Integer id_utente) {
         Id_utente = id_utente;
+    }
+
+    public Integer getId_agente() {
+        return Id_agente;
+    }
+
+    public void setId_agente(Integer id_agente) {
+        Id_agente = id_agente;
     }
 
     public String getRegione() {
@@ -176,6 +206,50 @@ public class Valutazione {
 
     public void setClasse_energetica(String classe_energetica) {
         this.classe_energetica = classe_energetica;
+    }
+
+    public StatoValutazione getStato() {
+        return stato;
+    }
+
+    public void setStato(StatoValutazione stato) {
+        this.stato = stato;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    @PrePersist
+    public void onCreate() {
+        LocalDateTime now = LocalDateTime.now();
+        this.createdAt = now;
+        this.updatedAt = now;
+    }
+
+    @PreUpdate
+    public void onUpdate() {
+        this.updatedAt = LocalDateTime.now();
     }
 
     
