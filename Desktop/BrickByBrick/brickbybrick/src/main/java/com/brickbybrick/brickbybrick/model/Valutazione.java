@@ -5,6 +5,7 @@ import com.brickbybrick.brickbybrick.model.enums.Condizione;
 import com.brickbybrick.brickbybrick.model.enums.Tipologia;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,6 +23,14 @@ public class Valutazione {
 
     @Column(name = "Id_utente", nullable = false)
     private Integer idUtente;
+
+    public Integer getIdUtente() {
+        return idUtente;
+    }
+
+    public void setIdUtente(Integer idUtente) {
+        this.idUtente = idUtente;
+    }
 
     @Column(name = "cap", nullable = false)
     private String cap;
@@ -59,8 +68,8 @@ public class Valutazione {
     @Column(name = "classe_energetica", nullable = false)
     private ClasseEnergetica classe_energetica;
 
-    @Column(name = "dotazioni_esterne", nullable = false)
-    private DotazioniEsterne dotazioni_esterne;
+    @Embedded
+    private DotazioniEsterne Id_dotazione;
 
 
     public Integer getId_valutazione() {
@@ -71,13 +80,6 @@ public class Valutazione {
         Id_valutazione = id_valutazione;
     }
 
-    public Integer getIdUtente() {
-        return idUtente;
-    }
-
-    public void setIdutente(Integer idUtente) {
-        idUtente = idUtente;
-    }
 
     public String getCap() {
         return cap;
@@ -175,13 +177,12 @@ public class Valutazione {
         this.classe_energetica = classe_energetica;
     }
 
-    public DotazioniEsterne getDotazioni_esterne() {
-        return dotazioni_esterne;
+    public DotazioniEsterne getId_dotazione() {
+        return Id_dotazione;
     }
 
-    public void setDotazioni_esterne(DotazioniEsterne dotazioni_esterne) {
-        this.dotazioni_esterne = dotazioni_esterne;
+    public void setId_dotazione(DotazioniEsterne id_dotazione) {
+        Id_dotazione = id_dotazione;
     }
 
-    
 }
