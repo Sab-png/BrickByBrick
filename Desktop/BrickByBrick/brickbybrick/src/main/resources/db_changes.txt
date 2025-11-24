@@ -1,0 +1,52 @@
+Modifiche necessarie al database per supportare i nuovi ruoli e dashboard
+=======================================================================
+
+1. Tabella `ruolo`
+   - Inserire (o aggiornare) i tre ruoli canonici con nomi coerenti al backend:
+     1 -> ADMIN
+     2 -> AGENTE
+     3 -> CLIENTE
+
+2. Tabelle `admin`, `agente`, `utente`
+   - Verificare che la colonna `Id_ruolo` non sia nullable e faccia riferimento ai tre ID sopra.
+   - Aggiornare gli indirizzi email demo affinché rispettino i domini:
+       * Admin: `nome@admin.net`
+       * Agente: `nome@agente.net`
+       * Cliente (utente): `nome@user.net`
+   - Le password devono essere salvate con hashing BCrypt (lo stesso encoder usato da Spring Security).
+     Esempio di insert:
+       INSERT INTO admin (Id_ruolo, nome, cognome, email, passw)
+       VALUES (1, 'Luca', 'Bianchi', 'luca@admin.net', '$2a$10$...hash...');
+
+3. Tabella `valutazione`
+   - Aggiungere le nuove colonne:
+       Id_agente INT NULL
+       stato VARCHAR(30) NOT NULL DEFAULT 'NUOVA'
+       note VARCHAR(1000) NULL
+       created_at DATETIME NULL
+       updated_at DATETIME NULL
+   - Popolare `stato` con valori: NUOVA, IN_ELABORAZIONE, CONCLUSA.
+   - In uno script di popolamento iniziale valorizzare `created_at`/`updated_at` a NOW().
+
+4. Tabella `notifica` (nuova)
+   CREATE TABLE notifica (
+       Id_notifica INT AUTO_INCREMENT PRIMARY KEY,
+       Id_agente INT NOT NULL,
+       messaggio VARCHAR(1000) NOT NULL,
+       letto BOOLEAN NOT NULL DEFAULT FALSE,
+       created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+       FOREIGN KEY (Id_agente) REFERENCES agente(Id_agente)
+   );
+
+5. Dati demo
+   - Inserire almeno:
+       * 2 admin `*@admin.net`
+       * 3 agenti `*@agente.net`
+       * 3 clienti `*@user.net`
+       * Alcune valutazioni con stati diversi e assegnazioni ad agenti
+       * Qualche notifica per testare la dashboard agente
+
+6. Script di migrazione
+   - Se il database è già esistente, prevedere ALTER TABLE invece di CREATE.
+   - Aggiornare anche `PopolamentoDB.sql` per riflettere lo schema nuovo.
+
