@@ -10,11 +10,8 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "prezzi_mercato")
 public class PrezzoMercato {
-    
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    
     @Column(name = "cap", nullable = false, unique = true)
     private String cap;
     
@@ -26,14 +23,6 @@ public class PrezzoMercato {
     
     @Column(name = "prezzo_medio_mq", nullable = false)
     private Double prezzoMedioMq;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getCap() {
         return cap;

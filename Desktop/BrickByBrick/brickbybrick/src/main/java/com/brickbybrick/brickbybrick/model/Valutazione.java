@@ -21,7 +21,7 @@ public class Valutazione {
     private Integer Id_valutazione;
 
     @Column(name = "Id_utente", nullable = false)
-    private Integer Id_utente;
+    private Integer idUtente;
 
     @Column(name = "cap", nullable = false)
     private String cap;
@@ -53,8 +53,8 @@ public class Valutazione {
     @Column(name = "anno_costruzione", nullable = false)
     private Integer anno_costruzione;
 
-    @Column(name = "ascensore", nullable = false)
-    private Boolean ascensore;
+    // @Column(name = "ascensore", nullable = false)
+    // private Boolean ascensore;
 
     @Column(name = "classe_energetica", nullable = false)
     private ClasseEnergetica classe_energetica;
@@ -71,12 +71,12 @@ public class Valutazione {
         Id_valutazione = id_valutazione;
     }
 
-    public Integer getId_utente() {
-        return Id_utente;
+    public Integer getIdUtente() {
+        return idUtente;
     }
 
-    public void setId_utente(Integer id_utente) {
-        Id_utente = id_utente;
+    public void setIdutente(Integer idUtente) {
+        idUtente = idUtente;
     }
 
     public String getCap() {
@@ -159,13 +159,13 @@ public class Valutazione {
         this.anno_costruzione = anno_costruzione;
     }
 
-    public Boolean getAscensore() {
-        return ascensore;
-    }
+    // public Boolean getAscensore() {
+    //     return ascensore;
+    // }
 
-    public void setAscensore(Boolean ascensore) {
-        this.ascensore = ascensore;
-    }
+    // public void setAscensore(Boolean ascensore) {
+    //     this.ascensore = ascensore;
+    // }
 
     public ClasseEnergetica getClasse_energetica() {
         return classe_energetica;

@@ -14,7 +14,7 @@ import com.brickbybrick.brickbybrick.repos.BrickRepoValutazione;
 import com.brickbybrick.brickbybrick.services.BrickServiceValutazione;
 
 @RestController
-@RequestMapping("/api/agenti")
+@RequestMapping("/api/valutazione")
 @CrossOrigin(origins = "http://localhost:5173") 
 
 public class BrickValutazioneREST {
