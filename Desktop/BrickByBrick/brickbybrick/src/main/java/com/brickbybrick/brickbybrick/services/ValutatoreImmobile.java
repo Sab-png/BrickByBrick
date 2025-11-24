@@ -34,7 +34,7 @@ class ValutatoreImmobile {
         fattoreComplessivo *= valutazione.getClasse_energetica().getMoltiplicatore();
         
         // Piano (penalizza piano terra e seminterrati, premia piani alti)
-        fattoreComplessivo *= calcolaFattorePiano(valutazione.getPiano(), valutazione.getId_dotazione().isAscensore());
+        fattoreComplessivo *= calcolaFattorePiano(valutazione.getPiano(), valutazione.getDotazione().isAscensore());
         
         // Età dell'immobile
         fattoreComplessivo *= calcolaFattoreEta(valutazione.getAnno_costruzione());
@@ -43,12 +43,12 @@ class ValutatoreImmobile {
         fattoreComplessivo *= calcolaFattoreBagni(valutazione.getBagni(), valutazione.getLocali());
         
         // Ascensore (se piano alto senza ascensore)
-        if (valutazione.getPiano() > 2 && !valutazione.getId_dotazione().isAscensore()) {
+        if (valutazione.getPiano() > 2 && !valutazione.getDotazione().isAscensore()) {
             fattoreComplessivo *= 0.92;
         }
         
         // Dotazioni esterne
-        fattoreComplessivo *= valutazione.getId_dotazione().calcolaFattoreDotazioni();
+        fattoreComplessivo *= valutazione.getDotazione().calcolaFattoreDotazioni();
         
         // 4. Calcola valore finale
         double valoreStimatoMin = valoreBase * fattoreComplessivo * 0.95;

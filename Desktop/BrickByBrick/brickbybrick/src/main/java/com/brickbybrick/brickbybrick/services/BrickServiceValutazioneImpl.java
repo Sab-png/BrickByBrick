@@ -127,8 +127,8 @@ public class BrickServiceValutazioneImpl implements BrickServiceValutazione {
         fattore *= getFattoreAnnoCostruzione(v.getAnno_costruzione());
 
         // Dotazioni esterne
-        if (v.getId_dotazione() != null) {
-            fattore *= v.getId_dotazione().calcolaFattoreDotazioni();
+        if (v.getDotazione() != null) {
+            fattore *= v.getDotazione().calcolaFattoreDotazioni();
         }
 
         return fattore;

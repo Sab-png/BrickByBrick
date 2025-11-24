@@ -3,6 +3,7 @@ package com.brickbybrick.brickbybrick.model;
 import com.brickbybrick.brickbybrick.model.enums.ClasseEnergetica;
 import com.brickbybrick.brickbybrick.model.enums.Condizione;
 import com.brickbybrick.brickbybrick.model.enums.Tipologia;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
@@ -69,8 +70,17 @@ public class Valutazione {
     private ClasseEnergetica classe_energetica;
 
     @Embedded
-    private DotazioniEsterne Id_dotazione;
+    @JsonProperty("dotazioni")  
+    private DotazioniEsterne dotazione;
 
+
+    public DotazioniEsterne getDotazione() {
+        return dotazione;
+    }
+
+    public void setDotazione(DotazioniEsterne dotazione) {  
+        this.dotazione = dotazione;
+    }
 
     public Integer getId_valutazione() {
         return Id_valutazione;
@@ -177,12 +187,6 @@ public class Valutazione {
         this.classe_energetica = classe_energetica;
     }
 
-    public DotazioniEsterne getId_dotazione() {
-        return Id_dotazione;
-    }
-
-    public void setId_dotazione(DotazioniEsterne id_dotazione) {
-        Id_dotazione = id_dotazione;
-    }
+    
 
 }

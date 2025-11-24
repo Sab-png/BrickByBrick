@@ -1,30 +1,40 @@
 package com.brickbybrick.brickbybrick.model;
 
 import jakarta.persistence.Embeddable;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Column;
 
 @Embeddable
 public class DotazioniEsterne {
 
     @Column(name = "dotazioni_cantina")
+    @JsonProperty("cantina")
     private boolean cantina;
 
     @Column(name = "dotazioni_terrazzo")
+    @JsonProperty("terrazzo")
     private boolean terrazzo;
 
     @Column(name = "dotazioni_balcone")
+    @JsonProperty("balcone")
     private boolean balcone;
 
     @Column(name = "dotazioni_garage")
+    @JsonProperty("garage")
     private boolean garage;
 
     @Column(name = "dotazioni_piscina")
+    @JsonProperty("piscina")
     private boolean piscina;
 
     @Column(name = "dotazioni_giardino")
+    @JsonProperty("giardino")
     private boolean giardino;
 
     @Column(name = "dotazioni_ascensore")
+    @JsonProperty("ascensore")
     private boolean ascensore;
 
     // Costruttore vuoto richiesto da JPA
