@@ -1,117 +1,175 @@
-import React, { useState, useCallback } from 'react';
-// Componenti importati
-import TableManager from '../components/AdminTableManager';  // Gestisce la tabella, la ricerca e la selezione (usa useTableData)
-import TableActions from './AdminTableActions';             // Componente per i bottoni Aggiungi/Modifica/Rimuovi
-import AgentModalManager from './AdminAgentModalManager';   // Gestisce il rendering condizionale del Modal del form
-import { users as agenti } from '../data/users';            // Dati fittizi iniziali (mock data)
+// src/pages/Agenti.jsx 
+
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+// Hook personalizzato che gestisce l'interazione con i dati (simulazione API/localStorage).
+// Fornisce lo stato dei dati (data, isLoading, error) e le funzioni di modifica (removeAgents, setFilters).
+import useAgents from '../hooks/UseAgents'; 
+// Componente generico per visualizzare i dati in formato tabella.
+import ReusableTable from './AdminTableReusable'; 
 
 /**
- * Pagina di Gestione Amministrativa degli Agenti.
- * Questo componente funge da 'Contenitore' o 'Coordinatore':
- * 1. Mantiene lo stato dell'interfaccia (quale agente modificare, se il modal è aperto).
- * 2. Definisce le azioni di business (aggiungi, modifica, salva, rimuovi).
- * 3. Delega il rendering e la logica complessa ai componenti figli (TableManager, ModalManager).
+ * Componente principale per la Gestione Agenti.
+ * Questa pagina è responsabile di:
+ * 1. Caricare e visualizzare la lista degli agenti tramite useAgents.
+ * 2. Gestire la logica di ricerca/filtro.
+ * 3. Gestire la selezione delle righe per le azioni di massa (Modifica, Rimuovi).
+ * 4. Reindirizzare ai form Aggiungi/Modifica.
  */
 const Agenti = () => {
+    const navigate = useNavigate();
+    // Stato locale per l'input di ricerca
+    const [searchTerm, setSearchTerm] = useState('');
+    // Stato locale per tenere traccia degli ID delle righe selezionate (necessario per Modifica/Rimuovi)
+    const [selectedUserIds, setSelectedUserIds] = useState([]);
+
+    // Destrutturazione delle funzioni e degli stati forniti dal custom hook
+    const { 
+        data: usersList, // I dati degli agenti filtrati o completi
+        isLoading,      // Stato di caricamento
+        error,          // Eventuale errore
+        removeAgents,   // Funzione per eliminare gli agenti
+        setFilters      // Funzione per aggiornare i filtri (triggera un nuovo fetch)
+    } = useAgents(); 
+
+    // --- LOGICA DI CONTROLLO ---
+
+    // Gestisce l'attivazione della ricerca. Aggiorna lo stato dei filtri nell'hook.
+    const handleSearchClick = () => {
+        setFilters({ search: searchTerm.trim() });
+        // Resetta la selezione dopo una ricerca per evitare azioni indesiderate
+        setSelectedUserIds([]); 
+    };
+
+    // Reindirizza al form unificato in modalità Aggiunta.
+    const handleAddAgent = () => {
+        navigate('/admin/gestione-utenti/aggiungi-agente');
+    };
+
+    // Reindirizza al form unificato in modalità Modifica, includendo l'ID nell'URL.
+    // L'ID viene preso dal primo elemento selezionato.
+    const handleEditAgent = () => {
+        // La modifica è consentita solo se è selezionato esattamente un elemento
+        if (selectedUserIds.length !== 1) return;
+        const idToEdit = selectedUserIds[0];
+        // Navigazione a una rotta dinamica (es: /modifica-agente/A001)
+        navigate(`/admin/gestione-utenti/modifica-agente/${idToEdit}`);
+    };
+  
+    // Gestisce la rimozione degli agenti selezionati.
+    const handleRemoveAgents = async () => {
+        if (selectedUserIds.length === 0) return;
+
+        if (window.confirm(`Sei sicuro di voler rimuovere ${selectedUserIds.length} agente/i?`)) {
+            try {
+                // Chiama la funzione di rimozione fornita dal custom hook
+                await removeAgents(selectedUserIds);
+                // Dopo il successo, resetta la selezione
+                setSelectedUserIds([]);
+            } catch (err) {
+                console.error('Errore durante la rimozione:', err);
+                // Qui si potrebbe aggiungere un setApiError(err.message) per feedback utente
+            }
+        }
+    };
+
+    // Gestisce la selezione/deselezione di una singola riga
+    const toggleUserSelection = (userId) => {
+        setSelectedUserIds(prevIds => 
+            prevIds.includes(userId) 
+                ? prevIds.filter(id => id !== userId) // Deseleziona
+                : [...prevIds, userId]                  // Seleziona
+        );
+    };
+
+    // Determina se tutti gli elementi visibili sono selezionati
+    const isAllSelected = usersList.length > 0 && selectedUserIds.length === usersList.length;
     
-    // --- 1. STATO DELL'INTERFACCIA (Modal/Selezione) ---
-    // Stato booleano per controllare la visibilità del form modale.
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    // Stato per memorizzare l'ID dell'agente da modificare. Null indica modalità "Aggiungi".
-    const [agentIdToEdit, setAgentIdToEdit] = useState(null); 
+    // Gestisce la selezione/deselezione di tutte le righe
+    const handleSelectAll = () => {
+        if (isAllSelected) {
+            setSelectedUserIds([]);
+        } else {
+            // Seleziona tutti gli ID della lista corrente (che potrebbe essere già filtrata)
+            const allIds = usersList.map(user => user.id);
+            setSelectedUserIds(allIds);
+        }
+    };
     
-    // --- 2. CONFIGURAZIONE TABELLA ---
-    // Definizione delle colonne da visualizzare.
+    // Configurazione delle colonne da passare al ReusableTable
     const userColumns = [
         { key: 'fullName', header: 'Nome e cognome' },
-        { key: 'id', header: 'ID Agente' },
         { key: 'email', header: 'Email' },
+        { key: 'phone', header: 'Telefono' },
         { key: 'cittaOperativa', header: 'Città operativa' },
+        { key: 'status', header: 'Stato' },
+        // Nota: Il rendering specifico per 'status' è gestito all'interno del ReusableTable
     ];
-    // Chiavi su cui il TableManager (tramite useTableData) deve eseguire la ricerca.
-    const searchKeys = ['fullName', 'email', 'id', 'cittaOperativa'];
 
-    // --- 3. FUNZIONI DI CONTROLLO E AZIONE (Logica di Business) ---
-
-    // Funzione per chiudere il Modale e resettare l'ID da modificare.
-    const handleCloseModal = useCallback(() => {
-        setIsModalOpen(false);
-        setAgentIdToEdit(null);
-    }, []); // Non ha dipendenze esterne, quindi array vuoto.
-
-    // Funzione per aprire il Modale in modalità 'Aggiungi'.
-    const handleAdd = useCallback(() => {
-        setAgentIdToEdit(null); // Assicura che l'ID sia null (Aggiungi)
-        setIsModalOpen(true);
-    }, []);
-
-    // Funzione per aprire il Modale in modalità 'Modifica'.
-    const handleEdit = useCallback((selectedIds) => {
-        if (selectedIds.length !== 1) {
-            window.alert('Seleziona ESATTAMENTE un agente per modificarlo.');
-            return;
-        }
-        // Imposta l'ID e apre il Modal.
-        setAgentIdToEdit(selectedIds[0]);
-        setIsModalOpen(true);
-    }, []);
-
-    // Funzione chiamata dal Modal dopo l'invio del form. Gestisce l'API (simulata).
-    const handleSave = useCallback((formData, mode) => {
-        // QUI ANDREBBE LA CHIAMATA API (POST/PUT/PATCH)
-        console.log(`Salvataggio dati Agente per la modalità: ${mode}`, formData);
-        
-        // Chiude il Modal e mostra il feedback all'utente.
-        handleCloseModal();
-        window.alert(`Agente ${mode === 'edit' ? 'aggiornato' : 'aggiunto'} con successo!`);
-    }, [handleCloseModal]); // Dipende da handleCloseModal.
-    
-    // Funzione wrapper per la rimozione, gestisce il feedback (alert) dopo la chiamata al hook.
-    const handleRemoveClick = useCallback((selectedIds, handleRemoveFn) => {
-        // Chiama handleRemove del hook (che gestisce window.confirm e lo stato)
-        const success = handleRemoveFn(`Sei sicuro di voler rimuovere ${selectedIds.length} agente/i?`);
-        
-        if (success) {
-            window.alert(`${selectedIds.length} agente/i rimosso/i con successo!`);
-        }
-    }, []); // Non ha dipendenze esterne.
-
-    // --- 4. DELEGA DEL RENDERING (Bottoni) ---
-    // Funzione passata al TableManager per renderizzare i bottoni.
-    // Riceve selectedIds e la funzione handleRemove dal hook (tramite TableManager).
-    const renderAgentActions = useCallback(({ selectedIds, handleRemove: handleRemoveFn }) => (
-        // Delega la visualizzazione dei bottoni al componente TableActions.
-        <TableActions
-            selectedIds={selectedIds}
-            onAdd={handleAdd}
-            onEdit={handleEdit}
-            // Mappa l'azione generica onRemove alla nostra logica di feedback specifica.
-            onRemove={(ids) => handleRemoveClick(ids, handleRemoveFn)}
-        />
-    ), [handleAdd, handleEdit, handleRemoveClick]); // Dipende dalle funzioni di azione.
-
-    // --- 5. RENDER PRINCIPALE ---
     return (
-        <>
-            {/* TableManager: Gestisce la visualizzazione della tabella e passa le funzioni di stato/hook */}
-            <TableManager 
-                title="Gestione Agenti"
-                initialData={agenti} 
-                columns={userColumns}
-                searchKeys={searchKeys}
-                renderActions={renderAgentActions} // Passa la funzione che renderizza i bottoni
-            />
-            
-            {/* AgentModalManager: Componente che renderizza il form modale se isModalOpen è true */}
-            <AgentModalManager
-                isOpen={isModalOpen} // Controlla la visibilità
-                agentId={agentIdToEdit} // Passa l'ID per modalità Edit
-                onClose={handleCloseModal}
-                onSave={handleSave}
-                // Trova e passa i dati iniziali se è in modalità Edit
-                initialData={agenti.find(a => a.id === agentIdToEdit)}
-            />
-        </>
+        <div className="user-management-page">
+            <h1>Gestione Agenti</h1>
+            <div className="user-table-card">
+                
+                {/* Controlli della tabella: Ricerca e Bottoni Azione */}
+                <div className="table-header-controls">
+                    <div className="search-container">
+                        <input 
+                            type="text" 
+                            placeholder="Cerca agente..." 
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            // Attiva la ricerca anche con la pressione di 'Invio'
+                            onKeyDown={(e) => e.key === 'Enter' && handleSearchClick()} 
+                        />
+                        <button className="search-btn" onClick={handleSearchClick}>Cerca</button>
+                    </div>
+                    
+                    <div className="action-buttons">
+                        <button className="add-btn" onClick={handleAddAgent}>
+                            ➕ Aggiungi Agente
+                        </button>
+                        <button 
+                            className="edit-btn" 
+                            onClick={handleEditAgent}
+                            // Bottone Modifica abilitato solo se UN elemento è selezionato
+                            disabled={selectedUserIds.length !== 1}
+                        >
+                            ✏️ Modifica
+                        </button>
+                        <button 
+                            className="remove-btn" 
+                            onClick={handleRemoveAgents}
+                            // Bottone Rimuovi abilitato solo se ALMENO un elemento è selezionato
+                            disabled={selectedUserIds.length === 0}
+                        >
+                            🗑️ Rimuovi
+                        </button>
+                    </div>
+                </div>
+
+                {/* Stato Dati: Feedback utente */}
+                {isLoading && <div className="data-status-message loading">Caricamento agenti... ⏳</div>}
+                {error && <div className="data-status-message error">Errore nel caricamento dei dati: {error.message} ❌</div>}
+                
+                {/* Rendering della Tabella: Viene mostrata solo se non ci sono errori e i dati sono presenti */}
+                {!isLoading && !error && usersList && (
+                    <ReusableTable 
+                        data={usersList} 
+                        columns={userColumns} 
+                        selectedItemIds={selectedUserIds}
+                        onRowSelect={toggleUserSelection}
+                        onSelectAll={handleSelectAll}
+                        isAllSelected={isAllSelected}
+                    />
+                )}
+                
+                {/* Messaggio se la lista è vuota (dopo il caricamento e senza errori) */}
+                {!isLoading && !error && usersList && usersList.length === 0 && (
+                    <div className="data-status-message info">Nessun agente trovato.</div>
+                )}
+            </div>
+        </div>
     );
 };
 
