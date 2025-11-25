@@ -1,0 +1,22 @@
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as m;
+
+.agents-section {
+  padding: vars.$spacing-3xl vars.$container-padding;
+
+  &__title {
+    @include m.heading(vars.$font-size-4xl, vars.$font-weight-bold);
+    text-align: center;
+    color: vars.$blue;
+    margin-bottom: vars.$spacing-3xl;
+  }
+
+  &__grid {
+    max-width: vars.$container-max-width;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+  }
+}

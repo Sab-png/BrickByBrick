@@ -1,0 +1,43 @@
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as m;
+
+.vendi-tech {
+  padding: vars.$spacing-3xl vars.$spacing-lg;
+  width: 100%;
+  @include m.flex-column;
+  align-items: center;
+
+  &__title {
+    @include m.heading(vars.$font-size-4xl, vars.$font-weight-bold);
+    color: vars.$blue;
+    margin-bottom: vars.$spacing-2xl;
+    text-align: center;
+    max-width: 800px;
+    
+    @include m.mobile {
+        font-size: vars.$font-size-2xl;
+    }
+  }
+
+  &__grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: vars.$spacing-xl;
+    justify-content: center;
+    width: 100%;
+    max-width: vars.$container-max-width;
+
+    @include m.mobile {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    @include m.desktop {
+      @include m.flex-row;
+
+      .card {
+        flex: 0 0 calc((100% - (2 * vars.$spacing-xl)) / 3);
+      }
+    }
+  }
+}
