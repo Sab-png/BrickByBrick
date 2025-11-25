@@ -30,6 +30,7 @@
 @use './components/vendiTech';
 @use './components/timeline';
 @use './components/prenotaVisita';
+@use './components/cardStep';
 
 // Components that use other Components
 @use './components/herosection';
@@ -40,6 +41,7 @@
 @use './components/immobiliResults';
 @use './components/faqSection';
 @use './components/agentSection';
+@use './components/stepMulti';
 
 @use './pages/dettaglioImmobile';
 @use './pages/notfound';
