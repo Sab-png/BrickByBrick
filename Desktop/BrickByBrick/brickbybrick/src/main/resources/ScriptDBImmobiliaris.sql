@@ -128,7 +128,7 @@ CREATE TABLE contratto_esclusivo (
     Id_contratto INT PRIMARY KEY AUTO_INCREMENT,
     Id_immobile INT NOT NULL,
     Id_utente INT NOT NULL,
-    durata VARCHAR(50) NOT NULL,
+    data_di_scadenza Date NOT NULL,
     prezzo DOUBLE NOT NULL,
     CONSTRAINT fk_contratto_esclusivo_Id_immobile FOREIGN KEY (Id_immobile) REFERENCES immobile(Id_immobile),
 	CONSTRAINT fk_contratto_esclusivo_Id_utente FOREIGN KEY (Id_utente) REFERENCES utente(Id_utente)
