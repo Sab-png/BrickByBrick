@@ -1,0 +1,291 @@
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as m;
+
+// Body base - responsive
+body {
+  font-family: vars.$font-paragraph;
+  font-size: vars.$font-size-sm; // mobile
+  line-height: vars.$line-height-normal;
+  color: vars.$black;
+  background-color: vars.$light-blue;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  @include m.tablet {
+    font-size: vars.$font-size-base; // tablet
+  }
+  
+  @include m.desktop {
+    font-size: vars.$font-size-base; // desktop
+  }
+}
+
+// Headings - responsive
+h1 {
+  @include m.heading(vars.$font-size-3xl, vars.$font-weight-bold); // mobile: 30px
+  margin-bottom: vars.$spacing-base;
+  color: vars.$black;
+  
+  @include m.tablet {
+    font-size: vars.$font-size-4xl; // tablet: 36px
+    margin-bottom: vars.$spacing-lg;
+  }
+  
+  @include m.desktop {
+    font-size: vars.$font-size-5xl; // desktop: 48px
+    margin-bottom: vars.$spacing-xl;
+  }
+}
+
+h2 {
+  @include m.heading(vars.$font-size-2xl, vars.$font-weight-bold); // mobile: 24px
+  margin-bottom: vars.$spacing-sm;
+  color: vars.$black;
+  
+  @include m.tablet {
+    font-size: vars.$font-size-3xl; // tablet: 30px
+    margin-bottom: vars.$spacing-base;
+  }
+  
+  @include m.desktop {
+    font-size: vars.$font-size-4xl; // desktop: 36px
+    margin-bottom: vars.$spacing-lg;
+  }
+}
+
+h3 {
+  @include m.heading(vars.$font-size-xl, vars.$font-weight-semibold); // mobile: 20px
+  margin-bottom: vars.$spacing-sm;
+  color: vars.$black;
+  
+  @include m.tablet {
+    font-size: vars.$font-size-2xl; // tablet: 24px
+    margin-bottom: vars.$spacing-base;
+  }
+  
+  @include m.desktop {
+    font-size: vars.$font-size-3xl; // desktop: 30px
+    margin-bottom: vars.$spacing-base;
+  }
+}
+
+h4 {
+  @include m.heading(vars.$font-size-lg, vars.$font-weight-semibold); // mobile: 18px
+  margin-bottom: vars.$spacing-xs;
+  color: vars.$black;
+  
+  @include m.tablet {
+    font-size: vars.$font-size-xl; // tablet: 20px
+    margin-bottom: vars.$spacing-sm;
+  }
+  
+  @include m.desktop {
+    font-size: vars.$font-size-2xl; // desktop: 24px
+    margin-bottom: vars.$spacing-sm;
+  }
+}
+
+h5 {
+  @include m.heading(vars.$font-size-base, vars.$font-weight-medium); // mobile: 16px
+  margin-bottom: vars.$spacing-xs;
+  color: vars.$black;
+  
+  @include m.tablet {
+    font-size: vars.$font-size-lg; // tablet: 18px
+    margin-bottom: vars.$spacing-sm;
+  }
+  
+  @include m.desktop {
+    font-size: vars.$font-size-xl; // desktop: 20px
+    margin-bottom: vars.$spacing-sm;
+  }
+}
+
+h6 {
+  @include m.heading(vars.$font-size-sm, vars.$font-weight-medium); // mobile: 14px
+  margin-bottom: vars.$spacing-xs;
+  color: vars.$black;
+  
+  @include m.tablet {
+    font-size: vars.$font-size-base; // tablet: 16px
+    margin-bottom: vars.$spacing-xs;
+  }
+  
+  @include m.desktop {
+    font-size: vars.$font-size-lg; // desktop: 18px
+    margin-bottom: vars.$spacing-sm;
+  }
+}
+
+// Paragraphs - responsive
+p {
+  margin-bottom: vars.$spacing-base;
+  line-height: vars.$line-height-relaxed;
+  font-size: vars.$font-size-sm; // mobile: 14px
+  
+  @include m.tablet {
+    font-size: vars.$font-size-base; // tablet: 16px
+  }
+  
+  @include m.desktop {
+    font-size: vars.$font-size-base; // desktop: 16px
+    margin-bottom: vars.$spacing-lg;
+  }
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// Links
+a {
+  color: vars.$turquoise;
+  text-decoration: none;
+  transition: color vars.$transition-base vars.$transition-ease;
+  
+  &:hover {
+    color: vars.$sky-blue;
+  }
+  
+}
+
+// Lists
+ul, ol {
+  margin-bottom: vars.$spacing-base;
+  padding-left: vars.$spacing-lg;
+  
+  li {
+    margin-bottom: vars.$spacing-xs;
+    line-height: vars.$line-height-relaxed;
+  }
+}
+
+ul {
+  list-style-type: disc;
+}
+
+ol {
+  list-style-type: decimal;
+}
+
+// Text utilities
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+// Font sizes responsive
+.text-xs {
+  font-size: vars.$font-size-xs;
+}
+
+.text-small {
+  font-size: vars.$font-size-sm;
+  
+  @include m.tablet {
+    font-size: vars.$font-size-sm;
+  }
+}
+
+.text-base {
+  font-size: vars.$font-size-base;
+  
+  @include m.tablet {
+    font-size: vars.$font-size-lg;
+  }
+}
+
+.text-large {
+  font-size: vars.$font-size-lg;
+  
+  @include m.tablet {
+    font-size: vars.$font-size-xl;
+  }
+  
+  @include m.desktop {
+    font-size: vars.$font-size-2xl;
+  }
+}
+
+.text-xl {
+  font-size: vars.$font-size-xl;
+  
+  @include m.tablet {
+    font-size: vars.$font-size-2xl;
+  }
+  
+  @include m.desktop {
+    font-size: vars.$font-size-3xl;
+  }
+}
+
+// Color utilities classes
+.text-light {
+  color: vars.$light-gray;
+}
+
+.text-white {
+  color: vars.$white;
+}
+
+.text-black {
+  color: vars.$black;
+}
+
+.text-blue {
+  color: vars.$blue;
+}
+
+.text-turquoise {
+  color: vars.$turquoise;
+}
+
+.text-sky-blue {
+  color: vars.$sky-blue;
+}
+
+// Weight utilities
+.text-light-weight {
+  font-weight: vars.$font-weight-light;
+}
+
+.text-regular {
+  font-weight: vars.$font-weight-regular;
+}
+
+.text-medium {
+  font-weight: vars.$font-weight-medium;
+}
+
+.text-semibold {
+  font-weight: vars.$font-weight-semibold;
+}
+
+.text-bold {
+  font-weight: vars.$font-weight-bold;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+// Utility per troncare testo
+.text-truncate {
+  @include m.text-truncate;
+}
+
+.text-clamp-2 {
+  @include m.text-clamp(2);
+}
+
+.text-clamp-3 {
+  @include m.text-clamp(3);
+}

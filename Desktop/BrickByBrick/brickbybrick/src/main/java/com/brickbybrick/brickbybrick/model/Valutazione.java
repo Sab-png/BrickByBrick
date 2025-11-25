@@ -1,6 +1,12 @@
 package com.brickbybrick.brickbybrick.model;
 
+import com.brickbybrick.brickbybrick.model.enums.ClasseEnergetica;
+import com.brickbybrick.brickbybrick.model.enums.Condizione;
+import com.brickbybrick.brickbybrick.model.enums.Tipologia;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,16 +20,21 @@ public class Valutazione {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_valutazione")
-    private int Id_valutazione;
+    private Integer Id_valutazione;
 
     @Column(name = "Id_utente", nullable = false)
-    private Integer Id_utente;
+    private Integer idUtente;
 
-    @Column(name = "regione", nullable = false)
-    private String regione;
+    public Integer getIdUtente() {
+        return idUtente;
+    }
+
+    public void setIdUtente(Integer idUtente) {
+        this.idUtente = idUtente;
+    }
 
     @Column(name = "cap", nullable = false)
-    private Integer cap;
+    private String cap;
 
     @Column(name = "citta", nullable = false)
     private String citta;
@@ -32,10 +43,10 @@ public class Valutazione {
     private String indirizzo;
 
     @Column(name = "tipologia", nullable = false)
-    private String tipologia;
+    private Tipologia tipologia;
 
     @Column(name = "piano", nullable = false)
-    private String piano;
+    private Integer piano;
 
     @Column(name = "locali", nullable = false)
     private Integer locali;
@@ -44,7 +55,7 @@ public class Valutazione {
     private Integer superficie;
 
     @Column(name = "condizioni", nullable = false)
-    private String condizioni;
+    private Condizione condizioni;
 
     @Column(name = "bagni", nullable = false)
     private Integer bagni;
@@ -52,41 +63,39 @@ public class Valutazione {
     @Column(name = "anno_costruzione", nullable = false)
     private Integer anno_costruzione;
 
-    @Column(name = "ascensore", nullable = false)
-    private Boolean ascensore;
+    // @Column(name = "ascensore", nullable = false)
+    // private Boolean ascensore;
 
     @Column(name = "classe_energetica", nullable = false)
-    private String classe_energetica;
+    private ClasseEnergetica classe_energetica;
 
-    public int getId_valutazione() {
+    @Embedded
+    @JsonProperty("dotazioni")  
+    private DotazioniEsterne dotazione;
+
+
+    public DotazioniEsterne getDotazione() {
+        return dotazione;
+    }
+
+    public void setDotazione(DotazioniEsterne dotazione) {  
+        this.dotazione = dotazione;
+    }
+
+    public Integer getId_valutazione() {
         return Id_valutazione;
     }
 
-    public void setId_valutazione(int id_valutazione) {
+    public void setId_valutazione(Integer id_valutazione) {
         Id_valutazione = id_valutazione;
     }
 
-    public Integer getId_utente() {
-        return Id_utente;
-    }
 
-    public void setId_utente(Integer id_utente) {
-        Id_utente = id_utente;
-    }
-
-    public String getRegione() {
-        return regione;
-    }
-
-    public void setRegione(String regione) {
-        this.regione = regione;
-    }
-
-    public Integer getCap() {
+    public String getCap() {
         return cap;
     }
 
-    public void setCap(Integer cap) {
+    public void setCap(String cap) {
         this.cap = cap;
     }
 
@@ -106,19 +115,19 @@ public class Valutazione {
         this.indirizzo = indirizzo;
     }
 
-    public String getTipologia() {
+    public Tipologia getTipologia() {
         return tipologia;
     }
 
-    public void setTipologia(String tipologia) {
+    public void setTipologia(Tipologia tipologia) {
         this.tipologia = tipologia;
     }
 
-    public String getPiano() {
+    public Integer getPiano() {
         return piano;
     }
 
-    public void setPiano(String piano) {
+    public void setPiano(Integer piano) {
         this.piano = piano;
     }
 
@@ -138,11 +147,11 @@ public class Valutazione {
         this.superficie = superficie;
     }
 
-    public String getCondizioni() {
+    public Condizione getCondizioni() {
         return condizioni;
     }
 
-    public void setCondizioni(String condizioni) {
+    public void setCondizioni(Condizione condizioni) {
         this.condizioni = condizioni;
     }
 
@@ -162,21 +171,22 @@ public class Valutazione {
         this.anno_costruzione = anno_costruzione;
     }
 
-    public Boolean getAscensore() {
-        return ascensore;
-    }
+    // public Boolean getAscensore() {
+    //     return ascensore;
+    // }
 
-    public void setAscensore(Boolean ascensore) {
-        this.ascensore = ascensore;
-    }
+    // public void setAscensore(Boolean ascensore) {
+    //     this.ascensore = ascensore;
+    // }
 
-    public String getClasse_energetica() {
+    public ClasseEnergetica getClasse_energetica() {
         return classe_energetica;
     }
 
-    public void setClasse_energetica(String classe_energetica) {
+    public void setClasse_energetica(ClasseEnergetica classe_energetica) {
         this.classe_energetica = classe_energetica;
     }
 
     
+
 }

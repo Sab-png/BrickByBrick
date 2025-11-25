@@ -1,14 +1,20 @@
-import './App.scss'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+
+import  FiltersContextProvider from './providers/FiltersContextProvider';
+
+import './styles/main.scss'
+
+import routes from './routes/routes'
 
 function App() {
 
   return (
-    <>
-      <div className="prova">
-        <h1>Prova</h1>
-      </div>
-    </>
+    <FiltersContextProvider>
+      <RouterProvider router={router} />
+    </FiltersContextProvider>
   )
 }
+
+const router = createBrowserRouter(routes)
 
 export default App

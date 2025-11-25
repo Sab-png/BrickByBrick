@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admins</title>
+    <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+>
+</head>
+<body>
+    <h1>Admins</h1>
+            
+    <div class="">
+    <table style="width: 100%;">
+        <thead>
+        <tr>
+            <th>Id_admin</th>
+            <th>Id_ruolo</th>
+            <th>nome</th>
+            <th>cognome</th>
+            <th>email</th>
+            <th>password</th>
+        </tr>
+        </thead>
+        <tbody >
+        <tr class="table-row" onclick="selectRow(this)" th:each="admin : ${admins}">
+
+            <td th:text="${admin.id_admin}"></td>
+            <td th:text="${admin.id_ruolo}"></td>
+            <td th:text="${admin.nome}"></td>
+            <td th:text="${admin.cognome}"></td>
+            <td th:text="${admin.email}"></td>
+            <td th:text="${admin.passw}"></td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+
+</body>
+</html>
+
+
+
+    

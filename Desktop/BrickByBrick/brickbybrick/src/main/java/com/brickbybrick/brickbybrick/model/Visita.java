@@ -1,63 +1,86 @@
-package com.brickbybrick.brickbybrick.model;
+// package com.brickbybrick.brickbybrick.model;
 
-import org.springframework.boot.actuate.autoconfigure.metrics.MetricsProperties.Data;
+// import java.time.LocalDateTime;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+// import jakarta.persistence.Column;
+// import jakarta.persistence.Entity;
+// import jakarta.persistence.GeneratedValue;
+// import jakarta.persistence.GenerationType;
+// import jakarta.persistence.Id;
+// import jakarta.persistence.JoinColumn;
+// import jakarta.persistence.ManyToOne;
+// import jakarta.persistence.Table;
 
-@Entity
-@Table(name = "visita")
-public class Visita {
+// @Entity
+// @Table(name = "visita")
+// public class Visita {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id_visita")
-    private Integer Id_visita;
+//     @Id
+//     @GeneratedValue(strategy = GenerationType.IDENTITY)
+//     @Column(name = "Id_visita")
+//     private Integer idVisita;
 
-    @Column(name = "Id_immobile", nullable = false)
-    private Integer Id_immobile;
+//     @ManyToOne
+//     @JoinColumn(name = "Id_immobile", nullable = false)
+//     private Immobile immobile;
 
-    @Column(name = "Id_agente", nullable = false)
-    private Integer Id_agente;
+//     @Column(name = "Id_agente", nullable = false)
+//     private Integer idAgente;
 
-    @Column(name = "data", nullable = false)
-    private Data data;
+//     @Column(name = "data", nullable = false)
+//     private LocalDateTime data;
 
-    public Integer getId_visita() {
-        return Id_visita;
-    }
+//     @ManyToOne
+//     @JoinColumn(name = "Id_agente", insertable = false, updatable = false)
+//     private Utente agente;
 
-    public void setId_visita(Integer id_visita) {
-        Id_visita = id_visita;
-    }
+//     // Costruttori
+//     public Visita() {}
 
-    public Integer getId_immobile() {
-        return Id_immobile;
-    }
+//     public Visita(Immobile immobile, Integer idAgente, LocalDateTime data) {
+//         this.immobile = immobile;
+//         this.idAgente = idAgente;
+//         this.data = data;
+//     }
 
-    public void setId_immobile(Integer id_immobile) {
-        Id_immobile = id_immobile;
-    }
+//     // Getter e Setter
+//     public Integer getIdVisita() {
+//         return idVisita;
+//     }
 
-    public Integer getId_agente() {
-        return Id_agente;
-    }
+//     public void setIdVisita(Integer idVisita) {
+//         this.idVisita = idVisita;
+//     }
 
-    public void setId_agente(Integer id_agente) {
-        Id_agente = id_agente;
-    }
+//     public Immobile getImmobile() {
+//         return immobile;
+//     }
 
-    public Data getData() {
-        return data;
-    }
+//     public void setImmobile(Immobile immobile) {
+//         this.immobile = immobile;
+//     }
 
-    public void setData(Data data) {
-        this.data = data;
-    }
+//     public Integer getIdAgente() {
+//         return idAgente;
+//     }
 
-    
-}
+//     public void setIdAgente(Integer idAgente) {
+//         this.idAgente = idAgente;
+//     }
+
+//     public LocalDateTime getData() {
+//         return data;
+//     }
+
+//     public void setData(LocalDateTime data) {
+//         this.data = data;
+//     }
+
+//     public Utente getAgente() {
+//         return agente;
+//     }
+
+//     public void setAgente(Utente agente) {
+//         this.agente = agente;
+//     }
+// }

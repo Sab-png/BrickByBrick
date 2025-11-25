@@ -1,10 +1,13 @@
 package com.brickbybrick.brickbybrick.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,11 +22,8 @@ public class Immobile {
     @Column(name = "foto", nullable = false)
     private String foto;
 
-    @Column(name = "regione", nullable = false)
-    private String regione;
-
     @Column(name = "cap", nullable = false)
-    private Integer cap;
+    private String cap;
 
     @Column(name = "citta", nullable = false)
     private String citta;
@@ -43,14 +43,17 @@ public class Immobile {
     @Column(name = "descrizione", nullable = false)
     private String descrizione;
 
-    @Column(name = "Id_caratteristiche", nullable = false)
-    private Integer Id_caratteristiche;
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)  
+    @JoinColumn(name = "Id_caratteristiche", referencedColumnName = "Id_caratteristiche")
+    private CaratteristicheImmobile caratteristiche;
 
     @Column(name = "planimetria", nullable = false)
     private String planimetria;
 
     @Column(name = "mappa", nullable = false)
     private String mappa;
+
+    
 
     public Integer getId_immobile() {
         return Id_immobile;
@@ -68,19 +71,11 @@ public class Immobile {
         this.foto = foto;
     }
 
-    public String getRegione() {
-        return regione;
-    }
-
-    public void setRegione(String regione) {
-        this.regione = regione;
-    }
-
-    public Integer getCap() {
+    public String getCap() {
         return cap;
     }
 
-    public void setCap(Integer cap) {
+    public void setCap(String cap) {
         this.cap = cap;
     }
 
@@ -132,12 +127,12 @@ public class Immobile {
         this.descrizione = descrizione;
     }
 
-    public Integer getId_caratteristiche() {
-        return Id_caratteristiche;
+    public CaratteristicheImmobile getCaratteristiche() {
+        return caratteristiche;
     }
 
-    public void setId_caratteristiche(Integer id_caratteristiche) {
-        Id_caratteristiche = id_caratteristiche;
+    public void setCaratteristiche(CaratteristicheImmobile caratteristiche) {
+        this.caratteristiche = caratteristiche;
     }
 
     public String getPlanimetria() {
@@ -155,6 +150,7 @@ public class Immobile {
     public void setMappa(String mappa) {
         this.mappa = mappa;
     }
+
 
 
 }

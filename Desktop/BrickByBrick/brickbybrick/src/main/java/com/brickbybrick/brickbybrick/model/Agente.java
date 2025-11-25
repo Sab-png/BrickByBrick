@@ -6,6 +6,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import com.fasterxml.jackson.annotation.JsonAlias;
 
 @Entity
 @Table(name = "agente")
@@ -17,25 +20,31 @@ public class Agente {
     private Integer Id_agente;
 
     @Column(name = "Id_ruolo", nullable = false)
-    private Integer Id_ruolo;
+    private Integer Id_ruolo = 2;
 
     @Column(name = "nome", nullable = false)
+    @NotBlank(message = "Nome obbligatorio")
     private String nome;
 
     @Column(name = "cognome", nullable = false)
+    @NotBlank(message = "Cognome obbligatorio")
     private String cognome;
 
     @Column(name = "telefono", length = 15)
     private String telefono;
 
     @Column(name = "città", length = 16)
+    @JsonAlias({"citta"})
     private String città;
 
     @Column(name = "email", nullable = false, unique = true, length = 100)
+    @NotBlank(message = "Email obbligatoria")
+    @Email(message = "Email non valida")
     private String email;
 
-    @Column(name = "password", nullable = false)
-    private String password;
+    @Column(name = "passw", nullable = false)
+    @NotBlank(message = "Password obbligatoria")
+    private String passw;
 
     public Integer getId_agente() {
         return Id_agente;
@@ -93,13 +102,14 @@ public class Agente {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPassw() {
+        return passw;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassw(String passw) {
+        this.passw = passw;
     }
+
 
     
 }

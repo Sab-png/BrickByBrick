@@ -1,0 +1,63 @@
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as m;
+
+.feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: vars.$spacing-base; // 16px
+    margin-bottom: vars.$spacing-lg; // 24px
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    &__icon-wrapper {
+        @include m.flex-center;
+        flex-shrink: 0;
+        padding-top: vars.$spacing-xs; // 4px per allineamento con il testo
+    }
+
+    &__icon {
+        @include m.size(30px);
+        color: vars.$sky-blue;
+        
+        // Se usi Font Awesome o altre icon font
+        font-size: vars.$font-size-2xl; // 24px
+        
+        @include m.tablet {
+            @include m.size(55px);
+            font-size: vars.$font-size-3xl; // 30px
+        }
+    }
+
+    &__text-content {
+        @include m.flex-column;
+        gap: vars.$spacing-xs; // 4px
+        flex: 1;
+    }
+
+    &__title {
+        font-family: vars.$font-title; // Poppins
+        font-size: vars.$font-size-lg; // 18px
+        font-weight: vars.$font-weight-bold; // 700
+        color: vars.$black;
+        margin: 0;
+        line-height: vars.$line-height-tight; // 1.2
+
+        @include m.tablet {
+            font-size: vars.$font-size-xl; // 20px
+        }
+    }
+
+    &__description {
+        font-family: vars.$font-paragraph; // Montserrat
+        font-size: vars.$font-size-sm; // 14px
+        color: vars.$light-gray;
+        margin: 0;
+        line-height: vars.$line-height-relaxed; // 1.75
+
+        @include m.tablet {
+            font-size: vars.$font-size-base; // 16px
+        }
+    }
+}

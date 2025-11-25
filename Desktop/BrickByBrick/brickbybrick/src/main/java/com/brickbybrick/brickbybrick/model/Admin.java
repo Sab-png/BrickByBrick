@@ -14,7 +14,7 @@ public class Admin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_admin")
-    private int Id_admin;
+    private Integer Id_admin;
 
     @Column(name = "Id_ruolo", nullable = false)
     private Integer Id_ruolo;
@@ -28,8 +28,8 @@ public class Admin {
     @Column(name = "email", nullable = false, unique = true, length = 100)
     private String email;
 
-    @Column(name = "password", nullable = false)
-    private String password;
+    @Column(name = "passw", nullable = false)
+    private String passw;
 
     public int getId_admin() {
         return Id_admin;
@@ -71,12 +71,12 @@ public class Admin {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPassw() {
+        return passw;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassw(String passw) {
+        this.passw = passw;
     }
 
     

@@ -1,0 +1,144 @@
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as m;
+
+// Container principale - responsive padding
+.container {
+  width: 100%;
+  max-width: vars.$container-max-width;
+  margin: 0 auto;
+  padding: 0 vars.$spacing-base; // mobile: 16px
+  
+  @include m.tablet {
+    padding: 0 vars.$spacing-xl; // tablet: 32px
+  }
+  
+  @include m.desktop {
+    padding: 0 vars.$spacing-2xl; // desktop: 48px
+  }
+}
+
+// Container più stretto (per testi lunghi, form)
+.container-narrow {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 vars.$spacing-base;
+  
+  @include m.tablet {
+    padding: 0 vars.$spacing-xl;
+  }
+}
+
+// Container extra stretto (per form login, articoli)
+.container-xs {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 vars.$spacing-base;
+}
+
+// Container full width (senza padding laterale)
+.container-fluid {
+  width: 100%;
+  padding: 0;
+}
+
+// Section spacing responsive
+.section {
+  padding: vars.$spacing-xl 0; // mobile: 32px
+  
+  @include m.tablet {
+    padding: vars.$spacing-2xl 0; // tablet: 48px
+  }
+  
+  @include m.desktop {
+    padding: vars.$spacing-3xl 0; // desktop: 64px
+  }
+}
+
+// Section con padding più piccolo
+.section-sm {
+  padding: vars.$spacing-lg 0; // mobile: 24px
+  
+  @include m.tablet {
+    padding: vars.$spacing-xl 0; // tablet: 32px
+  }
+  
+  @include m.desktop {
+    padding: vars.$spacing-2xl 0; // desktop: 48px
+  }
+}
+
+// Section con padding più grande
+.section-lg {
+  padding: vars.$spacing-2xl 0; // mobile: 48px
+  
+  @include m.tablet {
+    padding: vars.$spacing-3xl 0; // tablet: 64px
+  }
+  
+  @include m.desktop {
+    padding: calc(vars.$spacing-3xl * 1.5) 0; // desktop: 96px
+  }
+}
+
+
+// Mobile only (nascosto da tablet in su)
+.mobile-only {
+  display: block;
+  
+  @include m.tablet {
+    display: none;
+  }
+}
+
+// Tablet and up (nascosto su mobile)
+.tablet-up {
+  display: none;
+  
+  @include m.tablet {
+    display: block;
+  }
+}
+
+// Desktop only (nascosto sotto desktop)
+.desktop-up {
+  display: none;
+  
+  @include m.desktop {
+    display: block;
+  }
+}
+
+// Tablet only (visibile solo su tablet)
+.tablet-only {
+  display: none;
+  
+  @include m.tablet {
+    display: block;
+  }
+  
+  @include m.desktop {
+    display: none;
+  }
+}
+
+// Aspect Ratio
+.aspect-square {
+  @include m.aspect-ratio(1, 1);
+}
+
+.aspect-video {
+  @include m.aspect-ratio(16, 9);
+}
+
+.aspect-4-3 {
+  @include m.aspect-ratio(4, 3);
+}
+
+// Object Fit (per immagini)
+.object-contain { object-fit: contain; }
+.object-cover { object-fit: cover; }
+.object-fill { object-fit: fill; }
+.object-none { object-fit: none; }
+.object-scale-down { object-fit: scale-down; }

@@ -1,0 +1,131 @@
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as m;
+
+
+.features-section {
+    padding: vars.$spacing-3xl vars.$spacing-lg; // 64px 24px
+    @include m.flex-column;
+    align-items: center;
+
+    @include m.tablet {
+        padding: vars.$spacing-3xl vars.$spacing-xl; // 64px 32px
+    }
+
+    @include m.desktop {
+        padding: calc(vars.$spacing-3xl * 1.5) vars.$spacing-2xl; // 96px 48px
+    }
+
+    // Header (Titolo e Sottotitolo)
+    &__header {
+        @include m.flex-column;
+        align-items: center;
+        text-align: center;
+        margin-bottom: vars.$spacing-2xl; // 48px
+
+        @include m.tablet {
+            margin-bottom: vars.$spacing-3xl; // 64px
+        }
+    }
+
+    &__title {
+        font-family: vars.$font-title; // Poppins
+        font-size: vars.$font-size-3xl; // 30px
+        font-weight: vars.$font-weight-bold; // 700
+        color: vars.$black;
+        margin-bottom: vars.$spacing-base; // 16px
+        line-height: vars.$line-height-tight; // 1.2
+
+        @include m.tablet {
+            font-size: vars.$font-size-4xl; // 36px
+            margin-bottom: vars.$spacing-lg; // 24px
+        }
+
+        @include m.desktop {
+            font-size: vars.$font-size-5xl; // 48px
+        }
+    }
+
+    &__subtitle {
+        font-family: vars.$font-paragraph; // Montserrat
+        font-size: vars.$font-size-base; // 16px
+        color: vars.$black;
+        line-height: vars.$line-height-relaxed; // 1.75
+        max-width: 650px;
+        margin: 0;
+
+        @include m.tablet {
+            font-size: vars.$font-size-lg; // 18px
+            max-width: 750px;
+        }
+    }
+
+    // Contenuto (Immagine + Card)
+    &__content-wrapper {
+        display: flex;
+        gap: vars.$spacing-2xl; // 48px
+        align-items: stretch; // Altezza uguale
+        justify-content: center;
+        max-width: vars.$container-max-width; // 1200px
+        width: 100%;
+
+        @include m.mobile {
+            flex-direction: column;
+            gap: vars.$spacing-xl; // 32px
+            align-items: center;
+        }
+
+        @include m.tablet {
+            gap: vars.$spacing-xl;
+        }
+    }
+
+    // Immagine Sinistra
+    &__image-container {
+        flex: 1;
+        border-radius: vars.$border-radius-lg; // 12px
+        overflow: hidden;
+        box-shadow: vars.$shadow-md;
+        display: flex; // Per mantenere l'altezza
+        min-height: 100%; // Altezza uguale alla card
+
+        @include m.mobile {
+            display: none;
+        }
+
+        @include m.tablet {
+            max-width: 600px;
+        }
+    }
+
+    &__main-image {
+        max-width: 100%;
+        height: auto; // Riempie il contenitore
+        display: block;
+        object-fit: cover;
+        object-position: right center;
+    }
+
+    // Card Destra (Lista Punti)
+    &__list-card {
+        flex: 1;
+        background-color: vars.$white;
+        padding: vars.$spacing-xl; // 32px
+        border-radius: vars.$border-radius-lg; // 12px
+        box-shadow: vars.$shadow-lg;
+        max-width: 550px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; // Centra verticalmente il contenuto
+
+        @include m.mobile {
+            width: 100%;
+            max-width: 100%;
+            padding: vars.$spacing-lg; // 24px
+        }
+
+        @include m.tablet {
+            padding: vars.$spacing-2xl; // 48px
+            min-width: 700px;
+        }
+    }
+}

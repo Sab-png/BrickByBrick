@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifica Agente</title>
+    <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+>
+</head>
+
+<body>
+<form th:action="@{/caratteristiche/update/{id}(id=${caratteristica.id_caratteristiche})}" method="post" th:object="${caratteristica}">
+    
+    <div class="form-group">
+        <label for="tipologia">Tipologia</label>
+        <input type="text" class="form-control" id="tipologia" th:field="*{tipologia}" required>
+    </div>
+    <div class="form-group">
+        <label for="piano">Piano</label>
+        <input type="number" class="form-control" id="piano" th:field="*{piano}" required>
+    </div>
+    <div class="form-group">
+        <label for="ascensore">Ascensore</label>
+        <input type="checkbox" class="form-control" id="ascensore" th:field="*{ascensore}" >
+    </div>
+    <div class="form-group">
+        <label for="arredato">Arredato</label>
+        <input type="checkbox" class="form-control" id="arredato" th:field="*{arredato}" >
+    </div>
+    <div class="form-group">
+        <label for="disponibilita">Disponibilità</label>
+        <input type="text" class="form-control" id="disponibilita" th:field="*{disponibilita}" required>
+    </div>
+    <div class="form-group">
+        <label for="contratto">Contratto</label>
+        <input type="text" class="form-control" id="contratto" th:field="*{contratto}" required>
+    </div>
+    <div class="form-group">
+        <label for="piani_edificio">Piani edificio</label>
+        <input type="number" class="form-control" id="piani_edificio" th:field="*{piani_edificio}" required>
+    </div>
+    <div class="form-group">
+        <label for="anno_costruzione">Anno costruzione</label>
+        <input type="number" class="form-control" id="anno_costruzione" th:field="*{anno_costruzione}" required>
+    </div>
+    <div class="form-group">
+        <label for="classe_energetica">Classe energetica</label>
+        <input type="text" class="form-control" id="classe_energetica" th:field="*{classe_energetica}" required>
+    </div>
+    <div class="form-group">
+        <label for="accesso_disabili">Accesso disabili</label>
+        <input type="checkbox" class="form-control" id="accesso_disabili" th:field="*{accesso_disabili}" >
+    </div>
+    <div class="form-group">
+        <label for="camere">Camere</label>
+        <input type="number" class="form-control" id="camere" th:field="*{camere}" required>
+    </div>
+    <div class="form-group">
+        <label for="bagni">Bagni</label>
+        <input type="number" class="form-control" id="bagni" th:field="*{bagni}" required>
+    </div>
+    <div class="form-group">
+        <label for="balcone">Balcone</label>
+        <input type="number" class="form-control" id="balcone" th:field="*{balcone}" required>
+    </div>
+    <div class="form-group">
+        <label for="riscaldamento">Riscaldamento</label>
+        <input type="text" class="form-control" id="riscaldamento" th:field="*{riscaldamento}" required>
+    </div>
+    <div class="form-group">
+        <label for="terrazzo">Terrazzo</label>
+        <input type="checkbox" class="form-control" id="terrazzo" th:field="*{terrazzo}" >
+    </div>
+    <div class="form-group">
+        <label for="giardino">Giardino</label>
+        <input type="checkbox" class="form-control" id="giardino" th:field="*{giardino}" >
+    </div>
+    <div class="form-group">
+        <label for="box_auto">Box auto</label>
+        <input type="number" class="form-control" id="box_auto" th:field="*{box_auto}" required>
+    </div>
+    <div class="form-group">
+        <label for="cantina">Cantina</label>
+        <input type="checkbox" class="form-control" id="cantina" th:field="*{cantina}" >
+    </div>
+    <div class="form-group">
+        <label for="altre_caratteristiche">Altre Caratteristiche</label>
+        <input type="text" class="form-control" id="altre_caratteristiche" th:field="*{altre_caratteristiche}" required>
+    </div>
+    
+    <button type="submit" class="edit-button">Salva Modifiche</button>
+</form>
+
+
+
+
+
+</body>
+</html>

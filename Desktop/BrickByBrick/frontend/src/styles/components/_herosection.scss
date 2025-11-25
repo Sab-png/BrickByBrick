@@ -1,0 +1,145 @@
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as m;
+@use 'sass:color';
+
+// Variabili locali specifiche per l'hero section
+$header-height: 80px;
+$overlay-opacity: 0.5;
+
+.hero-section {
+    // Impostazione dello sfondo e dell'altezza
+    position: relative;
+    min-height: 100vh; 
+    width: 100%;
+    overflow: hidden;
+    @include m.flex-center;
+    align-items: flex-start;
+
+    // Sfondo immagine con overlay scuro
+    background-image: 
+        linear-gradient(rgba(vars.$black, $overlay-opacity), rgba(vars.$black, 0.4)), 
+        var(--bg-image-url); 
+        
+    background-size: cover;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    color: vars.$white;
+
+    // Contenuto principale (Testo e Pulsante CTA)
+    &__content-wrapper {
+        position: absolute;
+        top: $header-height + vars.$spacing-3xl; // Sotto l'header con spacing consistente
+        left: 5%;
+        z-index: 5; 
+        max-width: 650px;
+        padding: vars.$spacing-lg;
+
+        @include m.mobile {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 90%;
+            padding: vars.$spacing-base;
+        }
+
+        @include m.tablet {
+            max-width: 700px;
+            padding: vars.$spacing-xl;
+        }
+
+        @include m.desktop {
+            max-width: 750px;
+        }
+    }
+
+    &__title {
+        font-family: vars.$font-title; // Poppins
+        font-size: vars.$font-size-4xl; // mobile: 36px
+        font-weight: vars.$font-weight-bold; // 700
+        line-height: vars.$line-height-tight; // 1.2
+        margin-bottom: vars.$spacing-base; // 16px
+        color: vars.$white;
+        text-shadow: 2px 2px 8px rgba(vars.$black, 0.7);
+
+        @include m.tablet {
+            font-size: vars.$font-size-5xl; // tablet: 48px
+            margin-bottom: vars.$spacing-lg; // 24px
+        }
+
+        @include m.desktop {
+            font-size: 3.5rem; // desktop: 56px
+            margin-bottom: vars.$spacing-xl;
+        }
+    }
+
+    &__subtitle {
+        font-family: vars.$font-paragraph; // Montserrat
+        font-size: vars.$font-size-base; // 16px
+        font-weight: vars.$font-weight-regular;
+        color: vars.$white;
+        line-height: vars.$line-height-relaxed;
+        margin-bottom: vars.$spacing-xl;
+        text-shadow: 1px 1px 4px rgba(vars.$black, 0.6);
+
+        @include m.tablet {
+            font-size: vars.$font-size-lg; // 18px
+            margin-bottom: vars.$spacing-2xl;
+        }
+    }
+
+    &__cta-button {
+        background-color: vars.$turquoise;
+        color: vars.$white;
+        border: vars.$border-width-thick solid vars.$turquoise;
+        border-radius: vars.$border-radius-sm;
+        padding: vars.$spacing-base vars.$spacing-xl; // 16px 32px
+        font-family: vars.$font-title; // Poppins
+        font-size: vars.$font-size-base; // 16px
+        font-weight: vars.$font-weight-bold;
+        cursor: pointer;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        transition: all vars.$transition-base vars.$transition-ease;
+        box-shadow: vars.$shadow-md;
+
+        &:hover {
+            background-color: color.scale(vars.$turquoise, $lightness: -10%);
+            border-color: color.scale(vars.$turquoise, $lightness: -10%);
+            transform: translateY(-2px);
+            box-shadow: vars.$shadow-lg;
+        }
+
+        &:active {
+            transform: translateY(0);
+            box-shadow: vars.$shadow-sm;
+        }
+
+        @include m.mobile {
+            display: block;
+            width: 100%;
+            padding: vars.$spacing-base vars.$spacing-lg;
+            font-size: vars.$font-size-sm;
+        }
+
+        @include m.tablet {
+            font-size: vars.$font-size-lg;
+            padding: vars.$spacing-lg vars.$spacing-2xl;
+        }
+    }
+
+    // Media Queries per ottimizzazione
+    @include m.tablet {
+        &__content-wrapper {
+            top: $header-height + vars.$spacing-2xl;
+        }
+    }
+
+    @include m.mobile {
+        min-height: 60vh;
+        
+        &__title {
+            margin-top: vars.$spacing-2xl;
+        }
+    }
+}
