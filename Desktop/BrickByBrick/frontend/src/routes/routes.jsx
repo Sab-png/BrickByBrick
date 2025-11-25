@@ -10,6 +10,15 @@ import Valuta from '../pages/Valuta';
 import NotFound from '../pages/NotFound'
 import StepMultiForm from '../pages/StepMultiForm';
 
+
+
+// Admin sections 
+import AdminLayout from '../layout/AdminLayout';
+import Statistiche from '../pages/AdminStatistiche';
+import GestioneUtenti from '../pages/AdminGestioneUtenti';
+import ImmobiliAdmin from '../pages/AdminImmobili';
+import AgendaAdmin from '../pages/AdminAgenda';
+
 const routes = [
   {
     path: '/',
@@ -69,6 +78,34 @@ const routes = [
   {
     path: '*',
     Component: NotFound
+  },
+  {
+    path: '/admin',
+    Component: AdminLayout, // Layout con la SideBar
+    children: [
+      
+      {
+        index: true,
+        // path: 'statistiche',
+        Component: Statistiche,
+        title: 'Statistiche'
+      },
+      {
+        path: 'gestione-utenti',
+        Component: GestioneUtenti,
+        title: 'Gestione Utenti'
+      },
+      {
+        path: 'immobili',
+        Component: ImmobiliAdmin,
+        title: 'Immobili'
+      },
+      {
+        path: 'agenda',
+        Component: AgendaAdmin,
+        title: 'Agenda'
+      },
+    ]
   }
 ]
 
