@@ -88,6 +88,7 @@
 
 ## Struttura del Progetto
 
+ ` ` `
 BRICKBYBRICK
 ├── Desktop\BrickByBrick\
 │   └── .vscode/
@@ -144,6 +145,7 @@ BRICKBYBRICK
 │
 └── .vscode/
 
+ ` ` `
 ## Installazione e Avvio
 
 ### Requisiti
