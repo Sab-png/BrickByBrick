@@ -45,7 +45,7 @@ public class BrickAdminREST {
         return ResponseEntity.status(HttpStatus.CREATED).body(nuovoAdmin);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/edit/{id}")
     public ResponseEntity<Admin> updateAdmin(@PathVariable Integer id, @RequestBody Admin admin) {
         if (!serviceAdmin.existsById(id)) {
             return ResponseEntity.notFound().build();
@@ -56,7 +56,7 @@ public class BrickAdminREST {
     }
 
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteAdmin(@PathVariable Integer id) {
         if (!serviceAdmin.existsById(id)) {
             return ResponseEntity.notFound().build();

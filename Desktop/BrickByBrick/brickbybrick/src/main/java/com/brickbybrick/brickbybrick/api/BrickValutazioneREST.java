@@ -30,8 +30,6 @@ public class BrickValutazioneREST {
             @RequestBody Valutazione valutazione) {
         
         ValutazioneRisultato risultato = valutazioneService.calcolaValutazione(valutazione);
-        
-        // Salva la valutazione nel database
         valutazioneRepo.save(valutazione);
         
         return ResponseEntity.ok(risultato);

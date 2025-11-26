@@ -45,7 +45,7 @@ public class BrickUtentiREST {
         return ResponseEntity.status(HttpStatus.CREATED).body(nuovoUtente);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/edit/{id}")
     public ResponseEntity<Utente> updateUtente(@PathVariable Integer id, @RequestBody Utente utente) {
         if (!serviceUtente.existsById(id)) {
             return ResponseEntity.notFound().build();
@@ -55,7 +55,7 @@ public class BrickUtentiREST {
         return ResponseEntity.ok(utenteAggiornato);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteUtente(@PathVariable Integer id) {
         if (!serviceUtente.existsById(id)) {
             return ResponseEntity.notFound().build();

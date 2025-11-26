@@ -45,7 +45,7 @@ public class BrickImmobileREST {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public ResponseEntity<Immobile> createImmobile(@RequestBody Immobile immobile) {
         Immobile nuovoImmobile = serviceImmobile.addImmobile(immobile);
         return ResponseEntity.status(HttpStatus.CREATED).body(nuovoImmobile);

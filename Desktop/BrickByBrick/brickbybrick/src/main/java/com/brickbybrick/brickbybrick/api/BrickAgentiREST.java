@@ -43,7 +43,7 @@ public class BrickAgentiREST {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public ResponseEntity<Agente> createAgente(@Valid @RequestBody Agente agente) {
         Agente nuovoAgente = serviceAgente.addAgenti(agente);
         return ResponseEntity.status(HttpStatus.CREATED).body(nuovoAgente);
