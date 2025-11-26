@@ -44,7 +44,7 @@ public class BrickContrattiREST {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-        @PostMapping("/add")
+        @PostMapping
     public ResponseEntity<ContrattoEsclusivo> createContratto(@Valid @RequestBody ContrattoEsclusivo contratto) {
         ContrattoEsclusivo nuovoContratto = serviceContratto.addContratti(contratto);
         return ResponseEntity.status(HttpStatus.CREATED).body(nuovoContratto);
