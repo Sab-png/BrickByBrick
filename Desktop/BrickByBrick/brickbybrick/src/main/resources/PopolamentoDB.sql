@@ -41,9 +41,9 @@ INSERT INTO utente (Id_ruolo, nome, cognome, telefono, codice_fiscale, email, pa
 (3, 'Giorgio', 'Ferrari', '3353456789', 'FRRGRG85M12L219U', 'giorgio.ferrari@email.it', 'utente789');
 
 -- 8. VISITA
-INSERT INTO visita (Id_immobile, Id_agente, data) VALUES
-(1, 1, '2025-11-15 10:00:00'),
-(2, 2, '2025-11-16 15:30:00'),
-(3, 3, '2025-11-20 11:00:00');
+INSERT INTO visita (Id_immobile, Id_agente, data,Id_utente) VALUES
+(1, 1, '2025-11-15 10:00:00',1),
+(2, 2, '2025-11-16 15:30:00',2),
+(3, 3, '2025-11-20 11:00:00',3);
 
 
