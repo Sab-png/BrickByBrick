@@ -7,7 +7,6 @@ $header-height: 80px;
 $overlay-opacity: 0.5;
 
 .hero-section {
-    // Impostazione dello sfondo e dell'altezza
     position: relative;
     min-height: 100vh; 
     width: 100%;
@@ -15,20 +14,42 @@ $overlay-opacity: 0.5;
     @include m.flex-center;
     align-items: flex-start;
 
-    // Sfondo immagine con overlay scuro
-    background-image: 
-        linear-gradient(rgba(vars.$black, $overlay-opacity), rgba(vars.$black, 0.4)), 
-        var(--bg-image-url); 
+    &__bg-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+
+    &__overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 2; 
+        background: linear-gradient(rgba(vars.$black, 0.5), rgba(vars.$black, 0.4));
+        pointer-events: none; 
+    }
+
+    &__bg-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; // imita il background-size: cover
+        object-position: center bottom;
+        display: block; 
+    }
         
     background-size: cover;
     background-position: center bottom;
     background-repeat: no-repeat;
     color: vars.$white;
 
-    // Contenuto principale (Testo e Pulsante CTA)
     &__content-wrapper {
         position: absolute;
-        top: $header-height + vars.$spacing-3xl; // Sotto l'header con spacing consistente
+        top: $header-height + vars.$spacing-3xl; 
         left: 5%;
         z-index: 5; 
         max-width: 650px;
