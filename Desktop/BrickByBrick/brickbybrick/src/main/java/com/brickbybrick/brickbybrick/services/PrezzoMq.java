@@ -6,7 +6,7 @@ import java.net.URI;
 import com.google.gson.*;
 
 class PrezzoMq {
-    private static final String API_URL = "https://api.immobiliare.it/prezzi"; // mettio URL giusto dell'API
+    private static final String API_URL = "https://api.immobiliare.it/prezzi"; 
     private final HttpClient client;
     private final Gson gson;
 
@@ -15,14 +15,6 @@ class PrezzoMq {
         this.gson = new Gson();
     }
 
-    /**
-     * Ottiene il prezzo medio al mq per un dato CAP
-     * NOTA: Questa è un'implementazione di esempio. 
-     * API reali disponibili:
-     * - Immobiliare.it API (richiede registrazione)
-     * - Idealista API
-     * - OMI (Osservatorio Mercato Immobiliare) - dati pubblici Agenzia delle Entrate
-     */
     public double getPrezzoMedioMq(String cap) throws Exception {
         // Implementazione con API reale
         String url = API_URL + "?cap=" + cap;

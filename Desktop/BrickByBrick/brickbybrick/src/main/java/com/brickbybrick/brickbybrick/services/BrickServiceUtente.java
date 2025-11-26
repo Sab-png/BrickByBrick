@@ -2,7 +2,6 @@ package com.brickbybrick.brickbybrick.services;
 
 import java.util.List;
 import java.util.Optional;
-
 import com.brickbybrick.brickbybrick.model.Utente;
 
 public interface BrickServiceUtente {
