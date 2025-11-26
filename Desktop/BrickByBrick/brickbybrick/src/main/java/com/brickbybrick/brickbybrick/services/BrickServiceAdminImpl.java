@@ -12,7 +12,7 @@ import com.brickbybrick.brickbybrick.repos.BrickRepoAdmin;
     @Service
     public class BrickServiceAdminImpl implements BrickServiceAdmin {
 
-     @Autowired
+    @Autowired
     private BrickRepoAdmin repoAdmin;
 
     @Override

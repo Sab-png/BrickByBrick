@@ -37,10 +37,8 @@ public class DotazioniEsterne {
     @JsonProperty("ascensore")
     private boolean ascensore;
 
-    // Costruttore vuoto richiesto da JPA
     public DotazioniEsterne() {}
 
-    // Costruttore completo
     public DotazioniEsterne(boolean cantina, boolean terrazzo, boolean balcone,
                             boolean garage, boolean piscina, boolean giardino, boolean ascensore) {
         this.cantina = cantina;
@@ -52,7 +50,6 @@ public class DotazioniEsterne {
         this.ascensore = ascensore;
     }
 
-    // Getter e setter
     public boolean isCantina() { return cantina; }
     public void setCantina(boolean cantina) { this.cantina = cantina; }
 

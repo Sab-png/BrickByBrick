@@ -1,51 +1,13 @@
-// package com.brickbybrick.brickbybrick.services;
-
-// import java.util.List;
-// import java.util.Optional;
-
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.stereotype.Service;
-
-// import com.brickbybrick.brickbybrick.model.PrezzoMercato;
-// import com.brickbybrick.brickbybrick.model.Utente;
-// import com.brickbybrick.brickbybrick.model.Valutazione;
-// import com.brickbybrick.brickbybrick.repos.BrickRepoPrezzoMercato;
-// import com.brickbybrick.brickbybrick.repos.BrickRepoValutazione;
-
-// @Service
-// public class BrickServiceValutazioneImpl implements BrickServiceValutazione {
-
-//     @Autowired
-//     private BrickRepoValutazione repoValutazione;
-
-//     @Autowired
-//     private BrickRepoPrezzoMercato prezzoRepo;
-
-//     // @Override
-//     // public List<Valutazione> getValutazioni() {
-//     //     return repoValutazione.findAll();
-//     // }
-
-//     // @Override
-//     // public Optional<PrezzoMercato> findByCap(Integer cap) {
-//     //     return prezzoRepo.findByCap(cap);
-//     // }
-
-
-    package com.brickbybrick.brickbybrick.services;
+package com.brickbybrick.brickbybrick.services;
 
 import com.brickbybrick.brickbybrick.model.PrezzoMercato;
 import com.brickbybrick.brickbybrick.model.Valutazione;
 import com.brickbybrick.brickbybrick.model.ValutazioneRisultato;
 import com.brickbybrick.brickbybrick.repos.BrickRepoPrezzoMercato;
 import com.brickbybrick.brickbybrick.repos.BrickRepoValutazione;
-import com.brickbybrick.brickbybrick.model.enums.ClasseEnergetica;
-import com.brickbybrick.brickbybrick.model.enums.Condizione;
-import com.brickbybrick.brickbybrick.model.enums.Tipologia;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.time.Year;
 import java.util.List;
 import java.util.Optional;
@@ -145,7 +107,7 @@ public class BrickServiceValutazioneImpl implements BrickServiceValutazione {
     private double getFattoreAnnoCostruzione(Integer anno) {
         int eta = Year.now().getValue() - anno;
 
-        if (eta < 0) return 1.10;      // In costruzione +10%
+        if (eta < 0) return 1.10;      // in costruzione +10%
         if (eta <= 5) return 1.10;     // +10% nuovissimo
         if (eta <= 10) return 1.05;    // +5% recente
         if (eta <= 20) return 1.0;     // neutro

@@ -2,7 +2,6 @@ package com.brickbybrick.brickbybrick.services;
 
 import com.brickbybrick.brickbybrick.model.Valutazione;
 import com.brickbybrick.brickbybrick.model.ValutazioneRisultato;
-
 import java.util.List;
 import java.util.Optional;
 

@@ -5,12 +5,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.brickbybrick.brickbybrick.model.Agente;
 import com.brickbybrick.brickbybrick.model.ContrattoEsclusivo;
-import com.brickbybrick.brickbybrick.model.Utente;
 import com.brickbybrick.brickbybrick.repos.BrickRepoContratto;
-import com.brickbybrick.brickbybrick.repos.BrickRepoUtente;
 
 @Service
 public class BrickServiceContrattoImpl implements BrickServiceContratto {
