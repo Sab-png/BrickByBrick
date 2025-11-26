@@ -112,9 +112,11 @@ CREATE TABLE visita (
     Id_visita INT PRIMARY KEY AUTO_INCREMENT,
     Id_immobile INT NOT NULL,
     Id_agente INT NOT NULL,
+    Id_utente INT NOT NULL,
     data DATETIME NOT NULL,
     CONSTRAINT fk_visita_immobile FOREIGN KEY (Id_immobile) REFERENCES immobile(Id_immobile),
-    CONSTRAINT fk_visita_agente FOREIGN KEY (Id_agente) REFERENCES agente(Id_agente)
+    CONSTRAINT fk_visita_agente FOREIGN KEY (Id_agente) REFERENCES agente(Id_agente),
+    CONSTRAINT fk_visita_utente FOREIGN KEY (Id_utente) REFERENCES utente(Id_utente)
 );
 
 CREATE TABLE prezzo_mercato(

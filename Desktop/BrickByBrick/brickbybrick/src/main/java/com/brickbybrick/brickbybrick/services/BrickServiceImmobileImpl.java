@@ -1,13 +1,9 @@
 package com.brickbybrick.brickbybrick.services;
-
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.brickbybrick.brickbybrick.model.Immobile;
-import com.brickbybrick.brickbybrick.repos.BrickRepoCaratteristicheImmobile;
 import com.brickbybrick.brickbybrick.repos.BrickRepoImmobile;
 
 @Service
@@ -15,9 +11,6 @@ public class BrickServiceImmobileImpl implements BrickServiceImmobile {
 
     @Autowired
     private BrickRepoImmobile repoImmobile;
-
-    @Autowired
-    private BrickRepoCaratteristicheImmobile repoCaratteristicheImmobile;
 
     @Override
     public List<Immobile> getImmobili() {

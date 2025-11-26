@@ -47,7 +47,7 @@ public class BrickCaratteristicheREST {
     }
 
 
-    @PutMapping("/{id}")
+    @PutMapping("/edit/{id}")
     public ResponseEntity<CaratteristicheImmobile> updateCaratteristica(@PathVariable Integer id, @RequestBody CaratteristicheImmobile caratteristica) {
         if (!serviceCaratteristicheImmobile.existsById(id)) {
             return ResponseEntity.notFound().build();
@@ -58,7 +58,7 @@ public class BrickCaratteristicheREST {
     }
 
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteCaratteristica(@PathVariable Integer id) {
         if (!serviceCaratteristicheImmobile.existsById(id)) {
             return ResponseEntity.notFound().build();

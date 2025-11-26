@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
-import com.brickbybrick.brickbybrick.model.Agente;
 import com.brickbybrick.brickbybrick.model.ContrattoEsclusivo;
 import com.brickbybrick.brickbybrick.repos.BrickRepoContratto;
 import com.brickbybrick.brickbybrick.services.BrickServiceContratto;
