@@ -6,6 +6,10 @@ import step1Image from '../assets/images/img step 1.avif';
 import step2Image from '../assets/images/img step 2.avif';
 import step3Image from '../assets/images/img step 3.avif';
 
+import valutaBgJpg from "../assets/images/jpg/hero-valuta.jpg";
+import valutaBgWebP from "../assets/images/webp/hero-valuta.webp";
+import valutaBgAvif from "../assets/images/avif/hero-valuta.avif";
+
 export default function Valuta() {
   
     const steps = [
@@ -29,10 +33,15 @@ export default function Valuta() {
     return (
         <>
             <HeroSection 
-                title="Vuoi scoprire quanto vale la tua casa?"
+                title={"Vuoi scoprire quanto vale la tua casa?"}
                 subtitle="Inizia adesso la tua valutazione in 3 semplici passaggi."
-                bgImage="/src/assets/images/hero-valuta.avif"
-            />
+
+                imageDesktop={valutaBgJpg}       // Fallback JPG
+                imageDesktopWebP={valutaBgWebP}  // Versione WebP
+                imageDesktopAvif={valutaBgAvif}  // Versione AVIF
+                imageMobile={valutaBgWebP}       
+                alt="Panorama di Torino con vista sulla Mole Antonelliana, sfondo per servizio valutazione immobiliare" 
+            />        
 
             <StepsSection 
                 title="Quali sono i passaggi?"
