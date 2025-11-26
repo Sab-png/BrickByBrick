@@ -114,7 +114,7 @@ CREATE TABLE visita (
     Id_agente INT NOT NULL,
     data DATETIME NOT NULL,
     CONSTRAINT fk_visita_immobile FOREIGN KEY (Id_immobile) REFERENCES immobile(Id_immobile),
-    CONSTRAINT fk_visita_agente FOREIGN KEY (Id_agente) REFERENCES utente(Id_utente)
+    CONSTRAINT fk_visita_agente FOREIGN KEY (Id_agente) REFERENCES agente(Id_agente)
 );
 
 CREATE TABLE prezzo_mercato(
@@ -122,6 +122,16 @@ CREATE TABLE prezzo_mercato(
     prezzo_min_mq DOUBLE,
     prezzo_max_mq DOUBLE,
     prezzo_medio_mq DOUBLE
+);
+
+CREATE TABLE contratto_esclusivo (
+    Id_contratto INT PRIMARY KEY AUTO_INCREMENT,
+    Id_immobile INT NOT NULL,
+    Id_utente INT NOT NULL,
+    data_di_scadenza Date NOT NULL,
+    prezzo DOUBLE NOT NULL,
+    CONSTRAINT fk_contratto_esclusivo_Id_immobile FOREIGN KEY (Id_immobile) REFERENCES immobile(Id_immobile),
+	CONSTRAINT fk_contratto_esclusivo_Id_utente FOREIGN KEY (Id_utente) REFERENCES utente(Id_utente)
 );
 
 
