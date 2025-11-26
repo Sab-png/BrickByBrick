@@ -57,7 +57,6 @@ CREATE TABLE caratteristiche_immobile (
 CREATE TABLE immobile (
     Id_immobile INT PRIMARY KEY AUTO_INCREMENT,
     foto VARCHAR(1000) NOT NULL,
-    regione VARCHAR(100) NOT NULL,
     cap INT NOT NULL,
     citta VARCHAR(100) NOT NULL,
     indirizzo VARCHAR(255) NOT NULL,
@@ -86,21 +85,27 @@ CREATE TABLE utente (
 CREATE TABLE valutazione (
     Id_valutazione INT PRIMARY KEY AUTO_INCREMENT,
     Id_utente INT NOT NULL,
-    regione VARCHAR(100) NOT NULL,
-    cap INT NOT NULL,
+    cap VARCHAR(5) NOT NULL,
     citta VARCHAR(100) NOT NULL,
     indirizzo VARCHAR(255) NOT NULL,
-    tipologia VARCHAR(50) NOT NULL,
+    tipologia ENUM ('APPARTAMENTO', 'CASA_INDIPENDENTE') NOT NULL,
     piano VARCHAR(50) NOT NULL,
     locali INT NOT NULL,
     superficie INT NOT NULL,
-    condizioni VARCHAR(255) NOT NULL,
+    condizioni ENUM ('NUOVO', 'RISTRUTTURATO', 'DA_RISTRUTTURARE') NOT NULL,
     bagni INT NOT NULL,
     anno_costruzione INT NOT NULL,
-    ascensore BOOLEAN NOT NULL,
-    classe_energetica VARCHAR(20) NOT NULL,
+    classe_energetica ENUM('A4', 'A3', 'A2', 'A1', 'B', 'C', 'D', 'E', 'F', 'G') NOT NULL,
+    dotazioni_cantina BOOLEAN,
+    dotazioni_terrazzo BOOLEAN,
+    dotazioni_balcone BOOLEAN,
+    dotazioni_garage BOOLEAN,
+    dotazioni_piscina BOOLEAN,
+    dotazioni_giardino BOOLEAN,
+    dotazioni_ascensore BOOLEAN,
     CONSTRAINT fk_valutazione_utente FOREIGN KEY (Id_utente) REFERENCES utente(Id_utente)
 );
+
 
 
 CREATE TABLE visita (
@@ -110,6 +115,13 @@ CREATE TABLE visita (
     data DATETIME NOT NULL,
     CONSTRAINT fk_visita_immobile FOREIGN KEY (Id_immobile) REFERENCES immobile(Id_immobile),
     CONSTRAINT fk_visita_agente FOREIGN KEY (Id_agente) REFERENCES utente(Id_utente)
+);
+
+CREATE TABLE prezzo_mercato(
+	cap VARCHAR(10) PRIMARY KEY,
+    prezzo_min_mq DOUBLE,
+    prezzo_max_mq DOUBLE,
+    prezzo_medio_mq DOUBLE
 );
 
 

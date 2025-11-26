@@ -22,9 +22,6 @@ public class Immobile {
     @Column(name = "foto", nullable = false)
     private String foto;
 
-    @Column(name = "regione", nullable = false)
-    private String regione;
-
     @Column(name = "cap", nullable = false)
     private String cap;
 
@@ -72,14 +69,6 @@ public class Immobile {
 
     public void setFoto(String foto) {
         this.foto = foto;
-    }
-
-    public String getRegione() {
-        return regione;
-    }
-
-    public void setRegione(String regione) {
-        this.regione = regione;
     }
 
     public String getCap() {

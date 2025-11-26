@@ -75,7 +75,6 @@ public class BrickImmobileMCV {
     public String updateImmobile(@PathVariable("id") Integer id, @ModelAttribute("immobile") Immobile aggiornato) {
         Immobile esistente = serviceImmobile.getImmobileById(id).orElse(null);
         esistente.setFoto(aggiornato.getFoto());
-        esistente.setRegione(aggiornato.getRegione());
         esistente.setCap(aggiornato.getCap());
         esistente.setCitta(aggiornato.getCitta());
         esistente.setIndirizzo(aggiornato.getIndirizzo());
