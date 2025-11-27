@@ -27,7 +27,7 @@ export default function HeroSection({
             <source srcSet={imageDesktopWebP} type="image/webp" />
           )}
 
-          <img src={imageDesktop} alt={alt} className="hero-section__bg-image" fetchPriority="high" width="1920" height="1080" />
+          <img src={imageDesktop} alt={alt} className="hero-section__bg-image" fetchPriority="high" decoding="async" width="1920" height="600" />
         </picture>
       </div>
 
