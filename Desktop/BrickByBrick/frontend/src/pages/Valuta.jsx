@@ -25,24 +25,38 @@ import valutaBgWebP from "../assets/images/webp/hero-valuta.webp";
 import valutaBgAvif from "../assets/images/avif/hero-valuta.avif";
 
 export default function Valuta() {
-  
+
+    useSEO({
+        title: "Valuta il tuo Immobile Online - Stima Gratuita in 72h",
+        description: "Vuoi sapere quanto vale la tua casa? Compila il form e ricevi una valutazione immobiliare professionale e precisa basata sui reali prezzi di mercato.",
+        keywords: "valutazione casa online, stima immobile gratuita, quanto vale casa mia, valutazione immobili torino",
+        image: "https://www.immobiliaris.it/images/valuta-social.jpg"
+    })
+
     const steps = [
-        {
-            image: step1Image,
-            title: 'Compila il form passo dopo passo',
-            description: 'Inserisci i dati dell\'immobile: tipologia, zona, superficie e servizi. Puoi completare il form in pochi minuti.'
-        },
-        {
-            image: step2Image,
-            title: 'Ricevi la stima di prezzo entro 72 ore',
-            description: 'La nostra piattaforma elabora i dati e ti invia una valutazione preliminare via email in tempi rapidissimi.'
-        },
-        {
-            image: step3Image,
-            title: 'Valutazione e appuntamento con l\'esperto locale',
-            description: 'Fissa l\'incontro per la verifica sul posto e ottieni la valutazione definitiva.'
-        }
-    ];
+            {
+                // Passiamo un oggetto o proprietà distinte per le immagini
+                imageAvif: step1Avif,
+                imageWebp: step1Webp,
+                imageJpg: step1Jpg,
+                title: 'Compila il form passo dopo passo',
+                description: 'Inserisci i dati dell\'immobile: tipologia, zona, superficie e servizi. Puoi completare il form in pochi minuti.'
+            },
+            {
+                imageAvif: step2Avif,
+                imageWebp: step2Webp,
+                imageJpg: step2Jpg,
+                title: 'Ricevi la stima di prezzo entro 72 ore',
+                description: 'La nostra piattaforma elabora i dati e ti invia una valutazione preliminare via email in tempi rapidissimi.'
+            },
+            {
+                imageAvif: step3Avif,
+                imageWebp: step3Webp,
+                imageJpg: step3Jpg,
+                title: 'Valutazione e appuntamento con l\'esperto locale',
+                description: 'Fissa l\'incontro per la verifica sul posto e ottieni la valutazione definitiva.'
+            }
+        ];
 
     return (
         <>
