@@ -2,7 +2,12 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuthData } from '../providers/AuthContextProvider';
 
-import ImageLogin from '../assets/images/accedi-registrati.avif';
+import useSEO from '../hooks/useSEO';
+
+
+import ImageLoginAvif from '../assets/images/avif/accedi-registrati.avif'; 
+import ImageLoginWebp from '../assets/images/webp/accedi-registrati.webp'; 
+import ImageLoginJpg from '../assets/images/jpg/accedi-registrati.jpg';
 
 const Login = () => {
   const navigate = useNavigate();
