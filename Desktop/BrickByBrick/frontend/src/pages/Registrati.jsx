@@ -1,7 +1,11 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
-import ImageRegistrati from '../assets/images/accedi-registrati.avif';
+import useSEO from '../hooks/useSEO';
+
+import ImageRegistratiAvif from '../assets/images/avif/accedi-registrati.avif'; 
+import ImageRegistratiWebp from '../assets/images/webp/accedi-registrati.webp'; 
+import ImageRegistratiJpg from '../assets/images/jpg/accedi-registrati.jpg';
 
 const Registrati = () => {
   const navigate = useNavigate();
