@@ -2,9 +2,23 @@ import HeroSection from '../components/HeroSection';
 import StepsSection from '../components/StepsSection';
 import Newsletter from "../components/NewsLetter"
 
-import step1Image from '../assets/images/img step 1.avif';
-import step2Image from '../assets/images/img step 2.avif';
-import step3Image from '../assets/images/img step 3.avif';
+import useSEO from '../hooks/useSEO';
+
+// Step 1
+import step1Avif from '../assets/images/avif/step-1.avif';
+import step1Webp from '../assets/images/webp/step-1.webp';
+import step1Jpg from '../assets/images/jpg/step-1.jpg'; 
+
+// Step 2
+import step2Avif from '../assets/images/avif/step-2.avif';
+import step2Webp from '../assets/images/webp/step-2.webp';
+import step2Jpg from '../assets/images/jpg/step-2.jpg';
+
+// Step 3
+import step3Avif from '../assets/images/avif/step-3.avif';
+import step3Webp from '../assets/images/webp/step-3.webp';
+import step3Jpg from '../assets/images/jpg/step-3.jpg';
+
 
 import valutaBgJpg from "../assets/images/jpg/hero-valuta.jpg";
 import valutaBgWebP from "../assets/images/webp/hero-valuta.webp";
