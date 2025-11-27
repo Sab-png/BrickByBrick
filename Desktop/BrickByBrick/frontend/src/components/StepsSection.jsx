@@ -12,7 +12,11 @@ export default function StepsSection({ title, steps, ctaText, ctaLink }) {
                         <StepItem
                             key={index}
                             number={index + 1}
-                            image={step.image}
+                            // image={step.image}
+                            imageAvif={step.imageAvif}
+                            imageWebp={step.imageWebp}
+                            imageJpg={step.imageJpg}
+                            
                             title={step.title}
                             description={step.description}
                             alignRight={index === 1} // Allinea a destra solo il secondo step
