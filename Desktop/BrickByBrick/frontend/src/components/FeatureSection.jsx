@@ -1,11 +1,13 @@
 import FeatureItem from './FeatureItem';
 
-import imageFeature from '../assets/images/perche-immobiliaris.jpg';
-
 import imageOneFeatItem from '../assets/images/valutazione.svg';
 import imageTwoFeatItem from '../assets/images/efficenza.svg';
 import imageThreeFeatItem from '../assets/images/valore.svg';
 import imageFourFeatItem from '../assets/images/agenti.svg';
+
+import imageFeatureAvif from '../assets/images/avif/perche-immobiliaris.avif'; 
+import imageFeatureWebp from '../assets/images/webp/perche-immobiliaris.webp'; 
+import imageFeatureJpg from '../assets/images/jpg/perche-immobiliaris.jpg';
 
 export default function FeaturesSection() {
     return (
@@ -23,11 +25,11 @@ export default function FeaturesSection() {
             <div className="features-section__content-wrapper">
                 
                 <div className="features-section__image-container">
-                    <img 
-                        src={imageFeature}
-                        alt="Due uomini d'affari che discutono"
-                        className="features-section__main-image"
-                    />
+                    <picture>
+                        <source srcSet={imageFeatureAvif} type="image/avif" />
+                        <source srcSet={imageFeatureWebp} type="image/webp" />
+                        <img src={imageFeatureJpg} alt="Interior Design" className="features-section__main-image" loading="lazy" />
+                    </picture>
                 </div>
 
                 <div className="features-section__list-card">
