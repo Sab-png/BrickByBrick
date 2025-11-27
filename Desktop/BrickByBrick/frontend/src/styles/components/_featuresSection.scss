@@ -88,6 +88,12 @@
         display: flex; // Per mantenere l'altezza
         min-height: 100%; // Altezza uguale alla card
 
+        picture {
+            display: block; 
+            width: 100%;
+            height: 100%;
+        }
+
         @include m.mobile {
             display: none;
         }
@@ -98,8 +104,8 @@
     }
 
     &__main-image {
-        max-width: 100%;
-        height: auto; // Riempie il contenitore
+        width: 100%;
+        height: 100%; // Riempie il contenitore
         display: block;
         object-fit: cover;
         object-position: right center;
