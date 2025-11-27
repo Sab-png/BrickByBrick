@@ -25,7 +25,7 @@ const useImmobiliManager = () => {
             // Si presume che il backend usi un parametro 'search'
             const searchParam = filters.search ? `?search=${filters.search}` : '';
             // Ho modificato l'endpoint base da '/api/agenti' a '/api/immobili'
-            const url = `${API_BASE_URL}/api/immobili${searchParam}`;
+            const url = `${API_BASE_URL}/api/immobili`;
 
             const response = await fetch(url);
 
@@ -44,15 +44,15 @@ const useImmobiliManager = () => {
         }
     }, [filters]);
 
-    // --- 3. LOGICA DI LETTURA SINGOLA (GET /immobili/edit/{id}) ---
+    // --- 3. LOGICA DI LETTURA SINGOLA (GET /api/immobili/{id}) ---
     /**
      * @function getImmobileById
      * Recupera i dati di un singolo immobile per la modifica.
      */
     const getImmobileById = async (id) => {
         try {
-            // Endpoint: /immobili/edit/{id}
-            const url = `${API_BASE_URL}/immobili/edit/${id}`;
+            // Endpoint: /api/immobili/{id}
+            const url = `${API_BASE_URL}/api/immobili/${id}`;
             const response = await fetch(url);
 
             if (!response.ok) {
@@ -70,7 +70,7 @@ const useImmobiliManager = () => {
         }
     };
 
-    // --- 4. LOGICA DI ELIMINAZIONE (GET /immobili/delete/{id}) ---
+    // --- 4. LOGICA DI ELIMINAZIONE (DELETE /api/immobili/{id}) ---
     /**
      * @function removeImmobili
      * Elimina uno o più immobili specificati dagli ID.
@@ -82,13 +82,13 @@ const useImmobiliManager = () => {
         setError(null);
 
         try {
-            // Eseguiamo una chiamata GET per ogni ID (come nel tuo backend per gli agenti)
+            // Eseguiamo una chiamata DELETE per ogni ID
             for (const id of ids) {
-                // Endpoint: /immobili/delete/{id}
-                const url = `${API_BASE_URL}/immobili/delete/${id}`;
+                // Endpoint: /api/immobili/{id}
+                const url = `${API_BASE_URL}/api/immobili/${id}`;
 
                 const response = await fetch(url, {
-                    method: 'GET', // Metodo specifico del tuo backend
+                    method: 'DELETE',
                 });
 
                 if (!response.ok) {
@@ -106,7 +106,7 @@ const useImmobiliManager = () => {
         }
     };
 
-    // --- 5. LOGICA DI CREAZIONE/AGGIORNAMENTO (POST /immobili/add | POST /immobili/update/{id}) ---
+    // --- 5. LOGICA DI CREAZIONE/AGGIORNAMENTO (POST /api/immobili | PUT /api/immobili/{id}) ---
     /**
      * @function saveImmobile
      * Salva (crea o modifica) un immobile.
@@ -118,29 +118,27 @@ const useImmobiliManager = () => {
         setIsLoading(true);
         setError(null);
 
-        // Mappatura dei dati dal form (le chiavi del payload sono già corrette dal form)
-        // Adatta questi campi ai nomi effettivi del tuo modello Immobile
+        // Mappatura dei dati dal form
         const apiPayload = {
-            title: payload.title, // Esempio
-            address: payload.address, // Esempio
-            price: payload.price, // Esempio
-            // ... altri campi come description, type, city, etc.
-            ...payload // Se il payload del form corrisponde già al modello API
+            ...payload
         };
 
         let url = '';
+        let method = '';
 
         if (mode === 'add') {
-            // Endpoint Aggiunta: /immobili/add
-            url = `${API_BASE_URL}/immobili/add`;
+            // Endpoint Aggiunta: POST /api/immobili
+            url = `${API_BASE_URL}/api/immobili`;
+            method = 'POST';
         } else {
-            // Endpoint Modifica: /immobili/update/{id}
-            url = `${API_BASE_URL}/immobili/update/${immobileId}`;
+            // Endpoint Modifica: PUT /api/immobili/{id}
+            url = `${API_BASE_URL}/api/immobili/${immobileId}`;
+            method = 'PUT';
         }
 
         try {
             const response = await fetch(url, {
-                method: 'POST', // Usato per entrambe le operazioni
+                method: method,
                 headers: {
                     'Content-Type': 'application/json',
                 },

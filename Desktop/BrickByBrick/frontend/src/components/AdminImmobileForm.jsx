@@ -105,7 +105,7 @@ const ImmobileForm = ({ mode = 'add' }) => {
                 console.error(error);
                 setApiError(error.message || "Errore nel caricamento dei dati dell'immobile.");
                 // Reindirizza l'utente dopo un errore critico di caricamento
-                setTimeout(() => navigate('/admin/gestione-immobili'), 3000);
+                setTimeout(() => navigate('/admin/immobili'), 3000);
             } finally {
                 setIsLoading(false);
             }
@@ -126,7 +126,7 @@ const ImmobileForm = ({ mode = 'add' }) => {
             return;
         }
 
-        // 2. Prepara il payload con i nomi delle chiavi attesi dal backend (ADATTA QUESTI NOMI)
+        // 2. Prepara il payload con i nomi delle chiavi attesi dal backend
         const payload = {
             // Esempio: keys API (CamelCase) vs keys Form (Italiano)
             address: formData.indirizzo,
@@ -144,7 +144,7 @@ const ImmobileForm = ({ mode = 'add' }) => {
             await saveImmobile(immobileId, payload, mode);
 
             // 4. In caso di successo, reindirizza
-            navigate('/admin/gestione-immobili');
+            navigate('/admin/immobili');
         } catch (error) {
             // 5. Gestisce l'errore API
             setApiError(error.message || `Si è verificato un errore durante l'operazione di ${mode}.`);
@@ -225,7 +225,7 @@ const ImmobileForm = ({ mode = 'add' }) => {
                         <button type="submit" className="submit-btn" disabled={isLoading}>
                             {isLoading ? '⏳ Elaborando...' : submitButtonText}
                         </button>
-                        <button type="button" className="back-btn" onClick={() => navigate('/admin/gestione-immobili')} disabled={isLoading}>
+                        <button type="button" className="back-btn" onClick={() => navigate('/admin/immobili')} disabled={isLoading}>
                             Indietro
                         </button>
                     </div>

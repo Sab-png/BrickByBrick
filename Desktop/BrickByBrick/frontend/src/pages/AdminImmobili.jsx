@@ -19,8 +19,6 @@ const Immobili = () => {
     const navigate = useNavigate();
     // Stato locale per l'input di ricerca (ad esempio per indirizzo, città)
     const [searchTerm, setSearchTerm] = useState('');
-    // Stato locale per tenere traccia degli ID delle righe selezionate
-    const [selectedImmobileIds, setSelectedImmobileIds] = useState([]);
 
     // Destrutturazione delle funzioni e degli stati forniti dal custom hook
     const {
@@ -36,62 +34,27 @@ const Immobili = () => {
     // Gestisce l'attivazione della ricerca. Aggiorna lo stato dei filtri nell'hook.
     const handleSearchClick = () => {
         setFilters({ search: searchTerm.trim() });
-        // Resetta la selezione dopo una ricerca
-        setSelectedImmobileIds([]);
     };
 
     // Reindirizza al form unificato in modalità Aggiunta.
     const handleAddImmobile = () => {
         // Rotta adattata per gli immobili
-        navigate('/admin/gestione-immobili/aggiungi-immobile');
+        navigate('/admin/immobili/aggiungi-immobile');
     };
 
     // Reindirizza al form unificato in modalità Modifica, includendo l'ID nell'URL.
-    const handleEditImmobile = () => {
-        // La modifica è consentita solo se è selezionato esattamente un elemento
-        if (selectedImmobileIds.length !== 1) return;
-        const idToEdit = selectedImmobileIds[0];
-        // Navigazione a una rotta dinamica (es: /modifica-immobile/I001)
-        navigate(`/admin/gestione-immobili/modifica-immobile/${idToEdit}`);
+    const handleEditImmobile = (immobileId) => {
+        navigate(`/admin/immobili/modifica-immobile/${immobileId}`);
     };
 
-    // Gestisce la rimozione degli immobili selezionati.
-    const handleRemoveImmobili = async () => {
-        if (selectedImmobileIds.length === 0) return;
-
-        if (window.confirm(`Sei sicuro di voler rimuovere ${selectedImmobileIds.length} immobile/i?`)) {
+    // Gestisce la rimozione di un singolo immobile.
+    const handleDeleteImmobile = async (immobileId) => {
+        if (window.confirm('Sei sicuro di voler rimuovere questo immobile?')) {
             try {
-                // Chiama la funzione di rimozione fornita dal custom hook
-                await removeImmobili(selectedImmobileIds);
-                // Dopo il successo, resetta la selezione
-                setSelectedImmobileIds([]);
+                await removeImmobili([immobileId]);
             } catch (err) {
-                console.error('Errore durante la rimozione degli immobili:', err);
-                // Si potrebbe aggiungere un feedback visivo all'utente qui
+                console.error('Errore durante la rimozione dell\'immobile:', err);
             }
-        }
-    };
-
-    // Gestisce la selezione/deselezione di una singola riga
-    const toggleImmobileSelection = (immobileId) => {
-        setSelectedImmobileIds(prevIds =>
-            prevIds.includes(immobileId)
-                ? prevIds.filter(id => id !== immobileId) // Deseleziona
-                : [...prevIds, immobileId]                // Seleziona
-        );
-    };
-
-    // Determina se tutti gli elementi visibili sono selezionati
-    const isAllSelected = immobiliList.length > 0 && selectedImmobileIds.length === immobiliList.length;
-
-    // Gestisce la selezione/deselezione di tutte le righe
-    const handleSelectAll = () => {
-        if (isAllSelected) {
-            setSelectedImmobileIds([]);
-        } else {
-            // Seleziona tutti gli ID della lista corrente (filtrata)
-            const allIds = immobiliList.map(item => item.id);
-            setSelectedImmobileIds(allIds);
         }
     };
 
@@ -127,22 +90,6 @@ const Immobili = () => {
                         <button className="add-btn" onClick={handleAddImmobile} disabled={isLoading}>
                             ➕ Aggiungi Immobile
                         </button>
-                        <button
-                            className="edit-btn"
-                            onClick={handleEditImmobile}
-                            // Modifica abilitata solo se UN elemento è selezionato
-                            disabled={selectedImmobileIds.length !== 1 || isLoading}
-                        >
-                            ✏️ Modifica
-                        </button>
-                        <button
-                            className="remove-btn"
-                            onClick={handleRemoveImmobili}
-                            // Rimuovi abilitato solo se ALMENO un elemento è selezionato
-                            disabled={selectedImmobileIds.length === 0 || isLoading}
-                        >
-                            🗑️ Rimuovi
-                        </button>
                     </div>
                 </div>
 
@@ -155,10 +102,10 @@ const Immobili = () => {
                     <ReusableTable
                         data={immobiliList}
                         columns={immobileColumns}
-                        selectedItemIds={selectedImmobileIds}
-                        onRowSelect={toggleImmobileSelection} // Usa la funzione specifica degli immobili
-                        onSelectAll={handleSelectAll}
-                        isAllSelected={isAllSelected}
+                        onEdit={handleEditImmobile}
+                        onDelete={handleDeleteImmobile}
+                        showEdit={true}
+                        showDelete={true}
                     />
                 )}
 

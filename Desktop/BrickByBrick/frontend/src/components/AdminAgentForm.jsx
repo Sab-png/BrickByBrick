@@ -87,18 +87,13 @@ const AgentForm = ({ mode = 'add' }) => {
                 const agent = await getAgentById(agentId); 
                 
                 // Formattazione dei dati API nel formato del form
-                // NOTA: Se il tuo backend non divide nome/cognome, adatta questa logica
-                const names = (agent.fullName || '').split(' ');
-                const nome = names.shift() || '';
-                const cognome = names.join(' ') || '';
-
                 setFormData({
-                    nome: agent.firstName || nome, // Preferisci i campi separati se disponibili
-                    cognome: agent.lastName || cognome, 
+                    nome: agent.nome || '',
+                    cognome: agent.cognome || '',
                     email: agent.email || '',
-                    telefono: agent.phone || '', // Adatta il nome della chiave API (es. 'phone' o 'telefono')
-                    cittaOperativa: agent.cittaOperativa || '', // Adatta il nome della chiave API
-                    sesso: agent.sesso || '' // Adatta il nome della chiave API
+                    telefono: agent.telefono || '',
+                    cittaOperativa: agent.città || '',
+                    sesso: agent.sesso || ''
                 });
 
             } catch (error) {
@@ -130,12 +125,12 @@ const AgentForm = ({ mode = 'add' }) => {
 
         // 2. Prepara il payload con i nomi delle chiavi attesi dal backend
         const payload = {
-            firstName: formData.nome,
-            lastName: formData.cognome,
+            nome: formData.nome,
+            cognome: formData.cognome,
             email: formData.email,
-            phone: formData.telefono,
-            operativeCity: formData.cittaOperativa,
-            gender: formData.sesso,
+            telefono: formData.telefono,
+            città: formData.cittaOperativa,
+            // Il campo sesso non esiste nel modello backend quindi lo omettiamo
         };
 
         setIsLoading(true); 

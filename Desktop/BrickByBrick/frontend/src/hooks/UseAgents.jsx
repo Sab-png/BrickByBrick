@@ -38,12 +38,12 @@ const useAgents = () => {
         }
     }, [filters]);
 
-    // --- 3. LOGICA DI LETTURA SINGOLA (GET /agenti/edit/{id}) ---
+    // --- 3. LOGICA DI LETTURA SINGOLA (GET /api/agenti/{id}) ---
     // Usata da AgentForm per pre-popolare i campi di modifica
     const getAgentById = async (id) => {
         try {
-            // Endpoint: /api/agenti/edit/{id}
-            const url = `${API_BASE_URL}/agenti/edit/${id}`; 
+            // Endpoint: /api/agenti/{id}
+            const url = `${API_BASE_URL}/api/agenti/${id}`; 
             const response = await fetch(url);
 
             if (!response.ok) {
@@ -60,7 +60,7 @@ const useAgents = () => {
         }
     };
 
-    // --- 4. LOGICA DI ELIMINAZIONE (GET /agenti/delete/{id}) ---
+    // --- 4. LOGICA DI ELIMINAZIONE (DELETE /api/agenti/{id}) ---
     const removeAgents = async (ids) => {
         if (ids.length === 0) return;
         
@@ -68,13 +68,13 @@ const useAgents = () => {
         setError(null);
 
         try {
-            // Eseguiamo una chiamata GET per ogni ID come da specifica del tuo backend
+            // Eseguiamo una chiamata DELETE per ogni ID
             for (const id of ids) {
-                // Endpoint: /api/agenti/delete/{id}
-                const url = `${API_BASE_URL}/agenti/delete/${id}`;
+                // Endpoint: /api/agenti/{id}
+                const url = `${API_BASE_URL}/api/agenti/${id}`;
                 
                 const response = await fetch(url, {
-                    method: 'GET', // Metodo specifico del tuo backend
+                    method: 'DELETE',
                 });
 
                 if (!response.ok) {
@@ -92,34 +92,32 @@ const useAgents = () => {
         }
     };
 
-    // --- 5. LOGICA DI CREAZIONE/AGGIORNAMENTO (POST /agenti/add | POST /agenti/update/{id}) ---
+    // --- 5. LOGICA DI CREAZIONE/AGGIORNAMENTO (POST /api/agenti | PUT /api/agenti/{id}) ---
     const saveAgent = async (agentId, payload, mode) => {
         setIsLoading(true);
         setError(null);
         
-        // Mappatura dei dati dal form (le chiavi del payload sono già corrette dal form)
+        // Il payload arriva già con i nomi corretti dal form
         const apiPayload = {
-            firstName: payload.firstName,
-            lastName: payload.lastName,
-            email: payload.email,
-            phone: payload.phone,
-            operativeCity: payload.operativeCity,
-            gender: payload.gender,
+            ...payload
         };
 
         let url = '';
+        let method = '';
         
         if (mode === 'add') {
-            // Endpoint Aggiunta: /api/agenti/add
-            url = `${API_BASE_URL}/agenti/add`;
+            // Endpoint Aggiunta: POST /api/agenti
+            url = `${API_BASE_URL}/api/agenti`;
+            method = 'POST';
         } else {
-            // Endpoint Modifica: /api/agenti/update/{id}
-            url = `${API_BASE_URL}/agenti/update/${agentId}`;
+            // Endpoint Modifica: PUT /api/agenti/{id}
+            url = `${API_BASE_URL}/api/agenti/${agentId}`;
+            method = 'PUT';
         }
 
         try {
             const response = await fetch(url, {
-                method: 'POST', // Usato per entrambe le operazioni secondo i tuoi endpoint
+                method: method,
                 headers: {
                     'Content-Type': 'application/json',
                 },

@@ -17,7 +17,8 @@ import AdminLayout from '../layout/AdminLayout';
 import Statistiche from '../pages/AdminStatistiche';
 import GestioneUtenti from '../pages/AdminGestioneUtenti';
 import ImmobiliAdmin from '../pages/AdminImmobili';
-import AgentForm from '../components/AdminAgentForm'
+import AgentForm from '../components/AdminAgentForm';
+import ImmobileForm from '../components/AdminImmobileForm';
 import AgendaAdmin from '../pages/AdminAgenda';
 
 const routes = [
@@ -111,16 +112,16 @@ const routes = [
         Component: ImmobiliAdmin,
         title: 'Immobili'
       },
-      // {
-      //   path: 'immobili/aggiungi-immobile',
-      //   Component: AddImmobile,
-      //   title: 'Aggiungi immobile'
-      // },
-      // {
-      //   path : 'immobili/modifica-immobile/:id',
-      //   Component: ModifyImmobile,
-      //   title: 'Modifica immobile'
-      // },
+      {
+        path: 'immobili/aggiungi-immobile',
+        Component: () => <ImmobileForm mode="add" />,
+        title: 'Aggiungi immobile'
+      },
+      {
+        path: 'immobili/modifica-immobile/:id',
+        Component: () => <ImmobileForm mode="edit" />,
+        title: 'Modifica immobile'
+      },
       {
         path: 'agenda',
         Component: AgendaAdmin,
