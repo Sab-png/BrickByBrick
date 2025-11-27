@@ -1,8 +1,18 @@
 import CTAButton from '../components/CTAButton';
 import notFoundImg from '../assets/images/not-found.svg';
 
+import useSEO from '../hooks/useSEO';
+
 export default function NotFound() {
+
+    useSEO({
+        title: "404 Pagina non trovata",
+        description: "La pagina che stavi cercando non esiste o è stata spostata.",
+        noindex: true
+    })
+
     return (
+        <>
         <div className="not-found-container">
             <div className="not-found-image-wrapper">
                 <img src={notFoundImg} alt="Errore 404 - Non Trovato" />
@@ -18,5 +28,6 @@ export default function NotFound() {
 
             <CTAButton content='Torna Alla Home' ctaLink='/'/>
         </div>
+        </>
     );
 }
