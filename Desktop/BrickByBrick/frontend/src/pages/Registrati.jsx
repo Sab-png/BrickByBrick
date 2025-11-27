@@ -100,15 +100,24 @@ const Registrati = () => {
     }
   };
 
+  useSEO({
+    title: "Registrati - Crea un nuovo account",
+    description: "Iscriviti a Immobiliaris. Crea il tuo profilo gratuito per salvare ricerche, ricevere notifiche sui nuovi immobili e richiedere valutazioni.",
+    noindex: true
+  })
+
   return (
+    <>
     <div className="register">
       <div className="register__container">
         {/* SEZIONE IMMAGINE */}
         <div className="register__image-section">
-          <img 
-            src={ImageRegistrati} 
-            alt="Interior Design"
-          />
+
+          <picture>
+            <source srcSet={ImageRegistratiAvif} type="image/avif" />
+            <source srcSet={ImageRegistratiWebp} type="image/webp" />
+            <img src={ImageRegistratiJpg} alt="Interior Design" className="register__image" loading="lazy" />
+          </picture>
         </div>
 
         {/* SEZIONE FORM */}
@@ -283,6 +292,7 @@ const Registrati = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
