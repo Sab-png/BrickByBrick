@@ -1,22 +1,33 @@
+import { lazy, Suspense } from 'react';
 import Layout from '../layout/Layout';
 import ProtectedRoute from '../components/ProtectedRoute';
 
-// Pages Pubbliche
-import Homepage from '../pages/Homepage';
-import About from '../pages/About';
-import Immobili from '../pages/Immobili';
-import DettaglioImmobile from '../pages/DettaglioImmobile';
-import FAQSupport from '../pages/FAQSupport';
-import Vendi from '../pages/Vendi';
-import Valuta from '../pages/Valuta';
-import Login from '../pages/Login';
-import Registrati from '../pages/Registrati';
-import NotFound from '../pages/NotFound';
+// Componente di fallback per il loading - temporaneo
+const Loading = () => (
+  <div style={{ padding: '2rem', textAlign: 'center' }}>
+    Caricamento...
+  </div>
+);
 
-// Pages Protette
-import StepMultiForm from '../pages/StepMultiForm';
-// import AdminDashboard from '../pages/AdminDashboard';
-// import AgenteDashboard from '../pages/AgenteDashboard';
+import Homepage from '../pages/Homepage';
+
+const About = lazy(() => import('../pages/About'));
+const Immobili = lazy(() => import('../pages/Immobili'));
+const DettaglioImmobile = lazy(() => import('../pages/DettaglioImmobile'));
+const FAQSupport = lazy(() => import('../pages/FAQSupport'));
+const Vendi = lazy(() => import('../pages/Vendi'));
+const Valuta = lazy(() => import('../pages/Valuta'));
+const Login = lazy(() => import('../pages/Login'));
+const Registrati = lazy(() => import('../pages/Registrati'));
+const NotFound = lazy(() => import('../pages/NotFound'));
+
+const StepMultiForm = lazy(() => import('../pages/StepMultiForm'));
+
+const withSuspense = (Component) => (
+  <Suspense fallback={<Loading />}>
+    <Component />
+  </Suspense>
+);
 
 const routes = [
   {
@@ -25,43 +36,43 @@ const routes = [
     children: [
       {
         index: true,
-        Component: Homepage,
+        Component: () => withSuspense(Homepage),
         showInNav: false,
         title: 'Home'
       },
       {
         path: 'about',
-        Component: About,
+        Component: () => withSuspense(About),
         showInNav: true,
         title: 'Chi Siamo'
       },
       {
         path: 'valuta',
-        Component: Valuta,
+        Component: () => withSuspense(Valuta),
         showInNav: true,
         title: 'Valuta'
       },
       {
         path: 'immobili',
-        Component: Immobili,
+        Component: () => withSuspense(Immobili),
         showInNav: true,
         title: 'Immobili'
       },
       {
         path: 'support',
-        Component: FAQSupport,
+        Component: () => withSuspense(FAQSupport),
         showInNav: true,
         title: 'Supporto'
       },
       {
         path: 'immobili/:id',
-        Component: DettaglioImmobile,
+        Component: () => withSuspense(DettaglioImmobile),
         showInNav: false,
         title: 'Dettaglio Immobile'
       },
       {
         path: 'vendi',
-        Component: Vendi,
+        Component: () => withSuspense(Vendi),
         showInNav: true,
         title: 'Vendi'
       },
@@ -69,36 +80,34 @@ const routes = [
   },
   {
     path: 'valuta-immobile',
-    // element: <ProtectedRoute Component={StepMultiForm} />,
-    Component: StepMultiForm,
+    Component: () => withSuspense(StepMultiForm),
     title: 'Valuta Immobile'
   },
   // {
   //   path: 'dashboard',
-  //   element: <ProtectedRoute Component={AdminDashboard} requiredRole="ADMIN" />,
+  //   Component: () => withSuspense(() => <ProtectedRoute Component={AdminDashboard} requiredRole="ADMIN" />),
   //   title: 'Admin Dashboard'
   // },
-
   // {
   //   path: 'dashboard/agente',
-  //   element: <ProtectedRoute Component={AgenteDashboard} requiredRole="AGENTE" />,
+  //   Component: () => withSuspense(() => <ProtectedRoute Component={AgenteDashboard} requiredRole="AGENTE" />),
   //   title: 'Agente Dashboard'
   // },
   {
     path: 'login',
-    Component: Login,
+    Component: () => withSuspense(Login),
     showInNav: false,
     title: 'Login'
   },
   {
     path: 'registrati',
-    Component: Registrati,
+    Component: () => withSuspense(Registrati),
     showInNav: false,
     title: 'Registrati'
   },
   {
     path: '*',
-    Component: NotFound
+    Component: () => withSuspense(NotFound)
   }
 ];
 
