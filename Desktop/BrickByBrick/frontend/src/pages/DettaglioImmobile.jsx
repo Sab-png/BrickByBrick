@@ -1,5 +1,4 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { mockImmobili } from '../data/mockImmobili';
 import { useEffect, useState } from 'react';
 
 // Importa i nuovi componenti
@@ -10,6 +9,8 @@ import FeatureImmobile from '../components/FeatureImmobile';
 import InfoEdificioImmobile from '../components/InfoEdificioImmobile';
 import DescrizioneImmobile from '../components/DescrizioneImmobile';
 import Newsletter from '../components/NewsLetter';
+
+import useSEO from '../hooks/useSEO';
 
 export default function DettaglioImmobile() {
   const { id } = useParams();
@@ -46,6 +47,14 @@ export default function DettaglioImmobile() {
   };
 
   const { caratteristiche } = immobile;
+
+    useSEO({
+    title: `Immobile in ${immobile?.indirizzo} a ${immobile?.citta}`,
+    description: `Vendita ${immobile?.tipologia} in ${immobile?.indirizzo} a ${immobile?.citta}. Prezzo: €${immobile?.prezzo}. ${immobile?.descrizione}`,
+    image: String(immobile?.foto),
+    imageAlt: `Foto di ${immobile?.titolo}`,
+    type: "article"
+  })
 
   return (
     <>
