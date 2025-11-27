@@ -1,16 +1,20 @@
-import storyImage from '../assets/images/story-image.jpg'; 
+import storyImageAvif from '../assets/images/avif/story-image.avif';
+import storyImageWebp from '../assets/images/webp/story-image.webp';
+import storyImageJpg from '../assets/images/jpg/story-image.jpg'; 
 
 export default function StorySection() {
     return (
         <section className="story-section">
             <div className="story-section__container">
+                
                 <div className="story-section__image-wrapper">
-                    <img
-                        src={storyImage}
-                        alt="La nostra storia"
-                        className="story-section__image"
-                    />
+                    <picture>
+                        <source srcSet={storyImageAvif} type="image/avif" />
+                        <source srcSet={storyImageWebp} type="image/webp" />
+                        <img src={storyImageJpg} alt="La nostra storia - Team al lavoro" className="story-section__image" loading="lazy" />
+                    </picture>
                 </div>
+
                 <div className="story-section__content">
                     <h2 className="story-section__title">La nostra storia</h2>
                     <div className="story-section__text">
@@ -22,6 +26,7 @@ export default function StorySection() {
                         </p>
                     </div>
                 </div>
+
             </div>
         </section>
     );
