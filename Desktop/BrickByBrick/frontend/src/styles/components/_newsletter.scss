@@ -1,115 +1,175 @@
-// Variabili per mantenere la coerenza
-$color-bg: #b0c4de;          // Lo sfondo azzurro chiaro del box
-$color-button: #208e9a;      // Il verde acqua del pulsante
-$color-text: #36454f;        // Colore scuro per il testo
-$border-radius: 2.5rem 2.5rem 0 0;
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as m;
+@use 'sass:color';
+
 
 .newsletter {
-    // 1. Stile del contenitore principale
-    background-color: $color-bg;
-    border-radius: $border-radius;
-    padding: 150px 100px;
-    max-height: 400px;
-    
-    
-    
-    // Layout Flexbox per affiancare illustrazione, testo e form
+    background-color: vars.$newsletter-bg;
+    border-radius: vars.$newsletter-border-radius;
+    padding: vars.$spacing-3xl vars.$spacing-2xl;
     display: flex;
-    flex-wrap: wrap; // Permette il wrapping su schermi piccoli
+    flex-wrap: wrap;
+    align-items: center;
     
-    justify-content: space-between;
-    gap: 3rem;
+    // CAMBIO CHIAVE: Centra e definisce una max-width per centrare l'intera sezione
+    justify-content: center;
+    gap: vars.$spacing-2xl;
+    min-width: 100%;
 
-    
-    // 2. Illustrazione (Primo div)
-    &__illustration-box {
-        // Assegna uno spazio fisso all'illustrazione
-        flex-shrink: 0;
-        width: 250px; 
-        
-        .newsletter__image {
-             max-width: 100%;
-             height: auto;
-        }
-    }
-
-    // 3. Contenuto (Titolo e Paragrafo - Secondo div)
-    &__content {
-        flex-grow: 1; // Permette al contenuto di riempire lo spazio
-        max-width: 600px; // Limita la larghezza del testo
-        color: $color-text;
-        align-items: center;
-    }
-    
-    &__title {
-        font-size: 3rem;
-        font-weight: 800;
-        margin-bottom: 0.5rem;
-        text-align: left;
-    }
-    
-    // 4. Form (Input e Button - Terzo div/Form)
-    &__form {
-        display: flex; // Per affiancare input e pulsante
-        // Se non è specificato in SCSS, aggiungi un margine per staccare dal testo
-        margin-top: 20px; 
-        gap: 10px;
-        
-        
-        // Stile dell'input
-        .newsletter__input {
-            padding: 12px 15px;
-            
-            border-radius: 4px 4px 4px 4px;
-            flex-grow: 1; // L'input riempie lo spazio disponibile
-            min-width: 150px; // Larghezza minima per l'input
-            font-size: 1rem;
-            border: black 5px solid;
-            
-        }
-        
-        // Stile del pulsante
-        .newsletter__button {
-            background-color: $color-button;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 4px 4px 4px 4px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.2s;
-            gap: 1rem;
-            
-            &:hover:not(:disabled) {
-                background-color: darken($color-button, 10%);
-            }
-            
-            &:disabled {
-                background-color: lighten($color-button, 20%);
-                cursor: not-allowed;
-            }
-        }
-    }
-
-    // 5. Media Queries per la responsività
-    @media (max-width: 768px) {
-        // Sotto una certa larghezza, impila gli elementi verticalmente
+    @include m.mobile {
         flex-direction: column;
         text-align: center;
-        padding: 30px 20px;
-        
-        &__illustration-box {
-            width: 150px; 
+        padding: vars.$spacing-xl vars.$spacing-lg;
+        border-radius: vars.$border-radius-lg;
+        width: 100%; // Ritorna full width su mobile
+    }
+
+    @include m.tablet {
+        padding: vars.$spacing-3xl vars.$spacing-xl;
+    }
+
+    // Illustrazione
+    &__illustration-box {
+        flex-shrink: 0;
+        @include m.flex-center;
+
+        @include m.mobile {
+            display: none;
         }
+
+        @include m.tablet {
+            width: 250px;
+        }
+    }
+
+    &__image {
+        max-width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    // Contenuto
+    &__content {
+        flex-grow: 1;
+        max-width: 650px;
+        @include m.flex-column;
+        gap: vars.$spacing-base;
+
+        // Su mobile, il testo non è più centrato perché si centra l'intero blocco
+        @include m.mobile {
+            max-width: 100%;
+            text-align: center;
+        }
+
+        // Su desktop, forziamo l'allineamento a sinistra
+        @include m.tablet {
+            text-align: left;
+        }
+    }
+
+    &__title {
+        font-family: vars.$font-title; // Poppins
+        // font-size: vars.$font-size-3xl; // 30px
+        color: vars.$black;
+        margin: 0;
+        // line-height: vars.$line-height-tight;
+
+        @include m.tablet {
+            // font-size: vars.$font-size-4xl; // 36px
+        }
+
+        @include m.desktop {
+            // font-size: vars.$font-size-5xl; // 48px
+        }
+    }
+
+    &__text {
+        font-family: vars.$font-paragraph; // Montserrat
+        font-size: vars.$font-size-sm; // 14px
+        color: vars.$black;
+        line-height: vars.$line-height-relaxed;
+        margin: 0;
+
+        @include m.tablet {
+            font-size: vars.$font-size-base; // 16px
+        }
+    }
+
+    // Form
+    &__form {
+        display: flex;
+        gap: vars.$spacing-sm;
+        margin-top: vars.$spacing-base;
+        width: 100%;
+        max-width: 600px;
         
-        &__form {
-            width: 100%; // Il form occupa tutta la larghezza
-            justify-content: center;
-            
-            .newsletter__input,
-            .newsletter__button {
-                // Potresti volere che l'input si estenda di più
-            }
+        // CAMBIO CHIAVE: Forziamo l'allineamento del form a sinistra se non è su mobile
+        @include m.tablet {
+            margin-left: 0;
+        }
+
+        @include m.mobile {
+            flex-direction: column;
+            align-items: stretch;
+            // Centra il form se su mobile
+            margin: vars.$spacing-base auto 0 auto; 
+        }
+    }
+
+    &__input {
+        font-family: vars.$font-paragraph;
+        padding: vars.$spacing-sm vars.$spacing-base;
+        border-radius: vars.$border-radius-sm;
+        flex-grow: 1;
+        min-width: 200px;
+        font-size: vars.$font-size-sm;
+        border: 2px solid vars.$white;
+        background-color: vars.$white;
+        transition: border-color vars.$transition-base;
+
+        &::placeholder {
+            color: vars.$light-gray;
+        }
+
+        &:focus {
+            outline: none;
+            border-color: vars.$turquoise;
+        }
+
+        @include m.tablet {
+            font-size: vars.$font-size-base;
+            padding: vars.$spacing-base vars.$spacing-lg;
+        }
+    }
+
+    &__button {
+        background-color: vars.$turquoise;
+        color: vars.$white;
+        padding: vars.$spacing-sm vars.$spacing-lg;
+        border: none;
+        border-radius: vars.$border-radius-sm;
+        font-family: vars.$font-title; // Poppins
+        font-weight: vars.$font-weight-bold;
+        font-size: vars.$font-size-sm;
+        cursor: pointer;
+        transition: all vars.$transition-base vars.$transition-ease;
+        white-space: nowrap;
+
+        &:hover:not(:disabled) {
+            background-color: color.scale(vars.$turquoise, $lightness: -10%);
+            transform: translateY(-2px);
+            box-shadow: vars.$shadow-md;
+        }
+
+        &:disabled {
+            background-color: color.scale(vars.$turquoise, $lightness: 20%);
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        @include m.tablet {
+            font-size: vars.$font-size-base;
+            padding: vars.$spacing-base vars.$spacing-xl;
         }
     }
 }

@@ -6,7 +6,7 @@
  * prima di passare al successivo, con validazione dei dati.
  */
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CardStep from './CardStep';
 import '../styles/components/_stepMulti.scss'
@@ -15,12 +15,12 @@ import '../styles/components/_stepMulti.scss'
 import homeIcon from '../../public/img/casa_indipendente.svg';
 import casa from '../../public/img/casa_indipendente.svg';
 import appartamento from '../../public/img/Appartment.svg';
-import rulerIcon from '../../public/img/Papa-V.jpg';
-import dropletsIcon from '../../public/img/Papa-V.jpg';
-import userIcon from '../../public/img/Papa-V.jpg';
-import arrowLeftIcon from '../../public/img/Papa-V.jpg';
-import arrowRightIcon from '../../public/img/Papa-V.jpg';
-import homeOptionIcon from '../../public/img/Papa-V.jpg';
+import rulerIcon from '../../public/img/coins.svg';
+import dropletsIcon from '../../public/img/coins.svg';
+import userIcon from '../../public/img/coins.svg';
+import arrowLeftIcon from '../../public/img/coins.svg';
+import arrowRightIcon from '../../public/img/coins.svg';
+import homeOptionIcon from '../../public/img/coins.svg';
 
 /**
  * INIZIALIZZAZIONE DEL COMPONENTE

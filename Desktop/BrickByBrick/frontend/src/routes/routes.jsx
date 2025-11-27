@@ -1,28 +1,26 @@
 import Layout from '../layout/Layout'
-import AdminLayout from '../back-office/layout/AdminLayout' // Nuovo layout per admin
 
-// Pages pubbliche
 import Homepage from '../pages/Homepage'
 import About from '../pages/About'
 import Immobili from '../pages/Immobili'
 import DettaglioImmobile from '../pages/DettaglioImmobile'
-import FAQSupport from '../pages/FAQSupport'
-import StepMultiForm from '../pages/StepMultiForm'
+import FAQSupport from '../pages/FAQSupport';
+import Vendi from '../pages/Vendi';
+import Valuta from '../pages/Valuta';
 import NotFound from '../pages/NotFound'
+import StepMultiForm from '../pages/StepMultiForm';
 
-// Pages back-office
-import Dashboard from '../back-office/pages/Dashboard'
-import Statistiche from '../back-office/pages/AdminStatistica'
-import GestionePiattaforma from '../back-office/pages/AdminGestioneUtenti'
-import AddAgentPage from '../back-office/pages/AddAgent'
-import ModifyAgent from '../back-office/pages/ModifyAgent'
-import ImmobiliAdmin from '../back-office/pages/AdminImmobili'
-import Agenda from '../back-office/pages/AdminAgenda'
 
-import { Component } from 'react'
+
+// Admin sections 
+import AdminLayout from '../layout/AdminLayout';
+import Statistiche from '../pages/AdminStatistiche';
+import GestioneUtenti from '../pages/AdminGestioneUtenti';
+import ImmobiliAdmin from '../pages/AdminImmobili';
+import AgentForm from '../components/AdminAgentForm'
+import AgendaAdmin from '../pages/AdminAgenda';
 
 const routes = [
-  // Rotte pubbliche
   {
     path: '/',
     Component: Layout,
@@ -30,14 +28,21 @@ const routes = [
       {
         index: true,
         Component: Homepage,
-        showInNav: true,
+        showInNav: false,
         title: 'Home'
       },
+      // Nuove rotte
       {
         path: 'about',
         Component: About,
         showInNav: true,
         title: 'Chi Siamo'
+      },
+      {
+        path: 'valuta',
+        Component: Valuta,
+        showInNav: true,
+        title: 'Valuta'
       },
       {
         path: 'immobili',
@@ -46,55 +51,59 @@ const routes = [
         title: 'Immobili'
       },
       {
+        path: 'support',
+        Component: FAQSupport,
+        showInNav: true,
+        title: 'Supporto'
+
+      },
+      {
         path: 'immobili/:id',
         Component: DettaglioImmobile,
         showInNav: false
       },
       {
-        path: 'faq-support',
-        Component: FAQSupport,
+        path: 'vendi',
+        Component: Vendi,
         showInNav: true,
-        title: 'FAQ & Supporto'
+        title: 'Vendi'
       },
-      {
-        path: 'step-multi-form',
-        Component: StepMultiForm,
-        showInNav: true,
-        title: 'Step Multi Form'
-      },
-      {
-        path: '*',
-        Component: NotFound
-      }
     ]
   },
-  // Rotte back-office
+  {
+    path: 'valuta-immobile',
+    Component: StepMultiForm,
+    showInNav: false,
+    title: 'Step Multi Form'
+  },
+  {
+    path: '*',
+    Component: NotFound
+  },
   {
     path: '/admin',
     Component: AdminLayout, // Layout con la SideBar
     children: [
+      
       {
         index: true,
-        Component: Dashboard, // O redirect a statistiche
-      },
-      {
-        path: 'statistiche',
+        // path: 'statistiche',
         Component: Statistiche,
         title: 'Statistiche'
       },
       {
         path: 'gestione-utenti',
-        Component: GestionePiattaforma,
+        Component: GestioneUtenti,
         title: 'Gestione Utenti'
       },
- {
+      {
         path: 'gestione-utenti/aggiungi-agente',
-        Component: AddAgentPage,
+        Component: () => <AgentForm mode="add" />,
         title: 'Aggiungi agente'
       },
       {
         path: 'gestione-utenti/modifica-agente/:id',
-        Component: ModifyAgent,
+        Component: () => <AgentForm mode="edit" />,
         title: 'Modifica agente'
       },
       {
@@ -102,9 +111,19 @@ const routes = [
         Component: ImmobiliAdmin,
         title: 'Immobili'
       },
+      // {
+      //   path: 'immobili/aggiungi-immobile',
+      //   Component: AddImmobile,
+      //   title: 'Aggiungi immobile'
+      // },
+      // {
+      //   path : 'immobili/modifica-immobile/:id',
+      //   Component: ModifyImmobile,
+      //   title: 'Modifica immobile'
+      // },
       {
         path: 'agenda',
-        Component: Agenda,
+        Component: AgendaAdmin,
         title: 'Agenda'
       },
     ]

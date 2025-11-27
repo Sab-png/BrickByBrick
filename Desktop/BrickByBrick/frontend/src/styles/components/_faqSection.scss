@@ -1,87 +1,117 @@
-// _faq-variables.scss
-
-$background-color: #e6eff2; // Azzurro/Grigio chiaro per lo sfondo
-$primary-text-color: #333;
-$secondary-text-color: #555;
-$border-color: black;
-$accent-color: red; // Blu di esempio per l'accento
-$radius-large: 2rem;
-$radius-small: 4px;
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as m;
 
 .faq-background {
-  // Sfondo esterno che riempie lo schermo
-  background-color: $background-color;
-  padding: 50px 20px;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  // Sfondo esterno azzurro chiaro
+  background-color: vars.$light-blue;
+  padding: vars.$spacing-3xl vars.$spacing-lg;
+  
+  @include m.flex-column;
   align-items: center;
+
+  // Su mobile, riduciamo il padding verticale
+  @include m.mobile {
+    padding: vars.$spacing-xl vars.$spacing-base;
+  }
 }
 
 .faq-header {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: vars.$spacing-xl;
 
   h1 {
-    font-size: 2.5rem;
-    color: $primary-text-color;
-    margin-bottom: 5px;
+    // Usiamo il mixin per gli heading
+    @include m.heading(vars.$font-size-5xl, vars.$font-weight-bold);
+    color: vars.$dark-blue;
+    margin-bottom: vars.$spacing-sm;
+
+    @include m.mobile {
+      font-size: vars.$font-size-3xl; // Riduciamo il titolo su mobile
+    }
   }
 
   p {
-    color: $secondary-text-color;
-    font-size: 1.1rem;
+    color: vars.$light-gray;
+    font-family: vars.$font-paragraph;
+    font-size: vars.$font-size-lg;
+
+    @include m.mobile {
+      font-size: vars.$font-size-base;
+    }
   }
 }
 
 .faq-container {
-  // Il "blocco" arrotondato che contiene le FAQ
-  background-color: white;
-  border-radius: $radius-large;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); // Ombra leggera
+  // Blocco bianco arrotondato
+  background-color: vars.$white;
+  border-radius: vars.$border-radius-xl; // 16px
+  box-shadow: vars.$shadow-lg; // Ombra più morbida e ampia
   max-width: 800px;
   width: 100%;
-  padding: 30px 40px;
+  padding: vars.$spacing-xl vars.$spacing-2xl;
   
+  // Responsive: Riduciamo il padding interno su mobile
+  @include m.mobile {
+    padding: vars.$spacing-lg vars.$spacing-lg;
+  }
 }
 
 .faq-tabs {
   display: flex;
   justify-content: center;
   text-align: center;
-  border-bottom: 2px solid $border-color;
-  margin-bottom: 20px;
-  padding-bottom: 10px;
+  // Linea grigia chiara di separazione
+  border-bottom: vars.$border-width solid rgba(vars.$black, 0.1); 
+  margin-bottom: vars.$spacing-lg; // Spazio tra tab e prime FAQ
+  
+
+  // Responsive: Su mobile, permettiamo lo scroll orizzontale dei tab
+  @include m.mobile {
+    justify-content: flex-start;
+    overflow-x: auto;
+    
+    // Nascondiamo la scrollbar per un look più pulito
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;     /* Firefox */
+    &::-webkit-scrollbar {
+      display: none;             /* Chrome, Safari, Opera */
+    }
+  }
 
   .tab-button {
     background: none;
     border: none;
-    padding: 10px 15px;
-    margin-right: 15px;
+    padding: vars.$spacing-sm vars.$spacing-base;
+    padding-bottom: vars.$spacing-lg; // Più spazio per la linea
+    margin-right: vars.$spacing-lg;
     cursor: pointer;
-    font-size: 1rem;
-    color: $secondary-text-color;
+    font-family: vars.$font-paragraph;
+    font-size: vars.$font-size-base;
+    font-weight: vars.$font-weight-medium;
+    color: vars.$light-gray;
     position: relative;
-    transition: color 0.3s;
+    transition: color vars.$transition-base vars.$transition-ease;
+    flex-shrink: 0; // Impedisce ai tab di stringersi su mobile
+    white-space: nowrap; // Evita che i nomi dei tab vadano a capo
 
     &:hover:not(.active) {
-      color: lighten($primary-text-color, 10%);
+      color: vars.$dark-blue;
     }
 
     &.active {
-      color: $primary-text-color;
-      font-weight: 600;
+      color: vars.$dark-blue;
+      font-weight: vars.$font-weight-semibold;
 
-      // La linea blu sotto la tab attiva
+      // Linea d'accento (turchese)
       &::after {
         content: '';
         position: absolute;
-        bottom: -11px;
+        // Si posiziona sopra il border-bottom del contenitore
+        bottom: - (vars.$border-width); 
         left: 0;
         width: 100%;
-        height: 3px;
-        background-color: $accent-color;
-        border-radius: $radius-small $radius-small 0 0;
+        height: 2px; // Linea d'accento spessa 2px
+        background-color: vars.$turquoise; // Colore accento
       }
     }
   }
@@ -89,6 +119,7 @@ $radius-small: 4px;
 
 .no-faqs {
   text-align: center;
-  color: $secondary-text-color;
-  padding: 20px;
+  color: vars.$light-gray;
+  font-family: vars.$font-paragraph;
+  padding: vars.$spacing-lg;
 }

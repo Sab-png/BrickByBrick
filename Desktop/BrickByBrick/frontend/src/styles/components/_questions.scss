@@ -1,139 +1,166 @@
-// _contactSection.scss
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as m;
+@use 'sass:color';
 
-// Variabili (se non hai già un file condiviso)
-$background-color: #e6eff2; 
-$primary-text-color: #333;
-$secondary-text-color: #555;
-$border-color: #ccc;
-$accent-color: #008080; // Un verde/teal simile al bottone
-$radius-large: 20px;
-$radius-small: 6px;
+.contact {
 
-.contact-background {
-  background-color: $background-color;
-  padding: 80px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+  &__background {
+    background-color: vars.$light-blue;
+    padding: vars.$spacing-3xl vars.$spacing-lg;
 
-.contact-header {
-  text-align: center;
-  margin-bottom: 40px;
-  max-width: 600px;
+    @include m.flex-column;
+    align-items: center;
 
-  h2 {
-    font-size: 2rem;
-    color: $primary-text-color;
-    margin-bottom: 20px;
-  }
-
-  p {
-    color: $secondary-text-color;
-    line-height: 1.5;
-    margin-bottom: 5px;
-  }
-}
-
-.contact-container {
-  // Il "blocco" arrotondato che contiene il form
-  background-color: white;
-  border-radius: $radius-large;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); 
-  max-width: 800px;
-  width: 100%;
-  padding: 30px 40px;
-}
-
-.contact-form {
-  display: flex;
-  flex-direction: column;
-
-  .form-group {
-    margin-bottom: 20px;
-
-    label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 600;
-      color: $primary-text-color;
+    @include m.mobile {
+      padding: vars.$spacing-xl vars.$spacing-base;
     }
+  }
 
-    input, textarea {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid $border-color;
-      border-radius: $radius-small;
-      font-size: 1rem;
-      transition: border-color 0.3s, box-shadow 0.3s;
-      
-      &:focus {
-        border-color: $accent-color;
-        box-shadow: 0 0 0 1px $accent-color;
-        outline: none;
+  &__header {
+    text-align: center;
+    margin-bottom: vars.$spacing-2xl;
+    max-width: 600px;
+
+    h2 {
+      @include m.heading(vars.$font-size-4xl, vars.$font-weight-bold);
+      color: vars.$dark-blue;
+      margin-bottom: vars.$spacing-base;
+
+      @include m.mobile {
+        font-size: vars.$font-size-2xl;
       }
     }
 
-    textarea {
-      resize: vertical;
+    p {
+      font-family: vars.$font-paragraph;
+      color: vars.$light-gray;
+      font-size: vars.$font-size-base;
+      line-height: vars.$line-height-normal;
+      margin-bottom: vars.$spacing-sm;
     }
   }
 
-  .form-row {
-    display: flex;
-    gap: 20px; // Spazio tra Nome e Cognome
-    margin-bottom: 20px;
-    
-    .half-width {
-      width: 50%;
-      
-      // Assicura che la label sia visualizzata solo per il primo campo in mobile
-      &:first-child label {
-        display: block;
-      }
-    }
-  }
-  
-  .submit-button {
-    align-self: flex-start; // Allinea a sinistra come nell'immagine
-    background-color: $accent-color;
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: $radius-small;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    
-    &:hover {
-      background-color: darken($accent-color, 10%);
-    }
-  }
-}
+  &__container {
+    background-color: vars.$white;
+    border-radius: vars.$border-radius-xl;
+    box-shadow: vars.$shadow-lg;
+    max-width: 800px;
+    width: 100%;
+    padding: vars.$spacing-2xl vars.$spacing-3xl;
 
-// Media Query per la Responsività
-@media (max-width: 600px) {
-  .contact-container {
-    padding: 20px;
-  }
-  
-  .contact-form .form-row {
-    flex-direction: column; // Impila Nome e Cognome in verticale su schermi piccoli
-    gap: 0;
-
-    .half-width {
-      width: 100%;
+    @include m.mobile {
+      padding: vars.$spacing-xl vars.$spacing-lg;
     }
-    
+  }
+
+  &__form {
+    @include m.flex-column;
+
     .form-group {
-      margin-bottom: 20px;
-    }
-    
-    // Su mobile, nascondi la label del secondo campo per non duplicare "Nome e Cognome"
-    .hide-label-on-mobile {
+      margin-bottom: vars.$spacing-lg;
+
       label {
-        display: none;
+        display: block;
+        margin-bottom: vars.$spacing-sm;
+        font-family: vars.$font-paragraph;
+        font-weight: vars.$font-weight-semibold;
+        color: vars.$dark-blue;
+        font-size: vars.$font-size-sm;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: vars.$spacing-base;
+        border: vars.$border-width solid rgba(vars.$black, 0.15);
+        border-radius: vars.$border-radius-md;
+        font-family: vars.$font-paragraph;
+        font-size: vars.$font-size-base;
+
+        transition: border-color vars.$transition-base vars.$transition-ease,
+                    box-shadow vars.$transition-base vars.$transition-ease;
+
+        &::placeholder {
+          color: vars.$light-gray;
+        }
+
+        &:focus {
+          border-color: vars.$turquoise;
+          box-shadow: 0 0 0 vars.$border-width-thick vars.$turquoise;
+          outline: none;
+        }
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 120px;
+      }
+    }
+
+    .form-row {
+      @include m.flex-row;
+      align-items: flex-end;
+      gap: vars.$spacing-lg;
+      margin-bottom: vars.$spacing-lg;
+
+      .half-width {
+        width: 50%;
+      }
+    }
+
+    &__submit-button {
+      align-self: flex-start;
+      background-color: vars.$turquoise;
+      color: vars.$white;
+      border: none;
+      padding: vars.$spacing-base vars.$spacing-xl;
+      border-radius: vars.$border-radius-md;
+      font-family: vars.$font-paragraph;
+      font-size: vars.$font-size-base;
+      font-weight: vars.$font-weight-semibold;
+      cursor: pointer;
+
+      transition: background-color vars.$transition-base vars.$transition-ease,
+                  transform vars.$transition-base vars.$transition-ease,
+                  box-shadow vars.$transition-base vars.$transition-ease;
+
+      &:hover {
+        background-color: color.scale(vars.$turquoise, $lightness: -10%);
+        transform: translateY(-2px);
+        box-shadow: vars.$shadow-md;
+      }
+    }
+  }
+
+  &__visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+
+  @include m.mobile {
+    &__form {
+      .form-row {
+        flex-direction: column;
+        gap: 0;
+        margin-bottom: 0;
+        align-items: stretch;
+
+        .half-width {
+          width: 100%;
+          margin-bottom: vars.$spacing-lg;
+        }
+      }
+
+      .hide-label-on-mobile {
+        label {
+          display: none;
+        }
       }
     }
   }

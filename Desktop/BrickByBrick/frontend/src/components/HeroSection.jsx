@@ -1,19 +1,33 @@
+import { Link } from "react-router-dom";
 
-import '../styles/components/_herosection.scss';
+export default function HeroSection({ title, subtitle, showCTA = true, bgImage }) {
 
-export default function HeroSection() {
+  const heroStyle = {
+    '--bg-image-url': bgImage ? `url(${bgImage})` : 'none',
+  };
+
   return (
-    <section className="hero-section">
+    
+    <section className="hero-section" style={heroStyle}>
       <div className="hero-section__content-wrapper">
         <h1 className="hero-section__title">
-          Vendi la tua casa in Piemonte con un valore garantito e senza stress.
+          {title}
         </h1>
         
-        <button className="hero-section__cta-button">
-          VALUTA IL TUO IMMOBILE
-        </button>
+        {subtitle && (
+          <p className="hero-section__subtitle">
+            {subtitle}
+          </p>
+        )}
+        
+        {showCTA && (
+          <Link to={"/valuta-immobile"}>
+            <button className="hero-section__cta-button">
+              VALUTA IL TUO IMMOBILE
+            </button>
+          </Link>
+        )}
       </div>
-
     </section>
   );
 }

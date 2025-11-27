@@ -1,0 +1,61 @@
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as m;
+@use 'sass:color';
+
+.dettaglio-immobile {
+  width: 100%;
+
+  // Contenitore principale per il contenuto
+  &__content {
+    max-width: vars.$container-max-width;
+    margin: 0 auto;
+    padding: vars.$spacing-3xl vars.$spacing-lg;
+    @include m.flex-column;
+    gap: vars.$spacing-3xl;
+
+    @include m.tablet {
+      padding: vars.$spacing-3xl vars.$spacing-xl;
+    }
+  }
+
+  // Titolo di sezione condiviso
+  // Lo definiamo qui perché è usato da molti componenti figli
+  &__section-title {
+    font-family: vars.$font-title;
+    font-size: vars.$font-size-2xl;
+    font-weight: vars.$font-weight-bold;
+    color: vars.$blue;
+    margin: 0;
+
+    @include m.tablet {
+      font-size: vars.$font-size-3xl;
+    }
+  }
+
+  &__cta-section {
+    text-align: center;
+    padding-top: vars.$spacing-xl;
+  }
+
+  &__cta-button {
+    padding: vars.$spacing-lg vars.$spacing-3xl;
+    background-color: vars.$turquoise;
+    color: vars.$white;
+    border: none;
+    border-radius: vars.$border-radius-md;
+    font-family: vars.$font-title;
+    font-size: vars.$font-size-lg;
+    font-weight: vars.$font-weight-bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all vars.$transition-base vars.$transition-ease;
+    box-shadow: vars.$shadow-md;
+
+    &:hover {
+      background-color: color.scale(vars.$turquoise, $lightness: -10%);
+      transform: translateY(-2px);
+      box-shadow: vars.$shadow-xl;
+    }
+  }
+}

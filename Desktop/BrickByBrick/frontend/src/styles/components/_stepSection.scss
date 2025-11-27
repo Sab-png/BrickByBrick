@@ -1,0 +1,82 @@
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as m;
+@use 'sass:color';
+
+// // Variabile locale per lo sfondo azzurro chiaro
+// $steps-bg: rgba(vars.$sky-blue, 0.1);
+
+.steps-section {
+    width: 100%;
+    // background-color: $steps-bg;
+    padding: vars.$spacing-3xl 0;
+
+    @include m.tablet {
+        padding: calc(vars.$spacing-3xl * 1.5) 0;
+    }
+
+    @include m.desktop {
+        padding: calc(vars.$spacing-3xl * 2) 0;
+    }
+
+    &__container {
+        max-width: vars.$container-max-width;
+        margin: 0 auto;
+        padding: 0 vars.$spacing-lg;
+
+        @include m.tablet {
+            padding: 0 vars.$spacing-xl;
+        }
+
+        @include m.desktop {
+            padding: 0 vars.$spacing-2xl;
+        }
+    }
+
+    &__title {
+        font-family: vars.$font-title; // Poppins
+        font-size: vars.$font-size-3xl; // 30px
+        font-weight: vars.$font-weight-bold; // 700
+        color: vars.$blue;
+        text-align: center;
+        margin-bottom: vars.$spacing-2xl;
+        line-height: vars.$line-height-tight;
+
+        @include m.tablet {
+            font-size: vars.$font-size-4xl; // 36px
+            margin-bottom: vars.$spacing-3xl;
+        }
+
+        @include m.desktop {
+            font-size: vars.$font-size-5xl; // 48px
+        }
+    }
+
+    &__list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: vars.$spacing-3xl;
+        justify-items: start;
+
+        @include m.mobile {
+            gap: vars.$spacing-2xl;
+        }
+
+        @include m.desktop {
+            gap: calc(vars.$spacing-3xl * 1.5);
+        }
+    }
+
+    &__cta {
+        text-align: center;
+        margin-top: vars.$spacing-3xl;
+
+        @include m.tablet {
+            margin-top: calc(vars.$spacing-3xl * 1.5);
+        }
+    }
+
+
+}

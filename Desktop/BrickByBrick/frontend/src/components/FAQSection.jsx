@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import FAQItem from './FAQItem';
-import '../styles/components/_faqSection.scss'
 
-// --- Dati per tutte le sezioni ---
 const allFAQs = {
   "Generali": [
     {
@@ -175,10 +173,7 @@ const allFAQs = {
   ],
 };
 
-
-
 const tabs = ["Generali", "Preventivo AI", "Post valutazione", "Mandato in Esclusiva"];
-
 
 export default function FAQSection() {
   const [activeTab, setActiveTab] = useState("Generali");
