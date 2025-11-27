@@ -57,15 +57,23 @@ const Login = () => {
     }
   };
 
+    useSEO({
+    title: "Accedi all'Area Riservata",
+    description: "Effettua il login su Immobiliaris per gestire i tuoi annunci, consultare le valutazioni salvate e monitorare i tuoi preferiti.",
+    noindex: true
+  })
+
   return (
+    <>
     <div className="login">
       <div className="login__container">
         {/* SEZIONE IMMAGINE */}
         <div className="login__image-section">
-          <img 
-            src={ImageLogin} 
-            alt="Interior Design"
-          />
+          <picture>
+            <source srcSet={ImageLoginAvif} type="image/avif" />
+            <source srcSet={ImageLoginWebp} type="image/webp" />
+            <img src={ImageLoginJpg} alt="Interior Design" className="register__image" loading="lazy" />
+          </picture>
         </div>
 
         {/* SEZIONE FORM */}
@@ -163,6 +171,7 @@ const Login = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
