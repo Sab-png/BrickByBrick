@@ -7,6 +7,7 @@
 
 // Stand Alone Components
 @use './components/navbar';
+@use './components/navbarAdmin';
 @use './components/footer';
 @use './components/cta';
 @use './components/featureItem';
@@ -47,3 +48,13 @@
 @use './pages/notfound';
 @use './pages/login';
 @use './pages/registrati';
+
+// @use './pages/dettaglioImmobile';
+// @use './pages/notfound';
+@use './pages/adminLayout';
+@use './pages/adminGestioneUtenti';
+
+// Admin Components
+@use './components/adminTable';
+@use './components/adminTabs';
+@use './components/adminForms';

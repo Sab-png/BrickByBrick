@@ -23,6 +23,15 @@ const NotFound = lazy(() => import('../pages/NotFound'));
 
 const StepMultiForm = lazy(() => import('../pages/StepMultiForm'));
 
+// Admin sections 
+import AdminLayout from '../layout/AdminLayout';
+import Statistiche from '../pages/AdminStatistiche';
+import GestioneUtenti from '../pages/AdminGestioneUtenti';
+import ImmobiliAdmin from '../pages/AdminImmobili';
+import AgentForm from '../components/AdminAgentForm';
+import ImmobileForm from '../components/AdminImmobileForm';
+import AgendaAdmin from '../pages/AdminAgenda';
+
 const withSuspense = (Component) => (
   <Suspense fallback={<Loading />}>
     <Component />
@@ -108,7 +117,56 @@ const routes = [
   {
     path: '*',
     Component: () => withSuspense(NotFound)
+  },
+  {
+    path: '/admin',
+    Component: AdminLayout, // Layout con la SideBar
+    children: [
+
+      {
+        index: true,
+        // path: 'statistiche',
+        Component: Statistiche,
+        title: 'Statistiche'
+      },
+      {
+        path: 'gestione-utenti',
+        Component: GestioneUtenti,
+        title: 'Gestione Utenti'
+      },
+      {
+        path: 'gestione-utenti/aggiungi-agente',
+        Component: () => <AgentForm mode="add" />,
+        title: 'Aggiungi agente'
+      },
+      {
+        path: 'gestione-utenti/modifica-agente/:id',
+        Component: () => <AgentForm mode="edit" />,
+        title: 'Modifica agente'
+      },
+      {
+        path: 'immobili',
+        Component: ImmobiliAdmin,
+        title: 'Immobili'
+      },
+      {
+        path: 'immobili/aggiungi-immobile',
+        Component: () => <ImmobileForm mode="add" />,
+        title: 'Aggiungi immobile'
+      },
+      {
+        path: 'immobili/modifica-immobile/:id',
+        Component: () => <ImmobileForm mode="edit" />,
+        title: 'Modifica immobile'
+      },
+      {
+        path: 'agenda',
+        Component: AgendaAdmin,
+        title: 'Agenda'
+      }
+    ]
   }
+
 ];
 
 export default routes;

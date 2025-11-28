@@ -26,7 +26,6 @@ export default function StorySection() {
                         </p>
                     </div>
                 </div>
-
             </div>
         </section>
     );
