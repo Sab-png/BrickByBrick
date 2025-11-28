@@ -1,0 +1,436 @@
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as m;
+@use 'sass:color';
+
+// Sidebar Admin Navigation Styles
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    background: vars.$white;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.08);
+    z-index: vars.$z-index-header;
+    transition: width vars.$transition-base vars.$transition-ease;
+    width: 240px;
+    overflow: hidden;
+    border-right: 1px solid #e5e7eb;
+
+    @include m.mobile {
+        width: 60px;
+    }
+
+    &.open {
+        width: 240px;
+    }
+
+    &.closed {
+        width: 60px;
+
+        @include m.tablet {
+            width: 240px;
+        }
+    }
+
+    &-inner {
+        @include m.flex-column;
+        height: 100%;
+        width: 100%;
+        justify-content: space-between;
+        padding: 0;
+    }
+
+    &-header {
+        @include m.flex-center;
+        padding: vars.$spacing-lg vars.$spacing-base;
+        border-bottom: 1px solid #e5e7eb;
+        background: vars.$white;
+        min-height: 70px;
+        gap: vars.$spacing-sm;
+
+        @include m.mobile {
+            padding: vars.$spacing-base;
+        }
+    }
+
+    &-toggle {
+        @include m.size(36px);
+        @include m.flex-center;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        color: vars.$light-gray;
+        font-size: vars.$font-size-xl;
+        transition: all vars.$transition-base;
+        padding: 0;
+        border-radius: vars.$border-radius-md;
+
+        &:hover {
+            background-color: #f3f4f6;
+            color: vars.$blue;
+        }
+
+        &:active {
+            transform: scale(0.95);
+        }
+
+        @include m.tablet {
+            display: none;
+        }
+    }
+
+    .toggle-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &-nav {
+        flex: 1;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding: vars.$spacing-base 0;
+
+        &::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: #f9fafb;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 3px;
+
+            &:hover {
+                background: #9ca3af;
+            }
+        }
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: vars.$spacing-xs;
+        }
+    }
+
+    &-footer {
+        padding: vars.$spacing-lg vars.$spacing-base;
+        border-top: 1px solid #e5e7eb;
+        background: vars.$white;
+
+        @include m.mobile {
+            padding: vars.$spacing-base;
+        }
+    }
+
+    // Navigation Items
+    .nav-item {
+        list-style: none;
+        margin: 0;
+        padding: 0 vars.$spacing-base;
+    }
+
+    .nav-button {
+        display: flex;
+        align-items: center;
+        gap: vars.$spacing-base;
+        width: 100%;
+        padding: vars.$spacing-base vars.$spacing-lg;
+        background-color: transparent;
+        border: none;
+        text-decoration: none;
+        color: #6b7280;
+        cursor: pointer;
+        border-radius: vars.$border-radius-md;
+        transition: all vars.$transition-base vars.$transition-ease;
+        font-family: vars.$font-paragraph;
+        font-size: vars.$font-size-base;
+        font-weight: vars.$font-weight-regular;
+        white-space: nowrap;
+        min-height: 48px;
+        text-transform: capitalize;
+        position: relative;
+
+        @include m.mobile {
+            justify-content: center;
+            padding: vars.$spacing-base;
+        }
+
+        .sidebar.closed & {
+            justify-content: center;
+            padding: vars.$spacing-base;
+
+            @include m.tablet {
+                justify-content: flex-start;
+                padding: vars.$spacing-base vars.$spacing-lg;
+            }
+        }
+
+        .sidebar.open & {
+            justify-content: flex-start;
+            padding: vars.$spacing-base vars.$spacing-lg;
+        }
+
+        &:hover {
+            background: #f3f4f6;
+            color: vars.$turquoise;
+        }
+
+        &:active {
+            transform: scale(0.98);
+        }
+
+        &.active {
+            background: #ecfdf5;
+            color: vars.$turquoise;
+            font-weight: vars.$font-weight-semibold;
+
+            .nav-icon {
+                color: vars.$turquoise;
+            }
+        }
+    }
+
+    .nav-icon {
+        @include m.size(20px);
+        @include m.flex-center;
+        flex-shrink: 0;
+        font-size: vars.$font-size-lg;
+        color: currentColor;
+        transition: color vars.$transition-base;
+
+        svg {
+            @include m.size(20px);
+        }
+    }
+
+    .nav-label {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: left;
+        flex: 1;
+
+        @include m.mobile {
+            display: none;
+        }
+
+        .sidebar.closed & {
+            display: none;
+
+            @include m.tablet {
+                display: inline;
+            }
+        }
+
+        .sidebar.open & {
+            display: inline;
+        }
+    }
+
+    // Home/Exit Button
+    .home-button {
+        display: flex;
+        align-items: center;
+        gap: vars.$spacing-base;
+        width: 100%;
+        padding: vars.$spacing-base vars.$spacing-lg;
+        background-color: transparent;
+        border: none;
+        color: #6b7280;
+        cursor: pointer;
+        border-radius: vars.$border-radius-md;
+        transition: all vars.$transition-base vars.$transition-ease;
+        font-family: vars.$font-paragraph;
+        font-size: vars.$font-size-sm;
+        font-weight: vars.$font-weight-medium;
+        white-space: nowrap;
+        min-height: 44px;
+
+        @include m.mobile {
+            justify-content: center;
+            padding: vars.$spacing-base;
+        }
+
+        .sidebar.closed & {
+            justify-content: center;
+            padding: vars.$spacing-base;
+
+            @include m.tablet {
+                justify-content: flex-start;
+                padding: vars.$spacing-base vars.$spacing-lg;
+            }
+        }
+
+        .sidebar.open & {
+            justify-content: flex-start;
+            padding: vars.$spacing-base vars.$spacing-lg;
+        }
+
+        &:hover {
+            background: #fef2f2;
+            color: #dc2626;
+
+            .home-icon {
+                color: #dc2626;
+            }
+        }
+
+        &:active {
+            transform: scale(0.98);
+        }
+    }
+
+    .home-icon {
+        @include m.size(20px);
+        @include m.flex-center;
+        flex-shrink: 0;
+        color: currentColor;
+        transition: color vars.$transition-base;
+
+        svg {
+            @include m.size(20px);
+        }
+    }
+
+    .home-label {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        @include m.mobile {
+            display: none;
+        }
+
+        .sidebar.closed & {
+            display: none;
+
+            @include m.tablet {
+                display: inline;
+            }
+        }
+
+        .sidebar.open & {
+            display: inline;
+        }
+    }
+
+    // Home Button (Exit)
+    .home-button {
+        @include m.flex-center;
+        gap: vars.$spacing-base;
+        width: 100%;
+        padding: vars.$spacing-base vars.$spacing-sm;
+        background-color: color.change(vars.$sky-blue, $alpha: 0.1);
+        border: vars.$border-width solid color.change(vars.$sky-blue, $alpha: 0.3);
+        text-decoration: none;
+        color: vars.$sky-blue;
+        cursor: pointer;
+        border-radius: vars.$border-radius-md;
+        transition: all vars.$transition-base vars.$transition-ease;
+        font-family: vars.$font-paragraph;
+        font-size: vars.$font-size-sm;
+        font-weight: vars.$font-weight-medium;
+        white-space: nowrap;
+        min-height: 44px;
+
+        @include m.tablet {
+            justify-content: flex-start;
+            padding: vars.$spacing-base vars.$spacing-lg;
+            font-size: vars.$font-size-base;
+            gap: vars.$spacing-lg;
+        }
+
+        &:hover {
+            background-color: color.change(vars.$sky-blue, $alpha: 0.2);
+            border-color: color.change(vars.$sky-blue, $alpha: 0.5);
+            color: vars.$blue;
+        }
+
+        &:active {
+            transform: scale(0.98);
+        }
+
+        .sidebar.closed & {
+            justify-content: center;
+            padding: vars.$spacing-base vars.$spacing-sm;
+
+            @include m.tablet {
+                justify-content: flex-start;
+                padding: vars.$spacing-base vars.$spacing-lg;
+            }
+        }
+
+        .sidebar.open & {
+            justify-content: flex-start;
+            padding: vars.$spacing-base vars.$spacing-lg;
+        }
+    }
+
+    .home-icon {
+        @include m.size(24px);
+        @include m.flex-center;
+        flex-shrink: 0;
+        color: currentColor;
+
+        svg {
+            @include m.size(100%);
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+    }
+
+    .home-label {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        .sidebar.closed & {
+            display: none;
+
+            @include m.tablet {
+                display: inline;
+            }
+        }
+
+        .sidebar.open & {
+            display: inline;
+        }
+    }
+}
+
+// Layout adjustment when sidebar is present
+.admin-layout {
+    display: flex;
+    min-height: 100vh;
+
+    .sidebar {
+        flex-shrink: 0;
+    }
+
+    main {
+        flex: 1;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+}
+
+// Utility classes for sidebar state
+.sidebar-open {
+    overflow: hidden;
+
+    @include m.tablet {
+        overflow: auto;
+    }
+}
+
+.sidebar-closed {
+    @include m.mobile {
+        overflow: auto;
+    }
+}

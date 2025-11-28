@@ -1,0 +1,69 @@
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as m;
+
+// Tab Navigation per Admin
+.admin-tabs-container {
+    margin-bottom: vars.$spacing-xl;
+}
+
+.admin-tabs {
+    display: flex;
+    gap: vars.$spacing-xs;
+    border-bottom: 2px solid #e5e7eb;
+    margin-bottom: vars.$spacing-xl;
+    justify-content: center;
+
+    @include m.mobile {
+        overflow-x: auto;
+        justify-content: flex-start;
+        
+        &::-webkit-scrollbar {
+            height: 4px;
+        }
+    }
+}
+
+.admin-tab-button {
+    padding: vars.$spacing-base vars.$spacing-xl;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: #6b7280;
+    font-family: vars.$font-paragraph;
+    font-size: vars.$font-size-base;
+    font-weight: vars.$font-weight-medium;
+    cursor: pointer;
+    transition: all vars.$transition-base;
+    white-space: nowrap;
+    position: relative;
+    margin-bottom: -2px;
+
+    &:hover {
+        color: vars.$turquoise;
+        background: #f9fafb;
+    }
+
+    &.active {
+        color: vars.$turquoise;
+        border-bottom-color: vars.$turquoise;
+        font-weight: vars.$font-weight-semibold;
+    }
+
+    @include m.mobile {
+        padding: vars.$spacing-sm vars.$spacing-base;
+        font-size: vars.$font-size-sm;
+    }
+}
+
+.admin-tab-content {
+    background: vars.$white;
+    border-radius: vars.$border-radius-lg;
+    padding: vars.$spacing-xl;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
+
+    @include m.mobile {
+        padding: vars.$spacing-base;
+        border-radius: vars.$border-radius-md;
+    }
+}
