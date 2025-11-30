@@ -25,19 +25,22 @@ const initialFormData = {
  * Componente Form Unificato per Contratti.
  * Gestisce sia la creazione che la modifica di un contratto.
  * Il mode viene rilevato automaticamente: se c'è un ID nell'URL è 'edit', altrimenti 'add'.
+ * Può anche essere usato come modale passando le props contrattoId, mode e onClose.
  */
-const AdminContrattoForm = () => {
+const AdminContrattoForm = ({ contrattoId: propContrattoId, mode: propMode, onClose }) => {
     const navigate = useNavigate();
-    const { id: contrattoId } = useParams();
+    const { id: urlContrattoId } = useParams();
 
-    // Rileva automaticamente il mode: se c'è un ID nell'URL è edit, altrimenti add
-    const mode = contrattoId ? 'edit' : 'add';
+    // Usa le props se disponibili, altrimenti usa i valori dall'URL
+    const contrattoId = propContrattoId || urlContrattoId;
+    const mode = propMode || 'edit'; // Default a 'edit' per la nuova route
 
     // Stati locali del componente
     const [formData, setFormData] = useState(initialFormData);
     const [errors, setErrors] = useState({});
     const [isFormLoading, setIsFormLoading] = useState(false);
     const [apiError, setApiError] = useState(null);
+    const [searchContrattoId, setSearchContrattoId] = useState('');
 
     console.log('AdminContrattoForm - mode:', mode, 'isFormLoading:', isFormLoading, 'contrattoId:', contrattoId);
 
@@ -155,6 +158,44 @@ const AdminContrattoForm = () => {
         loadContrattoData();
     }, [mode, contrattoId, navigate, getContrattoById]);
 
+    // --- Gestione Caricamento Contratto da ID ---
+    const handleLoadContratto = async () => {
+        if (!searchContrattoId || searchContrattoId.trim() === '') {
+            setApiError('Inserisci un ID contratto valido');
+            return;
+        }
+
+        setIsFormLoading(true);
+        setApiError(null);
+
+        try {
+            const contratto = await getContrattoById(searchContrattoId);
+
+            // Formattazione della data per input type="date" (formato YYYY-MM-DD)
+            let formattedDate = '';
+            if (contratto.data_di_scadenza) {
+                const date = new Date(contratto.data_di_scadenza);
+                formattedDate = date.toISOString().split('T')[0];
+            }
+
+            setFormData({
+                Id_immobile: contratto.Id_immobile || '',
+                Id_utente: contratto.Id_utente || '',
+                data_di_scadenza: formattedDate,
+                prezzo: contratto.prezzo || ''
+            });
+
+            // Naviga alla route con l'ID
+            navigate(`/admin/contratti/modifica-contratto/${searchContrattoId}`);
+
+        } catch (error) {
+            console.error(error);
+            setApiError(error.message || "Errore nel caricamento dei dati del contratto.");
+        } finally {
+            setIsFormLoading(false);
+        }
+    };
+
     // --- Gestione Invio (handleSubmit) ---
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -181,7 +222,14 @@ const AdminContrattoForm = () => {
             await saveContratto(contrattoId, payload, mode);
 
             alert('Contratto salvato con successo!');
-            navigate('/admin/gestione-contratti');
+
+            // Se c'è una callback onClose (modalità modale), chiama quella
+            // Altrimenti naviga alla pagina di gestione contratti
+            if (onClose) {
+                onClose();
+            } else {
+                navigate('/admin/gestione-contratti');
+            }
         } catch (error) {
             setApiError(error.message || `Si è verificato un errore durante l'operazione di ${mode}.`);
         } finally {
@@ -190,7 +238,7 @@ const AdminContrattoForm = () => {
     };
 
     // --- Rendering ---
-    const pageTitle = mode === 'add' ? 'Aggiungi Nuovo Contratto' : `Modifica Contratto (ID: ${contrattoId})`;
+    const pageTitle = mode === 'add' ? 'Aggiungi Nuovo Contratto' : contrattoId ? `Modifica Contratto (ID: ${contrattoId})` : 'Modifica Contratto';
     const submitButtonText = mode === 'add' ? 'Aggiungi Contratto' : 'Salva Modifiche';
 
     return (
@@ -200,6 +248,34 @@ const AdminContrattoForm = () => {
 
             <div className="form-card">
                 <form onSubmit={handleSubmit}>
+                    {/* Campo ID Contratto (solo per ricerca quando non c'è ID nell'URL) */}
+                    {!contrattoId && mode === 'edit' && (
+                        <div className="form-field" style={{ marginBottom: '20px' }}>
+                            <label htmlFor="searchContrattoId">ID Contratto da Modificare *</label>
+                            <div style={{ display: 'flex', gap: '10px' }}>
+                                <input
+                                    id="searchContrattoId"
+                                    type="number"
+                                    value={searchContrattoId}
+                                    onChange={(e) => setSearchContrattoId(e.target.value)}
+                                    onKeyDown={(e) => e.key === 'Enter' && handleLoadContratto()}
+                                    disabled={isFormLoading}
+                                    placeholder="Inserisci ID contratto"
+                                    style={{ flex: 1 }}
+                                />
+                                <button
+                                    type="button"
+                                    className="submit-btn"
+                                    onClick={handleLoadContratto}
+                                    disabled={isFormLoading}
+                                    style={{ width: 'auto' }}
+                                >
+                                    {isFormLoading ? 'Caricamento...' : 'Carica'}
+                                </button>
+                            </div>
+                        </div>
+                    )}
+
                     <div className="form-grid">
                         {/* Campo ID Immobile */}
                         <div className="form-field">
@@ -269,10 +345,10 @@ const AdminContrattoForm = () => {
                         <button
                             type="button"
                             className="back-btn"
-                            onClick={() => navigate('/admin/gestione-contratti')}
+                            onClick={() => onClose ? onClose() : navigate('/admin/gestione-contratti')}
                             disabled={isFormLoading}
                         >
-                            Indietro
+                            {onClose ? 'Annulla' : 'Indietro'}
                         </button>
                     </div>
                 </form>

@@ -134,9 +134,9 @@ const routes = [
         title: 'Contratti'
       },
       {
-        path: 'contratti/aggiungi-contratto',
+        path: 'contratti/modifica-contratto',
         Component: ContrattoForm,
-        title: 'Aggiungi contratto'
+        title: 'Modifica contratto'
       },
       {
         path: 'contratti/modifica-contratto/:id',

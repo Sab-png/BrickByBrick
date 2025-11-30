@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useContratti from '../hooks/UseContratti';
 import ReusableTable from '../components/AdminTableReusable';
+import AdminContrattoForm from '../components/AdminContrattoForm';
 
 /**
  * Componente principale per la Gestione Contratti.
@@ -16,13 +17,16 @@ import ReusableTable from '../components/AdminTableReusable';
 const AdminContratti = () => {
     const navigate = useNavigate();
     const [searchTerm, setSearchTerm] = useState('');
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedContrattoId, setSelectedContrattoId] = useState(null);
 
     const {
         data: contrattiList,
         isLoading,
         error,
         removeContratti,
-        setFilters
+        setFilters,
+        refetch
     } = useContratti();
 
     // --- LOGICA DI CONTROLLO ---
@@ -31,12 +35,19 @@ const AdminContratti = () => {
         setFilters({ search: searchTerm.trim() });
     };
 
-    const handleAddContratto = () => {
-        navigate('/admin/contratti/aggiungi-contratto');
+    const handleModificaContratto = () => {
+        navigate('/admin/contratti/modifica-contratto');
     };
 
     const handleEditContratto = (contrattoId) => {
-        navigate(`/admin/contratti/modifica-contratto/${contrattoId}`);
+        setSelectedContrattoId(contrattoId);
+        setIsModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+        setSelectedContrattoId(null);
+        refetch(); // Ricarica i dati dopo la modifica
     };
 
     const handleDeleteContratto = async (contrattoId) => {
@@ -84,8 +95,8 @@ const AdminContratti = () => {
                     </div>
 
                     <div className="action-buttons">
-                        <button className="add-btn" onClick={handleAddContratto}>
-                            Aggiungi Contratto
+                        <button className="add-btn" onClick={handleModificaContratto}>
+                            Modifica Contratto
                         </button>
                     </div>
                 </div>
@@ -111,6 +122,20 @@ const AdminContratti = () => {
                     <div className="data-status-message info">Nessun contratto trovato.</div>
                 )}
             </div>
+
+            {/* Modale per Modifica Contratto */}
+            {isModalOpen && selectedContrattoId && (
+                <div className="modal-overlay" onClick={handleCloseModal}>
+                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                        <button className="modal-close-btn" onClick={handleCloseModal}>×</button>
+                        <AdminContrattoForm
+                            contrattoId={selectedContrattoId}
+                            onClose={handleCloseModal}
+                            mode="edit"
+                        />
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
