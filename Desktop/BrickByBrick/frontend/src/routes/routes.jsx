@@ -19,6 +19,7 @@ import ImmobiliAdmin from '../pages/AdminImmobili'
 import AgentForm from '../components/AdminAgentForm'
 import ImmobileForm from '../components/AdminImmobileForm'
 import AgendaAdmin from '../pages/AdminAgenda'
+import AdminContratti from '../pages/AdminContratti'
 
 const routes = [
   {
@@ -125,6 +126,11 @@ const routes = [
         path: 'agenda',
         Component: AgendaAdmin,
         title: 'Agenda'
+      },
+      {
+        path: 'contratti',
+        Component: AdminContratti,
+        title: 'Contratti'
       },
     ]
   }
