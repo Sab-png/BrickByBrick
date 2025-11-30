@@ -1,0 +1,168 @@
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as m;
+
+// ============================================
+// COMPONENTE IMMOBILI PIÙ VISTI
+// ============================================
+
+// Container della tabella
+.table-container {
+    overflow-x: auto;
+    border-radius: vars.$border-radius-md;
+
+    @include m.mobile {
+        margin: 0 calc(-1 * vars.$spacing-base);
+    }
+}
+
+// Tabella statistiche
+.stats-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: vars.$font-paragraph;
+
+    thead {
+        background: #f9fafb;
+        border-bottom: 2px solid #e5e7eb;
+
+        th {
+            padding: vars.$spacing-base vars.$spacing-sm;
+            text-align: center;
+            font-size: vars.$font-size-sm;
+            font-weight: vars.$font-weight-semibold;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            white-space: nowrap;
+
+            @include m.mobile {
+                padding: vars.$spacing-sm vars.$spacing-xs;
+                font-size: vars.$font-size-xs;
+            }
+        }
+    }
+
+    tbody {
+        tr {
+            border-bottom: 1px solid #e5e7eb;
+            transition: all vars.$transition-base;
+
+            &:hover {
+                background: #f9fafb;
+            }
+
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+
+        td {
+            padding: vars.$spacing-base vars.$spacing-sm;
+            vertical-align: middle;
+            text-align: center;
+            font-size: vars.$font-size-base;
+            color: vars.$dark-blue;
+
+            @include m.mobile {
+                padding: vars.$spacing-sm vars.$spacing-xs;
+                font-size: vars.$font-size-sm;
+            }
+        }
+    }
+}
+
+// Immagine immobile
+.property-image {
+    img {
+        width: 100px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: vars.$border-radius-sm;
+        border: 1px solid #e5e7eb;
+
+        @include m.mobile {
+            width: 60px;
+            height: 48px;
+        }
+    }
+}
+
+// Celle specifiche
+.address-cell {
+    font-weight: vars.$font-weight-medium;
+    max-width: 200px;
+
+    @include m.mobile {
+        max-width: 120px;
+        font-size: vars.$font-size-xs;
+    }
+}
+
+.city-cell {
+    color: #6b7280;
+}
+
+.price-cell {
+    color: vars.$turquoise;
+    font-weight: vars.$font-weight-bold;
+    white-space: nowrap;
+}
+
+// Badge stato
+.status-badge {
+    display: inline-block;
+    padding: vars.$spacing-xs vars.$spacing-sm;
+    border-radius: vars.$border-radius-sm;
+    font-size: vars.$font-size-xs;
+    font-weight: vars.$font-weight-medium;
+    text-transform: capitalize;
+    white-space: nowrap;
+
+    &.status-disponibile {
+        background: #d1fae5;
+        color: #065f46;
+    }
+
+    &.status-in_trattativa {
+        background: #fed7aa;
+        color: #92400e;
+    }
+
+    &.status-venduta {
+        background: #fee2e2;
+        color: #991b1b;
+    }
+
+    @include m.mobile {
+        padding: 2px vars.$spacing-xs;
+        font-size: 10px;
+    }
+}
+
+// Messaggi di stato
+.data-status-message {
+    padding: vars.$spacing-lg;
+    border-radius: vars.$border-radius-md;
+    text-align: center;
+    font-family: vars.$font-paragraph;
+    font-size: vars.$font-size-base;
+    margin: vars.$spacing-xl 0;
+
+    &.loading {
+        background: #eff6ff;
+        color: #1e40af;
+        border: 1px solid #dbeafe;
+    }
+
+    &.error {
+        background: #fef2f2;
+        color: #dc2626;
+        border: 1px solid #fee2e2;
+    }
+
+    &.info {
+        background: #f9fafb;
+        color: #6b7280;
+        border: 1px solid #e5e7eb;
+    }
+}

@@ -27,3 +27,43 @@
         padding: vars.$spacing-base;
     }
 }
+
+// Pagina Statistiche
+.statistics-page {
+    width: 100%;
+
+    .page-header {
+        margin-bottom: vars.$spacing-xl;
+        text-align: left;
+
+        h1 {
+            @include m.heading(vars.$font-size-3xl);
+            color: vars.$dark-blue;
+            margin: 0 0 vars.$spacing-xs 0;
+            font-weight: vars.$font-weight-bold;
+        }
+
+        .page-subtitle {
+            font-family: vars.$font-paragraph;
+            font-size: vars.$font-size-base;
+            color: vars.$light-gray;
+            margin: 0;
+            font-weight: vars.$font-weight-regular;
+        }
+    }
+}
+
+// Card Container per le statistiche
+.stats-card {
+    background: vars.$white;
+    border-radius: vars.$border-radius-lg;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: vars.$spacing-xl;
+    border: 1px solid #e5e7eb;
+    margin-bottom: vars.$spacing-xl;
+
+    @include m.mobile {
+        padding: vars.$spacing-base;
+        border-radius: vars.$border-radius-md;
+    }
+}

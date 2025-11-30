@@ -1,0 +1,476 @@
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as m;
+
+// ============================================
+// GRAFICO VISITE MENSILI (Stile Borsa/Trading)
+// ============================================
+
+// Stili comuni condivisi
+.stats-card-header {
+    margin-bottom: vars.$spacing-xl;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: vars.$spacing-base;
+
+    .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: vars.$spacing-lg;
+
+        @include m.mobile {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+
+    h2 {
+        @include m.heading(vars.$font-size-2xl);
+        color: vars.$dark-blue;
+        margin-bottom: vars.$spacing-xs;
+        font-weight: vars.$font-weight-bold;
+    }
+
+    .stats-card-subtitle {
+        font-family: vars.$font-paragraph;
+        font-size: vars.$font-size-sm;
+        color: #6b7280;
+        margin: 0;
+    }
+}
+
+.month-filter {
+    display: flex;
+    align-items: center;
+    gap: vars.$spacing-sm;
+
+    @include m.mobile {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    label {
+        font-family: vars.$font-paragraph;
+        font-size: vars.$font-size-sm;
+        color: #6b7280;
+        font-weight: vars.$font-weight-medium;
+        white-space: nowrap;
+    }
+
+    .month-select {
+        padding: vars.$spacing-sm vars.$spacing-base;
+        border: 1px solid #d1d5db;
+        border-radius: vars.$border-radius-md;
+        font-family: vars.$font-paragraph;
+        font-size: vars.$font-size-sm;
+        color: vars.$dark-blue;
+        background: vars.$white;
+        cursor: pointer;
+        transition: all vars.$transition-base;
+        min-width: 180px;
+
+        &:focus {
+            outline: none;
+            border-color: vars.$turquoise;
+            box-shadow: 0 0 0 3px rgba(35, 155, 155, 0.1);
+        }
+
+        &:hover {
+            border-color: vars.$turquoise;
+        }
+
+        @include m.mobile {
+            width: 100%;
+        }
+    }
+}
+
+.visits-chart-container {
+    width: 100%;
+    display: flex;
+    gap: vars.$spacing-base;
+    align-items: stretch;
+
+    @include m.mobile {
+        gap: vars.$spacing-xs;
+    }
+}
+
+// Asse Y verticale
+.y-axis {
+    position: relative;
+    padding-top: vars.$spacing-base;
+    padding-bottom: 40px;
+    min-width: 60px;
+    height: 400px;
+
+    @include m.mobile {
+        min-width: 50px;
+        height: 300px;
+        padding-top: vars.$spacing-sm;
+        padding-bottom: 30px;
+    }
+}
+
+.y-axis-label {
+    position: absolute;
+    font-family: vars.$font-paragraph;
+    font-size: vars.$font-size-sm;
+    color: #6b7280;
+    font-weight: vars.$font-weight-medium;
+    text-align: right;
+    padding-right: vars.$spacing-sm;
+    width: 100%;
+    transform: translateY(-50%);
+
+    @include m.mobile {
+        font-size: vars.$font-size-xs;
+        padding-right: vars.$spacing-xs;
+    }
+}
+
+// Contenitore grafico + etichette
+.chart-and-labels {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+// Wrapper del grafico a linea
+.line-chart-wrapper {
+    position: relative;
+    height: 400px;
+    padding: vars.$spacing-base;
+    background: vars.$white;
+
+    @include m.mobile {
+        height: 300px;
+        padding: vars.$spacing-sm;
+    }
+}
+
+// Container per le linee della griglia orizzontale
+.grid-lines-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: vars.$spacing-base;
+    pointer-events: none;
+
+    @include m.mobile {
+        padding: vars.$spacing-sm;
+    }
+}
+
+// Singola linea orizzontale della griglia
+.grid-line-horizontal {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #d1d5db;
+    transform: translateY(-50%);
+}
+
+.line-chart-svg {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+// Linee della griglia (vecchio stile SVG - può essere rimosso se non usato)
+.grid-line {
+    stroke: #d1d5db;
+    stroke-width: 0.5;
+}
+
+// Area riempita sotto la linea
+.chart-area {
+    opacity: 1;
+}
+
+// Linea del grafico
+.chart-line {
+    stroke: #2563eb;
+    stroke-width: 3;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 2px 4px rgba(37, 99, 235, 0.2));
+}
+
+// Punti circolari SVG sulla linea
+.chart-point-circle-svg {
+    fill: #2563eb;
+    stroke: vars.$white;
+    stroke-width: 2.5;
+    filter: drop-shadow(0 2px 4px rgba(37, 99, 235, 0.3));
+    pointer-events: none;
+}
+
+// Punti sulla linea (vecchio stile SVG)
+.chart-point-circle {
+    fill: #2563eb;
+    stroke: vars.$white;
+    stroke-width: 2;
+    filter: drop-shadow(0 2px 4px rgba(37, 99, 235, 0.3));
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+        r: 2;
+        fill: #1d4ed8;
+    }
+}
+
+// Nuovi punti SVG sulla linea
+.chart-point-circle-new {
+    fill: #2563eb;
+    filter: drop-shadow(0 2px 4px rgba(37, 99, 235, 0.3));
+    pointer-events: none;
+}
+
+// Container per i punti - con padding uguale al wrapper per allineamento perfetto
+.chart-points-container {
+    position: absolute;
+    top: vars.$spacing-base;
+    left: vars.$spacing-base;
+    width: calc(100% - #{vars.$spacing-base} * 2);
+    height: calc(100% - #{vars.$spacing-base} * 2);
+    pointer-events: none;
+
+    @include m.mobile {
+        top: vars.$spacing-sm;
+        left: vars.$spacing-sm;
+        width: calc(100% - #{vars.$spacing-sm} * 2);
+        height: calc(100% - #{vars.$spacing-sm} * 2);
+    }
+}
+
+// Punti sulla linea (nuovi - fuori SVG per mantenere forma circolare)
+.chart-point-dot {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #2563eb;
+    border: 2px solid vars.$white;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(37, 99, 235, 0.4);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 2;
+
+    @include m.mobile {
+        width: 8px;
+        height: 8px;
+        border-width: 1.5px;
+    }
+}
+
+// Overlay per punti interattivi - con padding uguale al wrapper
+.chart-points-overlay {
+    position: absolute;
+    top: vars.$spacing-base;
+    left: vars.$spacing-base;
+    width: calc(100% - #{vars.$spacing-base} * 2);
+    height: calc(100% - #{vars.$spacing-base} * 2);
+    pointer-events: none;
+
+    @include m.mobile {
+        top: vars.$spacing-sm;
+        left: vars.$spacing-sm;
+        width: calc(100% - #{vars.$spacing-sm} * 2);
+        height: calc(100% - #{vars.$spacing-sm} * 2);
+    }
+}
+
+.chart-point-wrapper {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    pointer-events: all;
+    z-index: 10;
+}
+
+.chart-point-hover {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: transparent;
+    transition: all 0.2s ease;
+    cursor: pointer;
+
+    &.visible,
+    &:hover {
+        background: rgba(37, 99, 235, 0.1);
+        transform: scale(1.3);
+    }
+}
+
+// Tooltip che appare al hover
+.point-tooltip {
+    position: absolute;
+    bottom: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2563eb;
+    color: vars.$white;
+    padding: vars.$spacing-xs vars.$spacing-base;
+    border-radius: 4px;
+    white-space: nowrap;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+    animation: tooltipFadeIn 0.2s ease;
+    pointer-events: none;
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 6px solid transparent;
+        border-top-color: #2563eb;
+    }
+
+    @include m.mobile {
+        padding: vars.$spacing-xs vars.$spacing-sm;
+    }
+}
+
+@keyframes tooltipFadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+.tooltip-value {
+    font-family: vars.$font-paragraph;
+    font-size: vars.$font-size-base;
+    font-weight: vars.$font-weight-medium;
+    color: vars.$white;
+
+    @include m.mobile {
+        font-size: vars.$font-size-sm;
+    }
+}
+
+// Etichette asse X sotto il grafico
+.x-axis-labels {
+    position: relative;
+    width: 100%;
+    height: 30px;
+    margin-top: vars.$spacing-sm;
+}
+
+.x-axis-label {
+    position: absolute;
+    transform: translateX(-50%);
+    font-family: vars.$font-paragraph;
+    font-size: vars.$font-size-sm;
+    font-weight: vars.$font-weight-medium;
+    color: #6b7280;
+    text-align: center;
+    white-space: nowrap;
+
+    @include m.mobile {
+        font-size: vars.$font-size-xs;
+    }
+}
+
+// ============================================
+// STATISTICHE RIEPILOGATIVE
+// ============================================
+
+.visits-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: vars.$spacing-base;
+    margin-top: vars.$spacing-xl;
+
+    @include m.mobile {
+        grid-template-columns: repeat(2, 1fr);
+        gap: vars.$spacing-sm;
+    }
+}
+
+.summary-card {
+    background: linear-gradient(135deg, #f9fafb 0%, vars.$white 100%);
+    border: 1px solid #e5e7eb;
+    border-radius: vars.$border-radius-md;
+    padding: vars.$spacing-lg;
+    text-align: center;
+    transition: all vars.$transition-base;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, vars.$turquoise, lighten(vars.$turquoise, 15%));
+        opacity: 0;
+        transition: opacity vars.$transition-base;
+    }
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+        &::before {
+            opacity: 1;
+        }
+    }
+
+    &.success {
+        background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+        border-color: #a7f3d0;
+
+        &::before {
+            background: linear-gradient(90deg, #10b981, #34d399);
+        }
+
+        .summary-value {
+            color: #059669;
+        }
+    }
+
+    @include m.mobile {
+        padding: vars.$spacing-base;
+    }
+}
+
+.summary-label {
+    font-family: vars.$font-paragraph;
+    font-size: vars.$font-size-sm;
+    font-weight: vars.$font-weight-medium;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: vars.$spacing-xs;
+
+    @include m.mobile {
+        font-size: vars.$font-size-xs;
+    }
+}
+
+.summary-value {
+    font-family: vars.$font-paragraph;
+    font-size: vars.$font-size-2xl;
+    font-weight: vars.$font-weight-bold;
+    color: vars.$dark-blue;
+
+    @include m.mobile {
+        font-size: vars.$font-size-xl;
+    }
+}

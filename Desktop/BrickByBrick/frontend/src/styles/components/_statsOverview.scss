@@ -1,0 +1,118 @@
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as m;
+
+// Panoramica Statistiche
+.stats-overview {
+    margin-bottom: vars.$spacing-2xl;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: vars.$spacing-lg;
+
+    @media (max-width: 1200px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include m.mobile {
+        grid-template-columns: 1fr;
+    }
+}
+
+.stat-card {
+    background: vars.$white;
+    border-radius: vars.$border-radius-lg;
+    padding: vars.$spacing-lg;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all vars.$transition-base;
+    border: 1px solid #e5e7eb;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    &.loading {
+        pointer-events: none;
+    }
+
+    .stat-card-content {
+        display: flex;
+        align-items: center;
+        gap: vars.$spacing-base;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+    }
+
+    .stat-icon {
+        @include m.size(60px);
+        border-radius: vars.$border-radius-lg;
+        @include m.flex-center;
+        flex-shrink: 0;
+
+        .icon-emoji {
+            font-size: vars.$font-size-2xl;
+        }
+    }
+
+    .stat-info {
+        flex: 1;
+        min-width: 0;
+
+        .stat-title {
+            font-family: vars.$font-paragraph;
+            font-size: vars.$font-size-sm;
+            font-weight: vars.$font-weight-medium;
+            color: #202224;
+            margin: 0 0 vars.$spacing-sm 0;
+            line-height: vars.$line-height-tight;
+        }
+
+        .stat-value {
+            font-family: vars.$font-title;
+            font-size: vars.$font-size-3xl;
+            font-weight: vars.$font-weight-bold;
+            color: #202224;
+            margin: 0;
+            line-height: vars.$line-height-tight;
+        }
+    }
+
+    // Loading state placeholders
+    .stat-icon-placeholder {
+        @include m.size(60px);
+        border-radius: vars.$border-radius-lg;
+        background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+        background-size: 200% 100%;
+        animation: loading vars.$transition-slow infinite;
+    }
+
+    .stat-title-placeholder {
+        width: 80%;
+        height: 14px;
+        border-radius: vars.$border-radius-sm;
+        background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+        background-size: 200% 100%;
+        animation: loading vars.$transition-slow infinite;
+        margin-bottom: vars.$spacing-sm;
+    }
+
+    .stat-value-placeholder {
+        width: 60%;
+        height: 30px;
+        border-radius: vars.$border-radius-sm;
+        background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+        background-size: 200% 100%;
+        animation: loading vars.$transition-slow infinite;
+    }
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
