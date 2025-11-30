@@ -250,9 +250,9 @@ const AdminContrattoForm = ({ contrattoId: propContrattoId, mode: propMode, onCl
                 <form onSubmit={handleSubmit}>
                     {/* Campo ID Contratto (solo per ricerca quando non c'è ID nell'URL) */}
                     {!contrattoId && mode === 'edit' && (
-                        <div className="form-field" style={{ marginBottom: '20px' }}>
+                        <div className="form-field">
                             <label htmlFor="searchContrattoId">ID Contratto da Modificare *</label>
-                            <div style={{ display: 'flex', gap: '10px' }}>
+                            <div className="form-actions">
                                 <input
                                     id="searchContrattoId"
                                     type="number"
@@ -261,14 +261,12 @@ const AdminContrattoForm = ({ contrattoId: propContrattoId, mode: propMode, onCl
                                     onKeyDown={(e) => e.key === 'Enter' && handleLoadContratto()}
                                     disabled={isFormLoading}
                                     placeholder="Inserisci ID contratto"
-                                    style={{ flex: 1 }}
                                 />
                                 <button
                                     type="button"
                                     className="submit-btn"
                                     onClick={handleLoadContratto}
                                     disabled={isFormLoading}
-                                    style={{ width: 'auto' }}
                                 >
                                     {isFormLoading ? 'Caricamento...' : 'Carica'}
                                 </button>
@@ -345,7 +343,7 @@ const AdminContrattoForm = ({ contrattoId: propContrattoId, mode: propMode, onCl
                         <button
                             type="button"
                             className="back-btn"
-                            onClick={() => onClose ? onClose() : navigate('/admin/gestione-contratti')}
+                            onClick={() => onClose ? onClose() : navigate(-1)}
                             disabled={isFormLoading}
                         >
                             {onClose ? 'Annulla' : 'Indietro'}
