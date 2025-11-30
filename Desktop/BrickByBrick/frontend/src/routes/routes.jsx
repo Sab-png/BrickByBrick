@@ -20,6 +20,7 @@ import AgentForm from '../components/AdminAgentForm'
 import ImmobileForm from '../components/AdminImmobileForm'
 import AgendaAdmin from '../pages/AdminAgenda'
 import AdminContratti from '../pages/AdminContratti'
+import ContrattoForm from '../components/AdminContrattoForm'
 
 const routes = [
   {
@@ -131,6 +132,16 @@ const routes = [
         path: 'contratti',
         Component: AdminContratti,
         title: 'Contratti'
+      },
+      {
+        path: 'contratti/aggiungi-contratto',
+        Component: ContrattoForm,
+        title: 'Aggiungi contratto'
+      },
+      {
+        path: 'contratti/modifica-contratto/:id',
+        Component: ContrattoForm,
+        title: 'Modifica contratto'
       },
     ]
   }

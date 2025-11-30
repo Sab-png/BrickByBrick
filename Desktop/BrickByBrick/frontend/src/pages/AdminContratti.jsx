@@ -7,7 +7,7 @@ import ReusableTable from '../components/AdminTableReusable';
 
 /**
  * Componente principale per la Gestione Contratti.
- * Questa pagina � responsabile di:
+ * Questa pagina è responsabile di:
  * 1. Caricare e visualizzare la lista dei contratti tramite useContratti.
  * 2. Gestire la logica di ricerca/filtro.
  * 3. Gestire la selezione delle righe per le azioni di massa (Modifica, Rimuovi).
@@ -32,11 +32,11 @@ const AdminContratti = () => {
     };
 
     const handleAddContratto = () => {
-        navigate('/admin/gestione-contratti/aggiungi-contratto');
+        navigate('/admin/contratti/aggiungi-contratto');
     };
 
     const handleEditContratto = (contrattoId) => {
-        navigate(`/admin/gestione-contratti/modifica-contratto/${contrattoId}`);
+        navigate(`/admin/contratti/modifica-contratto/${contrattoId}`);
     };
 
     const handleDeleteContratto = async (contrattoId) => {
@@ -45,7 +45,7 @@ const AdminContratti = () => {
             return;
         }
 
-        if (window.confirm('Sei sicuro di voler rimuovere questo contratto? ATTENZIONE: Se il contratto ha dati associati, l\'eliminazione fallir�.')) {
+        if (window.confirm('Sei sicuro di voler rimuovere questo contratto? ATTENZIONE: Se il contratto ha dati associati, l\'eliminazione fallirà.')) {
             try {
                 await removeContratti([contrattoId]);
                 alert('Contratto eliminato con successo!');
@@ -85,7 +85,7 @@ const AdminContratti = () => {
 
                     <div className="action-buttons">
                         <button className="add-btn" onClick={handleAddContratto}>
-                            � Aggiungi Contratto
+                            Aggiungi Contratto
                         </button>
                     </div>
                 </div>
