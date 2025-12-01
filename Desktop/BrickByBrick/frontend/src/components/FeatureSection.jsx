@@ -1,9 +1,9 @@
 import FeatureItem from './FeatureItem';
 
-import imageOneFeatItem from '../assets/images/valutazione.svg';
-import imageTwoFeatItem from '../assets/images/efficenza.svg';
-import imageThreeFeatItem from '../assets/images/valore.svg';
-import imageFourFeatItem from '../assets/images/agenti.svg';
+import imageOneFeatItem from '../assets/images/svg/valutazione.svg';
+import imageTwoFeatItem from '../assets/images/svg/efficenza.svg';
+import imageThreeFeatItem from '../assets/images/svg/valore.svg';
+import imageFourFeatItem from '../assets/images/svg/agenti.svg';
 
 import imageFeatureAvif from '../assets/images/avif/perche-immobiliaris.avif'; 
 import imageFeatureWebp from '../assets/images/webp/perche-immobiliaris.webp'; 
