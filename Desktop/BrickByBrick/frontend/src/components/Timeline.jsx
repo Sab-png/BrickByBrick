@@ -18,8 +18,6 @@ export default function Timeline() {
                             <div className="timeline__icon">{step.number}</div>
                             <h3 className="timeline__title-step">{step.title}</h3>
                             <p className="timeline__desc">{step.text}</p>
-                            
-                            {/* La freccia viene gestita via CSS, non serve HTML extra */}
                         </div>
                     ))}
                 </div>
