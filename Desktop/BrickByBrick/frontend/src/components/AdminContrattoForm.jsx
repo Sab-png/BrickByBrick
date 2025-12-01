@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import '../styles/components/_adminContrattoForm.scss';
 
 const API_BASE_URL = 'http://localhost:8085';
 
@@ -242,7 +243,7 @@ const AdminContrattoForm = ({ contrattoId: propContrattoId, mode: propMode, onCl
     const submitButtonText = mode === 'add' ? 'Aggiungi Contratto' : 'Salva Modifiche';
 
     return (
-        <div className="agent-form-container">
+        <div className="agent-form-container admin-contratto-form">
             <h1>{pageTitle}</h1>
             {apiError && <div className="api-error-alert alert-danger">**Attenzione:** {apiError}</div>}
 
@@ -250,9 +251,9 @@ const AdminContrattoForm = ({ contrattoId: propContrattoId, mode: propMode, onCl
                 <form onSubmit={handleSubmit}>
                     {/* Campo ID Contratto (solo per ricerca quando non c'è ID nell'URL) */}
                     {!contrattoId && mode === 'edit' && (
-                        <div className="form-field">
+                        <div className="form-field search-contratto-field">
                             <label htmlFor="searchContrattoId">ID Contratto da Modificare *</label>
-                            <div className="form-actions">
+                            <div className="search-input-group">
                                 <input
                                     id="searchContrattoId"
                                     type="number"
@@ -264,7 +265,7 @@ const AdminContrattoForm = ({ contrattoId: propContrattoId, mode: propMode, onCl
                                 />
                                 <button
                                     type="button"
-                                    className="submit-btn"
+                                    className="load-btn"
                                     onClick={handleLoadContratto}
                                     disabled={isFormLoading}
                                 >

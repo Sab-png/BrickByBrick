@@ -1,0 +1,54 @@
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as m;
+
+// Stili specifici per AdminContrattoForm
+.admin-contratto-form {
+
+    // Sezione ricerca contratto (quando non c'è ID nell'URL)
+    .search-contratto-field {
+        margin-bottom: vars.$spacing-xl;
+
+        .search-input-group {
+            display: flex;
+            gap: vars.$spacing-sm;
+
+            input {
+                flex: 1;
+            }
+
+            .load-btn {
+                padding: vars.$spacing-sm vars.$spacing-lg;
+                background-color: #007bff;
+                color: vars.$white;
+                border: none;
+                border-radius: vars.$border-radius-md;
+                font-size: vars.$font-size-sm;
+                font-family: vars.$font-paragraph;
+                font-weight: vars.$font-weight-medium;
+                white-space: nowrap;
+                cursor: pointer;
+                transition: all vars.$transition-base;
+
+                &:hover:not(:disabled) {
+                    background-color: darken(#007bff, 8%);
+                    transform: translateY(-2px);
+                    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.25);
+                }
+
+                &:active:not(:disabled) {
+                    transform: translateY(0);
+                }
+
+                &:disabled {
+                    cursor: not-allowed;
+                    opacity: 0.6;
+
+                    &:hover {
+                        transform: none;
+                        box-shadow: none;
+                    }
+                }
+            }
+        }
+    }
+}
