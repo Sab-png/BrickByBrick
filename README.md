@@ -72,11 +72,6 @@
 - Configurazione e gestione del **database**
 - Sviluppo del **backend** e delle **API REST**
 
-## Budget
-
-- **Lead generation paid**: 1.500 € al mese per 12 mesi. Il rinnovo e il budget per gli anni successivi saranno valutati dal cliente.
-- **Sviluppo portale**: Il budget per lo sviluppo del portale sarà definito in base all'architettura, al design, SEO e CRM.
-
 ## Area Geografica Target
 
 - **Città medio-grandi del Piemonte**: Torino, Cuneo, Alessandria, Asti
@@ -150,4 +145,35 @@ BRICKBYBRICK
 
 ### Requisiti
 
+## Autori
 
+#### Digital Strategist
+Angelica Felletti
+- GitHub: [@Xangelica](https://github.com/Xangelica).
+
+Tommaso 
+- GitHub: [@](https://github.com/).
+
+ Giovanni 
+- GitHub: [@](https://github.com/).
+
+#### Web Developer
+Jacopo dell'Oste
+- GitHub: [@jacopodellostee](https://github.com/Jacopodellostee).
+
+Martino Placano
+- GitHub: [@Marti-guti](https://github.com/Marti-guti).
+
+ Cao Vy Beltrame
+- GitHub: [@CaoVy03](https://github.com/CaoVy03).
+
+
+#### Software Developer
+Daniela Punzi
+- GitHub: [@Daniela15P](https://github.com/Daniela15P)
+
+Marco Spedaliere
+- GitHub: [@MarcoSpedaliere](https://github.com/MarcoSpedaliere)
+
+Andrea Sabini
+- GitHub: [@Sab-png](https://github.com/Sab-png)
