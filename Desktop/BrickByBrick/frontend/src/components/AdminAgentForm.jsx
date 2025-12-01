@@ -200,7 +200,7 @@ const AgentForm = () => {
     };
     
     // --- Rendering ---
-    const pageTitle = mode === 'add' ? '➕ Aggiungi Nuovo Agente' : ` Modifica Agente (ID: ${agentId})`;
+    const pageTitle = mode === 'add' ? 'Aggiungi Nuovo Agente' : ` Modifica Agente (ID: ${agentId})`;
     const submitButtonText = mode === 'add' ? 'Aggiungi Agente' : 'Salva Modifiche';
 
     return (
