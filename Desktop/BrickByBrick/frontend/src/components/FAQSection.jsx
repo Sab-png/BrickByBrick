@@ -181,42 +181,31 @@ export default function FAQSection() {
   const currentFAQs = allFAQs[activeTab] || []; 
 
   return (
-    <div className="faq-background">
+    <section className="faq-background" aria-labelledby="faq-heading">
       <div className="faq-header">
-        <h1>FAQ</h1>
+        <h2 id="faq-heading">FAQ</h2>
         <p>Ecco le domande più frequenti.</p>
       </div>
 
       <div className="faq-container">
-
-        {/* --- Area Tabs --- */}
-        <div className="faq-tabs">
+        <div className="faq-tabs" role="tablist" aria-label="Categorie FAQ">
           {tabs.map((tab) => (
-            <button
-              key={tab}
-              className={activeTab === tab ? 'tab-button active' : 'tab-button'}
-              onClick={() => setActiveTab(tab)}
-            >
+            <button key={tab} className={activeTab === tab ? 'tab-button active' : 'tab-button'} onClick={() => setActiveTab(tab)} role="tab" aria-selected={activeTab === tab} aria-controls={`panel-${tab}`} id={`tab-${tab}`}>
               {tab}
             </button>
           ))}
         </div>
         
-        {/* --- Area Contenuto FAQ --- */}
-        <div className="faq-content-area">
+        <div className="faq-content-area" role="tabpanel" id={`panel-${activeTab}`} aria-labelledby={`tab-${activeTab}`}>
           {currentFAQs.length > 0 ? (
             currentFAQs.map((faq) => (
-              <FAQItem 
-                key={faq.id} 
-                question={faq.question} 
-                answer={faq.answer} 
-              />
+              <FAQItem key={faq.id} question={faq.question} answer={faq.answer} />
             ))
           ) : (
             <p className="no-faqs">Nessuna FAQ disponibile per questa sezione.</p>
           )}
         </div>
       </div>
-    </div>
+    </section>
   );
 }
