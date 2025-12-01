@@ -148,7 +148,7 @@ const AdminContrattoForm = () => {
             } catch (error) {
                 console.error(error);
                 setApiError(error.message || "Errore nel caricamento dei dati del contratto.");
-                setTimeout(() => navigate('/admin/gestione-contratti'), 3000);
+                setTimeout(() => navigate('/admin/contratti'), 3000);
             } finally {
                 setIsFormLoading(false);
             }
@@ -221,7 +221,7 @@ const AdminContrattoForm = () => {
             await saveContratto(contrattoId, payload, mode);
 
             alert('Contratto salvato con successo!');
-            navigate('/admin/gestione-contratti');
+            navigate('/admin/contratti');
         } catch (error) {
             setApiError(error.message || `Si è verificato un errore durante l'operazione di ${mode}.`);
         } finally {
@@ -335,7 +335,7 @@ const AdminContrattoForm = () => {
                         <button
                             type="button"
                             className="back-btn"
-                            onClick={() => navigate('/admin/gestione-contratti')}
+                            onClick={() => navigate('/admin/contratti')}
                             disabled={isFormLoading}
                         >
                             Indietro
