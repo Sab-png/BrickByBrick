@@ -172,7 +172,7 @@ GRANT ALL ON immobiliaris.* TO 'byta'@'localhost';
 ### 3. Configurazione del Database
 Copia e incolla su MySQL gli script presenti in ```brickbybrick/src/main/resources/```, poi eseguili con il seguente ordine:
 
-1. ScriptDB.sql
+1. ScriptDBImmobiliari.sql
 2. PopolamentoDB.sql
 3. Popolamento_prezzo_mercato.sql
 
@@ -232,6 +232,6 @@ Istituto Tecnologico Superiore Academy per le Tecnologie dell'Informazione e del
 Sede legale: Torino, Piazza Carlo Felice 18<br>
 
 ## Licenza
-Questo progetto è sviluppato nell'ambito del corso ITS ICT Piemonte.
+Questo progetto è sviluppato nell'ambito del corso ITS ICT Piemonte.<br>
 Tutti i diritti riservati © 2025 Team BrickByBrick
 
