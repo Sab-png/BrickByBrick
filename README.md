@@ -1,4 +1,5 @@
 # Immobiliaris - Nuovo Portale Immobiliare
+### Gruppo 2: Byta
 
 ## Descrizione del progetto
 
@@ -21,31 +22,35 @@
 - **Integrazione con strumenti di marketing automation**.
 - **Responsive Design** e **ottimizzazione SEO**.
 
-## Requisiti tecnici
+## Tecnologie utilizzate
 
 ### Backend
 
-- **Linguaggio**: Java
+- **Linguaggio**: Java 
 - **Framework**: Spring Boot
+- **Build Tool**: Maven
+- **Database**: MySQL
 
 ### Frontend
 
-- **Tecnologie**: React, SCSS
-- **Framework**: ????
-
-### Database
-
-- **Database**: MySQL
+- **Libreria**: React
+- **Build Tool**: Vite
+- **Styling**: CSS
+- **Linguaggio**: JavaScript
 
 ### Versionamento
 
 - **Versionamento**: GitHub
 - **Gestione del progetto**: GitHub Projects
 
-### Documentazione
 
-- **Documentazione**: README.md
+## Requisiti di sistema
 
+Java: v11 o superiore<br>
+Node.js: v16 o superiore<br>
+npm: v8 o superiore<br>
+MySQL: v8.0 o superiore<br>
+Maven: v3.6 o superiore<br>
 
 ## Ruoli e Attività
 
@@ -72,18 +77,13 @@
 - Configurazione e gestione del **database**
 - Sviluppo del **backend** e delle **API REST**
 
-## Budget
-
-- **Lead generation paid**: 1.500 € al mese per 12 mesi. Il rinnovo e il budget per gli anni successivi saranno valutati dal cliente.
-- **Sviluppo portale**: Il budget per lo sviluppo del portale sarà definito in base all'architettura, al design, SEO e CRM.
-
 ## Area Geografica Target
 
-- **Città medio-grandi del Piemonte**: Torino, Cuneo, Alessandria, Asti
+- **Città medio-grandi del Piemonte**: Torino, Cuneo, Alessandria e Asti
 
 ## Strumenti e Media Coinvolti
 
-- **Social Media**: Facebook, Instagram, WhatsApp (estensione possibile a TikTok, YouTube)
+- **Social Media**: Facebook e Instagram
 - **Strumenti**: Facebook Ads, Google Ads, CRM, DEM/newsletter, Marketing Automation
 
 ## Struttura del Progetto
@@ -148,6 +148,91 @@ BRICKBYBRICK
  ```
 ## Installazione e Avvio
 
-### Requisiti
 
+### 1. Clonare il repository
+
+```
+git clone https://github.com/Sab-png/BrickByBrick.git
+cd BrickByBrick
+```
+### 2. Creazione dell'utente MySql e creazione del Database
+Esegui il seguente script:
+```
+-- Crea l'utente
+CREATE USER 'byta'@'localhost' IDENTIFIED BY '1234';
+
+-- Concedi i permessi sulle tabelle del database ()
+GRANT ALL PRIVILEGES ON immobiliaris.* TO 'byta'@'localhost';
+
+-- Applica le modifiche
+FLUSH PRIVILEGES;
+
+CREATE DATABASE immobiliaris;
+GRANT ALL ON immobiliaris.* TO 'byta'@'localhost';
+```
+### 3. Configurazione del Database
+Copia e incolla su MySQL gli script presenti in ```brickbybrick/src/main/resources/```, poi eseguili con il seguente ordine:
+
+1. ScriptDBImmobiliari.sql
+2. PopolamentoDB.sql
+3. Popolamento_prezzo_mercato.sql
+
+
+### 4. Avvio del Backend
+Nel terminale:
+```
+cd brickbybrick
+./mvnw spring-boot:run
+```
+Il server partirà su:
+```
+http://localhost:8085
+```
+### 5. Avvio del Frontend
+```
+cd frontend
+npm install
+npm run dev
+```
+Il server partirà su:
+```
+http://localhost:5173
+```
+
+## Autori
+
+#### Digital Strategist
+Angelica Felletti: [@Xangelica](https://github.com/Xangelica).
+
+Tommaso Palmieri: [@Doc10040](https://github.com/Doc10040).
+
+Giovanni Acatrinei: [@giovanniacatrinei](https://github.com/giovanniacatrinei).
+
+#### Web Developer
+Jacopo dell'Oste: [@jacopodellostee](https://github.com/Jacopodellostee).
+
+Martino Placano: [@Marti-guti](https://github.com/Marti-guti).
+
+Cao Vy Beltrame: [@CaoVy03](https://github.com/CaoVy03).
+
+#### Software Developer
+Daniela Punzi: [@Daniela15P](https://github.com/Daniela15P)
+
+Marco Spedaliere: [@MarcoSpedaliere](https://github.com/MarcoSpedaliere)
+
+Andrea Sabini: [@Sab-png](https://github.com/Sab-png)
+
+## Azienda committente
+Immobiliaris - Agenzia Immobiliare<br>
+Parte del gruppo Indomus<br>
+Referente aziendale: Paolo Ghirlinzoni
+
+## Istituto
+ITS ICT Piemonte<br>
+Istituto Tecnologico Superiore Academy per le Tecnologie dell'Informazione e della Comunicazione<br>
+Sede legale: Torino, Piazza Carlo Felice 18<br>
+
+## Licenza
+Questo progetto è sviluppato nell'ambito del corso ITS ICT Piemonte.<br>
+Tutti i diritti riservati © 2025 Team BrickByBrick
 
