@@ -8,12 +8,15 @@ $overlay-opacity: 0.5;
 
 .hero-section {
     position: relative;
-    min-height: 100vh; 
+    min-height: 100dvh; 
     width: 100%;
     overflow: hidden;
     @include m.flex-center;
     align-items: flex-start;
+    // aspect-ratio: 16 / 9;
 
+    background-color: vars.$light-blue;
+    
     &__bg-wrapper {
         position: absolute;
         top: 0;
