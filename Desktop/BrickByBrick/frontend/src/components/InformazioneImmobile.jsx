@@ -1,3 +1,13 @@
+import { 
+    FaHome, 
+    FaExpandArrowsAlt, 
+    FaDoorOpen, 
+    FaBed, 
+    FaBath, 
+    FaLayerGroup, 
+    FaCar 
+} from "react-icons/fa";
+
 export default function InformazioneImmobile({ immobile, caratteristiche }) {
     return (
         <div className="dettaglio-immobile__details-section">
