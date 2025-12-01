@@ -155,6 +155,11 @@ export default function Statistiche() {
                 <h2>Riepilogo Generale</h2>
                 <div className="summary-table">
                     <table>
+                        <colgroup>
+                            <col style={{ width: '33%' }} />
+                            <col style={{ width: '33%' }} />
+                            <col style={{ width: '33%' }} />
+                        </colgroup>
                         <thead>
                             <tr>
                                 <th>Categoria</th>

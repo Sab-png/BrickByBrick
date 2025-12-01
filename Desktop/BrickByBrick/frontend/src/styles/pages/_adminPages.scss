@@ -738,9 +738,11 @@
         width: 100%;
         border-collapse: collapse;
         font-family: vars.$font-paragraph;
+        table-layout: fixed;
 
         @include m.mobile {
             min-width: 100%;
+            table-layout: auto;
         }
 
         thead {
@@ -752,7 +754,7 @@
 
             th {
                 padding: vars.$spacing-base vars.$spacing-lg;
-                text-align: left;
+                text-align: center;
                 font-size: vars.$font-size-sm;
                 font-weight: vars.$font-weight-semibold;
                 color: #374151;
@@ -795,6 +797,7 @@
                 padding: vars.$spacing-lg;
                 font-size: vars.$font-size-base;
                 color: #374151;
+                text-align: center;
 
                 @media (max-width: 768px) {
                     padding: vars.$spacing-base;
@@ -811,18 +814,14 @@
                     font-size: vars.$font-size-xl;
                     font-weight: vars.$font-weight-bold;
                     color: vars.$turquoise;
-                    text-align: center;
-                    width: 120px;
                     white-space: nowrap;
 
                     @media (max-width: 768px) {
                         font-size: vars.$font-size-lg;
-                        width: 90px;
                     }
 
                     @include m.mobile {
                         font-size: vars.$font-size-base;
-                        width: 70px;
                     }
                 }
 
@@ -854,14 +853,6 @@
                 &:last-child {
                     color: #6b7280;
                     font-size: vars.$font-size-sm;
-
-                    @media (max-width: 768px) {
-                        display: none; // Nascondi descrizione su tablet
-                    }
-
-                    @include m.mobile {
-                        display: none; // Nascondi descrizione su mobile
-                    }
                 }
             }
         }
