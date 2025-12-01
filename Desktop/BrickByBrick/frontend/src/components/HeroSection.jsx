@@ -17,6 +17,10 @@ export default function HeroSection({
         <div className="hero-section__overlay"></div>
 
         <picture>
+          {/* {imageMobileWebP && (
+                <source media="(max-width: 768px)" srcSet={imageMobileWebP} type="image/webp" />
+          )} */}
+
           <source media="(max-width: 768px)" srcSet={imageMobile || imageDesktopWebP} />
 
           {imageDesktopAvif && (
@@ -27,7 +31,7 @@ export default function HeroSection({
             <source srcSet={imageDesktopWebP} type="image/webp" />
           )}
 
-          <img src={imageDesktop} alt={alt} className="hero-section__bg-image" fetchPriority="high" decoding="async" width="1920" height="600" />
+          <img src={imageDesktop} alt={alt || "Immagine di Copertina"} className="hero-section__bg-image" fetchPriority="high" loading="eager" decoding="async" width="1920" height="800" />
         </picture>
       </div>
 
