@@ -23,9 +23,8 @@ const useImmobiliManager = () => {
         try {
             // Endpoint: /api/immobili?search=term
             // Si presume che il backend usi un parametro 'search'
-            const searchParam = filters.search ? `?search=${filters.search}` : '';
-            // Ho modificato l'endpoint base da '/api/agenti' a '/api/immobili'
-            const url = `${API_BASE_URL}/api/immobili`;
+            const searchParam = filters.search ? `?search=${encodeURIComponent(filters.search)}` : '';
+            const url = `${API_BASE_URL}/api/immobili${searchParam}`;
 
             const response = await fetch(url);
 
@@ -84,23 +83,30 @@ const useImmobiliManager = () => {
         try {
             // Eseguiamo una chiamata DELETE per ogni ID
             for (const id of ids) {
-                // Endpoint: /api/immobili/{id}
-                const url = `${API_BASE_URL}/api/immobili/${id}`;
+                // Endpoint: /api/immobili/delete/{id}
+                const url = `${API_BASE_URL}/api/immobili/delete/${id}`;
 
                 const response = await fetch(url, {
                     method: 'DELETE',
                 });
 
                 if (!response.ok) {
-                    throw new Error(`Impossibile eliminare l'immobile ${id}: ${response.status}`);
+                    const errorText = await response.text().catch(() => 'Errore sconosciuto');
+                    throw new Error(`Impossibile eliminare l'immobile ${id}: ${response.status} - ${errorText}`);
                 }
+                
+                console.log(`Immobile ${id} eliminato con successo`);
             }
 
             // Ricarica la lista completa dopo l'eliminazione
             await fetchImmobili();
 
         } catch (err) {
-            setError(new Error(`Errore durante l'eliminazione: ${err.message}`));
+            const errorMessage = err.message.includes('foreign key constraint') || err.message.includes('a foreign key constraint fails')
+                ? `Impossibile eliminare l'immobile: è associato a delle visite. Elimina prima le visite collegate.`
+                : `Errore durante l'eliminazione: ${err.message}`;
+            setError(new Error(errorMessage));
+            throw err;
         } finally {
             setIsLoading(false);
         }
@@ -131,8 +137,8 @@ const useImmobiliManager = () => {
             url = `${API_BASE_URL}/api/immobili`;
             method = 'POST';
         } else {
-            // Endpoint Modifica: PUT /api/immobili/{id}
-            url = `${API_BASE_URL}/api/immobili/${immobileId}`;
+            // Endpoint Modifica: PUT /api/immobili/edit/{id}
+            url = `${API_BASE_URL}/api/immobili/edit/${immobileId}`;
             method = 'PUT';
         }
 

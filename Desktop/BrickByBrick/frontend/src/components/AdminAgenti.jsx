@@ -39,32 +39,39 @@ const Agenti = () => {
 
     // Reindirizza al form unificato in modalità Aggiunta.
     const handleAddAgent = () => {
-        navigate('/admin/gestione-utenti/aggiungi-agente');
+        navigate('/admin/agenti/aggiungi-agente');
     };
 
     // Reindirizza al form unificato in modalità Modifica, includendo l'ID nell'URL.
     const handleEditAgent = (agentId) => {
-        navigate(`/admin/gestione-utenti/modifica-agente/${agentId}`);
+        navigate(`/admin/agenti/modifica-agente/${agentId}`);
     };
   
     // Gestisce la rimozione di un singolo agente.
     const handleDeleteAgent = async (agentId) => {
-        if (window.confirm('Sei sicuro di voler rimuovere questo agente?')) {
+        if (!agentId) {
+            alert('Errore: ID agente non valido');
+            return;
+        }
+        
+        if (window.confirm('Sei sicuro di voler rimuovere questo agente? ATTENZIONE: Se l\'agente ha dati associati, l\'eliminazione fallirà.')) {
             try {
                 await removeAgents([agentId]);
+                alert('Agente eliminato con successo!');
             } catch (err) {
                 console.error('Errore durante la rimozione:', err);
+                alert(err.message || 'Errore durante l\'eliminazione');
             }
         }
     };
     
     // Configurazione delle colonne da passare al ReusableTable
     const userColumns = [
-        { key: 'fullName', header: 'Nome e cognome' },
+        { key: 'nome', header: 'Nome' },
+        { key: 'cognome', header: 'Cognome' },
         { key: 'email', header: 'Email' },
-        { key: 'phone', header: 'Telefono' },
-        { key: 'cittaOperativa', header: 'Città operativa' },
-        { key: 'status', header: 'Stato' },
+        { key: 'telefono', header: 'Telefono' },
+        { key: 'città', header: 'Città' },
         // Nota: Il rendering specifico per 'status' è gestito all'interno del ReusableTable
     ];
 

@@ -1,84 +1,102 @@
-// UsersManager.jsx
-import React, { useState, useEffect } from 'react';
-import ReusableTable from './AdminTableReusable'; // Assicurati del percorso corretto
+// AdminUtenti.jsx - Gestione Clienti
+import React, { useState } from 'react';
+import useUtenti from '../hooks/UseUtenti';
+import ReusableTable from './AdminTableReusable';
 
+/**
+ * Componente per la Gestione Clienti/Utenti.
+ * Visualizza la lista, permette ricerca ed eliminazione.
+ * NON include modifica o aggiunta (solo visualizzazione e delete).
+ */
 const UtentiAdmin = () => {
-  // Dati fittizi per gli utenti (in un caso reale verrebbero da un'API o un file separato)
-  const mockUsers = [
-    { id: 'U001', fullName: 'Luigi Verdi', email: 'luigi@test.com', phone: '3331234567', age: 38, status: 'Attivo', role: 'Cliente' },
-    { id: 'U002', fullName: 'Anna Neri', email: 'anna@test.com', phone: '3339876543', age: 45, status: 'Sospeso', role: 'Cliente VIP' },
-    { id: 'U003', fullName: 'Marco Gialli', email: 'marco@test.com', phone: '3334567890', age: 29, status: 'Attivo', role: 'Cliente' },
-  ];
+    // Stato locale per l'input di ricerca
+    const [searchTerm, setSearchTerm] = useState('');
 
-  // 1. Stato per i dati visualizzati
-  const [usersList, setUsersList] = useState(mockUsers);
-  // 2. Stato per la ricerca
-  const [searchTerm, setSearchTerm] = useState('');
+    // Hook per gestire i dati degli utenti
+    const { 
+        data: usersList,
+        isLoading,
+        error,
+        removeUtenti,
+        setFilters
+    } = useUtenti();
 
-  // --- Logica di Filtraggio ---
-  const handleSearchClick = () => {
-    if (searchTerm.trim() === '') {
-      setUsersList(mockUsers);
-    } else {
-      const filtered = mockUsers.filter(user =>
-        user.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        user.id.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-      setUsersList(filtered);
-    }
-  };
+    // Gestisce l'attivazione della ricerca
+    const handleSearchClick = () => {
+        setFilters({ search: searchTerm.trim() });
+    };
 
-  // Configurazione colonne (Adattate per gli Utenti generici)
-  const userColumns = [
-    { key: 'fullName', header: 'Nome Completo' },
-    { key: 'email', header: 'Email' },
-    { key: 'role', header: 'Tipologia Cliente' }, // Colonna diversa dagli Agenti
-    { key: 'phone', header: 'Telefono' },
-    { key: 'age', header: 'Età' },
-  ];
-
-  // --- Logica Rimuovi Utenti ---
-  const handleDeleteUser = (userId) => {
-    if (!window.confirm('Sei sicuro di voler rimuovere questo utente?')) return;
-
-    const remaining = usersList.filter(u => u.id !== userId);
-    setUsersList(remaining);
-  };
-
-  return (
-    <div className="user-management-page">
-      <h1>Gestione Utenti</h1>
-      
-      <div className="user-table-card">
+    // Gestisce la rimozione di un singolo utente
+    const handleDeleteUser = async (userId) => {
+        if (!userId) {
+            alert('Errore: ID utente non valido');
+            return;
+        }
         
-        {/* Header con controlli - Solo Ricerca, niente bottoni azione */}
-        <div className="table-header-controls" style={{ justifyContent: 'flex-start' }}>
-            <div className="search-container">
-                <input 
-                    type="text" 
-                    placeholder="Cerca utente..." 
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    onKeyDown={(e) => e.key === 'Enter' && handleSearchClick()} 
-                />
-                <button className="search-btn" onClick={handleSearchClick}>
-                    Cerca
-                </button>
+        if (window.confirm('Sei sicuro di voler rimuovere questo utente? ATTENZIONE: Se l\'utente ha dati associati, l\'eliminazione fallirà.')) {
+            try {
+                await removeUtenti([userId]);
+                alert('Utente eliminato con successo!');
+            } catch (err) {
+                console.error('Errore durante la rimozione:', err);
+                alert(err.message || 'Errore durante l\'eliminazione');
+            }
+        }
+    };
+
+    // Configurazione delle colonne per la tabella
+    const userColumns = [
+        { key: 'nome', header: 'Nome' },
+        { key: 'cognome', header: 'Cognome' },
+        { key: 'email', header: 'Email' },
+        { key: 'telefono', header: 'Telefono' },
+        { key: 'codice_fiscale', header: 'Codice Fiscale' },
+    ];
+
+    return (
+        <div className="user-management-page">
+            <h1>Gestione Utenti</h1>
+            
+            <div className="user-table-card">
+                {/* Controlli della tabella: Solo Ricerca */}
+                <div className="table-header-controls" style={{ justifyContent: 'flex-start' }}>
+                    <div className="search-container">
+                        <input 
+                            type="text" 
+                            placeholder="Cerca cliente..." 
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            onKeyDown={(e) => e.key === 'Enter' && handleSearchClick()} 
+                        />
+                        <button className="search-btn" onClick={handleSearchClick}>
+                            Cerca
+                        </button>
+                    </div>
+                </div>
+
+                {/* Visualizzazione errori */}
+                {error && (
+                    <div className="error-alert" style={{ color: 'red', padding: '10px', margin: '10px 0' }}>
+                        ⚠️ {error.message}
+                    </div>
+                )}
+
+                {/* Stato di caricamento */}
+                {isLoading && <div className="loading">Caricamento utenti in corso...</div>}
+
+                {/* Tabella utenti */}
+                {!isLoading && (
+                    <ReusableTable 
+                        data={usersList} 
+                        columns={userColumns}
+                        onDelete={handleDeleteUser}
+                        showEdit={false}  // Nessun bottone modifica
+                        showDelete={true}  // Solo bottone elimina
+                    />
+                )}
             </div>
         </div>
-        
-        {/* Tabella Riutilizzabile */}
-        <ReusableTable 
-            data={usersList} 
-            columns={userColumns}
-            onDelete={handleDeleteUser}
-            showEdit={false}
-            showDelete={true}
-        />
-      </div>
-    </div>
-  );
+    );
 };
 
 export default UtentiAdmin;

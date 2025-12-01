@@ -16,4 +16,6 @@ public interface BrickServiceAgente {
     void deleteAgente(Integer id);
     
     boolean existsById(Integer id);
+    
+    List<Agente> searchAgenti(String searchTerm);
 }

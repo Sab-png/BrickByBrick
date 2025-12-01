@@ -24,13 +24,16 @@ const NotFound = lazy(() => import('../pages/NotFound'));
 const StepMultiForm = lazy(() => import('../pages/StepMultiForm'));
 
 // Admin sections 
-import AdminLayout from '../layout/AdminLayout';
-import Statistiche from '../pages/AdminStatistiche';
-import GestioneUtenti from '../pages/AdminGestioneUtenti';
-import ImmobiliAdmin from '../pages/AdminImmobili';
-import AgentForm from '../components/AdminAgentForm';
-import ImmobileForm from '../components/AdminImmobileForm';
-import AgendaAdmin from '../pages/AdminAgenda';
+import AdminLayout from '../layout/AdminLayout'
+import Statistiche from '../pages/AdminStatistiche'
+import AdminAgenti from '../components/AdminAgenti'
+import UtentiAdmin from '../components/AdminUtenti'
+import ImmobiliAdmin from '../pages/AdminImmobili'
+import AgentForm from '../components/AdminAgentForm'
+import ImmobileForm from '../components/AdminImmobileForm'
+import AgendaAdmin from '../pages/AdminAgenda'
+import AdminContratti from '../components/AdminContratti'
+import AdminContrattoForm from '../components/AdminContrattoForm'
 
 const withSuspense = (Component) => (
   <Suspense fallback={<Loading />}>
@@ -122,7 +125,6 @@ const routes = [
     path: '/admin',
     Component: AdminLayout, // Layout con la SideBar
     children: [
-
       {
         index: true,
         // path: 'statistiche',
@@ -130,19 +132,39 @@ const routes = [
         title: 'Statistiche'
       },
       {
-        path: 'gestione-utenti',
-        Component: GestioneUtenti,
-        title: 'Gestione Utenti'
+        path: 'agenti',
+        Component: AdminAgenti,
+        title: 'Gestione Agenti'
       },
       {
-        path: 'gestione-utenti/aggiungi-agente',
-        Component: () => <AgentForm mode="add" />,
+        path: 'agenti/aggiungi-agente',
+        Component: AgentForm,
         title: 'Aggiungi agente'
       },
       {
-        path: 'gestione-utenti/modifica-agente/:id',
-        Component: () => <AgentForm mode="edit" />,
+        path: 'agenti/modifica-agente/:id',
+        Component: AgentForm,
         title: 'Modifica agente'
+      },
+      {
+        path: 'utenti',
+        Component: UtentiAdmin,
+        title: 'Gestione Utenti'
+      },
+      {
+        path: 'contratti',
+        Component: AdminContratti,
+        title: 'Gestione Contratti'
+      },
+      {
+        path: 'contratti/nuovo',
+        Component: AdminContrattoForm,
+        title: 'Nuovo Contratto'
+      },
+      {
+        path: 'contratti/modifica/:id',
+        Component: AdminContrattoForm,
+        title: 'Modifica Contratto'
       },
       {
         path: 'immobili',
@@ -151,19 +173,19 @@ const routes = [
       },
       {
         path: 'immobili/aggiungi-immobile',
-        Component: () => <ImmobileForm mode="add" />,
+        Component: ImmobileForm,
         title: 'Aggiungi immobile'
       },
       {
         path: 'immobili/modifica-immobile/:id',
-        Component: () => <ImmobileForm mode="edit" />,
+        Component: ImmobileForm,
         title: 'Modifica immobile'
       },
       {
         path: 'agenda',
         Component: AgendaAdmin,
         title: 'Agenda'
-      }
+      },
     ]
   }
 

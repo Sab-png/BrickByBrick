@@ -49,29 +49,47 @@ const Immobili = () => {
 
     // Gestisce la rimozione di un singolo immobile.
     const handleDeleteImmobile = async (immobileId) => {
-        if (window.confirm('Sei sicuro di voler rimuovere questo immobile?')) {
+        if (!immobileId) {
+            alert('Errore: ID immobile non valido');
+            return;
+        }
+        
+        if (window.confirm('Sei sicuro di voler rimuovere questo immobile? ATTENZIONE: Se l\'immobile ha visite associate, l\'eliminazione fallirà.')) {
             try {
                 await removeImmobili([immobileId]);
+                alert('Immobile eliminato con successo!');
             } catch (err) {
                 console.error('Errore durante la rimozione dell\'immobile:', err);
+                alert(err.message || 'Errore durante l\'eliminazione');
             }
         }
     };
 
-    // Configurazione delle colonne da passare al ReusableTable (ADATTA LE CHIAVI AI TUOI DATI)
+    // Configurazione delle colonne da passare al ReusableTable con campi DB
     const immobileColumns = [
-        { key: 'tipologia', header: 'Tipologia' },
-        { key: 'address', header: 'Indirizzo' },
-        { key: 'city', header: 'Città' },
-        { key: 'price', header: 'Prezzo (€)' },
-        { key: 'energyClass', header: 'Classe En.' },
-        { key: 'status', header: 'Stato' }, // Esempio: "Disponibile", "Venduto"
+        { 
+            key: 'tipologia', 
+            header: 'Tipologia',
+            render: (item) => item.caratteristiche?.tipologia || 'N/D'
+        },
+        { key: 'indirizzo', header: 'Indirizzo' },
+        { key: 'citta', header: 'Città' },
+        { 
+            key: 'prezzo', 
+            header: 'Prezzo (€)',
+            render: (item) => item.prezzo ? `€ ${item.prezzo.toLocaleString()}` : 'N/D'
+        },
+        { 
+            key: 'disponibilita', 
+            header: 'Disponibilità',
+            render: (item) => item.caratteristiche?.disponibilita || 'N/D'
+        },
     ];
 
     return (
-        <div className="immobile-management-page">
+        <div className="user-management-page">
             <h1>Gestione Immobili</h1>
-            <div className="immobile-table-card">
+            <div className="user-table-card">
 
                 {/* Controlli della tabella: Ricerca e Bottoni Azione */}
                 <div className="table-header-controls">

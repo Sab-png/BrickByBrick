@@ -2,10 +2,8 @@ package com.brickbybrick.brickbybrick.services;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.brickbybrick.brickbybrick.model.Utente;
 import com.brickbybrick.brickbybrick.repos.BrickRepoUtente;
 
@@ -38,5 +36,13 @@ public class BrickServiceUtenteImpl implements BrickServiceUtente {
     @Override
     public boolean existsById(Integer id) {
         return repoUtente.existsById(id);
+    }
+
+    @Override
+    public List<Utente> searchUtenti(String searchTerm) {
+        if (searchTerm == null || searchTerm.trim().isEmpty()) {
+            return repoUtente.findAll();
+        }
+        return repoUtente.searchUtenti(searchTerm.trim());
     }
 }

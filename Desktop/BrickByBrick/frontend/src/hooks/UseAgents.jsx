@@ -70,23 +70,30 @@ const useAgents = () => {
         try {
             // Eseguiamo una chiamata DELETE per ogni ID
             for (const id of ids) {
-                // Endpoint: /api/agenti/{id}
-                const url = `${API_BASE_URL}/api/agenti/${id}`;
+                // Endpoint: /api/agenti/delete/{id}
+                const url = `${API_BASE_URL}/api/agenti/delete/${id}`;
                 
                 const response = await fetch(url, {
                     method: 'DELETE',
                 });
 
                 if (!response.ok) {
-                    throw new Error(`Impossibile eliminare l'agente ${id}: ${response.status}`);
+                    const errorText = await response.text().catch(() => 'Errore sconosciuto');
+                    throw new Error(`Impossibile eliminare l'agente ${id}: ${response.status} - ${errorText}`);
                 }
+                
+                console.log(`Agente ${id} eliminato con successo`);
             }
             
             // Ricarica la lista completa dopo l'eliminazione
             await fetchAgents(); 
             
         } catch (err) {
-            setError(new Error(`Errore durante l'eliminazione: ${err.message}`));
+            const errorMessage = err.message.includes('foreign key constraint') || err.message.includes('a foreign key constraint fails')
+                ? `Impossibile eliminare l'agente: è associato a dei dati esistenti (visite, contratti, ecc.). Rimuovi prima le associazioni.`
+                : `Errore durante l'eliminazione: ${err.message}`;
+            setError(new Error(errorMessage));
+            throw err;
         } finally {
             setIsLoading(false);
         }
@@ -110,8 +117,8 @@ const useAgents = () => {
             url = `${API_BASE_URL}/api/agenti`;
             method = 'POST';
         } else {
-            // Endpoint Modifica: PUT /api/agenti/{id}
-            url = `${API_BASE_URL}/api/agenti/${agentId}`;
+            // Endpoint Modifica: PUT /api/agenti/edit/{id}
+            url = `${API_BASE_URL}/api/agenti/edit/${agentId}`;
             method = 'PUT';
         }
 
