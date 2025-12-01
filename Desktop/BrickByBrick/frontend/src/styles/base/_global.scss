@@ -1,6 +1,11 @@
 @use '../abstracts/variables' as vars;
 @use '../abstracts/mixins' as m;
 
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
 // Container principale - responsive padding
 .container {
   width: 100%;
