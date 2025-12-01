@@ -26,15 +26,13 @@ const initialFormData = {
  * Componente Form Unificato per Contratti.
  * Gestisce sia la creazione che la modifica di un contratto.
  * Il mode viene rilevato automaticamente: se c'è un ID nell'URL è 'edit', altrimenti 'add'.
- * Può anche essere usato come modale passando le props contrattoId, mode e onClose.
  */
-const AdminContrattoForm = ({ contrattoId: propContrattoId, mode: propMode, onClose }) => {
+const AdminContrattoForm = () => {
     const navigate = useNavigate();
-    const { id: urlContrattoId } = useParams();
+    const { id: contrattoId } = useParams();
 
-    // Usa le props se disponibili, altrimenti usa i valori dall'URL
-    const contrattoId = propContrattoId || urlContrattoId;
-    const mode = propMode || 'edit'; // Default a 'edit' per la nuova route
+    // Determina la modalità in base alla presenza dell'ID nell'URL
+    const mode = contrattoId ? 'edit' : 'add';
 
     // Stati locali del componente
     const [formData, setFormData] = useState(initialFormData);
@@ -223,14 +221,7 @@ const AdminContrattoForm = ({ contrattoId: propContrattoId, mode: propMode, onCl
             await saveContratto(contrattoId, payload, mode);
 
             alert('Contratto salvato con successo!');
-
-            // Se c'è una callback onClose (modalità modale), chiama quella
-            // Altrimenti naviga alla pagina di gestione contratti
-            if (onClose) {
-                onClose();
-            } else {
-                navigate('/admin/gestione-contratti');
-            }
+            navigate('/admin/gestione-contratti');
         } catch (error) {
             setApiError(error.message || `Si è verificato un errore durante l'operazione di ${mode}.`);
         } finally {
@@ -344,10 +335,10 @@ const AdminContrattoForm = ({ contrattoId: propContrattoId, mode: propMode, onCl
                         <button
                             type="button"
                             className="back-btn"
-                            onClick={() => onClose ? onClose() : navigate(-1)}
+                            onClick={() => navigate('/admin/gestione-contratti')}
                             disabled={isFormLoading}
                         >
-                            {onClose ? 'Annulla' : 'Indietro'}
+                            Indietro
                         </button>
                     </div>
                 </form>

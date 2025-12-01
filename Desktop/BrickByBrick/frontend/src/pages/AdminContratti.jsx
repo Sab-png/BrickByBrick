@@ -4,29 +4,25 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useContratti from '../hooks/UseContratti';
 import ReusableTable from '../components/AdminTableReusable';
-import AdminContrattoForm from '../components/AdminContrattoForm';
 
 /**
  * Componente principale per la Gestione Contratti.
  * Questa pagina è responsabile di:
  * 1. Caricare e visualizzare la lista dei contratti tramite useContratti.
  * 2. Gestire la logica di ricerca/filtro.
- * 3. Gestire la selezione delle righe per le azioni di massa (Modifica, Rimuovi).
- * 4. Reindirizzare ai form Aggiungi/Modifica.
+ * 3. Gestire la navigazione al form per modificare/aggiungere contratti.
+ * 4. Gestire l'eliminazione dei contratti.
  */
 const AdminContratti = () => {
     const navigate = useNavigate();
     const [searchTerm, setSearchTerm] = useState('');
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedContrattoId, setSelectedContrattoId] = useState(null);
 
     const {
         data: contrattiList,
         isLoading,
         error,
         removeContratti,
-        setFilters,
-        refetch
+        setFilters
     } = useContratti();
 
     // --- LOGICA DI CONTROLLO ---
@@ -40,14 +36,7 @@ const AdminContratti = () => {
     };
 
     const handleEditContratto = (contrattoId) => {
-        setSelectedContrattoId(contrattoId);
-        setIsModalOpen(true);
-    };
-
-    const handleCloseModal = () => {
-        setIsModalOpen(false);
-        setSelectedContrattoId(null);
-        refetch(); // Ricarica i dati dopo la modifica
+        navigate(`/admin/contratti/modifica-contratto/${contrattoId}`);
     };
 
     const handleDeleteContratto = async (contrattoId) => {
@@ -122,20 +111,6 @@ const AdminContratti = () => {
                     <div className="data-status-message info">Nessun contratto trovato.</div>
                 )}
             </div>
-
-            {/* Modale per Modifica Contratto */}
-            {isModalOpen && selectedContrattoId && (
-                <div className="modal-overlay" onClick={handleCloseModal}>
-                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                        <button className="modal-close-btn" onClick={handleCloseModal}>×</button>
-                        <AdminContrattoForm
-                            contrattoId={selectedContrattoId}
-                            onClose={handleCloseModal}
-                            mode="edit"
-                        />
-                    </div>
-                </div>
-            )}
         </div>
     );
 };
