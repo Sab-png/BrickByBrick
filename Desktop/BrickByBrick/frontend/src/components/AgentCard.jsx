@@ -5,7 +5,7 @@ export default function AgentCard({ imageAvif, imageWebp, imageJpg, name, locati
                 <picture>
                     <source srcSet={imageAvif} type="image/avif" />
                     <source srcSet={imageWebp} type="image/webp" />
-                    <img src={imageJpg} alt={name} className="agent-card__image" loading="lazy" />
+                    <img src={imageJpg} alt={name} className="agent-card__image" loading="lazy" decoding="async" width="280" height="400"/>
                 </picture>
             </div>
             <div className="agent-card__info">
