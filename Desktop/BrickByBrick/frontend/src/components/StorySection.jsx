@@ -11,7 +11,7 @@ export default function StorySection() {
                     <picture>
                         <source srcSet={storyImageAvif} type="image/avif" />
                         <source srcSet={storyImageWebp} type="image/webp" />
-                        <img src={storyImageJpg} alt="La nostra storia - Team al lavoro" className="story-section__image" loading="lazy" />
+                        <img src={storyImageJpg} alt="La nostra storia - Team al lavoro" className="story-section__image" width="800" height="800" loading="lazy" decoding='async' sizes="(max-width: 768px) 100vw, 400px"/>
                     </picture>
                 </div>
 
