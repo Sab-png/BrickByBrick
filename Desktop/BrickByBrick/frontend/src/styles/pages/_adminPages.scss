@@ -9,13 +9,22 @@
 // Pagina Gestione (Tabelle)
 .user-management-page {
     width: 100%;
-    
+
     h1 {
         @include m.heading(vars.$font-size-3xl);
         color: vars.$dark-blue;
         margin-bottom: vars.$spacing-xl;
         font-weight: vars.$font-weight-bold;
         text-align: center;
+
+        @media (max-width: 768px) {
+            font-size: vars.$font-size-2xl;
+        }
+
+        @include m.mobile {
+            font-size: vars.$font-size-xl;
+            margin-bottom: vars.$spacing-lg;
+        }
     }
 }
 
