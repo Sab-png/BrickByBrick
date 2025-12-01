@@ -13,6 +13,7 @@ import Newsletter from '../components/NewsLetter';
 import useSEO from '../hooks/useSEO';
 
 export default function DettaglioImmobile() {
+
   const { id } = useParams();
   const navigate = useNavigate();
   // const immobile = mockImmobili.find(item => item.id_immobile === Number(id));
@@ -56,13 +57,6 @@ export default function DettaglioImmobile() {
 
   const { caratteristiche } = immobile;
 
-    useSEO({
-    title: `Immobile in ${immobile?.indirizzo} a ${immobile?.citta}`,
-    description: `Vendita ${immobile?.tipologia} in ${immobile?.indirizzo} a ${immobile?.citta}. Prezzo: €${immobile?.prezzo}. ${immobile?.descrizione}`,
-    image: String(immobile?.foto),
-    imageAlt: `Foto di ${immobile?.titolo}`,
-    type: "article"
-  })
 
   return (
     <>
@@ -73,7 +67,7 @@ export default function DettaglioImmobile() {
         {/* Il contenitore del contenuto principale */}
         <div className="dettaglio-immobile__content">
           
-          {/* <ImmobileGallery immagini={immobile.immagini} altText={immobile.indirizzo} /> */}
+          <ImmobileGallery immagine={immobile.foto} altText={immobile.descrizione} />
 
           <InformazioneImmobile immobile={immobile} caratteristiche={caratteristiche}  />
 
