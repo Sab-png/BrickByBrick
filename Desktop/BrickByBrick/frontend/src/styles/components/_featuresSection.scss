@@ -88,6 +88,8 @@
         display: flex; // Per mantenere l'altezza
         min-height: 100%; // Altezza uguale alla card
 
+        background-color: vars.$light-blue;
+
         picture {
             display: block; 
             width: 100%;
@@ -99,7 +101,8 @@
         }
 
         @include m.tablet {
-            max-width: 600px;
+            // width: 50%;
+            width: 50%;
         }
     }
 
@@ -132,6 +135,7 @@
         @include m.tablet {
             padding: vars.$spacing-2xl; // 48px
             min-width: 700px;
+            // min-width: 0;
         }
     }
 }
