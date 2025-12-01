@@ -6,7 +6,7 @@ export default function StepItem({ number, imageAvif, imageWebp, imageJpg, title
                 <picture>
                     <source srcSet={imageAvif} type="image/avif" />
                     <source srcSet={imageWebp} type="image/webp" />
-                    <img src={imageJpg} alt={title} className="step-item__image" loading="lazy" />
+                    <img src={imageJpg} alt={title} className="step-item__image" width="300" height="200" loading="lazy" decoding="async"/>
                 </picture>
             </div>
             <div className="step-item__content">
