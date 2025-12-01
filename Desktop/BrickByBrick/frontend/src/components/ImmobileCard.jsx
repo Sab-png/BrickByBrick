@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 
+import { FaHome, FaBed, FaBath, FaArrowRight } from "react-icons/fa";
+
 export default function ImmobileCard({ immobile }) {
   const formatPrice = (price) => {
     return new Intl.NumberFormat('it-IT', {
