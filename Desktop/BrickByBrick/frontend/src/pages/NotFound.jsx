@@ -1,5 +1,5 @@
 import CTAButton from '../components/CTAButton';
-import notFoundImg from '../assets/images/not-found.svg';
+import notFoundImg from '../assets/images/svg/not-found.svg';
 
 import useSEO from '../hooks/useSEO';
 
