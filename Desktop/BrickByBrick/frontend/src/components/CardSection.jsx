@@ -1,8 +1,8 @@
 import Card from './Card';
 
-import cardOneImg from '../assets/images/card-one-home.svg';
-import cardTwoImg from '../assets/images/card-two-home.svg';
-import cardThreeImg from '../assets/images/card-three-home.svg';
+import cardOneImg from '../assets/images/svg/card-one-home.svg';
+import cardTwoImg from '../assets/images/svg/card-two-home.svg';
+import cardThreeImg from '../assets/images/svg/card-three-home.svg';
 
 export default function CardSection() {
   return (
