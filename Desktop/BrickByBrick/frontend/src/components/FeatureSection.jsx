@@ -28,7 +28,7 @@ export default function FeaturesSection() {
                     <picture>
                         <source srcSet={imageFeatureAvif} type="image/avif" />
                         <source srcSet={imageFeatureWebp} type="image/webp" />
-                        <img src={imageFeatureJpg} alt="Interior Design" className="features-section__main-image" loading="lazy" />
+                        <img src={imageFeatureJpg} alt="Interior Design" className="features-section__main-image" loading="lazy" decoding='async' width="800" height="960"/>
                     </picture>
                 </div>
 
