@@ -45,8 +45,8 @@ const ReusableTable = ({
     };
 
     return (
-        <div className="admin-table-container" style={{ overflowX: 'auto', width: '100%' }}>
-            <table className="admin-table" style={{ minWidth: '100%', width: 'max-content' }}>
+        <div className="admin-table-container">
+            <table className="admin-table">
                 <thead>
                     <tr>
                         {columns.map((column) => (
@@ -75,13 +75,13 @@ const ReusableTable = ({
                             <tr key={itemId || Math.random()}>
                                 {/* Celle dei dati */}
                                 {columns.map((column) => (
-                                    <td key={`${itemId}-${column.key}`}>
+                                    <td key={`${itemId}-${column.key}`} data-label={column.header}>
                                         {renderCellContent(item, column)}
                                     </td>
                                 ))}
-                                
+
                                 {/* Cella Azioni */}
-                                <td>
+                                <td data-label="Azioni">
                                     <div className="table-actions">
                                         {showEdit && (
                                             <button
