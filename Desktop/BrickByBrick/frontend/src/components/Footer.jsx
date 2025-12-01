@@ -1,3 +1,11 @@
+import { 
+    FaFacebookF, 
+    FaTwitter, 
+    FaInstagram, 
+    FaLinkedinIn, 
+    FaYoutube 
+} from "react-icons/fa"; 
+
 export default function Footer() {
     return (
         <footer className="footer">
@@ -9,21 +17,12 @@ export default function Footer() {
                 </div>
 
                 <div className="footer__social-links">
-                    <a href="#" aria-label="Facebook">
-                        <i className="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="#" aria-label="Twitter">
-                        <i className="fab fa-twitter"></i>
-                    </a>
-                    <a href="#" aria-label="Instagram">
-                        <i className="fab fa-instagram"></i>
-                    </a>
-                    <a href="#" aria-label="LinkedIn">
-                        <i className="fab fa-linkedin"></i>
-                    </a>
-                    <a href="#" aria-label="YouTube">
-                        <i className="fab fa-youtube"></i>
-                    </a>
+                    {/* Nota: Ho aggiunto la classe 'social-icon' per il CSS */}
+                    <a href="#" aria-label="Facebook"><FaFacebookF className="social-icon" /></a>
+                    <a href="#" aria-label="Twitter"><FaTwitter className="social-icon" /></a>
+                    <a href="#" aria-label="Instagram"><FaInstagram className="social-icon" /></a>
+                    <a href="#" aria-label="LinkedIn"><FaLinkedinIn className="social-icon" /></a>
+                    <a href="#" aria-label="YouTube"><FaYoutube className="social-icon" /></a>
                 </div>
 
             </div>
