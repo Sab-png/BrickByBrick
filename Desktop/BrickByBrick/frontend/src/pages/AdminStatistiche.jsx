@@ -164,22 +164,22 @@ export default function Statistiche() {
                         </thead>
                         <tbody>
                             <tr>
-                                <td>🏠 Immobili</td>
+                                <td><span className="icon-only">🏠</span><span className="text-only"> Immobili</span></td>
                                 <td className="number">{stats.immobili}</td>
                                 <td>Proprietà disponibili nel catalogo</td>
                             </tr>
                             <tr>
-                                <td>👤 Agenti</td>
+                                <td><span className="icon-only">👤</span><span className="text-only"> Agenti</span></td>
                                 <td className="number">{stats.agenti}</td>
                                 <td>Agenti immobiliari attivi</td>
                             </tr>
                             <tr>
-                                <td>👥 Utenti</td>
+                                <td><span className="icon-only">👥</span><span className="text-only"> Utenti</span></td>
                                 <td className="number">{stats.utenti}</td>
                                 <td>Clienti registrati nel sistema</td>
                             </tr>
                             <tr>
-                                <td>📄 Contratti</td>
+                                <td><span className="icon-only">📄</span><span className="text-only"> Contratti</span></td>
                                 <td className="number">{stats.contratti}</td>
                                 <td>Contratti esclusivi attivi</td>
                             </tr>
