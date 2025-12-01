@@ -1,0 +1,459 @@
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as m;
+
+// ============================================
+// PAGINE ADMIN - STILI UNIFICATI
+// Usato da: AdminAgenti, AdminUtenti, AdminImmobili, AdminContratti
+// ============================================
+
+// Pagina Gestione (Tabelle)
+.user-management-page {
+    width: 100%;
+    
+    h1 {
+        @include m.heading(vars.$font-size-3xl);
+        color: vars.$dark-blue;
+        margin-bottom: vars.$spacing-xl;
+        font-weight: vars.$font-weight-bold;
+        text-align: center;
+    }
+}
+
+// Pagina Form (Aggiungi/Modifica)
+.admin-page-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: vars.$spacing-xl;
+
+    @include m.mobile {
+        padding: vars.$spacing-base;
+    }
+}
+
+.admin-page-header {
+    text-align: center;
+    margin-bottom: vars.$spacing-2xl;
+
+    h1 {
+        @include m.heading(vars.$font-size-3xl);
+        color: vars.$dark-blue;
+        margin-bottom: vars.$spacing-sm;
+        font-weight: vars.$font-weight-bold;
+    }
+
+    p {
+        font-family: vars.$font-paragraph;
+        font-size: vars.$font-size-base;
+        color: #6b7280;
+    }
+}
+
+.user-table-card {
+    background: vars.$white;
+    border-radius: vars.$border-radius-lg;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: vars.$spacing-xl;
+    border: 1px solid #e5e7eb;
+
+    @include m.mobile {
+        padding: vars.$spacing-base;
+        border-radius: vars.$border-radius-md;
+    }
+}
+
+// Controlli Header (Ricerca + Bottoni)
+.table-header-controls {
+    @include m.flex-between;
+    gap: vars.$spacing-lg;
+    margin-bottom: vars.$spacing-xl;
+    flex-wrap: wrap;
+
+    @include m.mobile {
+        flex-direction: column;
+        align-items: stretch;
+        gap: vars.$spacing-base;
+    }
+}
+
+.search-container {
+    display: flex;
+    gap: vars.$spacing-sm;
+    flex: 1;
+    max-width: 500px;
+
+    @include m.mobile {
+        max-width: 100%;
+    }
+
+    input {
+        flex: 1;
+        padding: vars.$spacing-sm vars.$spacing-base;
+        border: 1px solid #d1d5db;
+        border-radius: vars.$border-radius-md;
+        font-family: vars.$font-paragraph;
+        font-size: vars.$font-size-base;
+        color: vars.$dark-blue;
+        transition: all vars.$transition-base;
+
+        &:focus {
+            outline: none;
+            border-color: vars.$turquoise;
+            box-shadow: 0 0 0 3px rgba(35, 155, 155, 0.1);
+        }
+
+        &::placeholder {
+            color: #9ca3af;
+        }
+    }
+}
+
+.search-btn {
+    padding: vars.$spacing-sm vars.$spacing-xl;
+    background: vars.$turquoise;
+    color: vars.$white;
+    border: none;
+    border-radius: vars.$border-radius-md;
+    font-family: vars.$font-paragraph;
+    font-size: vars.$font-size-base;
+    font-weight: vars.$font-weight-medium;
+    cursor: pointer;
+    transition: all vars.$transition-base;
+    white-space: nowrap;
+
+    &:hover {
+        background: darken(vars.$turquoise, 8%);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 6px rgba(35, 155, 155, 0.2);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+
+    @include m.mobile {
+        padding: vars.$spacing-sm vars.$spacing-base;
+    }
+}
+
+.action-buttons {
+    display: flex;
+    gap: vars.$spacing-sm;
+    flex-wrap: wrap;
+
+    @include m.mobile {
+        justify-content: stretch;
+        
+        button {
+            flex: 1;
+        }
+    }
+}
+
+.add-btn,
+.edit-btn,
+.remove-btn,
+.remove-user-btn {
+    padding: vars.$spacing-sm vars.$spacing-lg;
+    border: none;
+    border-radius: vars.$border-radius-md;
+    font-family: vars.$font-paragraph;
+    font-size: vars.$font-size-sm;
+    font-weight: vars.$font-weight-medium;
+    cursor: pointer;
+    transition: all vars.$transition-base;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: vars.$spacing-xs;
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        
+        &:hover {
+            transform: none;
+            box-shadow: none;
+        }
+    }
+
+    @include m.mobile {
+        padding: vars.$spacing-sm vars.$spacing-base;
+        font-size: vars.$font-size-xs;
+    }
+}
+
+.add-btn {
+    background: vars.$turquoise;
+    color: vars.$white;
+
+    &:hover:not(:disabled) {
+        background: darken(vars.$turquoise, 8%);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 6px rgba(35, 155, 155, 0.2);
+    }
+}
+
+.edit-btn {
+    background: #f3f4f6;
+    color: #374151;
+
+    &:hover:not(:disabled) {
+        background: #e5e7eb;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+}
+
+.remove-btn,
+.remove-user-btn {
+    background: #fee2e2;
+    color: #dc2626;
+
+    &:hover:not(:disabled) {
+        background: #fecaca;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 4px rgba(220, 38, 38, 0.2);
+    }
+}
+
+// Messaggi di stato
+.data-status-message {
+    padding: vars.$spacing-lg;
+    border-radius: vars.$border-radius-md;
+    text-align: center;
+    font-family: vars.$font-paragraph;
+    font-size: vars.$font-size-base;
+    margin: vars.$spacing-xl 0;
+
+    &.loading {
+        background: #eff6ff;
+        color: #1e40af;
+        border: 1px solid #dbeafe;
+    }
+
+    &.error {
+        background: #fef2f2;
+        color: #dc2626;
+        border: 1px solid #fee2e2;
+    }
+
+    &.info {
+        background: #f9fafb;
+        color: #6b7280;
+        border: 1px solid #e5e7eb;
+    }
+}
+
+// ============================================
+// FORM ADMIN - STILI UNIFICATI
+// Usato da: AdminContrattoForm, AdminAgentForm, AdminImmobileForm
+// ============================================
+
+.admin-form {
+    background: vars.$white;
+    border-radius: vars.$border-radius-lg;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: vars.$spacing-2xl;
+    border: 1px solid #e5e7eb;
+
+    @include m.mobile {
+        padding: vars.$spacing-lg;
+        border-radius: vars.$border-radius-md;
+    }
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: vars.$spacing-sm;
+    margin-bottom: vars.$spacing-lg;
+
+    label {
+        font-family: vars.$font-paragraph;
+        font-size: vars.$font-size-sm;
+        font-weight: vars.$font-weight-semibold;
+        color: #374151;
+        display: flex;
+        align-items: center;
+        gap: vars.$spacing-xs;
+    }
+
+    input,
+    select,
+    textarea {
+        padding: vars.$spacing-sm vars.$spacing-base;
+        border: 1px solid #d1d5db;
+        border-radius: vars.$border-radius-md;
+        font-family: vars.$font-paragraph;
+        font-size: vars.$font-size-base;
+        color: vars.$dark-blue;
+        transition: all vars.$transition-base;
+        background: vars.$white;
+        width: 100%;
+
+        &:focus {
+            outline: none;
+            border-color: vars.$turquoise;
+            box-shadow: 0 0 0 3px rgba(35, 155, 155, 0.1);
+        }
+
+        &:disabled {
+            background: #f9fafb;
+            color: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        &::placeholder {
+            color: #9ca3af;
+        }
+    }
+
+    select {
+        cursor: pointer;
+        appearance: auto;
+        
+        &:disabled {
+            cursor: not-allowed;
+        }
+    }
+
+    textarea {
+        min-height: 100px;
+        resize: vertical;
+        font-family: vars.$font-paragraph;
+    }
+
+    .error-text {
+        font-size: vars.$font-size-xs;
+        color: #dc2626;
+        font-weight: vars.$font-weight-medium;
+        margin-top: vars.$spacing-xs;
+    }
+}
+
+// Preview Info Cards (per selezioni dropdown)
+.info-preview {
+    margin-top: vars.$spacing-sm;
+    padding: vars.$spacing-base;
+    border-radius: vars.$border-radius-md;
+    font-size: vars.$font-size-sm;
+    line-height: 1.6;
+
+    strong {
+        font-weight: vars.$font-weight-semibold;
+        color: #374151;
+    }
+}
+
+// Form Actions (Pulsanti)
+.form-actions {
+    display: flex;
+    gap: vars.$spacing-base;
+    justify-content: flex-end;
+    padding-top: vars.$spacing-xl;
+    margin-top: vars.$spacing-xl;
+    border-top: 1px solid #e5e7eb;
+
+    @include m.mobile {
+        flex-direction: column-reverse;
+        gap: vars.$spacing-sm;
+    }
+
+    button {
+        padding: vars.$spacing-sm vars.$spacing-xl;
+        border: none;
+        border-radius: vars.$border-radius-md;
+        font-family: vars.$font-paragraph;
+        font-size: vars.$font-size-base;
+        font-weight: vars.$font-weight-medium;
+        cursor: pointer;
+        transition: all vars.$transition-base;
+        white-space: nowrap;
+        min-width: 160px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: vars.$spacing-xs;
+
+        &:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+
+            &:hover {
+                transform: none;
+                box-shadow: none;
+            }
+        }
+
+        @include m.mobile {
+            width: 100%;
+        }
+    }
+}
+
+.submit-btn {
+    background: vars.$turquoise;
+    color: vars.$white;
+
+    &:hover:not(:disabled) {
+        background: darken(vars.$turquoise, 8%);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(35, 155, 155, 0.25);
+    }
+
+    &:active:not(:disabled) {
+        transform: translateY(0);
+    }
+}
+
+.cancel-btn {
+    background: #f3f4f6;
+    color: #374151;
+
+    &:hover:not(:disabled) {
+        background: #e5e7eb;
+        transform: translateY(-2px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    &:active:not(:disabled) {
+        transform: translateY(0);
+    }
+}
+
+.back-btn {
+    @extend .cancel-btn;
+}
+
+// Messaggi di errore/successo
+.data-status-message,
+.error-message,
+.loading-message {
+    padding: vars.$spacing-base vars.$spacing-lg;
+    border-radius: vars.$border-radius-md;
+    margin-bottom: vars.$spacing-lg;
+    font-family: vars.$font-paragraph;
+    font-size: vars.$font-size-sm;
+    font-weight: vars.$font-weight-medium;
+    text-align: center;
+
+    &.loading,
+    &.loading-message {
+        background: #eff6ff;
+        color: #1e40af;
+        border: 1px solid #dbeafe;
+    }
+
+    &.error,
+    &.error-message {
+        background: #fef2f2;
+        color: #dc2626;
+        border: 1px solid #fee2e2;
+    }
+
+    strong {
+        font-weight: vars.$font-weight-bold;
+    }
+}
+

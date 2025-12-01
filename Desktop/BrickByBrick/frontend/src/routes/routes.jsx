@@ -20,6 +20,8 @@ import ImmobiliAdmin from '../pages/AdminImmobili'
 import AgentForm from '../components/AdminAgentForm'
 import ImmobileForm from '../components/AdminImmobileForm'
 import AgendaAdmin from '../pages/AdminAgenda'
+import AdminContratti from '../components/AdminContratti'
+import AdminContrattoForm from '../components/AdminContrattoForm'
 
 const routes = [
   {
@@ -111,6 +113,21 @@ const routes = [
         path: 'utenti',
         Component: UtentiAdmin,
         title: 'Gestione Utenti'
+      },
+      {
+        path: 'contratti',
+        Component: AdminContratti,
+        title: 'Gestione Contratti'
+      },
+      {
+        path: 'contratti/nuovo',
+        Component: AdminContrattoForm,
+        title: 'Nuovo Contratto'
+      },
+      {
+        path: 'contratti/modifica/:id',
+        Component: AdminContrattoForm,
+        title: 'Modifica Contratto'
       },
       {
         path: 'immobili',
