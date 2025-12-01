@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/api/visite")
-@CrossOrigin(origins = "http://localhost:5173") 
+@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"}) 
 public class BrickVisitaREST {
     @Autowired
     public BrickServiceVisita serviceVisita;

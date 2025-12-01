@@ -20,7 +20,7 @@ import com.brickbybrick.brickbybrick.services.BrickServiceAdmin;
 
 @RestController
 @RequestMapping("/api/admin")
-@CrossOrigin(origins = "http://localhost:5173") 
+@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"}) 
 public class BrickAdminREST {
     
     @Autowired

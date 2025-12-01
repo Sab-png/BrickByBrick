@@ -19,7 +19,7 @@ import com.brickbybrick.brickbybrick.model.CaratteristicheImmobile;
 import com.brickbybrick.brickbybrick.services.BrickServiceCaratteristicheImmobile;
 @RestController
 @RequestMapping("/api/caratteristiche")
-@CrossOrigin(origins = "http://localhost:5173") 
+@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"}) 
 public class BrickCaratteristicheREST {
 @Autowired
     private BrickServiceCaratteristicheImmobile serviceCaratteristicheImmobile;

@@ -22,7 +22,7 @@ import com.brickbybrick.brickbybrick.services.BrickServiceAgente;
 
 @RestController
 @RequestMapping("/api/agenti")
-@CrossOrigin(origins = "http://localhost:5173") 
+@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"}) 
 
 public class BrickAgentiREST {
     
