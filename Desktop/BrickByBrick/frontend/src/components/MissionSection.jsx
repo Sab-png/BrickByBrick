@@ -1,8 +1,8 @@
 import Card from './Card';
 
-import iconAffidabilita from '../assets/images/affidabilita.svg';
-import iconInnovazione from '../assets/images/innovazione.svg';
-import iconTerritorialita from '../assets/images/territorialita.svg';
+import iconAffidabilita from '../assets/images/svg/affidabilita.svg';
+import iconInnovazione from '../assets/images/svg/innovazione.svg';
+import iconTerritorialita from '../assets/images/svg/territorialita.svg';
 
 export default function MissionSection() {
     return (
