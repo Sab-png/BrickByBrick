@@ -143,37 +143,72 @@ BRICKBYBRICK
  ```
 ## Installazione e Avvio
 
-### Requisiti
+
+### 1. Clonare il repository
+
+```
+git clone https://github.com/Sab-png/BrickByBrick.git
+cd BrickByBrick
+```
+
+### 2. Configurazione del Database
+Copia e incolla su MySQL gli script presenti in ```brickbybrick/src/main/resources/```, poi eseguli con il seguente ordine:
+
+1. ScriptDB.sql
+2. PopolamentoDB.sql
+3. Popolamento_prezzo_mercato.sql
+
+### 3. Configurare ```application.properties```
+```
+spring.datasource.url=jdbc:mysql://localhost:3306/immobiliaris
+spring.datasource.username=tuo_user
+spring.datasource.password=tuo_password
+spring.jpa.hibernate.ddl-auto=none
+
+server.port=8085
+```
+
+### 4. Avvio del Backend
+Nel terminale:
+```
+cd brickbybrick
+./mvnw spring-boot:run
+```
+Il server partirà su:
+```
+http://localhost:8085
+```
+### 5. Avvio del Frontend
+```
+cd frontend
+npm install
+npm run dev
+```
+Il server partirà su:
+```
+http://localhost:5173
+```
 
 ## Autori
 
 #### Digital Strategist
-Angelica Felletti
-- GitHub: [@Xangelica](https://github.com/Xangelica).
+Angelica Felletti: [@Xangelica](https://github.com/Xangelica).
 
-Tommaso 
-- GitHub: [@](https://github.com/).
+Tommaso: [@](https://github.com/).
 
- Giovanni 
-- GitHub: [@](https://github.com/).
+ Giovanni: [@](https://github.com/).
 
 #### Web Developer
-Jacopo dell'Oste
-- GitHub: [@jacopodellostee](https://github.com/Jacopodellostee).
+Jacopo dell'Oste: [@jacopodellostee](https://github.com/Jacopodellostee).
 
-Martino Placano
-- GitHub: [@Marti-guti](https://github.com/Marti-guti).
+Martino Placano: [@Marti-guti](https://github.com/Marti-guti).
 
- Cao Vy Beltrame
-- GitHub: [@CaoVy03](https://github.com/CaoVy03).
+ Cao Vy Beltrame: [@CaoVy03](https://github.com/CaoVy03).
 
 
 #### Software Developer
-Daniela Punzi
-- GitHub: [@Daniela15P](https://github.com/Daniela15P)
+Daniela Punzi: [@Daniela15P](https://github.com/Daniela15P)
 
-Marco Spedaliere
-- GitHub: [@MarcoSpedaliere](https://github.com/MarcoSpedaliere)
+Marco Spedaliere: [@MarcoSpedaliere](https://github.com/MarcoSpedaliere)
 
-Andrea Sabini
-- GitHub: [@Sab-png](https://github.com/Sab-png)
+Andrea Sabini: [@Sab-png](https://github.com/Sab-png)
