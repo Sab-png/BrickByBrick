@@ -15,4 +15,6 @@ public interface BrickServiceUtente {
     void deleteUtente(Integer id);
     
     boolean existsById(Integer id);
+    
+    List<Utente> searchUtenti(String searchTerm);
 }

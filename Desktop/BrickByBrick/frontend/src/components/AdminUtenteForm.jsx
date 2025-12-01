@@ -1,4 +1,4 @@
-// src/components/AgentForm.jsx
+// src/components/AdminUtenteForm.jsx
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -11,26 +11,31 @@ const validationRules = {
     cognome: { regex: /^[a-zA-Z\s']{2,50}$/, message: 'Il cognome è obbligatorio e deve contenere solo lettere e spazi (2-50 caratteri)' },
     email: { regex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: 'Email non valida' },
     telefono: { regex: /^[0-9\s\+\-\(\)]{9,20}$/, message: 'Numero telefono non valido (almeno 9 cifre)' },
-    città: { regex: /^[a-zA-Z\s']{2,50}$/, message: 'La città è obbligatoria e deve contenere solo lettere e spazi (2-50 caratteri)' },
+    codice_fiscale: { regex: /^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$/i, message: 'Codice fiscale non valido (16 caratteri)' },
     passw: { regex: /^.{6,}$/, message: 'La password deve contenere almeno 6 caratteri' }
 };
 
-// Stato iniziale del form.
+// Stato iniziale del form
 const initialFormData = {
-    nome: '', cognome: '', email: '', telefono: '', città: '', passw: ''
+    nome: '',
+    cognome: '',
+    email: '',
+    telefono: '',
+    codice_fiscale: '',
+    passw: ''
 };
 
 /**
- * Componente Form Unificato per Agenti.
- * Gestisce sia la creazione che la modifica di un agente.
+ * Componente Form Unificato per Utenti/Clienti.
+ * Gestisce sia la creazione che la modifica di un utente.
  * Il mode viene rilevato automaticamente: se c'è un ID nell'URL è 'edit', altrimenti 'add'.
  */
-const AgentForm = () => {
+const UtenteForm = () => {
     const navigate = useNavigate();
-    const { id: agentId } = useParams();
+    const { id: utenteId } = useParams();
     
     // Rileva automaticamente il mode: se c'è un ID nell'URL è edit, altrimenti add
-    const mode = agentId ? 'edit' : 'add';
+    const mode = utenteId ? 'edit' : 'add';
 
     // Stati locali del componente (completamente separati dall'hook)
     const [formData, setFormData] = useState(initialFormData);
@@ -39,28 +44,28 @@ const AgentForm = () => {
     const [apiError, setApiError] = useState(null);
     
     // Debug: logga lo stato di loading
-    console.log('AgentForm - mode:', mode, 'isFormLoading:', isFormLoading, 'agentId:', agentId);
+    console.log('UtenteForm - mode:', mode, 'isFormLoading:', isFormLoading, 'utenteId:', utenteId);
     
-    // Funzione per ottenere un agente per ID (chiamata diretta all'API)
-    const getAgentById = useCallback(async (id) => {
-        const url = `${API_BASE_URL}/api/agenti/${id}`; 
+    // Funzione per ottenere un utente per ID (chiamata diretta all'API)
+    const getUtenteById = useCallback(async (id) => {
+        const url = `${API_BASE_URL}/api/utenti/${id}`; 
         const response = await fetch(url);
         if (!response.ok) {
-            throw new Error(`Impossibile trovare l'agente ${id}. Errore: ${response.status}`);
+            throw new Error(`Impossibile trovare l'utente ${id}. Errore: ${response.status}`);
         }
         return await response.json();
     }, []);
     
-    // Funzione per salvare un agente (chiamata diretta all'API)
-    const saveAgent = useCallback(async (agentId, payload, mode) => {
+    // Funzione per salvare un utente (chiamata diretta all'API)
+    const saveUtente = useCallback(async (utenteId, payload, mode) => {
         let url = '';
         let method = '';
         
         if (mode === 'add') {
-            url = `${API_BASE_URL}/api/agenti`;
+            url = `${API_BASE_URL}/api/utenti`;
             method = 'POST';
         } else {
-            url = `${API_BASE_URL}/api/agenti/edit/${agentId}`;
+            url = `${API_BASE_URL}/api/utenti/edit/${utenteId}`;
             method = 'PUT';
         }
 
@@ -94,8 +99,9 @@ const AgentForm = () => {
 
         if (formData.telefono.trim() && !validationRules.telefono.regex.test(formData.telefono)) { newErrors.telefono = validationRules.telefono.message; }
 
-        if (!formData.città.trim()) { newErrors.città = 'La città è obbligatoria'; }
-        else if (!validationRules.città.regex.test(formData.città)) { newErrors.città = validationRules.città.message; }
+        if (formData.codice_fiscale.trim() && !validationRules.codice_fiscale.regex.test(formData.codice_fiscale)) { 
+            newErrors.codice_fiscale = validationRules.codice_fiscale.message; 
+        }
         
         if (mode === 'add' && !formData.passw.trim()) { newErrors.passw = 'La password è obbligatoria'; }
         else if (formData.passw.trim() && !validationRules.passw.regex.test(formData.passw)) { newErrors.passw = validationRules.passw.message; }
@@ -115,9 +121,9 @@ const AgentForm = () => {
 
     // --- Caricamento Dati Esistenti (useEffect per "edit") ---
     useEffect(() => {
-        const loadAgentData = async () => {
+        const loadUtenteData = async () => {
             // Logica di gestione: se siamo in 'add' o manca l'ID, usciamo
-            if (mode !== 'edit' || !agentId) {
+            if (mode !== 'edit' || !utenteId) {
                 setFormData(initialFormData);
                 setIsFormLoading(false); // Assicurati che isFormLoading sia false in modalità add
                 return;
@@ -127,33 +133,33 @@ const AgentForm = () => {
             setApiError(null);
 
             try {
-                // CHIAMA L'API per ottenere i dati del singolo agente
-                const agent = await getAgentById(agentId); 
+                // CHIAMA L'API per ottenere i dati del singolo utente
+                const utente = await getUtenteById(utenteId); 
                 
                 // Formattazione dei dati API nel formato del form
                 setFormData({
-                    nome: agent.nome || '',
-                    cognome: agent.cognome || '',
-                    email: agent.email || '',
-                    telefono: agent.telefono || '',
-                    città: agent.città || '',
+                    nome: utente.nome || '',
+                    cognome: utente.cognome || '',
+                    email: utente.email || '',
+                    telefono: utente.telefono || '',
+                    codice_fiscale: utente.codice_fiscale || '',
                     passw: '' // Non carichiamo mai la password per sicurezza
                 });
 
             } catch (error) {
-                // Gestisce gli errori di caricamento API (es. agente non trovato)
+                // Gestisce gli errori di caricamento API (es. utente non trovato)
                 console.error(error);
-                setApiError(error.message || "Errore nel caricamento dei dati dell'agente.");
+                setApiError(error.message || "Errore nel caricamento dei dati dell'utente.");
                 // Reindirizza l'utente dopo un errore critico di caricamento
-                setTimeout(() => navigate('/admin/agenti'), 3000); 
+                setTimeout(() => navigate('/admin/utenti'), 3000); 
             } finally {
                 setIsFormLoading(false); // Termina il loading
             }
         };
 
-        loadAgentData();
-    // Dipendenze: mode, agentId, navigate e le funzioni sono stabili con useCallback
-    }, [mode, agentId, navigate, getAgentById]); 
+        loadUtenteData();
+    // Dipendenze: mode, utenteId, navigate e le funzioni sono stabili con useCallback
+    }, [mode, utenteId, navigate, getUtenteById]); 
 
     // --- Gestione Invio (handleSubmit) ---
     const handleSubmit = async (e) => {
@@ -173,8 +179,8 @@ const AgentForm = () => {
             cognome: formData.cognome,
             email: formData.email,
             telefono: formData.telefono,
-            città: formData.città,
-            Id_ruolo: 2 // Ruolo agente predefinito
+            codice_fiscale: formData.codice_fiscale,
+            Id_ruolo: 3 // Ruolo cliente predefinito (3 = cliente)
         };
         
         // Aggiungi password solo se compilata (obbligatoria in add, opzionale in edit)
@@ -185,14 +191,14 @@ const AgentForm = () => {
         setIsFormLoading(true); 
 
         try {
-            // 3. Chiama la funzione di salvataggio API (saveAgent)
-            await saveAgent(agentId, payload, mode);
+            // 3. Chiama la funzione di salvataggio API (saveUtente)
+            await saveUtente(utenteId, payload, mode);
             
             // 4. In caso di successo, reindirizza
-            alert('Agente salvato con successo!');
-            navigate('/admin/agenti'); 
+            alert('Utente salvato con successo!');
+            navigate('/admin/utenti'); 
         } catch (error) {
-            // 5. Gestisce l'errore API (l'errore viene rilanciato da useAgents)
+            // 5. Gestisce l'errore API
             setApiError(error.message || `Si è verificato un errore durante l'operazione di ${mode}.`);
         } finally {
             setIsFormLoading(false); 
@@ -200,8 +206,8 @@ const AgentForm = () => {
     };
     
     // --- Rendering ---
-    const pageTitle = mode === 'add' ? '➕ Aggiungi Nuovo Agente' : ` Modifica Agente (ID: ${agentId})`;
-    const submitButtonText = mode === 'add' ? 'Aggiungi Agente' : 'Salva Modifiche';
+    const pageTitle = mode === 'add' ? '➕ Aggiungi Nuovo Cliente' : `✍️ Modifica Cliente (ID: ${utenteId})`;
+    const submitButtonText = mode === 'add' ? 'Aggiungi Cliente' : 'Salva Modifiche';
 
     return (
         <div className="agent-form-container">
@@ -236,11 +242,20 @@ const AgentForm = () => {
                             <input id="telefono" name="telefono" value={formData.telefono} onChange={handleChange} disabled={isFormLoading} type="tel" />
                             {errors.telefono && <span className="error-message">{errors.telefono}</span>}
                         </div>
-                        {/* Campo Città */}
+                        {/* Campo Codice Fiscale */}
                         <div className="form-field">
-                            <label htmlFor="città">Città *</label>
-                            <input id="città" name="città" value={formData.città} onChange={handleChange} disabled={isFormLoading} />
-                            {errors.città && <span className="error-message">{errors.città}</span>}
+                            <label htmlFor="codice_fiscale">Codice Fiscale</label>
+                            <input 
+                                id="codice_fiscale" 
+                                name="codice_fiscale" 
+                                value={formData.codice_fiscale} 
+                                onChange={handleChange} 
+                                disabled={isFormLoading}
+                                maxLength="16"
+                                style={{ textTransform: 'uppercase' }}
+                                placeholder="RSSMRA80A01H501Z"
+                            />
+                            {errors.codice_fiscale && <span className="error-message">{errors.codice_fiscale}</span>}
                         </div>
                         {/* Campo Password */}
                         <div className="form-field">
@@ -256,7 +271,7 @@ const AgentForm = () => {
                         <button type="submit" className="submit-btn" disabled={isFormLoading}>
                             {isFormLoading ? '⏳ Elaborando...' : submitButtonText}
                         </button>
-                        <button type="button" className="back-btn" onClick={() => navigate('/admin/agenti')} disabled={isFormLoading}>
+                        <button type="button" className="back-btn" onClick={() => navigate('/admin/utenti')} disabled={isFormLoading}>
                             Indietro
                         </button>
                     </div>
@@ -266,4 +281,4 @@ const AgentForm = () => {
     );
 };
 
-export default AgentForm;
+export default UtenteForm;

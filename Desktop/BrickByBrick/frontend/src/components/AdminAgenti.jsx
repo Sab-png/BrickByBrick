@@ -39,12 +39,12 @@ const Agenti = () => {
 
     // Reindirizza al form unificato in modalità Aggiunta.
     const handleAddAgent = () => {
-        navigate('/admin/gestione-utenti/aggiungi-agente');
+        navigate('/admin/agenti/aggiungi-agente');
     };
 
     // Reindirizza al form unificato in modalità Modifica, includendo l'ID nell'URL.
     const handleEditAgent = (agentId) => {
-        navigate(`/admin/gestione-utenti/modifica-agente/${agentId}`);
+        navigate(`/admin/agenti/modifica-agente/${agentId}`);
     };
   
     // Gestisce la rimozione di un singolo agente.
