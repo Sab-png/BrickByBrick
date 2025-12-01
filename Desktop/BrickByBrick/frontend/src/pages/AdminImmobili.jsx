@@ -87,9 +87,9 @@ const Immobili = () => {
     ];
 
     return (
-        <div className="immobile-management-page">
+        <div className="user-management-page">
             <h1>Gestione Immobili</h1>
-            <div className="immobile-table-card">
+            <div className="user-table-card">
 
                 {/* Controlli della tabella: Ricerca e Bottoni Azione */}
                 <div className="table-header-controls">

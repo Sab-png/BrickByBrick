@@ -41,15 +41,38 @@
     }
 
     &-header {
-        @include m.flex-center;
+        @include m.flex-between;
         padding: vars.$spacing-lg vars.$spacing-base;
-        border-bottom: 1px solid #e5e7eb;
         background: vars.$white;
         min-height: 70px;
         gap: vars.$spacing-sm;
+        flex-direction: column;
 
         @include m.mobile {
             padding: vars.$spacing-base;
+        }
+    }
+
+    &-logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: vars.$spacing-sm 0;
+        
+        img {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+            transition: all vars.$transition-base;
+            
+            .sidebar.closed & {
+                height: 32px;
+                
+                @include m.tablet {
+                    height: 40px;
+                }
+            }
         }
     }
 

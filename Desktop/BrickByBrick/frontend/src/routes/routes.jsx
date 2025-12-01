@@ -14,11 +14,14 @@ import StepMultiForm from '../pages/StepMultiForm'
 // Admin sections 
 import AdminLayout from '../layout/AdminLayout'
 import Statistiche from '../pages/AdminStatistiche'
-import GestioneUtenti from '../pages/AdminGestioneUtenti'
+import AdminAgenti from '../components/AdminAgenti'
+import UtentiAdmin from '../components/AdminUtenti'
 import ImmobiliAdmin from '../pages/AdminImmobili'
 import AgentForm from '../components/AdminAgentForm'
 import ImmobileForm from '../components/AdminImmobileForm'
 import AgendaAdmin from '../pages/AdminAgenda'
+import AdminContratti from '../components/AdminContratti'
+import AdminContrattoForm from '../components/AdminContrattoForm'
 
 const routes = [
   {
@@ -92,19 +95,39 @@ const routes = [
         title: 'Statistiche'
       },
       {
-        path: 'gestione-utenti',
-        Component: GestioneUtenti,
-        title: 'Gestione Utenti'
+        path: 'agenti',
+        Component: AdminAgenti,
+        title: 'Gestione Agenti'
       },
       {
-        path: 'gestione-utenti/aggiungi-agente',
+        path: 'agenti/aggiungi-agente',
         Component: AgentForm,
         title: 'Aggiungi agente'
       },
       {
-        path: 'gestione-utenti/modifica-agente/:id',
+        path: 'agenti/modifica-agente/:id',
         Component: AgentForm,
         title: 'Modifica agente'
+      },
+      {
+        path: 'utenti',
+        Component: UtentiAdmin,
+        title: 'Gestione Utenti'
+      },
+      {
+        path: 'contratti',
+        Component: AdminContratti,
+        title: 'Gestione Contratti'
+      },
+      {
+        path: 'contratti/nuovo',
+        Component: AdminContrattoForm,
+        title: 'Nuovo Contratto'
+      },
+      {
+        path: 'contratti/modifica/:id',
+        Component: AdminContrattoForm,
+        title: 'Modifica Contratto'
       },
       {
         path: 'immobili',
