@@ -72,7 +72,7 @@ const Login = () => {
           <picture>
             <source srcSet={ImageLoginAvif} type="image/avif" />
             <source srcSet={ImageLoginWebp} type="image/webp" />
-            <img src={ImageLoginJpg} alt="Interior Design" className="register__image" loading="lazy" />
+            <img src={ImageLoginJpg} alt="Interior Design" className="register__image" loading="eager" fetchPriority="high" width="960" height="1080"/>
           </picture>
         </div>
 
