@@ -26,10 +26,13 @@
     padding: vars.$spacing-base;
     background-color: vars.$light-blue;
     border-radius: vars.$border-radius-md;
-    i {
-      font-size: vars.$font-size-2xl;
+
+    .detail-icon {
+      font-size: vars.$font-size-2xl; 
       color: vars.$sky-blue;
+      flex-shrink: 0; 
     }
+
     div {
       @include m.flex-column;
       gap: vars.$spacing-xs;
