@@ -116,7 +116,7 @@ const Registrati = () => {
           <picture>
             <source srcSet={ImageRegistratiAvif} type="image/avif" />
             <source srcSet={ImageRegistratiWebp} type="image/webp" />
-            <img src={ImageRegistratiJpg} alt="Interior Design" className="register__image" loading="lazy" />
+            <img src={ImageRegistratiJpg} alt="Interior Design" className="register__image" loading="eager" fetchPriority="high" width="960" height="1080" />
           </picture>
         </div>
 
