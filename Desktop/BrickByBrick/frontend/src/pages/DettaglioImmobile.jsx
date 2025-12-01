@@ -34,6 +34,14 @@ export default function DettaglioImmobile() {
     fetchSingle();
   }, [id]);
 
+  useSEO({
+    title: `Immobile in ${immobile?.indirizzo} a ${immobile?.citta}`,
+    description: `Vendita ${immobile?.tipologia} in ${immobile?.indirizzo} a ${immobile?.citta}. Prezzo: €${immobile?.prezzo}. ${immobile?.descrizione}`,
+    image: String(immobile?.foto),
+    imageAlt: `Foto di ${immobile?.titolo}`,
+    type: "article"
+  })
+
   if (!immobile) {
     return <p>Caricamento immobile...</p>;
   }
