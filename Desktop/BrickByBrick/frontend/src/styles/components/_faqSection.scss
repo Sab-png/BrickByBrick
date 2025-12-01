@@ -9,7 +9,6 @@
   @include m.flex-column;
   align-items: center;
 
-  // Su mobile, riduciamo il padding verticale
   @include m.mobile {
     padding: vars.$spacing-xl vars.$spacing-base;
   }
@@ -19,14 +18,13 @@
   text-align: center;
   margin-bottom: vars.$spacing-xl;
 
-  h1 {
-    // Usiamo il mixin per gli heading
+  h2 {
     @include m.heading(vars.$font-size-5xl, vars.$font-weight-bold);
     color: vars.$dark-blue;
     margin-bottom: vars.$spacing-sm;
 
     @include m.mobile {
-      font-size: vars.$font-size-3xl; // Riduciamo il titolo su mobile
+      font-size: vars.$font-size-3xl;
     }
   }
 
@@ -42,15 +40,13 @@
 }
 
 .faq-container {
-  // Blocco bianco arrotondato
   background-color: vars.$white;
-  border-radius: vars.$border-radius-xl; // 16px
-  box-shadow: vars.$shadow-lg; // Ombra più morbida e ampia
+  border-radius: vars.$border-radius-xl;
+  box-shadow: vars.$shadow-lg;
   max-width: 800px;
   width: 100%;
   padding: vars.$spacing-xl vars.$spacing-2xl;
   
-  // Responsive: Riduciamo il padding interno su mobile
   @include m.mobile {
     padding: vars.$spacing-lg vars.$spacing-lg;
   }
@@ -60,21 +56,16 @@
   display: flex;
   justify-content: center;
   text-align: center;
-  // Linea grigia chiara di separazione
   border-bottom: vars.$border-width solid rgba(vars.$black, 0.1); 
-  margin-bottom: vars.$spacing-lg; // Spazio tra tab e prime FAQ
+  margin-bottom: vars.$spacing-lg;
   
-
-  // Responsive: Su mobile, permettiamo lo scroll orizzontale dei tab
   @include m.mobile {
     justify-content: flex-start;
     overflow-x: auto;
-    
-    // Nascondiamo la scrollbar per un look più pulito
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;     /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
     &::-webkit-scrollbar {
-      display: none;             /* Chrome, Safari, Opera */
+      display: none;
     }
   }
 
@@ -82,7 +73,7 @@
     background: none;
     border: none;
     padding: vars.$spacing-sm vars.$spacing-base;
-    padding-bottom: vars.$spacing-lg; // Più spazio per la linea
+    padding-bottom: vars.$spacing-lg;
     margin-right: vars.$spacing-lg;
     cursor: pointer;
     font-family: vars.$font-paragraph;
@@ -91,8 +82,8 @@
     color: vars.$light-gray;
     position: relative;
     transition: color vars.$transition-base vars.$transition-ease;
-    flex-shrink: 0; // Impedisce ai tab di stringersi su mobile
-    white-space: nowrap; // Evita che i nomi dei tab vadano a capo
+    flex-shrink: 0;
+    white-space: nowrap;
 
     &:hover:not(.active) {
       color: vars.$dark-blue;
@@ -102,16 +93,14 @@
       color: vars.$dark-blue;
       font-weight: vars.$font-weight-semibold;
 
-      // Linea d'accento (turchese)
       &::after {
         content: '';
         position: absolute;
-        // Si posiziona sopra il border-bottom del contenitore
         bottom: - (vars.$border-width); 
         left: 0;
         width: 100%;
-        height: 2px; // Linea d'accento spessa 2px
-        background-color: vars.$turquoise; // Colore accento
+        height: 2px;
+        background-color: vars.$turquoise;
       }
     }
   }
