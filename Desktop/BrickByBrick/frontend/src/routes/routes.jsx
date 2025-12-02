@@ -94,7 +94,8 @@ const routes = [
   },
   {
     path: 'valuta-immobile',
-    Component: () => withSuspense(StepMultiForm),
+    // Component: () => withSuspense(StepMultiForm),
+    Component: () => withSuspense(() => <ProtectedRoute Component={StepMultiForm} requiredRole="CLIENTE" />),
     title: 'Valuta Immobile'
   },
   {
@@ -130,7 +131,8 @@ const routes = [
   },
   {
     path: '/admin',
-    Component: AdminLayout, // Layout con la SideBar
+    // Component: AdminLayout, // Layout con la SideBar
+    Component: () => <ProtectedRoute Component={AdminLayout} requiredRole="ADMIN" />,
     children: [
       {
         index: true,
