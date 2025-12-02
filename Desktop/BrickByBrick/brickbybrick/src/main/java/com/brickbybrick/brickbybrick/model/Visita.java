@@ -11,8 +11,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 
 @Entity
@@ -26,14 +24,14 @@ public class Visita {
 
     @ManyToOne
     @JoinColumn(name = "Id_immobile")
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private Immobile immobile;
     
     @Column(name = "Id_agente", nullable = false)
     private Integer Id_agente;
 
-    @Column(name = "Id_utente", nullable = false)
-    private Integer Id_utente;
+    @ManyToOne
+    @JoinColumn(name = "Id_utente")
+    private Utente utente;
 
     @Column(name = "data", nullable = false)
     private LocalDateTime data;
@@ -72,11 +70,11 @@ public class Visita {
     }
 
     public Integer getId_utente() {
-        return Id_utente;
+        return utente.getId_utente();
     }
 
     public void setId_utente(Integer id_utente) {
-        Id_utente = id_utente;
+        utente.setId_utente(id_utente);
     }
 
     

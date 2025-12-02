@@ -4,7 +4,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.brickbybrick.brickbybrick.model.Immobile;
-import com.brickbybrick.brickbybrick.model.Visita;
 import com.brickbybrick.brickbybrick.repos.BrickRepoImmobile;
 
 @Service

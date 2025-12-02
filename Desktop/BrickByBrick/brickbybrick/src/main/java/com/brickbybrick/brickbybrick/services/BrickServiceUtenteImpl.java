@@ -14,6 +14,8 @@ public class BrickServiceUtenteImpl implements BrickServiceUtente {
 
     @Autowired
     private BrickRepoUtente repoUtente;
+    @Autowired
+    private BrickServiceVisita visitaService;
 
     @Override
     public List<Utente> getUtenti() {
@@ -32,6 +34,7 @@ public class BrickServiceUtenteImpl implements BrickServiceUtente {
 
     @Override
     public void deleteUtente(Integer id) {
+        visitaService.deleteVisiteByUtenteId(id);
         repoUtente.deleteById(id);
     }
 

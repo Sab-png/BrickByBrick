@@ -15,6 +15,11 @@ public interface BrickRepoVisita extends JpaRepository<Visita, Integer> {
 
     @Modifying
     @Transactional
+    @Query("DELETE FROM Visita v WHERE v.utente.id = :id")
+    void deleteByUtenteId(@Param("id") Integer id);
+
+    @Modifying
+    @Transactional
     @Query("DELETE FROM Visita v WHERE v.immobile.id= :id")
     void deleteByImmobileId(@Param("id") Integer id);
 }

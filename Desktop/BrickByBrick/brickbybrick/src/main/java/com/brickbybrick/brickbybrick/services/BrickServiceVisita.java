@@ -19,6 +19,8 @@ public interface BrickServiceVisita {
     boolean existsById(Integer id);
 
     void deleteVisiteByImmobileId(Integer immobileId);
+
+    void deleteVisiteByUtenteId(Integer utenteId);
     
    
 

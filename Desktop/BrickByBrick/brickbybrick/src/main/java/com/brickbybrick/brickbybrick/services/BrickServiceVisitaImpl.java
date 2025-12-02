@@ -14,6 +14,7 @@ public class BrickServiceVisitaImpl implements BrickServiceVisita {
 
     @Autowired
     private BrickRepoVisita repoVisita;
+    
 
     @Override
     public List<Visita> getVisite() {
@@ -38,6 +39,11 @@ public class BrickServiceVisitaImpl implements BrickServiceVisita {
     public boolean existsById(Integer id){
         return repoVisita.existsById(id);
     }
+    @Override
+    public void deleteVisiteByUtenteId(Integer utenteId) {
+        repoVisita.deleteByUtenteId(utenteId);
+    }
+
     @Override
     public void deleteVisiteByImmobileId(Integer immobileId) {
         repoVisita.deleteByImmobileId(immobileId);
