@@ -23,6 +23,8 @@ const NotFound = lazy(() => import('../pages/NotFound'));
 
 const StepMultiForm = lazy(() => import('../pages/StepMultiForm'));
 
+import PrenotaVisitaForm from '../components/PrenotaVisitaForm';
+
 // Admin sections 
 import AdminLayout from '../layout/AdminLayout'
 import Statistiche from '../pages/AdminStatistiche'
@@ -93,6 +95,11 @@ const routes = [
   {
     path: 'valuta-immobile',
     Component: () => withSuspense(StepMultiForm),
+    title: 'Valuta Immobile'
+  },
+  {
+    path: 'prenota-visita/:id',
+    Component: PrenotaVisitaForm,
     title: 'Valuta Immobile'
   },
   // {
