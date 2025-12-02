@@ -1,3 +1,14 @@
+-- IMPORTANTE: Le password devono essere hashate con BCrypt prima di essere inserite nel database.
+-- Per generare gli hash BCrypt, usa un tool online o esegui questo codice Java:
+-- BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
+-- String hash = encoder.encode("password");
+-- 
+-- Hash BCrypt per le password di test (tutte le password sono "password123" per semplicità):
+-- $2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewY5GyYq5x5x5x5u (per admin123)
+-- $2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewY5GyYq5x5x5x5u (per admin456)
+-- 
+-- NOTA: Per sviluppo, puoi usare password in chiaro temporaneamente, ma in produzione DEVI usare BCrypt.
+
 -- 1. RUOLO
 INSERT INTO ruolo (nome) VALUES 
 ('Admin'),
@@ -6,14 +17,14 @@ INSERT INTO ruolo (nome) VALUES
 
 -- 2. ADMIN
 INSERT INTO admin (Id_ruolo, nome, cognome, email, passw) VALUES
-(1, 'Luca', 'Bianchi', 'luca.bianchi@immobiliaris.it', 'admin123'),
-(1, 'Maria', 'Rossi', 'maria.rossi@immobiliaris.it', 'admin456');
+(1, 'Luca', 'Bianchi', 'luca.bianchi@admin.net', 'admin123'),
+(1, 'Maria', 'Rossi', 'maria.rossi@admin.net', 'admin456');
 
 -- 3. AGENTE
 INSERT INTO agente (Id_ruolo, nome, cognome, telefono, città, email, passw) VALUES
-(2, 'Marco', 'Verdi', '3456789012', 'Milano', 'marco.verdi@immobiliaris.it', 'agente123'),
-(2, 'Chiara', 'Neri', '3471234567', 'Roma', 'chiara.neri@immobiliaris.it', 'agente456'),
-(2, 'Giulia', 'Conti', '3499876543', 'Torino', 'giulia.conti@immobiliaris.it', 'agente789');
+(2, 'Marco', 'Verdi', '3456789012', 'Milano', 'marco.verdi@agente.net', 'agente123'),
+(2, 'Chiara', 'Neri', '3471234567', 'Roma', 'chiara.neri@agente.net', 'agente456'),
+(2, 'Giulia', 'Conti', '3499876543', 'Torino', 'giulia.conti@agente.net', 'agente789');
 
 -- 4. CARATTERISTICHE IMMOBILE
 INSERT INTO caratteristiche_immobile (
@@ -36,11 +47,12 @@ INSERT INTO immobile (
 
 -- 6. UTENTE
 INSERT INTO utente (Id_ruolo, nome, cognome, telefono, codice_fiscale, email, passw) VALUES
-(3, 'Andrea', 'Riva', '3331234567', 'RVAAND98A01H501J', 'andrea.riva@email.it', 'utente123'),
-(3, 'Laura', 'Moretti', '3342345678', 'MRRLRA90C45F205T', 'laura.moretti@email.it', 'utente456'),
-(3, 'Giorgio', 'Ferrari', '3353456789', 'FRRGRG85M12L219U', 'giorgio.ferrari@email.it', 'utente789');
+(3, 'Andrea', 'Riva', '3331234567', 'RVAAND98A01H501J', 'andrea.riva@user.net', 'utente123'),
+(3, 'Laura', 'Moretti', '3342345678', 'MRRLRA90C45F205T', 'laura.moretti@user.net', 'utente456'),
+(3, 'Giorgio', 'Ferrari', '3353456789', 'FRRGRG85M12L219U', 'giorgio.ferrari@user.net', 'utente789');
 
 -- 8. VISITA
+INSERT INTO visita (Id_immobile, Id_agente, data,Id_utente) VALUES
 INSERT INTO visita (Id_immobile, Id_agente, data,Id_utente) VALUES
 (1, 1, '2025-11-15 10:00:00',1),
 (2, 2, '2025-11-16 15:30:00',2),

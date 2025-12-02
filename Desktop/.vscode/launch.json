@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-BrickbybrickApplication<brickbybrick>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.brickbybrick.brickbybrick.BrickbybrickApplication",
+            "projectName": "brickbybrick",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
