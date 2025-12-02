@@ -234,5 +234,5 @@ Sede legale: Torino, Piazza Carlo Felice 18<br>
 
 ## Licenza
 Questo progetto è sviluppato nell'ambito del corso ITS ICT Piemonte.<br>
-Tutti i diritti riservati © 2025 Team BrickByBrick
+Tutti i diritti riservati © 2025 Team Byta
 

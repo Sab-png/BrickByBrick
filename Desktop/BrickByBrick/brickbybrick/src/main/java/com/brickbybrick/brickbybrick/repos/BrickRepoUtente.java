@@ -1,12 +1,18 @@
 package com.brickbybrick.brickbybrick.repos;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+
 import com.brickbybrick.brickbybrick.model.Utente;
 
 public interface BrickRepoUtente extends JpaRepository<Utente, Integer> {
+        Optional<Utente> findByEmailIgnoreCase(String email);
+
+    boolean existsByEmailIgnoreCase(String email);
     
     @Query("SELECT u FROM Utente u WHERE " +
            "LOWER(u.nome) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR " +
