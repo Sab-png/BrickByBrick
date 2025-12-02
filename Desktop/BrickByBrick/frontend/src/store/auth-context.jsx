@@ -4,11 +4,12 @@ const AuthContext = createContext({
   user: null,
   token: null,
   isAuthenticated: false,
-  login: () => {},
+  loading: true,
+  login: async () => ({ success: false }),
   logout: () => {},
-  isAdmin: () => {},
-  isAgente: () => {},
-  isCliente: () => {},
+  isAdmin: false,
+  isAgente: false,
+  isCliente: false,
 });
 
 export default AuthContext;
