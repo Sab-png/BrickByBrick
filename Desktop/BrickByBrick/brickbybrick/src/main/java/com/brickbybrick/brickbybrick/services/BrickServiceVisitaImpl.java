@@ -38,5 +38,9 @@ public class BrickServiceVisitaImpl implements BrickServiceVisita {
     public boolean existsById(Integer id){
         return repoVisita.existsById(id);
     }
+    @Override
+    public void deleteVisiteByImmobileId(Integer immobileId) {
+        repoVisita.deleteByImmobileId(immobileId);
+    }
 
 }

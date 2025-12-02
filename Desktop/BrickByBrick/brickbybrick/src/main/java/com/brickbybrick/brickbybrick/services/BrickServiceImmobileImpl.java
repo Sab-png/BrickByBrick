@@ -4,6 +4,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.brickbybrick.brickbybrick.model.Immobile;
+import com.brickbybrick.brickbybrick.model.Visita;
 import com.brickbybrick.brickbybrick.repos.BrickRepoImmobile;
 
 @Service
@@ -11,6 +12,8 @@ public class BrickServiceImmobileImpl implements BrickServiceImmobile {
 
     @Autowired
     private BrickRepoImmobile repoImmobile;
+    @Autowired
+    private BrickServiceVisita serviceVisita;
 
     @Override
     public List<Immobile> getImmobili() {
@@ -29,6 +32,7 @@ public class BrickServiceImmobileImpl implements BrickServiceImmobile {
     
     @Override
     public void deleteImmobile(int id) {
+        serviceVisita.deleteVisiteByImmobileId(id);
         repoImmobile.deleteById(id);
     }
 
