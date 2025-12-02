@@ -39,10 +39,7 @@
     &__logo-image {
         height: 32px;
         width: auto;
-
-        @include m.tablet {
-            height: 40px;
-        }
+        @include m.tablet { height: 40px; }
     }
 
     &__logo-text {
@@ -51,11 +48,7 @@
         font-weight: vars.$font-weight-bold;
         color: vars.$blue;
         white-space: nowrap;
-        display: inline-block; 
-
-        @include m.tablet {
-            font-size: vars.$font-size-lg;
-        }
+        @include m.tablet { font-size: vars.$font-size-lg; }
     }
 
     // --- Hamburger Menu ---
@@ -71,12 +64,9 @@
         padding: 0;
         z-index: 1011; 
         color: vars.$blue;
-        
         margin-left: auto; 
 
-        @include m.tablet {
-            display: none; 
-        }
+        @include m.tablet { display: none; }
 
         span {
             width: 100%;
@@ -88,21 +78,13 @@
         }
 
         &--active {
-            span:nth-child(1) {
-                transform: translateY(9px) rotate(45deg);
-            }
-
-            span:nth-child(2) {
-                opacity: 0;
-                width: 0;
-            }
-
-            span:nth-child(3) {
-                transform: translateY(-9px) rotate(-45deg);
-            }
+            span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+            span:nth-child(2) { opacity: 0; width: 0; }
+            span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
         }
     }
 
+    // --- Main Nav Container ---
     &__nav {
         display: flex;
         align-items: center;
@@ -111,12 +93,13 @@
             position: fixed;
             top: 0;
             right: 0;
-            min-width: 100%; // Larghezza del menu laterale (non tutto schermo)
+            min-width: 80%; // Un po' meno del 100% per estetica
+            max-width: 400px;
             height: 100vh;
             background-color: vars.$white;
             
             flex-direction: column;
-            align-items: flex-start;
+            align-items: flex-start; // Allinea a sinistra su mobile
             justify-content: flex-start;
             padding: 100px vars.$spacing-xl vars.$spacing-xl; 
             box-shadow: vars.$shadow-xl;
@@ -135,28 +118,51 @@
             position: static;
             flex-direction: row;
             height: auto;
-            width: auto;
+            width: 100%; // Occupa lo spazio rimanente
+            justify-content: space-between; // Separa links da azioni
             background-color: transparent;
             transform: none !important;
             box-shadow: none;
             padding: 0;
-            max-width: none;
+            margin-left: vars.$spacing-2xl;
         }
     }
 
+    // --- Link Groups ---
     &__nav-links {
         display: flex;
         flex-direction: column;
-        width: 100%;
         gap: vars.$spacing-base;
 
         @include m.tablet {
             flex-direction: row;
-            width: auto;
+            align-items: center;
             gap: vars.$spacing-lg;
         }
     }
 
+    // --- Action Group (Login, Logout, User Info) ---
+    &__actions {
+        display: flex;
+        flex-direction: column;
+        gap: vars.$spacing-base;
+        margin-top: vars.$spacing-lg; // Spazio extra su mobile
+        width: 100%;
+        // border-top: 1px solid vars.$gray-200; // Separatore su mobile
+        padding-top: vars.$spacing-lg;
+
+        @include m.tablet {
+            flex-direction: row;
+            align-items: center;
+            margin-top: 0;
+            width: auto;
+            border-top: none;
+            padding-top: 0;
+            margin-left: auto; // Spinge tutto a destra
+        }
+    }
+
+    // --- Shared Link Style (Applies to a and button) ---
     &__link {
         font-family: vars.$font-paragraph;
         font-size: vars.$font-size-lg; 
@@ -167,6 +173,12 @@
         position: relative;
         display: block;
         padding: vars.$spacing-sm 0;
+        
+        // Reset per Button
+        background: none;
+        border: none;
+        cursor: pointer;
+        text-align: left;
 
         &:hover {
             color: vars.$turquoise;
@@ -195,62 +207,82 @@
         }
     }
 
-    &__mobile-auth {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        padding-top: vars.$spacing-base;
-        gap: vars.$spacing-base;
-
-        @include m.tablet {
-            display: none; 
-        }
-    }
-
-    &__desktop-actions {
-        display: none; 
-        align-items: center;
-        gap: vars.$spacing-base;
-
-        @include m.tablet {
-            display: flex;
-        }
-    }
-
-    &__login-btn {
-        font-family: vars.$font-paragraph;
-        font-weight: vars.$font-weight-medium;
-        color: vars.$blue;
-        text-decoration: none;
-        transition: color vars.$transition-base;
-        
-        &:hover {
-            color: vars.$turquoise;
-        }
-    }
-
+    // --- Specific Button Styles ---
     &__register-btn {
+        @extend .navbar__link; // Eredita base
         font-family: vars.$font-title;
         font-weight: vars.$font-weight-semibold;
-        color: vars.$white;
+        color: vars.$white !important; // Override link color
         background-color: vars.$turquoise;
-        text-decoration: none;
         padding: vars.$spacing-sm vars.$spacing-lg;
         border-radius: vars.$border-radius-full;
-        transition: all vars.$transition-base;
         text-align: center;
-        border: none;
-        cursor: pointer;
-
+        
         &:hover {
             background-color: color.scale(vars.$turquoise, $lightness: -10%);
             transform: translateY(-2px);
             box-shadow: vars.$shadow-md;
+            color: vars.$white !important;
         }
 
-        &--mobile {
-            width: 100%;
-            margin-top: vars.$spacing-sm;
+        @include m.mobile {
+            width: 100%; // Full width su mobile
+        }
+    }
+
+    &__logout-btn {
+        @extend .navbar__link; // Eredita base
+        font-family: vars.$font-title;
+        font-weight: vars.$font-weight-semibold;
+        color: vars.$white;
+        background-color: #ff0000;
+        padding: vars.$spacing-sm vars.$spacing-lg;
+        border-radius: vars.$border-radius-full;
+        text-align: center;
+        
+        &:hover {
+            background-color: color.scale(#ff0000, $lightness: -10%);
+            transform: translateY(-2px);
+            box-shadow: vars.$shadow-md;
+            color: vars.$white !important;
+        }
+
+        @include m.mobile {
+            width: 100%; // Full width su mobile
+        }
+    }
+
+    // --- User Info Styling ---
+    &__user-info {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        
+        @include m.tablet {
+            flex-direction: row;
+            align-items: center;
+            gap: vars.$spacing-sm;
+            margin-right: vars.$spacing-sm;
+            padding-right: vars.$spacing-sm;
+            // border-right: 1px solid vars.$gray-300;
+        }
+    }
+
+    &__user-name {
+        font-family: vars.$font-paragraph;
+        font-weight: vars.$font-weight-bold;
+        color: vars.$blue;
+        font-size: vars.$font-size-base;
+    }
+
+    &__user-role-badge {
+        font-size: 0.75rem;
+        // color: vars.$gray-500;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        
+        @include m.tablet {
+            display: none; // Nascondi ruolo su desktop se vuoi pulizia
         }
     }
 
