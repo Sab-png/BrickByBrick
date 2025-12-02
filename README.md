@@ -106,7 +106,6 @@ BRICKBYBRICK
 |   |   |   |   |   ├── services/
 |   |   |   |   |   └── BrickbybrickApplication.java 
 |   |   |   |   └── resources/
-|   |   |   |       └── templates/
 |   |   |   └── test/
 |   |   |       └── BrickbyBrickApplicationTests.java
 |   |   ├── .gitattributes
