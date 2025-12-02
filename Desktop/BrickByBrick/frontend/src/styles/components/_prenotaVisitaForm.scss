@@ -1,0 +1,188 @@
+@use '../abstracts/variables' as v;
+@use '../abstracts/mixins' as m;
+
+.prenota-visita {
+  @include m.flex-center;
+  
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: v.$z-index-modal;
+
+
+  &__container {
+    background-color: v.$white;
+    width: 90%;
+    max-width: 700px; 
+    padding: v.$spacing-2xl; 
+    
+    border-radius: v.$border-radius-lg;
+    box-shadow: v.$shadow-xl;
+    position: relative;
+    border: 1px solid v.$light-blue;
+    
+    animation: slideUpFade 0.3s ease-out forwards;
+
+    @include m.mobile {
+      padding: v.$spacing-lg;
+      max-width: 100%;
+    }
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: v.$spacing-xl; 
+  }
+
+  &__title {
+    font-family: v.$font-title;
+    font-size: v.$font-size-2xl; 
+    font-weight: v.$font-weight-bold;
+    color: v.$blue;
+    margin-bottom: v.$spacing-xs;
+  }
+
+  &__subtitle {
+    font-family: v.$font-paragraph;
+    font-size: v.$font-size-base;
+    color: v.$light-gray;
+  }
+
+  &__form {
+    @include m.flex-column;
+    gap: v.$spacing-xl; // Aumentato spazio tra i campi input
+  }
+
+  &__group {
+    @include m.flex-column;
+    gap: v.$spacing-sm; // Più aria tra label e input
+    text-align: left;
+  }
+
+  &__label {
+    font-family: v.$font-title;
+    font-size: v.$font-size-xs;
+    font-weight: v.$font-weight-semibold;
+    color: v.$blue;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  &__input {
+    width: 100%;
+    padding: v.$spacing-base; 
+    border: 1px solid #e5e7eb;
+    border-radius: v.$border-radius-md;
+    font-family: v.$font-paragraph;
+    font-size: v.$font-size-base;
+    color: v.$blue;
+    background-color: #fafbfc;
+    transition: all v.$transition-base v.$transition-ease;
+    min-height: 50px; 
+
+    &::-webkit-calendar-picker-indicator {
+      cursor: pointer;
+      opacity: 0.6;
+      transition: 0.2s;
+      &:hover { opacity: 1; }
+    }
+
+    &:focus {
+      outline: none;
+      border-color: v.$turquoise;
+      background-color: v.$white;
+      box-shadow: 0 0 0 3px rgba(35, 155, 155, 0.1);
+    }
+  }
+
+  &__actions {
+    @include m.flex-column;
+    gap: v.$spacing-lg;
+    margin-top: v.$spacing-lg;
+    align-items: center; 
+  }
+
+  &__submit {
+    width: 100%;
+    padding: v.$spacing-base;
+    border: none;
+    border-radius: v.$border-radius-md;
+    font-family: v.$font-title;
+    font-weight: v.$font-weight-semibold;
+    font-size: v.$font-size-base;
+    color: v.$white;
+    background: linear-gradient(135deg, v.$turquoise, v.$sky-blue);
+    box-shadow: v.$shadow-md;
+    cursor: pointer;
+    transition: all 0.2s;
+    min-height: 50px;
+
+    &:hover:not(:disabled) {
+      box-shadow: v.$shadow-lg;
+      transform: translateY(-2px);
+    }
+
+    &:disabled {
+      background: #e5e7eb;
+      color: v.$light-gray;
+      cursor: not-allowed;
+    }
+  }
+
+
+  &__back-btn {
+    @include m.flex-center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    
+    font-family: v.$font-title;
+    font-size: v.$font-size-sm;
+    font-weight: v.$font-weight-semibold;
+    color: v.$turquoise;
+    
+    gap: v.$spacing-xs;
+    transition: gap v.$transition-base v.$transition-ease;
+
+    svg {
+      font-size: v.$font-size-sm; 
+    }
+
+    &:hover {
+      gap: v.$spacing-sm; 
+      color: v.$sky-blue; 
+    }
+  }
+
+  &__success {
+    text-align: center;
+    padding: v.$spacing-2xl 0;
+    
+    h3 {
+      color: v.$turquoise;
+      font-family: v.$font-title;
+      font-size: v.$font-size-2xl;
+      margin-bottom: v.$spacing-base;
+    }
+    p { 
+      color: v.$blue; 
+      font-family: v.$font-paragraph;
+      font-size: v.$font-size-lg;
+    }
+  }
+
+  &__error-msg {
+    color: #dc2626;
+    font-family: v.$font-paragraph;
+    font-size: v.$font-size-sm;
+    text-align: center;
+    margin-top: v.$spacing-sm;
+  }
+}
+
+@keyframes slideUpFade {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
