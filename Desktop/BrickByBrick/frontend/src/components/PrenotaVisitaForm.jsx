@@ -1,13 +1,24 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { FaArrowLeft } from "react-icons/fa"; // Importa la freccia sinistra
+import { FaArrowLeft } from "react-icons/fa";
 
-const PrenotaVisitaForm = ({ idAgente, onClose }) => {
+import AuthContext from '../store/auth-context';
+
+const PrenotaVisitaForm = ({ onClose }) => {
+
+  const { user } = useContext(AuthContext) || {};
+
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
   const [status, setStatus] = useState('idle');
 
   const { id } = useParams();
+
+  const getUserData = () => ({
+      idUtente: user?.id || null
+  });
+
+  const userData = getUserData();
   
   const navigate = useNavigate();
 
@@ -20,15 +31,19 @@ const PrenotaVisitaForm = ({ idAgente, onClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     setStatus('loading');
 
     const sqlDateTime = `${date} ${time}:00`;
+
     const payload = {
       Id_immobile: id,
-      Id_agente: idAgente,
+      Id_utente: userData.idUtente,
       data: sqlDateTime
     };
 
+    console.log(payload);
+    
     try {
       const response = await fetch('http://localhost:8085/api/visite', {
         method: 'POST',
@@ -77,27 +92,12 @@ const PrenotaVisitaForm = ({ idAgente, onClose }) => {
               
               <div className="prenota-visita__group">
                 <label className="prenota-visita__label">Seleziona Data</label>
-                <input
-                  type="date"
-                  className="prenota-visita__input"
-                  required
-                  value={date}
-                  onChange={(e) => setDate(e.target.value)}
-                  min={new Date().toISOString().split("T")[0]}
-                />
+                <input type="date" className="prenota-visita__input" required value={date} onChange={(e) => setDate(e.target.value)} min={new Date().toISOString().split("T")[0]} />
               </div>
 
               <div className="prenota-visita__group">
                 <label className="prenota-visita__label">Seleziona Orario</label>
-                <input
-                  type="time"
-                  className="prenota-visita__input"
-                  required
-                  value={time}
-                  onChange={(e) => setTime(e.target.value)}
-                  min="09:00"
-                  max="19:00"
-                />
+                <input type="time" className="prenota-visita__input" required value={time} onChange={(e) => setTime(e.target.value)} min="09:00" max="19:00" />
               </div>
 
               {status === 'error' && (
@@ -107,20 +107,11 @@ const PrenotaVisitaForm = ({ idAgente, onClose }) => {
               )}
 
               <div className="prenota-visita__actions">
-                <button 
-                  type="submit" 
-                  className="prenota-visita__submit" 
-                  disabled={status === 'loading'}
-                >
+                <button type="submit" className="prenota-visita__submit" disabled={status === 'loading'} >
                   {status === 'loading' ? 'Invio in corso...' : 'Conferma Visita'}
                 </button>
 
-                {/* Pulsante "Torna all'immobile" stilizzato */}
-                <button 
-                  type="button" 
-                  className="prenota-visita__back-btn" 
-                  onClick={handleBack}
-                >
+                <button type="button" className="prenota-visita__back-btn" onClick={handleBack}>
                   <FaArrowLeft /> Torna all'immobile
                 </button>
               </div>
