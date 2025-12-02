@@ -4,7 +4,6 @@ import { useAuthData } from '../providers/AuthContextProvider';
 
 import useSEO from '../hooks/useSEO';
 
-
 import ImageLoginAvif from '../assets/images/avif/accedi-registrati.avif'; 
 import ImageLoginWebp from '../assets/images/webp/accedi-registrati.webp'; 
 import ImageLoginJpg from '../assets/images/jpg/accedi-registrati.jpg';
@@ -35,7 +34,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const result = await login(formData.email, formData.password);
+      const result = await login(formData.email, formData.password, formData.remember);
 
       if (!result.success) {
         setError(result.error);
@@ -44,20 +43,24 @@ const Login = () => {
       }
 
       // Se il login è riuscito, redirect basato sul ruolo
-      if (result.user.role === 'ADMIN') {
-        navigate('/dashboard');
-      } else if (result.user.role === 'AGENTE') {
-        navigate('/dashboard/agente');
-      } else {
-        navigate('/valuta-immobile');
-      }
+      // if (result.user.role === 'ADMIN') {
+      //   navigate('/admin'); // ho unificato il backoffice in /admin
+      // } else if (result.user.role === 'AGENTE') {
+      //   navigate('/dashboard/agente');
+      // } else {
+      //   // assumiamo CLIENTE -> Step Multi Form
+      //   navigate('/valuta-immobile');
+      // }
+
+      navigate("/")
+
     } catch (err) {
       setError(err.message || 'Errore durante il login');
       setLoading(false);
     }
   };
 
-    useSEO({
+  useSEO({
     title: "Accedi all'Area Riservata",
     description: "Effettua il login su Immobiliaris per gestire i tuoi annunci, consultare le valutazioni salvate e monitorare i tuoi preferiti.",
     noindex: true
