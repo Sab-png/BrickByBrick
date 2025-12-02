@@ -11,6 +11,8 @@ public class BrickServiceImmobileImpl implements BrickServiceImmobile {
 
     @Autowired
     private BrickRepoImmobile repoImmobile;
+    @Autowired
+    private BrickServiceVisita serviceVisita;
 
     @Override
     public List<Immobile> getImmobili() {
@@ -29,6 +31,7 @@ public class BrickServiceImmobileImpl implements BrickServiceImmobile {
     
     @Override
     public void deleteImmobile(int id) {
+        serviceVisita.deleteVisiteByImmobileId(id);
         repoImmobile.deleteById(id);
     }
 
