@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 // Importa i nuovi componenti
@@ -82,11 +82,12 @@ export default function DettaglioImmobile() {
           <DescrizioneImmobile descrizione={immobile.descrizione} altreCaratteristiche={caratteristiche?.altre_caratteristiche} />
 
           <div className="dettaglio-immobile__cta-section">
-            <button className="dettaglio-immobile__cta-button">
-              Contatta agente
-            </button>
+            <Link to={`/prenota-visita/${id}`}>
+              <button className="dettaglio-immobile__cta-button">
+                Prenota Visita
+              </button>
+            </Link>
           </div>
-
         </div>
       </div>
 
