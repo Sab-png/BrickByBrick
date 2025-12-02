@@ -51,10 +51,14 @@ INSERT INTO utente (Id_ruolo, nome, cognome, telefono, codice_fiscale, email, pa
 (3, 'Laura', 'Moretti', '3342345678', 'MRRLRA90C45F205T', 'laura.moretti@user.net', 'utente456'),
 (3, 'Giorgio', 'Ferrari', '3353456789', 'FRRGRG85M12L219U', 'giorgio.ferrari@user.net', 'utente789');
 
--- 8. VISITA
+-- 7. VISITA
 INSERT INTO visita (Id_immobile, Id_agente, data,Id_utente) VALUES
 (1, 1, '2025-11-15 10:00:00',1),
 (2, 2, '2025-11-16 15:30:00',2),
 (3, 3, '2025-11-20 11:00:00',3);
 
+-- 8. CONTRATTI
+INSERT INTO contratto_esclusivo (id_immobile, id_utente, data_di_scadenza, prezzo) VALUES
+(1, 1, '2025-12-01', 10000),
+(2, 2, '2025-11-01', 18000);
 
