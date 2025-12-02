@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import ConfirmModal from './ConfirmModal';
+import useConfirmModal from '../hooks/UseConfirmModal';
 
 const API_BASE_URL = 'http://localhost:8085';
 
@@ -33,6 +35,7 @@ const initialFormData = {
 const UtenteForm = () => {
     const navigate = useNavigate();
     const { id: utenteId } = useParams();
+    const { modalState, showConfirm, handleClose, handleConfirm } = useConfirmModal();
     
     // Rileva automaticamente il mode: se c'è un ID nell'URL è edit, altrimenti add
     const mode = utenteId ? 'edit' : 'add';
@@ -149,9 +152,18 @@ const UtenteForm = () => {
             } catch (error) {
                 // Gestisce gli errori di caricamento API (es. utente non trovato)
                 console.error(error);
-                setApiError(error.message || "Errore nel caricamento dei dati dell'utente.");
-                // Reindirizza l'utente dopo un errore critico di caricamento
-                setTimeout(() => navigate('/admin/utenti'), 3000); 
+                const errorMsg = error.message || "Errore nel caricamento dei dati dell'utente.";
+                setApiError(errorMsg);
+                // Mostra modale di errore
+                await showConfirm({
+                    title: 'Errore Caricamento',
+                    message: errorMsg,
+                    type: 'danger',
+                    confirmText: 'OK',
+                    showCancel: false
+                });
+                // Reindirizza l'utente dopo l'errore critico
+                navigate('/admin/utenti'); 
             } finally {
                 setIsFormLoading(false); // Termina il loading
             }
@@ -194,12 +206,26 @@ const UtenteForm = () => {
             // 3. Chiama la funzione di salvataggio API (saveUtente)
             await saveUtente(utenteId, payload, mode);
             
-            // 4. In caso di successo, reindirizza
-            alert('Utente salvato con successo!');
+            // 4. In caso di successo, mostra modale di conferma
+            await showConfirm({
+                title: 'Successo',
+                message: mode === 'add' ? 'Utente aggiunto con successo!' : 'Utente modificato con successo!',
+                type: 'success',
+                confirmText: 'OK',
+                showCancel: false
+            });
             navigate('/admin/utenti'); 
         } catch (error) {
             // 5. Gestisce l'errore API
-            setApiError(error.message || `Si è verificato un errore durante l'operazione di ${mode}.`);
+            const errorMsg = error.message || `Si è verificato un errore durante l'operazione di ${mode}.`;
+            setApiError(errorMsg);
+            await showConfirm({
+                title: 'Errore',
+                message: errorMsg,
+                type: 'danger',
+                confirmText: 'OK',
+                showCancel: false
+            });
         } finally {
             setIsFormLoading(false); 
         }
@@ -277,6 +303,18 @@ const UtenteForm = () => {
                     </div>
                 </form>
             </div>
+            
+            <ConfirmModal
+                isOpen={modalState.isOpen}
+                onClose={handleClose}
+                onConfirm={handleConfirm}
+                title={modalState.title}
+                message={modalState.message}
+                type={modalState.type}
+                confirmText={modalState.confirmText}
+                cancelText={modalState.cancelText}
+                showCancel={modalState.showCancel}
+            />
         </div>
     );
 };

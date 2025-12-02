@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { Component, lazy, Suspense } from 'react';
 import Layout from '../layout/Layout';
 import ProtectedRoute from '../components/ProtectedRoute';
 
@@ -33,9 +33,12 @@ import UtentiAdmin from '../components/AdminUtenti'
 import ImmobiliAdmin from '../pages/AdminImmobili'
 import AgentForm from '../components/AdminAgentForm'
 import ImmobileForm from '../components/AdminImmobileForm'
-import AgendaAdmin from '../pages/AdminAgenda'
 import AdminContratti from '../components/AdminContratti'
 import AdminContrattoForm from '../components/AdminContrattoForm'
+//Agente sections
+import AgenteLayout from '../layout/AgentLayout';
+import VisiteAgente from '../components/AgenteVisite';
+import FormAgenteVisite from '../components/FormAgenteVisite';
 
 const withSuspense = (Component) => (
   <Suspense fallback={<Loading />}>
@@ -190,13 +193,30 @@ const routes = [
         Component: ImmobileForm,
         title: 'Modifica immobile'
       },
+    ]
+  },
+  {
+    path: '/agente',
+    Component: () => <ProtectedRoute Component={AgenteLayout} requiredRole="AGENTE" />,
+    children: [
       {
-        path: 'agenda',
-        Component: AgendaAdmin,
-        title: 'Agenda'
+        index: true,
+        Component: VisiteAgente,
+        title: 'Visite',
       },
+      {
+        path: 'visite',
+        Component: VisiteAgente,
+        title: 'Visite',
+      },
+      {
+        path: 'visite/modifica/:id',
+        Component: FormAgenteVisite,
+        title: 'Modifica Visita'
+      }
     ]
   }
+
 
 ];
 

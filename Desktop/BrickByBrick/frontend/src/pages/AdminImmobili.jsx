@@ -5,7 +5,9 @@ import { useNavigate } from 'react-router-dom';
 // Hook personalizzato che gestisce l'interazione con i dati degli immobili.
 import useImmobiliManager from '../hooks/UseImmobili';
 // Componente generico per visualizzare i dati in formato tabella.
-import ReusableTable from '../components/AdminTableReusable'
+import ReusableTable from '../components/AdminTableReusable';
+import ConfirmModal from '../components/ConfirmModal';
+import useConfirmModal from '../hooks/UseConfirmModal';
 
 /**
  * Componente principale per la Gestione Immobili.
@@ -17,6 +19,7 @@ import ReusableTable from '../components/AdminTableReusable'
  */
 const Immobili = () => {
     const navigate = useNavigate();
+    const { modalState, showConfirm, handleClose, handleConfirm } = useConfirmModal();
     // Stato locale per l'input di ricerca (ad esempio per indirizzo, città)
     const [searchTerm, setSearchTerm] = useState('');
 
@@ -50,17 +53,43 @@ const Immobili = () => {
     // Gestisce la rimozione di un singolo immobile.
     const handleDeleteImmobile = async (immobileId) => {
         if (!immobileId) {
-            alert('Errore: ID immobile non valido');
+            await showConfirm({
+                title: 'Errore',
+                message: 'ID immobile non valido',
+                type: 'danger',
+                confirmText: 'OK',
+                showCancel: false
+            });
             return;
         }
         
-        if (window.confirm('Sei sicuro di voler rimuovere questo immobile? ATTENZIONE: Se l\'immobile ha visite associate, l\'eliminazione fallirà.')) {
+        const confirmed = await showConfirm({
+            title: 'Conferma Eliminazione',
+            message: 'Sei sicuro di voler rimuovere questo immobile? ATTENZIONE: Se l\'immobile ha visite associate, l\'eliminazione fallirà.',
+            type: 'danger',
+            confirmText: 'Elimina',
+            cancelText: 'Annulla'
+        });
+
+        if (confirmed) {
             try {
                 await removeImmobili([immobileId]);
-                alert('Immobile eliminato con successo!');
+                await showConfirm({
+                    title: 'Successo',
+                    message: 'Immobile eliminato con successo!',
+                    type: 'success',
+                    confirmText: 'OK',
+                    showCancel: false
+                });
             } catch (err) {
                 console.error('Errore durante la rimozione dell\'immobile:', err);
-                alert(err.message || 'Errore durante l\'eliminazione');
+                await showConfirm({
+                    title: 'Errore',
+                    message: err.message || 'Errore durante l\'eliminazione',
+                    type: 'danger',
+                    confirmText: 'OK',
+                    showCancel: false
+                });
             }
         }
     };
@@ -132,6 +161,18 @@ const Immobili = () => {
                     <div className="data-status-message info">Nessun immobile trovato.</div>
                 )}
             </div>
+            
+            <ConfirmModal
+                isOpen={modalState.isOpen}
+                onClose={handleClose}
+                onConfirm={handleConfirm}
+                title={modalState.title}
+                message={modalState.message}
+                type={modalState.type}
+                confirmText={modalState.confirmText}
+                cancelText={modalState.cancelText}
+                showCancel={modalState.showCancel}
+            />
         </div>
     );
 };

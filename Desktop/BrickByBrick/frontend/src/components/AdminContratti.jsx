@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import useContratti from '../hooks/UseContratti';
 import ReusableTable from './AdminTableReusable';
 import { useNavigate } from 'react-router-dom';
+import ConfirmModal from './ConfirmModal';
+import useConfirmModal from '../hooks/UseConfirmModal';
 
 /**
  * Componente AdminContratti - Gestione Contratti Esclusivi
@@ -10,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 const AdminContratti = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const navigate = useNavigate();
+    const { modalState, showConfirm, handleClose, handleConfirm } = useConfirmModal();
 
     // Hook per gestire i contratti
     const { 
@@ -31,7 +34,7 @@ const AdminContratti = () => {
     };
 
     // Naviga al form per modificare un contratto esistente
-    const handleEditContratto = (contrattoOrId) => {
+    const handleEditContratto = async (contrattoOrId) => {
         // Gestisce sia l'oggetto contratto che l'ID diretto
         let contrattoId;
         
@@ -47,7 +50,13 @@ const AdminContratti = () => {
         console.log('handleEditContratto - ID estratto:', contrattoId);
         
         if (!contrattoId) {
-            alert('Errore: ID contratto non valido');
+            await showConfirm({
+                title: 'Errore',
+                message: 'ID contratto non valido',
+                type: 'danger',
+                confirmText: 'OK',
+                showCancel: false
+            });
             return;
         }
         navigate(`/admin/contratti/modifica/${contrattoId}`);
@@ -70,17 +79,43 @@ const AdminContratti = () => {
         console.log('handleDeleteContratto - ID estratto:', contrattoId);
         
         if (!contrattoId) {
-            alert('Errore: ID contratto non valido');
+            await showConfirm({
+                title: 'Errore',
+                message: 'ID contratto non valido',
+                type: 'danger',
+                confirmText: 'OK',
+                showCancel: false
+            });
             return;
         }
         
-        if (window.confirm('Sei sicuro di voler eliminare questo contratto?')) {
+        const confirmed = await showConfirm({
+            title: 'Conferma Eliminazione',
+            message: 'Sei sicuro di voler eliminare questo contratto?',
+            type: 'danger',
+            confirmText: 'Elimina',
+            cancelText: 'Annulla'
+        });
+
+        if (confirmed) {
             try {
                 await removeContratti([contrattoId]);
-                alert('Contratto eliminato con successo!');
+                await showConfirm({
+                    title: 'Successo',
+                    message: 'Contratto eliminato con successo!',
+                    type: 'success',
+                    confirmText: 'OK',
+                    showCancel: false
+                });
             } catch (err) {
                 console.error('Errore durante l\'eliminazione:', err);
-                alert(err.message || 'Errore durante l\'eliminazione');
+                await showConfirm({
+                    title: 'Errore',
+                    message: err.message || 'Errore durante l\'eliminazione',
+                    type: 'danger',
+                    confirmText: 'OK',
+                    showCancel: false
+                });
             }
         }
     };
@@ -151,6 +186,18 @@ const AdminContratti = () => {
                     <div className="data-status-message info">Nessun contratto trovato.</div>
                 )}
             </div>
+            
+            <ConfirmModal
+                isOpen={modalState.isOpen}
+                onClose={handleClose}
+                onConfirm={handleConfirm}
+                title={modalState.title}
+                message={modalState.message}
+                type={modalState.type}
+                confirmText={modalState.confirmText}
+                cancelText={modalState.cancelText}
+                showCancel={modalState.showCancel}
+            />
         </div>
     );
 };

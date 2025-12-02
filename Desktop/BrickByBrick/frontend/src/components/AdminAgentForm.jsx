@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import ConfirmModal from './ConfirmModal';
+import useConfirmModal from '../hooks/UseConfirmModal';
 
 const API_BASE_URL = 'http://localhost:8085';
 
@@ -28,6 +30,7 @@ const initialFormData = {
 const AgentForm = () => {
     const navigate = useNavigate();
     const { id: agentId } = useParams();
+    const { modalState, showConfirm, handleClose, handleConfirm } = useConfirmModal();
     
     // Rileva automaticamente il mode: se c'è un ID nell'URL è edit, altrimenti add
     const mode = agentId ? 'edit' : 'add';
@@ -143,9 +146,18 @@ const AgentForm = () => {
             } catch (error) {
                 // Gestisce gli errori di caricamento API (es. agente non trovato)
                 console.error(error);
-                setApiError(error.message || "Errore nel caricamento dei dati dell'agente.");
-                // Reindirizza l'utente dopo un errore critico di caricamento
-                setTimeout(() => navigate('/admin/agenti'), 3000); 
+                const errorMsg = error.message || "Errore nel caricamento dei dati dell'agente.";
+                setApiError(errorMsg);
+                // Mostra modale di errore
+                await showConfirm({
+                    title: 'Errore Caricamento',
+                    message: errorMsg,
+                    type: 'danger',
+                    confirmText: 'OK',
+                    showCancel: false
+                });
+                // Reindirizza l'utente dopo l'errore critico
+                navigate('/admin/agenti'); 
             } finally {
                 setIsFormLoading(false); // Termina il loading
             }
@@ -188,12 +200,26 @@ const AgentForm = () => {
             // 3. Chiama la funzione di salvataggio API (saveAgent)
             await saveAgent(agentId, payload, mode);
             
-            // 4. In caso di successo, reindirizza
-            alert('Agente salvato con successo!');
+            // 4. In caso di successo, mostra modale di conferma
+            await showConfirm({
+                title: 'Successo',
+                message: mode === 'add' ? 'Agente aggiunto con successo!' : 'Agente modificato con successo!',
+                type: 'success',
+                confirmText: 'OK',
+                showCancel: false
+            });
             navigate('/admin/agenti'); 
         } catch (error) {
-            // 5. Gestisce l'errore API (l'errore viene rilanciato da useAgents)
-            setApiError(error.message || `Si è verificato un errore durante l'operazione di ${mode}.`);
+            // 5. Gestisce l'errore API
+            const errorMsg = error.message || `Si è verificato un errore durante l'operazione di ${mode}.`;
+            setApiError(errorMsg);
+            await showConfirm({
+                title: 'Errore',
+                message: errorMsg,
+                type: 'danger',
+                confirmText: 'OK',
+                showCancel: false
+            });
         } finally {
             setIsFormLoading(false); 
         }
@@ -262,6 +288,18 @@ const AgentForm = () => {
                     </div>
                 </form>
             </div>
+            
+            <ConfirmModal
+                isOpen={modalState.isOpen}
+                onClose={handleClose}
+                onConfirm={handleConfirm}
+                title={modalState.title}
+                message={modalState.message}
+                type={modalState.type}
+                confirmText={modalState.confirmText}
+                cancelText={modalState.cancelText}
+                showCancel={modalState.showCancel}
+            />
         </div>
     );
 };

@@ -28,7 +28,7 @@ export default function Navbar() {
   };
 
   // Determina il percorso della dashboard
-  const dashboardPath = isAdmin ? '/admin' : isAgente ? '/dashboard/agente' : null;
+  const dashboardPath = isAdmin ? '/admin' : isAgente ? '/agente' : null;
   const showDashboard = isAdmin || isAgente;
 
   if (loading) {

@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import ConfirmModal from './ConfirmModal';
+import useConfirmModal from '../hooks/UseConfirmModal';
 
 const API_BASE_URL = 'http://localhost:8085';
 
@@ -19,6 +21,7 @@ const initialFormData = {
 const AdminContrattoForm = () => {
     const navigate = useNavigate();
     const { id: contrattoId } = useParams();
+    const { modalState, showConfirm, handleClose, handleConfirm } = useConfirmModal();
     
     // Rileva automaticamente il mode: se c'è un ID nell'URL è edit, altrimenti add
     const mode = contrattoId ? 'edit' : 'add';
@@ -132,8 +135,16 @@ const AdminContrattoForm = () => {
                 }
             } catch (error) {
                 console.error(error);
-                setApiError(error.message);
-                setTimeout(() => navigate('/admin/contratti'), 3000);
+                const errorMsg = error.message;
+                setApiError(errorMsg);
+                await showConfirm({
+                    title: 'Errore Caricamento',
+                    message: errorMsg,
+                    type: 'danger',
+                    confirmText: 'OK',
+                    showCancel: false
+                });
+                navigate('/admin/contratti');
             } finally {
                 setIsDataLoading(false);
             }
@@ -165,11 +176,25 @@ const AdminContrattoForm = () => {
 
             await saveContratto(contrattoId, payload, mode);
             
-            alert(mode === 'add' ? '✅ Contratto creato con successo!' : '✅ Contratto aggiornato con successo!');
+            await showConfirm({
+                title: 'Successo',
+                message: mode === 'add' ? '✅ Contratto creato con successo!' : '✅ Contratto aggiornato con successo!',
+                type: 'success',
+                confirmText: 'OK',
+                showCancel: false
+            });
             navigate('/admin/contratti');
         } catch (error) {
             console.error('Errore salvataggio:', error);
-            setApiError(error.message);
+            const errorMsg = error.message;
+            setApiError(errorMsg);
+            await showConfirm({
+                title: 'Errore',
+                message: errorMsg,
+                type: 'danger',
+                confirmText: 'OK',
+                showCancel: false
+            });
         } finally {
             setIsFormLoading(false);
         }
@@ -329,6 +354,18 @@ const AdminContrattoForm = () => {
                     </button>
                 </div>
             </form>
+            
+            <ConfirmModal
+                isOpen={modalState.isOpen}
+                onClose={handleClose}
+                onConfirm={handleConfirm}
+                title={modalState.title}
+                message={modalState.message}
+                type={modalState.type}
+                confirmText={modalState.confirmText}
+                cancelText={modalState.cancelText}
+                showCancel={modalState.showCancel}
+            />
         </div>
     );
 };

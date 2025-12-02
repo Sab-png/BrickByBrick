@@ -1,12 +1,9 @@
-// src/pages/Agenti.jsx 
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// Hook personalizzato che gestisce l'interazione con i dati (simulazione API/localStorage).
-// Fornisce lo stato dei dati (data, isLoading, error) e le funzioni di modifica (removeAgents, setFilters).
 import useAgents from '../hooks/UseAgents'; 
-// Componente generico per visualizzare i dati in formato tabella.
-import ReusableTable from './AdminTableReusable'; 
+import ReusableTable from './AdminTableReusable';
+import ConfirmModal from './ConfirmModal';
+import useConfirmModal from '../hooks/UseConfirmModal'; 
 
 /**
  * Componente principale per la Gestione Agenti.
@@ -18,16 +15,15 @@ import ReusableTable from './AdminTableReusable';
  */
 const Agenti = () => {
     const navigate = useNavigate();
-    // Stato locale per l'input di ricerca
     const [searchTerm, setSearchTerm] = useState('');
+    const { modalState, showConfirm, handleClose, handleConfirm } = useConfirmModal();
 
-    // Destrutturazione delle funzioni e degli stati forniti dal custom hook
     const { 
-        data: usersList, // I dati degli agenti filtrati o completi
-        isLoading,      // Stato di caricamento
-        error,          // Eventuale errore
-        removeAgents,   // Funzione per eliminare gli agenti
-        setFilters      // Funzione per aggiornare i filtri (triggera un nuovo fetch)
+        data: usersList,
+        isLoading,
+        error,
+        removeAgents,
+        setFilters
     } = useAgents(); 
 
     // --- LOGICA DI CONTROLLO ---
@@ -47,20 +43,46 @@ const Agenti = () => {
         navigate(`/admin/agenti/modifica-agente/${agentId}`);
     };
   
-    // Gestisce la rimozione di un singolo agente.
+    // Gestisce la rimozione di un singolo agente
     const handleDeleteAgent = async (agentId) => {
         if (!agentId) {
-            alert('Errore: ID agente non valido');
+            await showConfirm({
+                title: 'Errore',
+                message: 'ID agente non valido',
+                type: 'danger',
+                confirmText: 'OK',
+                showCancel: false
+            });
             return;
         }
         
-        if (window.confirm('Sei sicuro di voler rimuovere questo agente? ATTENZIONE: Se l\'agente ha dati associati, l\'eliminazione fallirà.')) {
+        const confirmed = await showConfirm({
+            title: 'Conferma Eliminazione',
+            message: 'Sei sicuro di voler rimuovere questo agente? ATTENZIONE: Se l\'agente ha dati associati, l\'eliminazione fallirà.',
+            type: 'danger',
+            confirmText: 'Elimina',
+            cancelText: 'Annulla'
+        });
+
+        if (confirmed) {
             try {
                 await removeAgents([agentId]);
-                alert('Agente eliminato con successo!');
+                await showConfirm({
+                    title: 'Successo',
+                    message: 'Agente eliminato con successo!',
+                    type: 'success',
+                    confirmText: 'OK',
+                    showCancel: false
+                });
             } catch (err) {
                 console.error('Errore durante la rimozione:', err);
-                alert(err.message || 'Errore durante l\'eliminazione');
+                await showConfirm({
+                    title: 'Errore',
+                    message: err.message || 'Errore durante l\'eliminazione',
+                    type: 'danger',
+                    confirmText: 'OK',
+                    showCancel: false
+                });
             }
         }
     };
@@ -122,6 +144,19 @@ const Agenti = () => {
                     <div className="data-status-message info">Nessun agente trovato.</div>
                 )}
             </div>
+
+            {/* Modale di conferma */}
+            <ConfirmModal
+                isOpen={modalState.isOpen}
+                onClose={handleClose}
+                onConfirm={handleConfirm}
+                title={modalState.title}
+                message={modalState.message}
+                type={modalState.type}
+                confirmText={modalState.confirmText}
+                cancelText={modalState.cancelText}
+                showCancel={modalState.showCancel}
+            />
         </div>
     );
 };

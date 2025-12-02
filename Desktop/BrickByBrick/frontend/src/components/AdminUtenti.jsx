@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import useUtenti from '../hooks/UseUtenti';
 import ReusableTable from './AdminTableReusable';
+import ConfirmModal from './ConfirmModal';
+import useConfirmModal from '../hooks/UseConfirmModal';
 
 /**
  * Componente per la Gestione Clienti/Utenti.
@@ -11,6 +13,7 @@ import ReusableTable from './AdminTableReusable';
 const UtentiAdmin = () => {
     // Stato locale per l'input di ricerca
     const [searchTerm, setSearchTerm] = useState('');
+    const { modalState, showConfirm, handleClose, handleConfirm } = useConfirmModal();
 
     // Hook per gestire i dati degli utenti
     const { 
@@ -29,17 +32,43 @@ const UtentiAdmin = () => {
     // Gestisce la rimozione di un singolo utente
     const handleDeleteUser = async (userId) => {
         if (!userId) {
-            alert('Errore: ID utente non valido');
+            await showConfirm({
+                title: 'Errore',
+                message: 'ID utente non valido',
+                type: 'danger',
+                confirmText: 'OK',
+                showCancel: false
+            });
             return;
         }
         
-        if (window.confirm('Sei sicuro di voler rimuovere questo utente? ATTENZIONE: Se l\'utente ha dati associati, l\'eliminazione fallirà.')) {
+        const confirmed = await showConfirm({
+            title: 'Conferma Eliminazione',
+            message: 'Sei sicuro di voler rimuovere questo utente? ATTENZIONE: Se l\'utente ha dati associati, l\'eliminazione fallirà.',
+            type: 'danger',
+            confirmText: 'Elimina',
+            cancelText: 'Annulla'
+        });
+
+        if (confirmed) {
             try {
                 await removeUtenti([userId]);
-                alert('Utente eliminato con successo!');
+                await showConfirm({
+                    title: 'Successo',
+                    message: 'Utente eliminato con successo!',
+                    type: 'success',
+                    confirmText: 'OK',
+                    showCancel: false
+                });
             } catch (err) {
                 console.error('Errore durante la rimozione:', err);
-                alert(err.message || 'Errore durante l\'eliminazione');
+                await showConfirm({
+                    title: 'Errore',
+                    message: err.message || 'Errore durante l\'eliminazione',
+                    type: 'danger',
+                    confirmText: 'OK',
+                    showCancel: false
+                });
             }
         }
     };
@@ -95,6 +124,18 @@ const UtentiAdmin = () => {
                     />
                 )}
             </div>
+            
+            <ConfirmModal
+                isOpen={modalState.isOpen}
+                onClose={handleClose}
+                onConfirm={handleConfirm}
+                title={modalState.title}
+                message={modalState.message}
+                type={modalState.type}
+                confirmText={modalState.confirmText}
+                cancelText={modalState.cancelText}
+                showCancel={modalState.showCancel}
+            />
         </div>
     );
 };

@@ -60,6 +60,7 @@ const ReusableTable = ({
                         // Determina l'ID in base al tipo di entità - prova tutte le varianti possibili
                         // Per i contratti, id_contratto ha la priorità assoluta
                         const itemId = item.Id_contratto || item.id_contratto ||
+                                      item.Id_visita || item.id_visita ||
                                       item.Id_agente || item.id_agente || 
                                       item.Id_immobile || item.id_immobile || 
                                       item.Id_utente || item.id_utente || 
