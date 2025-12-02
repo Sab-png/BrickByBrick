@@ -35,7 +35,7 @@
 
 - **Libreria**: React
 - **Build Tool**: Vite
-- **Styling**: CSS
+- **Styling**: SCSS
 - **Linguaggio**: JavaScript
 
 ### Versionamento
