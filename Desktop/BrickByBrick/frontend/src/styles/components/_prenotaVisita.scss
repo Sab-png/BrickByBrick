@@ -2,9 +2,10 @@
 @use '../abstracts/mixins' as m;
 @use "sass:color";
 
-.prenota-visita {
+.prenota-visita-section {
     padding: vars.$spacing-3xl vars.$spacing-base;
     text-align: center;
+    z-index: -100;
 
     &__container {
         max-width: 800px;
