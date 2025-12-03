@@ -148,7 +148,7 @@ const FormAgenteVisite = () => {
 
             await showConfirm({
                 title: 'Successo',
-                message: '✅ Visita aggiornata con successo!',
+                message: ' Visita aggiornata con successo!',
                 type: 'success',
                 confirmText: 'OK',
                 showCancel: false
@@ -183,20 +183,20 @@ const FormAgenteVisite = () => {
     return (
         <div className="admin-page-container">
             <header className="admin-page-header">
-                <h1>✏️ Modifica Visita</h1>
+                <h1> Modifica Visita</h1>
                 <p>Modifica la data e ora della visita programmata</p>
             </header>
 
             {apiError && (
                 <div className="data-status-message error">
-                    <strong>⚠️ Attenzione:</strong> {apiError}
+                    <strong> Attenzione:</strong> {apiError}
                 </div>
             )}
 
             <form onSubmit={handleSubmit} className="admin-form">
                 {/* ID Immobile (Read-only) */}
                 <div className="form-group">
-                    <label htmlFor="id_immobile">🏠 ID Immobile</label>
+                    <label htmlFor="id_immobile"> ID Immobile</label>
                     <input
                         type="text"
                         id="id_immobile"
@@ -228,7 +228,7 @@ const FormAgenteVisite = () => {
 
                 {/* Data e Ora (Modificabile) */}
                 <div className="form-group">
-                    <label htmlFor="data">📅 Data e Ora Visita *</label>
+                    <label htmlFor="data"> Data e Ora Visita *</label>
                     <input
                         type="datetime-local"
                         id="data"
@@ -248,7 +248,7 @@ const FormAgenteVisite = () => {
                         className="submit-btn"
                         disabled={isFormLoading}
                     >
-                        💾 Salva Modifiche
+                         Salva Modifiche
                     </button>
                     <button
                         type="button"
@@ -256,7 +256,7 @@ const FormAgenteVisite = () => {
                         onClick={() => navigate('/agente/visite')}
                         disabled={isFormLoading}
                     >
-                        ❌ Annulla
+                         Annulla
                     </button>
                 </div>
             </form>
