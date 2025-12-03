@@ -1,14 +1,3 @@
--- IMPORTANTE: Le password devono essere hashate con BCrypt prima di essere inserite nel database.
--- Per generare gli hash BCrypt, usa un tool online o esegui questo codice Java:
--- BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
--- String hash = encoder.encode("password");
--- 
--- Hash BCrypt per le password di test (tutte le password sono "password123" per semplicità):
--- $2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewY5GyYq5x5x5x5u (per admin123)
--- $2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewY5GyYq5x5x5x5u (per admin456)
--- 
--- NOTA: Per sviluppo, puoi usare password in chiaro temporaneamente, ma in produzione DEVI usare BCrypt.
-
 -- 1. RUOLO
 INSERT INTO ruolo (nome) VALUES 
 ('Admin'),
