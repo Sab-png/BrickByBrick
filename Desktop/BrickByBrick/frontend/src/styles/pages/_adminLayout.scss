@@ -1,0 +1,29 @@
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as m;
+
+.admin-layout {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f5f7fa;
+}
+
+.admin-wrapper {
+    flex: 1;
+    margin-left: 240px;
+    min-height: 100vh;
+    transition: margin-left vars.$transition-base vars.$transition-ease;
+
+    @include m.mobile {
+        margin-left: 60px;
+    }
+}
+
+.admin-content {
+    padding: vars.$spacing-xl;
+    max-width: 1400px;
+    margin: 0 auto;
+
+    @include m.mobile {
+        padding: vars.$spacing-base;
+    }
+}

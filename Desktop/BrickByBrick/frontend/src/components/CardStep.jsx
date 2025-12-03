@@ -1,69 +1,42 @@
-import React from 'react';
-import '../styles/components/_cardstep.scss';
-
-const CardStep = ({ 
-  iconSrc,  // Cambiato da 'icon' a 'iconSrc' per accettare path immagine
-  iconAlt,  // Alt text per accessibilità
-  title, 
-  subtitle, 
-  children, 
-  currentStep, 
-  totalSteps, 
-  onNext, 
+const CardStep = ({
+  iconSrc,
+  iconAlt,
+  title,
+  subtitle,
+  children,
+  currentStep,
+  totalSteps,
+  onNext,
   onPrev,
   onSubmit,
   isLastStep,
-  prevIcon,  // Path immagine per freccia indietro
-  nextIcon   // Path immagine per freccia avanti
-  ,
-  // Nuovi props opzionali per navigazione diretta tra step
-  onJumpToStep, // function(stepNumber)
-  clickableSteps // array di step numerici che possono essere cliccati
+  hideProgressBar,
+  hideButtons
 }) => {
+
+  const inputSteps = totalSteps > 1 ? totalSteps - 1 : 1;
+  let progressPercentage = ((currentStep - 1) / (inputSteps - 1)) * 100;
+
+  progressPercentage = Math.min(100, Math.max(0, progressPercentage));
+
   return (
     <div className="card-step-container">
       <div className="card-step-wrapper">
-        {/* Card Content */}
         <div className="card-step-content">
-          {/* Progress Bar - NOW INSIDE THE CARD */}
-          <div className="progress-section">
-            <div className="progress-steps">
-              {Array.from({ length: totalSteps }, (_, i) => i + 1).map((step) => {
-                const isClickable = Array.isArray(clickableSteps) && clickableSteps.includes(step);
-                return (
-                  <div
-                    key={step}
-                    className={`progress-step ${
-                      step === currentStep ? 'active' : ''
-                    } ${step < currentStep ? 'completed' : ''} ${isClickable ? 'clickable' : ''}`}
-                    onClick={() => {
-                      if (isClickable && typeof onJumpToStep === 'function') onJumpToStep(step);
-                    }}
-                    role={isClickable ? 'button' : undefined}
-                    tabIndex={isClickable ? 0 : -1}
-                    onKeyDown={(e) => { if (isClickable && (e.key === 'Enter' || e.key === ' ')) onJumpToStep(step); }}
-                  >
-                    {step}
-                  </div>
-                );
-              })}
+
+          {/* Progress Bar - Nascondibile */}
+          {!hideProgressBar && (
+            <div className="progress-section">
+              <div className="progress-bar">
+                <div className="progress-bar-fill" style={{ width: `${progressPercentage}%` }} />
+              </div>
             </div>
-            <div className="progress-bar">
-              <div
-                className="progress-bar-fill"
-                style={{ width: `${(currentStep / totalSteps) * 100}%` }}
-              />
-            </div>
-          </div>
+          )}
 
           {/* Header */}
           <div className="card-step-header">
             {iconSrc && (
-              <img 
-                src={iconSrc} 
-                alt={iconAlt || 'Step icon'} 
-                className="card-step-icon" 
-              />
+              <img src={iconSrc} alt={iconAlt || 'Step icon'} className="card-step-icon" />
             )}
             <h2 className="card-step-title">{title}</h2>
             <p className="card-step-subtitle">{subtitle}</p>
@@ -74,41 +47,18 @@ const CardStep = ({
             {children}
           </div>
 
-          {/* Navigation Buttons */}
-          <div className="card-step-footer">
-            <button
-              onClick={onPrev}
-              className={`btn-nav btn-prev`}
-            >
-              {prevIcon ? (
-                <img src={prevIcon} alt="Indietro" className="btn-icon" />
-              ) : (
-                <span className="btn-icon-text">←</span>
-              )}
-              Indietro
-            </button>
+          {/* Navigation Buttons - Nascondibili */}
+          {!hideButtons && (
+            <div className="card-step-footer">
+              <button onClick={onPrev} className={`btn-nav btn-prev`}>← Indietro</button>
 
-            {!isLastStep ? (
-              <button
-                onClick={onNext}
-                className="btn-nav btn-next"
-              >
-                Avanti
-                {nextIcon ? (
-                  <img src={nextIcon} alt="Avanti" className="btn-icon" />
-                ) : (
-                  <span className="btn-icon-text">→</span>
-                )}
-              </button>
-            ) : (
-              <button
-                onClick={onSubmit}
-                className="btn-nav btn-submit"
-              >
-                Invia ricerca
-              </button>
-            )}
-          </div>
+              {!isLastStep ? (
+                <button onClick={onNext} className="btn-nav btn-next">Avanti →</button>
+              ) : (
+                <button onClick={onSubmit} className="btn-nav btn-submit">Invia ricerca</button>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import newsletterImage from '../assets/images/newsletter.svg';
+import newsletterImage from '../assets/images/svg/newsletter.svg';
 
 export default function Newsletter() {
     const [email, setEmail] = useState('');

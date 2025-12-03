@@ -1,5 +1,4 @@
-import { useParams, useNavigate } from 'react-router-dom';
-import { mockImmobili } from '../data/mockImmobili';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 // Importa i nuovi componenti
@@ -11,7 +10,10 @@ import InfoEdificioImmobile from '../components/InfoEdificioImmobile';
 import DescrizioneImmobile from '../components/DescrizioneImmobile';
 import Newsletter from '../components/NewsLetter';
 
+import useSEO from '../hooks/useSEO';
+
 export default function DettaglioImmobile() {
+
   const { id } = useParams();
   const navigate = useNavigate();
   // const immobile = mockImmobili.find(item => item.id_immobile === Number(id));
@@ -33,6 +35,14 @@ export default function DettaglioImmobile() {
     fetchSingle();
   }, [id]);
 
+  useSEO({
+    title: `Immobile in ${immobile?.indirizzo} a ${immobile?.citta}`,
+    description: `Vendita ${immobile?.tipologia} in ${immobile?.indirizzo} a ${immobile?.citta}. Prezzo: €${immobile?.prezzo}. ${immobile?.descrizione}`,
+    image: String(immobile?.foto),
+    imageAlt: `Foto di ${immobile?.titolo}`,
+    type: "article"
+  })
+
   if (!immobile) {
     return <p>Caricamento immobile...</p>;
   }
@@ -47,6 +57,7 @@ export default function DettaglioImmobile() {
 
   const { caratteristiche } = immobile;
 
+
   return (
     <>
       <div className="dettaglio-immobile">
@@ -56,7 +67,7 @@ export default function DettaglioImmobile() {
         {/* Il contenitore del contenuto principale */}
         <div className="dettaglio-immobile__content">
           
-          {/* <ImmobileGallery immagini={immobile.immagini} altText={immobile.indirizzo} /> */}
+          <ImmobileGallery immagine={immobile.foto} altText={immobile.descrizione} />
 
           <InformazioneImmobile immobile={immobile} caratteristiche={caratteristiche}  />
 
@@ -71,11 +82,12 @@ export default function DettaglioImmobile() {
           <DescrizioneImmobile descrizione={immobile.descrizione} altreCaratteristiche={caratteristiche?.altre_caratteristiche} />
 
           <div className="dettaglio-immobile__cta-section">
-            <button className="dettaglio-immobile__cta-button">
-              Contatta agente
-            </button>
+            <Link to={`/prenota-visita/${id}`}>
+              <button className="dettaglio-immobile__cta-button">
+                Prenota Visita
+              </button>
+            </Link>
           </div>
-
         </div>
       </div>
 

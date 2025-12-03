@@ -7,6 +7,7 @@
 
 // Stand Alone Components
 @use './components/navbar';
+@use './components/navbarAdmin';
 @use './components/footer';
 @use './components/cta';
 @use './components/featureItem';
@@ -24,8 +25,14 @@
 @use './components/featureImmobile';
 @use './components/descrizioneImmobile';
 @use './components/faqItem';
-@use './components/faqSection';
 @use './components/questions';
+@use './components/storySection';
+@use './components/agentCard';
+@use './components/vendiTech';
+@use './components/timeline';
+@use './components/prenotaVisita';
+@use './components/cardStep';
+@use './components/prenotaVisitaForm';
 
 // Components that use other Components
 @use './components/herosection';
@@ -34,6 +41,23 @@
 @use './components/cardSection';
 @use './components/filters';
 @use './components/immobiliResults';
-
+@use './components/faqSection';
+@use './components/agentSection';
+@use './components/stepMulti';
 
 @use './pages/dettaglioImmobile';
+@use './pages/notfound';
+@use './pages/login';
+@use './pages/registrati';
+
+@use './pages/adminLayout';
+@use './pages/adminGestioneUtenti';
+
+// Admin Components
+@use './components/adminTable';
+@use './components/adminTabs';
+@use './components/adminForms';
+@use './components/confirmModal';
+@use './pages/adminPages';
+
+

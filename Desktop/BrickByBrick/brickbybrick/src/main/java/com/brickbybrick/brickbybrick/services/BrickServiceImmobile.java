@@ -15,6 +15,8 @@ public interface BrickServiceImmobile {
     void deleteImmobile(int id);
 
     boolean existsById(Integer id);
+    
+    List<Immobile> searchImmobili(String searchTerm);
 
     }
 

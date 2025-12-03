@@ -23,9 +23,11 @@
     font-family: vars.$font-paragraph;
     font-size: vars.$font-size-sm;
     font-weight: vars.$font-weight-medium;
-    i {
+    
+    .feature-icon {
       color: vars.$sky-blue;
       font-size: vars.$font-size-base;
+      flex-shrink: 0; 
     }
   }
 }

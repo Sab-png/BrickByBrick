@@ -1,0 +1,267 @@
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as m;
+
+.card-step-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, vars.$light-blue 0%, #dae5f2 100%);
+  @include m.flex-center;
+  padding: vars.$spacing-xl;
+
+  @include m.mobile {
+    padding: vars.$spacing-lg;
+  }
+
+  @include m.tablet {
+    padding: vars.$spacing-2xl;
+  }
+}
+
+.card-step-wrapper {
+  width: 100%;
+  max-width: 900px;
+}
+
+// Progress Bar
+.progress-section {
+  margin-bottom: vars.$spacing-2xl;
+  padding-bottom: vars.$spacing-2xl;
+
+  .progress-steps {
+    @include m.flex-row;
+    justify-content: space-between;
+    align-items: center;
+    gap: vars.$spacing-sm;
+    margin-bottom: vars.$spacing-lg;
+
+    .progress-step {
+      @include m.flex-center;
+      @include m.size(2.5rem);
+      border-radius: vars.$border-radius-full;
+      font-family: vars.$font-title;
+      font-weight: vars.$font-weight-semibold;
+      font-size: vars.$font-size-sm;
+      transition: all vars.$transition-base vars.$transition-ease;
+      background-color: #e0e7f1;
+      color: vars.$light-gray;
+      border: 2px solid transparent;
+      cursor: default;
+
+      &.active {
+        background: linear-gradient(135deg, vars.$turquoise, vars.$sky-blue);
+        color: vars.$white;
+        transform: scale(1.1);
+        box-shadow: vars.$shadow-lg;
+      }
+
+      &.completed {
+        background-color: #5eead4;
+        color: vars.$white;
+        border-color: vars.$turquoise;
+      }
+
+      &.clickable {
+        cursor: pointer;
+        border-color: #5eead4;
+        transition: all vars.$transition-base vars.$transition-ease;
+
+        &:hover {
+          background-color: #d1fdf4;
+          transform: scale(1.08);
+          box-shadow: vars.$shadow-md;
+          border-color: vars.$turquoise;
+        }
+
+        &:focus-visible {
+          outline: 2px solid vars.$turquoise;
+          outline-offset: 2px;
+        }
+      }
+    }
+  }
+
+  .progress-bar {
+    height: 6px;
+    background-color: #e5e7eb;
+    border-radius: vars.$border-radius-full;
+    overflow: hidden;
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, vars.$turquoise, vars.$sky-blue);
+      transition: width vars.$transition-base vars.$transition-ease;
+    }
+  }
+}
+
+// Card Content
+.card-step-content {
+  background-color: vars.$white;
+  border-radius: vars.$border-radius-xl;
+  box-shadow: vars.$shadow-xl;
+  padding: vars.$spacing-2xl;
+  transition: all vars.$transition-base vars.$transition-ease;
+
+  @include m.mobile {
+    padding: vars.$spacing-xl;
+    border-radius: vars.$border-radius-lg;
+  }
+
+  @include m.tablet {
+    padding: vars.$spacing-2xl;
+  }
+}
+
+// Header
+.card-step-header {
+  text-align: center;
+  margin-bottom: vars.$spacing-2xl;
+
+  @include m.mobile {
+    margin-bottom: vars.$spacing-xl;
+  }
+
+  .card-step-icon {
+    @include m.size(3.5rem);
+    margin: 0 auto vars.$spacing-lg;
+    display: block;
+    object-fit: contain;
+
+    @include m.mobile {
+      @include m.size(2.5rem);
+      margin-bottom: vars.$spacing-base;
+    }
+  }
+
+  .card-step-title {
+    @include m.heading(vars.$font-size-3xl, vars.$font-weight-bold);
+    color: vars.$blue;
+    margin-bottom: vars.$spacing-sm;
+
+    @include m.mobile {
+      font-size: vars.$font-size-2xl;
+    }
+  }
+
+  .card-step-subtitle {
+    color: vars.$light-gray;
+    font-family: vars.$font-paragraph;
+    font-size: vars.$font-size-base;
+    font-weight: vars.$font-weight-regular;
+    margin: 0;
+  }
+}
+
+// Body
+.card-step-body {
+  margin-bottom: vars.$spacing-2xl;
+
+  @include m.mobile {
+    margin-bottom: vars.$spacing-xl;
+  }
+}
+
+// Footer / Navigation
+.card-step-footer {
+  @include m.flex-between;
+  margin-top: vars.$spacing-2xl;
+  padding-top: vars.$spacing-2xl;
+  border-top: 1px solid #e5e7eb;
+  gap: vars.$spacing-lg;
+
+  @include m.mobile {
+    @include m.flex-column;
+    gap: vars.$spacing-base;
+  }
+
+  .btn-nav {
+    @include m.flex-center;
+    gap: vars.$spacing-sm;
+    padding: vars.$spacing-base vars.$spacing-xl;
+    border: none;
+    border-radius: vars.$border-radius-md;
+    font-family: vars.$font-title;
+    font-weight: vars.$font-weight-semibold;
+    font-size: vars.$font-size-base;
+    transition: all vars.$transition-base vars.$transition-ease;
+    cursor: pointer;
+    min-height: 44px;
+
+    @include m.mobile {
+      width: 100%;
+      padding: vars.$spacing-base vars.$spacing-lg;
+    }
+
+    .btn-icon {
+      @include m.size(1.25rem);
+      object-fit: contain;
+    }
+
+    .btn-icon-text {
+      font-size: vars.$font-size-lg;
+      line-height: 1;
+    }
+
+    &.btn-prev {
+      background-color: #f3f4f6;
+      color: vars.$light-gray;
+      border: 1px solid #e5e7eb;
+      flex: 0 1 auto;
+
+      @include m.mobile {
+        flex: 1;
+      }
+
+      &:hover:not(.disabled) {
+        background-color: #e5e7eb;
+        transform: translateX(-2px);
+        border-color: #d1d5db;
+      }
+
+      &:active:not(.disabled) {
+        transform: translateX(0);
+      }
+
+      &.disabled {
+        background-color: #f9fafb;
+        color: #d1d5db;
+        cursor: not-allowed;
+        opacity: 0.5;
+        border-color: #f3f4f6;
+      }
+    }
+
+    &.btn-next,
+    &.btn-submit {
+      background: linear-gradient(135deg, vars.$turquoise, vars.$sky-blue);
+      color: vars.$white;
+      box-shadow: vars.$shadow-md;
+      flex: 0 1 auto;
+
+      @include m.mobile {
+        flex: 1;
+      }
+
+      &:hover {
+        box-shadow: vars.$shadow-lg;
+        transform: translateY(-2px);
+      }
+
+      &:active {
+        transform: translateY(0);
+        box-shadow: vars.$shadow-md;
+      }
+
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+      }
+    }
+
+    &.btn-submit {
+      padding: vars.$spacing-base vars.$spacing-2xl;
+      font-size: vars.$font-size-lg;
+      font-weight: vars.$font-weight-bold;
+    }
+  }
+}

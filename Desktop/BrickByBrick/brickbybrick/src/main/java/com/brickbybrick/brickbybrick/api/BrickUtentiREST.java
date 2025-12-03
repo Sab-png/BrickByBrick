@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,8 +28,18 @@ public class BrickUtentiREST {
     private BrickServiceUtente serviceUtente;
 
     @GetMapping
-    public ResponseEntity<List<Utente>> getAllUtenti() {
-        List<Utente> utenti = serviceUtente.getUtenti();
+    public ResponseEntity<List<Utente>> getAllUtenti(
+            @RequestParam(required = false) String search) {
+        List<Utente> utenti;
+        
+        if (search != null && !search.trim().isEmpty()) {
+            // Se c'è un parametro search, usa la ricerca
+            utenti = serviceUtente.searchUtenti(search);
+        } else {
+            // Altrimenti ritorna tutti gli utenti
+            utenti = serviceUtente.getUtenti();
+        }
+        
         return ResponseEntity.ok(utenti);
     }
 

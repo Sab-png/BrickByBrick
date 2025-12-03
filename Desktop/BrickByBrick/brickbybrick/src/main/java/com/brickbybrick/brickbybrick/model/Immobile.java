@@ -28,6 +28,9 @@ public class Immobile {
     @Column(name = "citta", nullable = false)
     private String citta;
 
+    @Column(name = "regione", nullable = false)
+    private String regione;
+
     @Column(name = "indirizzo", nullable = false)
     private String indirizzo;
 
@@ -85,6 +88,14 @@ public class Immobile {
 
     public void setCitta(String citta) {
         this.citta = citta;
+    }
+
+    public String getRegione() {
+        return regione;
+    }
+
+    public void setRegione(String regione) {
+        this.regione = regione;
     }
 
     public String getIndirizzo() {

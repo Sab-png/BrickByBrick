@@ -39,4 +39,12 @@ public class BrickServiceAgenteImpl implements BrickServiceAgente {
     public boolean existsById(Integer id) {
         return repoAgente.existsById(id);
     }
+
+    @Override
+    public List<Agente> searchAgenti(String searchTerm) {
+        if (searchTerm == null || searchTerm.trim().isEmpty()) {
+            return repoAgente.findAll();
+        }
+        return repoAgente.searchAgenti(searchTerm.trim());
+    }
 }

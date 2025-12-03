@@ -11,10 +11,12 @@
     width: 100%;
 
     &__container {
-        @include m.flex-between;
+        @include m.flex-between; 
+        align-items: center;
         max-width: vars.$container-max-width;
         margin: 0 auto;
         padding: vars.$spacing-base vars.$spacing-lg;
+        gap: vars.$spacing-base;
 
         @include m.tablet {
             padding: vars.$spacing-base vars.$spacing-xl;
@@ -25,115 +27,158 @@
         }
     }
 
-    // Logo
     &__logo {
-        @include m.flex-center;
+        display: flex;
+        align-items: center;
         gap: vars.$spacing-sm;
         text-decoration: none;
-        z-index: 2;
+        z-index: 20;
+        flex-shrink: 0;
     }
 
     &__logo-image {
         height: 32px;
         width: auto;
-
-        @include m.tablet {
-            height: 40px;
-        }
+        @include m.tablet { height: 40px; }
     }
 
     &__logo-text {
         font-family: vars.$font-title;
-        font-size: vars.$font-size-lg;
+        font-size: vars.$font-size-base; 
         font-weight: vars.$font-weight-bold;
         color: vars.$blue;
+        white-space: nowrap;
+        @include m.tablet { font-size: vars.$font-size-lg; }
+    }
 
-        @include m.mobile {
-            display: none;
+    // --- Hamburger Menu ---
+    &__hamburger {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 28px;
+        height: 21px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        z-index: 1011; 
+        color: vars.$blue;
+        margin-left: auto; 
+
+        @include m.tablet { display: none; }
+
+        span {
+            width: 100%;
+            height: 3px;
+            background-color: vars.$blue;
+            border-radius: 2px;
+            transition: all vars.$transition-base vars.$transition-ease;
+            transform-origin: center;
         }
 
-        @include m.tablet {
-            display: inline;
+        &--active {
+            span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+            span:nth-child(2) { opacity: 0; width: 0; }
+            span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
         }
     }
 
-    // Hamburger Menu - Work In Progress
-    // &__hamburger {
-    //     display: flex;
-    //     flex-direction: column;
-    //     justify-content: space-between;
-    //     width: 28px;
-    //     height: 21px;
-    //     background: transparent;
-    //     border: none;
-    //     cursor: pointer;
-    //     padding: 0;
-    //     z-index: 2;
-
-    //     @include m.tablet {
-    //         display: none;
-    //     }
-
-    //     span {
-    //         width: 100%;
-    //         height: 3px;
-    //         background-color: vars.$blue;
-    //         border-radius: 2px;
-    //         transition: all vars.$transition-base vars.$transition-ease;
-    //     }
-
-    //     &--active {
-    //         span:nth-child(1) {
-    //             transform: rotate(45deg) translateY(10px);
-    //         }
-    //         span:nth-child(2) {
-    //             opacity: 0;
-    //         }
-    //         span:nth-child(3) {
-    //             transform: rotate(-45deg) translateY(-10px);
-    //         }
-    //     }
-    // }
-
-    // Navigation
+    // --- Main Nav Container ---
     &__nav {
-        @include m.flex-center;
-        gap: vars.$spacing-lg;
+        display: flex;
+        align-items: center;
 
         @include m.mobile {
             position: fixed;
             top: 0;
-            left: 0;
-            width: 100%;
+            right: 0;
+            min-width: 80%; // Un po' meno del 100% per estetica
+            max-width: 400px;
             height: 100vh;
             background-color: vars.$white;
+            
             flex-direction: column;
-            justify-content: center;
-            transform: translateX(-100%);
+            align-items: flex-start; // Allinea a sinistra su mobile
+            justify-content: flex-start;
+            padding: 100px vars.$spacing-xl vars.$spacing-xl; 
+            box-shadow: vars.$shadow-xl;
+            
+            transform: translateX(100%); 
             transition: transform vars.$transition-base vars.$transition-ease;
+            z-index: 1010;
+            overflow-y: auto;
         }
 
         &--open {
-            transform: translateX(0);
+            transform: translateX(0); 
         }
 
         @include m.tablet {
             position: static;
             flex-direction: row;
             height: auto;
+            width: 100%; // Occupa lo spazio rimanente
+            justify-content: space-between; // Separa links da azioni
             background-color: transparent;
-            transform: none;
+            transform: none !important;
+            box-shadow: none;
+            padding: 0;
+            margin-left: vars.$spacing-2xl;
         }
     }
 
+    // --- Link Groups ---
+    &__nav-links {
+        display: flex;
+        flex-direction: column;
+        gap: vars.$spacing-base;
+
+        @include m.tablet {
+            flex-direction: row;
+            align-items: center;
+            gap: vars.$spacing-lg;
+        }
+    }
+
+    // --- Action Group (Login, Logout, User Info) ---
+    &__actions {
+        display: flex;
+        flex-direction: column;
+        gap: vars.$spacing-base;
+        margin-top: vars.$spacing-lg; // Spazio extra su mobile
+        width: 100%;
+        // border-top: 1px solid vars.$gray-200; // Separatore su mobile
+        padding-top: vars.$spacing-lg;
+
+        @include m.tablet {
+            flex-direction: row;
+            align-items: center;
+            margin-top: 0;
+            width: auto;
+            border-top: none;
+            padding-top: 0;
+            margin-left: auto; // Spinge tutto a destra
+        }
+    }
+
+    // --- Shared Link Style (Applies to a and button) ---
     &__link {
         font-family: vars.$font-paragraph;
-        font-size: vars.$font-size-base;
+        font-size: vars.$font-size-lg; 
         font-weight: vars.$font-weight-medium;
         color: vars.$blue;
         text-decoration: none;
-        transition: color vars.$transition-base vars.$transition-ease;
+        transition: color vars.$transition-base;
         position: relative;
+        display: block;
+        padding: vars.$spacing-sm 0;
+        
+        // Reset per Button
+        background: none;
+        border: none;
+        cursor: pointer;
+        text-align: left;
 
         &:hover {
             color: vars.$turquoise;
@@ -141,107 +186,123 @@
 
         &.active {
             color: vars.$turquoise;
-            
-            &::after {
-                content: '';
-                position: absolute;
-                bottom: -4px;
-                left: 0;
-                width: 100%;
-                height: 2px;
-                background-color: vars.$turquoise;
+            font-weight: vars.$font-weight-semibold;
+
+            @include m.tablet {
+                &::after {
+                    content: '';
+                    position: absolute;
+                    bottom: -4px;
+                    left: 0;
+                    width: 100%;
+                    height: 2px;
+                    background-color: vars.$turquoise;
+                }
             }
         }
 
-        @include m.mobile {
-            font-size: vars.$font-size-xl;
-            padding: vars.$spacing-base 0;
-        }
-
         @include m.tablet {
-            font-size: vars.$font-size-sm;
-        }
-    }
-
-    // Actions
-    &__actions {
-        @include m.flex-center;
-        gap: vars.$spacing-base;
-
-        @include m.mobile {
-            gap: vars.$spacing-sm;
-        }
-    }
-
-    &__search-btn {
-        @include m.flex-center;
-        @include m.size(40px);
-        background-color: transparent;
-        border: 1px solid vars.$light-gray;
-        border-radius: vars.$border-radius-sm;
-        color: vars.$blue;
-        cursor: pointer;
-        transition: all vars.$transition-base vars.$transition-ease;
-
-        &:hover {
-            background-color: vars.$turquoise;
-            color: vars.$white;
-            border-color: vars.$turquoise;
-        }
-
-        i {
             font-size: vars.$font-size-base;
+            padding: 0;
         }
     }
 
-    &__login-btn {
-        font-family: vars.$font-paragraph;
-        font-size: vars.$font-size-sm;
-        font-weight: vars.$font-weight-medium;
-        color: vars.$blue;
-        text-decoration: none;
-        padding: vars.$spacing-sm vars.$spacing-base;
-        transition: color vars.$transition-base vars.$transition-ease;
-
-        &:hover {
-            color: vars.$turquoise;
-        }
-
-        @include m.mobile {
-            display: none;
-        }
-
-        @include m.tablet {
-            display: inline-block;
-        }
-    }
-
+    // --- Specific Button Styles ---
     &__register-btn {
+        @extend .navbar__link; // Eredita base
         font-family: vars.$font-title;
-        font-size: vars.$font-size-sm;
         font-weight: vars.$font-weight-semibold;
-        color: vars.$white;
+        color: vars.$white !important; // Override link color
         background-color: vars.$turquoise;
-        text-decoration: none;
-        padding: vars.$spacing-2xl;
+        padding: vars.$spacing-sm vars.$spacing-lg;
         border-radius: vars.$border-radius-full;
-        transition: all vars.$transition-base vars.$transition-ease;
-
+        text-align: center;
+        
         &:hover {
             background-color: color.scale(vars.$turquoise, $lightness: -10%);
-            color: vars.$white;
             transform: translateY(-2px);
             box-shadow: vars.$shadow-md;
+            color: vars.$white !important;
         }
 
         @include m.mobile {
-            font-size: vars.$font-size-xs;
-            padding: vars.$spacing-xs vars.$spacing-sm;
+            width: 100%; // Full width su mobile
+        }
+    }
+
+    &__logout-btn {
+        @extend .navbar__link; // Eredita base
+        font-family: vars.$font-title;
+        font-weight: vars.$font-weight-semibold;
+        color: vars.$white;
+        background-color: #ff0000;
+        padding: vars.$spacing-sm vars.$spacing-lg;
+        border-radius: vars.$border-radius-full;
+        text-align: center;
+        
+        &:hover {
+            background-color: color.scale(#ff0000, $lightness: -10%);
+            transform: translateY(-2px);
+            box-shadow: vars.$shadow-md;
+            color: vars.$white !important;
+        }
+
+        @include m.mobile {
+            width: 100%; // Full width su mobile
+        }
+    }
+
+    // --- User Info Styling ---
+    &__user-info {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        
+        @include m.tablet {
+            flex-direction: row;
+            align-items: center;
+            gap: vars.$spacing-sm;
+            margin-right: vars.$spacing-sm;
+            padding-right: vars.$spacing-sm;
+            // border-right: 1px solid vars.$gray-300;
+        }
+    }
+
+    &__user-name {
+        font-family: vars.$font-paragraph;
+        font-weight: vars.$font-weight-bold;
+        color: vars.$blue;
+        font-size: vars.$font-size-base;
+    }
+
+    &__user-role-badge {
+        font-size: 0.75rem;
+        // color: vars.$gray-500;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        
+    }
+
+    &__menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(vars.$black, 0.4);
+        z-index: 1000; 
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity vars.$transition-base, visibility vars.$transition-base;
+        backdrop-filter: blur(2px);
+
+        &--visible {
+            opacity: 1;
+            visibility: visible;
         }
 
         @include m.tablet {
-            font-size: vars.$font-size-sm;
-            padding: vars.$spacing-sm vars.$spacing-lg;
+            display: none;
         }
     }
 }

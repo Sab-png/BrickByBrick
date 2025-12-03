@@ -1,4 +1,5 @@
-// src/components/dettaglio/DettaglioHeader.js
+import { FaArrowLeft, FaMapMarkerAlt } from "react-icons/fa";
+
 export default function HeaderImmobile({ immobile, formattedPrice, onBackClick }) {
   return (
     <div className="dettaglio-immobile__header">
@@ -6,15 +7,20 @@ export default function HeaderImmobile({ immobile, formattedPrice, onBackClick }
         <button
           onClick={onBackClick}
           className="dettaglio-immobile__back-btn"
+          aria-label="Torna all'elenco immobili"
         >
-          <i className="fas fa-arrow-left"></i>
+          <FaArrowLeft />
         </button>
+        
         <div className="dettaglio-immobile__header-text">
           <h1 className="dettaglio-immobile__title">{immobile.indirizzo}</h1>
           <p className="dettaglio-immobile__location">
-            <i className="fas fa-map-marker-alt"></i> {immobile.indirizzo}, {immobile.citta} ({immobile.cap})
+            {/* Ho aggiunto una classe per poterla gestire nel CSS se serve margine/colore */}
+            <FaMapMarkerAlt className="location-icon" /> 
+            <span>{immobile.indirizzo}, {immobile.citta} ({immobile.cap})</span>
           </p>
         </div>
+        
         <div className="dettaglio-immobile__price-box">
           <span className="dettaglio-immobile__price">{formattedPrice}</span>
         </div>

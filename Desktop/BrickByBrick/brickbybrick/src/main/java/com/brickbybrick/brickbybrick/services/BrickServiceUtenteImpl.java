@@ -42,4 +42,12 @@ public class BrickServiceUtenteImpl implements BrickServiceUtente {
     public boolean existsById(Integer id) {
         return repoUtente.existsById(id);
     }
+
+    @Override
+    public List<Utente> searchUtenti(String searchTerm) {
+        if (searchTerm == null || searchTerm.trim().isEmpty()) {
+            return repoUtente.findAll();
+        }
+        return repoUtente.searchUtenti(searchTerm.trim());
+    }
 }

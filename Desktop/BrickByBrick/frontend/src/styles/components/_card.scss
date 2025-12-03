@@ -14,8 +14,6 @@ $card-width: 360px;
   border-radius: vars.$border-radius-lg;
   box-shadow: vars.$shadow-md;
   background-color: vars.$white;
-
-
   transition: transform vars.$transition-base vars.$transition-ease, 
               box-shadow vars.$transition-base vars.$transition-ease;
 
@@ -30,13 +28,14 @@ $card-width: 360px;
     @include m.flex-center;
 
     .card__image {
-      width: 120px;
+      width: 64px;
       height: auto;
+      aspect-ratio: 1 / 1;
       object-fit: contain;
 
       @include m.mobile {
         width: 90px;
-      }
+      } 
     }
   }
 

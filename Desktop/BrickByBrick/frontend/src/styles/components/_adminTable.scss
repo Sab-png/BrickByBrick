@@ -1,0 +1,196 @@
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as m;
+
+// Tabella Admin Riutilizzabile
+.admin-table-container {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: vars.$border-radius-md;
+    border: 1px solid #e5e7eb;
+
+    &::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #f9fafb;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #d1d5db;
+        border-radius: 4px;
+
+        &:hover {
+            background: #9ca3af;
+        }
+    }
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: vars.$white;
+    font-family: vars.$font-paragraph;
+
+    thead {
+        background: #f9fafb;
+        border-bottom: 2px solid #e5e7eb;
+        
+        th {
+            padding: vars.$spacing-base vars.$spacing-lg;
+            text-align: left;
+            font-size: vars.$font-size-sm;
+            font-weight: vars.$font-weight-semibold;
+            color: #374151;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            white-space: nowrap;
+
+            &:last-child {
+                text-align: center;
+                width: 120px;
+            }
+
+            @include m.mobile {
+                padding: vars.$spacing-sm vars.$spacing-base;
+                font-size: vars.$font-size-xs;
+            }
+        }
+    }
+
+    tbody {
+        tr {
+            border-bottom: 1px solid #f3f4f6;
+            transition: background-color vars.$transition-base;
+
+            &:hover {
+                background: #f9fafb;
+            }
+
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+
+        td {
+            padding: vars.$spacing-base vars.$spacing-lg;
+            font-size: vars.$font-size-sm;
+            color: #4b5563;
+            vertical-align: middle;
+
+            @include m.mobile {
+                padding: vars.$spacing-sm vars.$spacing-base;
+                font-size: vars.$font-size-xs;
+            }
+        }
+    }
+}
+
+// Azioni nella tabella
+.table-actions {
+    display: flex;
+    gap: vars.$spacing-xs;
+    justify-content: center;
+    align-items: center;
+}
+
+.action-btn {
+    @include m.size(32px);
+    @include m.flex-center;
+    border: none;
+    border-radius: vars.$border-radius-sm;
+    cursor: pointer;
+    transition: all vars.$transition-base;
+    padding: 0;
+
+    svg {
+        @include m.size(16px);
+    }
+
+    &:hover {
+        transform: translateY(-2px);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+.edit-action-btn {
+    background: #dbeafe;
+    color: #1e40af;
+
+    &:hover {
+        background: #bfdbfe;
+        box-shadow: 0 2px 4px rgba(30, 64, 175, 0.2);
+    }
+}
+
+.delete-action-btn {
+    background: #fee2e2;
+    color: #dc2626;
+
+    &:hover {
+        background: #fecaca;
+        box-shadow: 0 2px 4px rgba(220, 38, 38, 0.2);
+    }
+}
+
+// Checkbox personalizzata
+.table-checkbox {
+    @include m.size(18px);
+    cursor: pointer;
+    accent-color: vars.$turquoise;
+    transition: all vars.$transition-base;
+    appearance: auto;
+    -webkit-appearance: auto;
+    margin: 0;
+    
+    &:hover {
+        transform: scale(1.15);
+    }
+
+    &:checked {
+        filter: brightness(1.1);
+    }
+
+    &:focus {
+        outline: 2px solid rgba(35, 155, 155, 0.3);
+        outline-offset: 2px;
+    }
+}
+
+// Badge Status
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: vars.$spacing-xs vars.$spacing-sm;
+    border-radius: vars.$border-radius-full;
+    font-size: vars.$font-size-xs;
+    font-weight: vars.$font-weight-medium;
+    text-transform: capitalize;
+
+    &.online {
+        background: #d1fae5;
+        color: #065f46;
+    }
+
+    &.offline {
+        background: #e5e7eb;
+        color: #374151;
+    }
+
+    &.busy {
+        background: #fef3c7;
+        color: #92400e;
+    }
+}
+
+// Avatar nella tabella
+.user-avatar {
+    @include m.size(32px);
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: vars.$spacing-sm;
+    border: 2px solid #e5e7eb;
+}

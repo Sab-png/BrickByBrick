@@ -2,56 +2,57 @@
 @use '../abstracts/mixins' as m;
 
 .faq-item {
-  // Linea di separazione grigia chiara tra le domande
   border-bottom: vars.$border-width solid rgba(vars.$black, 0.1); 
   
-  // Aggiungiamo un po' di spazio solo alla fine dell'ultima
   &:last-child {
     border-bottom: none;
   }
 }
 
 .faq-question {
-  @include m.flex-between; // Usa il mixin per display: flex, justify-content, align-items
-  
-  // Rimuoviamo il bordo, come da immagine
-  // border: vars.$border-width solid vars.$dark-blue; (Rimosso)
-  
-  padding: vars.$spacing-lg vars.$spacing-base; // Spaziatura verticale generosa
+  @include m.flex-between;
+  padding: vars.$spacing-lg vars.$spacing-base;
   cursor: pointer;
   
-  // Tipografia della domanda
-  font-family: vars.$font-paragraph; // Testo più leggibile
+  list-style: none;
+  &::-webkit-details-marker {
+    display: none;
+  }
+
+  font-family: vars.$font-paragraph;
   font-size: vars.$font-size-base;
   font-weight: vars.$font-weight-medium;
   color: vars.$dark-blue;
-  
   transition: color vars.$transition-base vars.$transition-ease;
 
   &:hover {
-    color: vars.$turquoise; // Scurisce il testo all'hover
+    color: vars.$turquoise;
   }
-  
+
   .faq-icon {
     font-size: vars.$font-size-xl;
     font-weight: vars.$font-weight-regular; 
     margin-left: vars.$spacing-base;
-    color: vars.$light-gray; // Icona grigia
+    color: vars.$light-gray;
+    
+    &::after {
+      content: '+';
+    }
   }
 
-  // Responsive: Riduci il padding su mobile
   @include m.mobile {
     padding: vars.$spacing-base vars.$spacing-xs;
     font-size: vars.$font-size-sm;
   }
 }
 
+// Quando il tag <details> è aperto ([open]), cambiamo l'icona in '-'
+.faq-item[open] .faq-question .faq-icon::after {
+  content: '-';
+}
+
 .faq-answer {
-  // Spaziatura interna per la risposta
-  // Aggiungiamo più padding a sinistra per allinearlo visivamente
-  padding: 0 vars.$spacing-base vars.$spacing-lg vars.$spacing-base; 
-  
-  // Tipografia della risposta
+  padding: 0 vars.$spacing-base vars.$spacing-lg vars.$spacing-base;
   color: vars.$light-gray;
   font-family: vars.$font-paragraph;
   font-size: vars.$font-size-sm;
@@ -59,10 +60,9 @@
   
   p {
     margin: 0;
-    max-width: 90%; // Evita che il testo vada sotto l'icona
+    max-width: 90%;
   }
 
-  // Responsive: Riduci il padding su mobile
   @include m.mobile {
     padding: 0 vars.$spacing-xs vars.$spacing-base vars.$spacing-xs;
     font-size: vars.$font-size-sm;

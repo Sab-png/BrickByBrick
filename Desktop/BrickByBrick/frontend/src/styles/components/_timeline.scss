@@ -1,0 +1,124 @@
+@use '../abstracts/variables' as v;
+@use '../abstracts/mixins' as m;
+@use "sass:color";
+
+.timeline {
+    padding: v.$spacing-3xl v.$spacing-base;
+
+    &__container {
+        max-width: v.$container-max-width;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    &__title {
+        @include m.heading(v.$font-size-3xl);
+        color: v.$blue; 
+        margin-bottom: v.$spacing-sm;
+    }
+
+    &__subtitle {
+        font-family: v.$font-paragraph;
+        color: v.$black; 
+        margin-bottom: v.$spacing-3xl;
+    }
+
+    &__timeline {
+        display: flex;
+        flex-direction: column;
+        gap: v.$spacing-3xl; 
+        
+        @include m.desktop {
+            flex-direction: row;
+            align-items: flex-start;
+            justify-content: space-between;
+            padding: 0 v.$spacing-lg;
+        }
+    }
+
+    &__step {
+        position: relative;
+        flex: 1;
+        padding: v.$spacing-lg; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+        &:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            width: 20px; 
+            height: 20px;
+            border-right: 4px solid v.$turquoise;
+            border-bottom: 4px solid v.$turquoise;
+            
+            bottom: -35px; 
+            left: 50%;
+            transform: translateX(-50%) rotate(45deg); 
+            z-index: 0;
+
+            @include m.desktop {
+                display: none;
+            }
+        }
+    }
+
+    &__icon {
+        width: 60px; 
+        height: 60px;
+        position: relative; 
+        
+        background-color: v.$turquoise;
+        color: v.$white;
+        border: v.$border-width-thick solid v.$turquoise;
+        border-radius: 50%; 
+        
+        @include m.flex-center;
+        font-family: v.$font-title;
+        font-weight: v.$font-weight-bold;
+        font-size: v.$font-size-xl;
+        margin-bottom: v.$spacing-base;
+        
+        box-shadow: v.$shadow-md;
+        transition: all v.$transition-base v.$transition-ease;
+        cursor: default; 
+        z-index: 1; 
+
+        &:hover {
+            background-color: color.scale(v.$turquoise, $lightness: -10%);
+            border-color: color.scale(v.$turquoise, $lightness: -10%);
+            transform: translateY(-5px); 
+            box-shadow: v.$shadow-lg;
+        }
+
+        .timeline__step:not(:last-child) &::after {
+            @include m.desktop {
+                content: '';
+                position: absolute;
+                width: 20px;
+                height: 20px;
+                border-right: 4px solid v.$turquoise; 
+                border-top: 4px solid v.$turquoise;   
+                
+                top: 50%;
+                right: -120px; 
+                
+                transform: translateY(-50%) rotate(45deg); 
+                pointer-events: none;
+            }
+        }
+    }
+
+    &__title-step {
+        @include m.heading(v.$font-size-lg);
+        color: v.$blue; 
+        margin-bottom: v.$spacing-xs;
+    }
+
+    &__desc {
+        font-family: v.$font-paragraph;
+        font-size: v.$font-size-base;
+        color: v.$black;
+        line-height: v.$line-height-relaxed;
+    }
+}

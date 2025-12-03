@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import  FiltersContextProvider from './providers/FiltersContextProvider';
+import AuthContextProvider from './providers/AuthContextProvider';
 
 import './styles/main.scss'
 
@@ -9,9 +10,11 @@ import routes from './routes/routes'
 function App() {
 
   return (
-    <FiltersContextProvider>
-      <RouterProvider router={router} />
-    </FiltersContextProvider>
+    <AuthContextProvider>
+      <FiltersContextProvider>
+        <RouterProvider router={router} />
+      </FiltersContextProvider>
+    </AuthContextProvider>
   )
 }
 

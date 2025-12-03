@@ -40,6 +40,12 @@ public class BrickServiceImmobileImpl implements BrickServiceImmobile {
         return repoImmobile.existsById(id);
     }
 
-
+    @Override
+    public List<Immobile> searchImmobili(String searchTerm) {
+        if (searchTerm == null || searchTerm.trim().isEmpty()) {
+            return repoImmobile.findAll();
+        }
+        return repoImmobile.searchImmobili(searchTerm.trim());
+    }
 
 }

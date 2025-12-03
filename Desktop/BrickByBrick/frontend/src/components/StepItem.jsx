@@ -1,9 +1,13 @@
-export default function StepItem({ number, image, title, description, alignRight = false }) {
+export default function StepItem({ number, imageAvif, imageWebp, imageJpg, title, description, alignRight = false }) {
     return (
         <li className={`step-item ${alignRight ? 'step-item--right' : ''}`}>
             <div className="step-item__number">{number}</div>
             <div className="step-item__media">
-                <img src={image} alt={title} className="step-item__image" />
+                <picture>
+                    <source srcSet={imageAvif} type="image/avif" />
+                    <source srcSet={imageWebp} type="image/webp" />
+                    <img src={imageJpg} alt={title} className="step-item__image" width="300" height="200" loading="lazy" decoding="async"/>
+                </picture>
             </div>
             <div className="step-item__content">
                 <h3 className="step-item__title">{title}</h3>

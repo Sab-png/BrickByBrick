@@ -1,0 +1,46 @@
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as m;
+@use "sass:color";
+
+.prenota-visita-section {
+    padding: vars.$spacing-3xl vars.$spacing-base;
+    text-align: center;
+    z-index: -100;
+
+    &__container {
+        max-width: 800px;
+        margin: 0 auto;
+        @include m.flex-column;
+        align-items: center;
+    }
+
+    &__title {
+        @include m.heading(vars.$font-size-3xl);
+        color: vars.$blue;
+        margin-bottom: vars.$spacing-base;
+    }
+
+    &__text {
+        font-family: vars.$font-paragraph;
+        font-size: vars.$font-size-base;
+        color: vars.$black;
+        margin-bottom: vars.$spacing-xl;
+        line-height: vars.$line-height-relaxed;
+    }
+
+    &__btn {
+        padding: vars.$spacing-base vars.$spacing-xl;
+        background-color: vars.$turquoise;
+        color: vars.$white;
+        border: none;
+        border-radius: vars.$border-radius-sm;
+        font-family: vars.$font-title;
+        font-weight: vars.$font-weight-bold;
+        cursor: pointer;
+        transition: background-color vars.$transition-fast;
+
+        &:hover {
+            background-color: color.scale(vars.$turquoise, $lightness: -10%);
+        }
+    }
+}

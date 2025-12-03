@@ -36,7 +36,7 @@ export default function Questions() {
           </div>
 
           <div className="form-group">
-            <label htmlFor="message">Messaggio (allega file se necessario)</label>
+            <label htmlFor="message">Messaggio</label>
             <textarea
               id="message"
               rows="5"

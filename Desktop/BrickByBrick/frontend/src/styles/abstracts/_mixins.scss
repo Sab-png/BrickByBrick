@@ -43,7 +43,7 @@
 }
 
 // Typography
-@mixin heading($size, $weight: $font-weight-bold) {
+@mixin heading($size, $weight: v.$font-weight-bold) {
     font-family: v.$font-title;
     font-size: $size;
     font-weight: $weight;
