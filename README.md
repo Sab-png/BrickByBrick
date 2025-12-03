@@ -35,7 +35,7 @@
 
 - **Libreria**: React
 - **Build Tool**: Vite
-- **Styling**: CSS
+- **Styling**: SCSS
 - **Linguaggio**: JavaScript
 
 ### Versionamento
@@ -90,60 +90,63 @@ Maven: v3.6 o superiore<br>
 
  ``` 
 BRICKBYBRICK
+├── .vscode/
 ├── Desktop\BrickByBrick\
-│   └── .vscode/
-│
-├── brickbybrick/
-│   ├── .mvn/
-│   │
-│   ├── src/
-│   │   ├── main/
-│   │   │   ├── java\com\brickbybrick\brickbybrick\
-│   │   │   │   ├── api/              # API REST endpoints
-│   │   │   │   ├── controller/       # Controller MVC
-│   │   │   │   ├── model/            # Entità e modelli dati
-│   │   │   │   ├── repos/            # Repository per accesso dati
-│   │   │   │   ├── services/
-│   │   │   │   ├── sign_in/
-│   │   │   │   └── BrickbybrickApplication.java
-│   │   │   │
-│   │   │   └── resources/
-│   │   │       ├── static/
-│   │   │       ├── templates/
-│   │   │       ├── application.properties
-│   │   │       ├── Popolamento_prezzo_mercato.sql
-│   │   │       ├── PopolamentoDB.sql
-│   │   │       └── ScriptDBImmobiliari.sql
-│   │   │
-│   │   └── test/
-│   │
-│   ├── target/
-│   ├── .gitattributes
-│   ├── .gitignore
-│   ├── mvnw
-│   ├── mvnw.cmd
-│   └── pom.xml
-│
-├── frontend/
-│
-│   ├── node_modules/
-│   │
-│   ├── public/
-│   │
-│   ├── src/
-│   │
-│   ├── .gitignore
-│   ├── eslint.config.js
-│   ├── index.html
-│   ├── package-lock.json
-│   ├── package.json
-│   └── vite.config.js
-│
+│   ├── .vscode/
+|   ├── brickbybrick
+|   |   ├── .mvn/
+|   |   |   └── wrapper/
+|   |   ├── src/
+|   |   |   └── main/
+|   |   |   |   ├── java/
+|   |   |   |   |   ├── api/
+|   |   |   |   |   ├── controller/
+|   |   |   |   |   ├── model/
+|   |   |   |   |   ├── repos/
+|   |   |   |   |   ├── services/
+|   |   |   |   |   └── BrickbybrickApplication.java 
+|   |   |   |   └── resources/
+|   |   |   └── test/
+|   |   |       └── BrickbyBrickApplicationTests.java
+|   |   ├── .gitattributes
+|   |   ├── .gitignore
+|   |   ├── mvnw
+|   |   ├── mvnw.cmd
+|   |   └── pom.xml
+|   ├── frontend
+|   |   ├── node_modules/
+|   |   ├── public/
+|   |   |   ├── img/
+|   |   |   └── immobili/
+|   |   ├── src/
+|   |   |   ├── assets/
+|   |   |   |   └── images/
+|   |   |   ├── components/
+|   |   |   ├── data/
+|   |   |   ├── hooks/
+|   |   |   ├── layout/
+|   |   |   ├── pages/
+|   |   |   ├── providers/
+|   |   |   ├── routes/
+|   |   |   ├── store/
+|   |   |   ├── styles/
+|   |   |   ├── App.jsx
+|   |   |   └── main.jsx
+|   |   ├── .gitignore
+|   |   ├── .npmrc
+|   |   ├── eslint.config.js
+|   |   ├── index.html
+|   |   ├── package-lock.json
+|   |   ├── package.json
+|   |   ├── README.md
+|   |   └── vite.config.js 
 ├── target/
-│   ├── DB_immobiliaris.PNG
-│   └── HELP.md
-│
-└── .vscode/
+│   ├── classes/
+│   └── test-classes/
+├── DB_immobiliaris.PNG
+├── HELP.md
+├── ManualeUtente.md
+└── README.md
 
  ```
 ## Installazione e Avvio

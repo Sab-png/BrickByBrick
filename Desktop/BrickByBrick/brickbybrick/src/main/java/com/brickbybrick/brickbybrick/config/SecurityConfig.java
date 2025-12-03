@@ -9,10 +9,12 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -23,7 +25,7 @@ import com.brickbybrick.brickbybrick.security.JwtProperties;
 import com.brickbybrick.brickbybrick.security.PlainTextOrBCryptPasswordEncoder;
 
 @Configuration
-// @EnableMethodSecurity  // TEMPORANEO: Disabilitato per i test - RIABILITARE IN PRODUZIONE
+@EnableMethodSecurity // Riabilitato per consentire l'uso di annotazioni di sicurezza a livello di metodo
 @EnableConfigurationProperties(JwtProperties.class)
 public class SecurityConfig {
 
@@ -42,13 +44,15 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        // TEMPORANEO: Permetti tutto per i test - RIMUOVERE IN PRODUZIONE
+                        // Endpoint pubblici
+                        .requestMatchers("/api/auth/login").permitAll()
+                        // Tutte le altre API richiedono autenticazione JWT
+                        .requestMatchers("/api/**").authenticated()
+                        // Altri endpoint (es. risorse statiche) rimangono pubblici
                         .anyRequest().permitAll())
-                // Riabilitato per permettere il login (ma tutte le richieste sono permesse)
                 .authenticationProvider(authenticationProvider())
-                // Commentato per i test - riabilitare in produzione
-                // .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-                ;
+                // Abilita il filtro JWT prima del filtro standard di autenticazione username/password
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
