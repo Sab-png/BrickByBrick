@@ -33,9 +33,9 @@ const VisiteAgente = () => {
     };
 
     // Reindirizza al form per modificare una visita
-    const handleEditVisita = (visitaId) => {
-        navigate(`/agente/visite/modifica/${visitaId}`);
-    };
+    // const handleEditVisita = (visitaId) => {
+    //     navigate(`/agente/visite/modifica/${visitaId}`);
+    // };
 
     // Gestisce l'eliminazione di una visita
     const handleDeleteVisita = async (visitaId) => {
@@ -168,9 +168,9 @@ const VisiteAgente = () => {
                     <ReusableTable
                         data={visiteList}
                         columns={visiteColumns}
-                        onEdit={handleEditVisita}
+                        onEdit={null}
                         onDelete={handleDeleteVisita}
-                        showEdit={true}
+                        showEdit={false}
                         showDelete={true}
                     />
                 )}
