@@ -123,7 +123,7 @@ const VisiteAgente = () => {
         return (
             <div className="user-management-page">
                 <div className="data-status-message error">
-                    ⚠️ Errore: Impossibile identificare l'agente. Effettua il login.
+                    Errore: Impossibile identificare l'agente. Effettua il login.
                 </div>
             </div>
         );
