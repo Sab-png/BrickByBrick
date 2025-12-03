@@ -45,13 +45,26 @@ public class Visita {
         Id_Visita = id_Visita;
     }
 
-    public Integer getId_immobile() {
-        return immobile.getId_immobile();
+public void setId_immobile(Integer id_immobile) {
+    if (this.immobile == null) {
+        this.immobile = new Immobile();
     }
+    this.immobile.setId_immobile(id_immobile);
+}
 
-    public void setId_immobile(Integer id_immobile) {
-        immobile.setId_immobile(id_immobile);
+public void setId_utente(Integer id_utente) {
+    if (this.utente == null) {
+        this.utente = new Utente();
     }
+    this.utente.setId_utente(id_utente);
+}
+public Integer getId_immobile() {
+    return immobile != null ? immobile.getId_immobile() : null;
+}
+
+public Integer getId_utente() {
+    return utente != null ? utente.getId_utente() : null;
+}
 
     public Integer getId_agente() {
         return Id_agente;
@@ -69,13 +82,7 @@ public class Visita {
         this.data = data;
     }
 
-    public Integer getId_utente() {
-        return utente.getId_utente();
-    }
 
-    public void setId_utente(Integer id_utente) {
-        utente.setId_utente(id_utente);
-    }
 
     
 
