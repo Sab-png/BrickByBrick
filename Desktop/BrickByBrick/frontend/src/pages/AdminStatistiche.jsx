@@ -71,7 +71,7 @@ export default function Statistiche() {
         return (
             <div className="stats-page">
                 <div className="data-status-message error">
-                    ⚠️ Errore: {error}
+                    Errore: {error}
                 </div>
             </div>
         );
@@ -164,22 +164,22 @@ export default function Statistiche() {
                         </thead>
                         <tbody>
                             <tr>
-                                <td>🏠 Immobili</td>
+                                <td>Immobili</td>
                                 <td className="number">{stats.immobili}</td>
                                 <td>Proprietà disponibili nel catalogo</td>
                             </tr>
                             <tr>
-                                <td>👤 Agenti</td>
+                                <td>Agenti</td>
                                 <td className="number">{stats.agenti}</td>
                                 <td>Agenti immobiliari attivi</td>
                             </tr>
                             <tr>
-                                <td>👥 Utenti</td>
+                                <td>Utenti</td>
                                 <td className="number">{stats.utenti}</td>
                                 <td>Clienti registrati nel sistema</td>
                             </tr>
                             <tr>
-                                <td>📄 Contratti</td>
+                                <td>Contratti</td>
                                 <td className="number">{stats.contratti}</td>
                                 <td>Contratti esclusivi attivi</td>
                             </tr>

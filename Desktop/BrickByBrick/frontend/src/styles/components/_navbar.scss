@@ -281,9 +281,6 @@
         text-transform: uppercase;
         letter-spacing: 0.5px;
         
-        @include m.tablet {
-            display: none; // Nascondi ruolo su desktop se vuoi pulizia
-        }
     }
 
     &__menu-overlay {

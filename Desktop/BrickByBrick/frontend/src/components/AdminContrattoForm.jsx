@@ -178,7 +178,7 @@ const AdminContrattoForm = () => {
             
             await showConfirm({
                 title: 'Successo',
-                message: mode === 'add' ? '✅ Contratto creato con successo!' : '✅ Contratto aggiornato con successo!',
+                message: mode === 'add' ? 'Contratto creato con successo!' : 'Contratto aggiornato con successo!',
                 type: 'success',
                 confirmText: 'OK',
                 showCancel: false
@@ -221,20 +221,20 @@ const AdminContrattoForm = () => {
     return (
         <div className="admin-page-container">
             <header className="admin-page-header">
-                <h1>{mode === 'add' ? '➕ Nuovo Contratto Esclusivo' : '✏️ Modifica Contratto'}</h1>
+                <h1>{mode === 'add' ? 'Nuovo Contratto Esclusivo' : 'Modifica Contratto'}</h1>
                 <p>{mode === 'add' ? 'Crea un nuovo contratto selezionando utente e immobile' : 'Modifica i dettagli del contratto esistente'}</p>
             </header>
 
             {apiError && (
                 <div className="data-status-message error-message">
-                    <strong>⚠️ Attenzione:</strong> {apiError}
+                    <strong>Attenzione:</strong> {apiError}
                 </div>
             )}
 
             <form onSubmit={handleSubmit} className="admin-form">
                 {/* Selezione Utente */}
                 <div className="form-group">
-                    <label htmlFor="id_utente">👤 Seleziona Utente *</label>
+                    <label htmlFor="id_utente">Seleziona Utente *</label>
                     <select
                         id="id_utente"
                         name="id_utente"
@@ -270,7 +270,7 @@ const AdminContrattoForm = () => {
 
                 {/* Selezione Immobile */}
                 <div className="form-group">
-                    <label htmlFor="id_immobile">🏠 Seleziona Immobile *</label>
+                    <label htmlFor="id_immobile">Seleziona Immobile *</label>
                     <select
                         id="id_immobile"
                         name="id_immobile"
@@ -307,7 +307,7 @@ const AdminContrattoForm = () => {
 
                 {/* Data Scadenza */}
                 <div className="form-group">
-                    <label htmlFor="data_di_scadenza">📅 Data di Scadenza *</label>
+                    <label htmlFor="data_di_scadenza">Data di Scadenza *</label>
                     <input
                         type="date"
                         id="data_di_scadenza"
@@ -322,7 +322,7 @@ const AdminContrattoForm = () => {
 
                 {/* Prezzo */}
                 <div className="form-group">
-                    <label htmlFor="prezzo">💰 Prezzo Contratto €</label>
+                    <label htmlFor="prezzo">Prezzo Contratto €</label>
                     <input
                         type="text"
                         id="prezzo"
@@ -342,7 +342,7 @@ const AdminContrattoForm = () => {
                         className="submit-btn"
                         disabled={isFormLoading}
                     >
-                        {mode === 'add' ? '➕ Crea Contratto' : '💾 Salva Modifiche'}
+                        {mode === 'add' ? 'Crea Contratto' : 'Salva Modifiche'}
                     </button>
                     <button 
                         type="button" 
@@ -350,7 +350,7 @@ const AdminContrattoForm = () => {
                         onClick={() => navigate('/admin/contratti')}
                         disabled={isFormLoading}
                     >
-                        ❌ Annulla
+                        Annulla
                     </button>
                 </div>
             </form>

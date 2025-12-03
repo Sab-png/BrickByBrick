@@ -226,7 +226,7 @@ const AgentForm = () => {
     };
     
     // --- Rendering ---
-    const pageTitle = mode === 'add' ? '➕ Aggiungi Nuovo Agente' : ` Modifica Agente (ID: ${agentId})`;
+    const pageTitle = mode === 'add' ? '+ Aggiungi Nuovo Agente' : ` Modifica Agente (ID: ${agentId})`;
     const submitButtonText = mode === 'add' ? 'Aggiungi Agente' : 'Salva Modifiche';
 
     return (
@@ -280,7 +280,7 @@ const AgentForm = () => {
                     {/* Bottoni d'azione */}
                     <div className="form-actions">
                         <button type="submit" className="submit-btn" disabled={isFormLoading}>
-                            {isFormLoading ? '⏳ Elaborando...' : submitButtonText}
+                            {isFormLoading ? 'Elaborando...' : submitButtonText}
                         </button>
                         <button type="button" className="back-btn" onClick={() => navigate('/admin/agenti')} disabled={isFormLoading}>
                             Indietro

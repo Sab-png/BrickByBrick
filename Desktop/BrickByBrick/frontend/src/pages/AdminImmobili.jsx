@@ -135,14 +135,14 @@ const Immobili = () => {
 
                     <div className="action-buttons">
                         <button className="add-btn" onClick={handleAddImmobile} disabled={isLoading}>
-                            ➕ Aggiungi Immobile
+                            + Aggiungi Immobile
                         </button>
                     </div>
                 </div>
 
                 {/* Stato Dati: Feedback utente */}
-                {isLoading && <div className="data-status-message loading">Caricamento immobili... ⏳</div>}
-                {error && <div className="data-status-message error">Errore nel caricamento dei dati: {error.message} ❌</div>}
+                {isLoading && <div className="data-status-message loading">Caricamento immobili... </div>}
+                {error && <div className="data-status-message error">Errore nel caricamento dei dati: {error.message} </div>}
 
                 {/* Rendering della Tabella */}
                 {!isLoading && !error && immobiliList && (

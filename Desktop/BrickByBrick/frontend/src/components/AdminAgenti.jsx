@@ -118,13 +118,13 @@ const Agenti = () => {
                     
                     <div className="action-buttons">
                         <button className="add-btn" onClick={handleAddAgent}>
-                            ➕ Aggiungi Agente
+                            + Aggiungi Agente
                         </button>
                     </div>
                 </div>
 
                 {/* Stato Dati: Feedback utente */}
-                {isLoading && <div className="data-status-message loading">Caricamento agenti... ⏳</div>}
+                {isLoading && <div className="data-status-message loading">Caricamento agenti... </div>}
                 {error && <div className="data-status-message error">Errore nel caricamento dei dati: {error.message} ❌</div>}
                 
                 {/* Rendering della Tabella: Viene mostrata solo se non ci sono errori e i dati sono presenti */}

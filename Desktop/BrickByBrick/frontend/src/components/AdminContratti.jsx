@@ -159,13 +159,13 @@ const AdminContratti = () => {
                     
                     <div className="action-buttons">
                         <button className="add-btn" onClick={handleNuovoContratto}>
-                            ➕ Nuovo Contratto
+                            + Nuovo Contratto
                         </button>
                     </div>
                 </div>
 
                 {/* Stato Dati: Feedback utente */}
-                {contrattiLoading && <div className="data-status-message loading">Caricamento contratti... ⏳</div>}
+                {contrattiLoading && <div className="data-status-message loading">Caricamento contratti... </div>}
                 {contrattiError && <div className="data-status-message error">Errore nel caricamento dei dati: {contrattiError.message} ❌</div>}
                 
                 {/* Rendering della Tabella: Viene mostrata solo se non ci sono errori e i dati sono presenti */}
@@ -177,7 +177,7 @@ const AdminContratti = () => {
                         onDelete={handleDeleteContratto}
                         showEdit={true}
                         showDelete={true}
-                        editButtonText="✏️ Modifica"
+                        editButtonText="Modifica"
                     />
                 )}
                 

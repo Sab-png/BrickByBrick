@@ -318,7 +318,7 @@ const ImmobileForm = () => {
     };
 
     // --- Rendering ---
-    const pageTitle = mode === 'add' ? '➕ Aggiungi Nuovo Immobile' : `✍️ Modifica Immobile (ID: ${immobileId})`;
+    const pageTitle = mode === 'add' ? '+ Aggiungi Nuovo Immobile' : `Modifica Immobile ${immobileId}`;
     const submitButtonText = mode === 'add' ? 'Aggiungi Immobile' : 'Salva Modifiche';
 
     // Opzioni per i select
@@ -338,7 +338,7 @@ const ImmobileForm = () => {
             <div className="form-card">
                 <form onSubmit={handleSubmit}>
                     {/* SEZIONE 1: DATI PRINCIPALI */}
-                    <h3>📍 Dati Principali</h3>
+                    <h3>Dati Principali</h3>
                     <div className="form-grid">
                         <div className="form-field">
                             <label htmlFor="indirizzo">Indirizzo *</label>
@@ -396,7 +396,7 @@ const ImmobileForm = () => {
                     </div>
 
                     {/* SEZIONE 2: CARATTERISTICHE PRINCIPALI */}
-                    <h3>🏠 Caratteristiche Principali</h3>
+                    <h3>Caratteristiche Principali</h3>
                     <div className="form-grid">
                         <div className="form-field">
                             <label htmlFor="tipologia">Tipologia *</label>

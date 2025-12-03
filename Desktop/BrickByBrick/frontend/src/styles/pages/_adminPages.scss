@@ -9,13 +9,32 @@
 // Pagina Gestione (Tabelle)
 .user-management-page {
     width: 100%;
-    
+    overflow-x: hidden;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+
+    @include m.mobile {
+        overflow: hidden;
+        max-width: 100vw;
+        padding: vars.$spacing-sm;
+    }
+
     h1 {
         @include m.heading(vars.$font-size-3xl);
         color: vars.$dark-blue;
         margin-bottom: vars.$spacing-xl;
         font-weight: vars.$font-weight-bold;
         text-align: center;
+
+        @media (max-width: 768px) {
+            font-size: vars.$font-size-2xl;
+        }
+
+        @include m.mobile {
+            font-size: vars.$font-size-xl;
+            margin-bottom: vars.$spacing-lg;
+        }
     }
 }
 
@@ -55,10 +74,16 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     padding: vars.$spacing-xl;
     border: 1px solid #e5e7eb;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
 
     @include m.mobile {
-        padding: vars.$spacing-base;
+        padding: vars.$spacing-sm;
         border-radius: vars.$border-radius-md;
+        overflow: hidden;
+        margin: 0;
     }
 }
 
@@ -68,11 +93,15 @@
     gap: vars.$spacing-lg;
     margin-bottom: vars.$spacing-xl;
     flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
 
     @include m.mobile {
         flex-direction: column;
         align-items: stretch;
-        gap: vars.$spacing-base;
+        gap: vars.$spacing-sm;
+        margin-bottom: vars.$spacing-base;
     }
 }
 
@@ -81,13 +110,17 @@
     gap: vars.$spacing-sm;
     flex: 1;
     max-width: 500px;
+    min-width: 0; // Previene overflow
 
     @include m.mobile {
         max-width: 100%;
+        width: 100%;
+        flex: none;
     }
 
     input {
         flex: 1;
+        min-width: 0; // Previene overflow
         padding: vars.$spacing-sm vars.$spacing-base;
         border: 1px solid #d1d5db;
         border-radius: vars.$border-radius-md;
@@ -95,6 +128,8 @@
         font-size: vars.$font-size-base;
         color: vars.$dark-blue;
         transition: all vars.$transition-base;
+        box-sizing: border-box;
+        width: 100%;
 
         &:focus {
             outline: none;
@@ -104,6 +139,11 @@
 
         &::placeholder {
             color: #9ca3af;
+        }
+
+        @include m.mobile {
+            font-size: vars.$font-size-sm;
+            padding: vars.$spacing-xs vars.$spacing-sm;
         }
     }
 }
@@ -120,6 +160,7 @@
     cursor: pointer;
     transition: all vars.$transition-base;
     white-space: nowrap;
+    flex-shrink: 0;
 
     &:hover {
         background: darken(vars.$turquoise, 8%);
@@ -132,7 +173,8 @@
     }
 
     @include m.mobile {
-        padding: vars.$spacing-sm vars.$spacing-base;
+        padding: vars.$spacing-xs vars.$spacing-base;
+        font-size: vars.$font-size-sm;
     }
 }
 
@@ -140,12 +182,15 @@
     display: flex;
     gap: vars.$spacing-sm;
     flex-wrap: wrap;
+    box-sizing: border-box;
 
     @include m.mobile {
         justify-content: stretch;
-        
+        width: 100%;
+
         button {
             flex: 1;
+            min-width: 0;
         }
     }
 }
@@ -165,12 +210,14 @@
     white-space: nowrap;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: vars.$spacing-xs;
+    box-sizing: border-box;
 
     &:disabled {
         opacity: 0.5;
         cursor: not-allowed;
-        
+
         &:hover {
             transform: none;
             box-shadow: none;
@@ -178,8 +225,11 @@
     }
 
     @include m.mobile {
-        padding: vars.$spacing-sm vars.$spacing-base;
-        font-size: vars.$font-size-xs;
+        padding: vars.$spacing-xs vars.$spacing-sm;
+        font-size: 0.7rem;
+        min-width: 0;
+        white-space: normal;
+        text-align: center;
     }
 }
 
@@ -242,6 +292,215 @@
         background: #f9fafb;
         color: #6b7280;
         border: 1px solid #e5e7eb;
+    }
+}
+
+// ============================================
+// TABELLA ADMIN RESPONSIVE
+// ============================================
+
+.admin-table-container {
+    width: 100%;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    max-width: 100%;
+
+    @include m.mobile {
+        overflow: hidden;
+        max-width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: vars.$font-paragraph;
+    table-layout: auto;
+
+    @include m.mobile {
+        display: block;
+        width: 100%;
+    }
+
+    thead {
+        background: #f9fafb;
+
+        @include m.mobile {
+            display: none;
+        }
+
+        tr {
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        th {
+            padding: vars.$spacing-base vars.$spacing-sm;
+            text-align: left;
+            font-size: vars.$font-size-sm;
+            font-weight: vars.$font-weight-semibold;
+            color: #374151;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+
+            @include m.mobile {
+                padding: vars.$spacing-xs;
+            }
+
+            &:last-child {
+                text-align: center;
+                width: 100px;
+            }
+        }
+    }
+
+    tbody {
+        @include m.mobile {
+            display: block;
+        }
+
+        tr {
+            border-bottom: 1px solid #e5e7eb;
+            transition: background vars.$transition-base;
+
+            &:hover {
+                background: #f9fafb;
+
+                @include m.mobile {
+                    background: transparent;
+                }
+            }
+
+            &:last-child {
+                border-bottom: none;
+            }
+
+            @include m.mobile {
+                display: block;
+                width: 100%;
+                box-sizing: border-box;
+                margin-bottom: vars.$spacing-base;
+                border: 1px solid #e5e7eb;
+                border-radius: vars.$border-radius-md;
+                padding: vars.$spacing-base;
+                background: vars.$white;
+            }
+        }
+
+        td {
+            padding: vars.$spacing-base vars.$spacing-sm;
+            color: #374151;
+            font-size: vars.$font-size-base;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            max-width: 200px;
+
+            &:last-child {
+                text-align: center;
+                max-width: 100px;
+            }
+
+            @include m.mobile {
+                display: block;
+                padding: vars.$spacing-xs 0;
+                text-align: left !important;
+                border-bottom: none;
+                max-width: none !important;
+                width: 100% !important;
+                box-sizing: border-box;
+                word-break: break-word;
+                overflow: hidden;
+
+                &::before {
+                    content: attr(data-label) ": ";
+                    font-weight: vars.$font-weight-semibold;
+                    color: #6b7280;
+                    font-size: vars.$font-size-xs;
+                    text-transform: uppercase;
+                }
+
+                &:last-child {
+                    padding-top: vars.$spacing-sm;
+                    margin-top: vars.$spacing-sm;
+                    border-top: 1px solid #e5e7eb;
+
+                    &::before {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.table-actions {
+    display: flex;
+    gap: vars.$spacing-sm;
+    justify-content: center;
+    align-items: center;
+
+    @include m.mobile {
+        justify-content: flex-start;
+    }
+}
+
+.action-btn {
+    padding: vars.$spacing-xs;
+    border: none;
+    border-radius: vars.$border-radius-sm;
+    cursor: pointer;
+    transition: all vars.$transition-base;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    svg {
+        width: 16px;
+        height: 16px;
+
+        @include m.mobile {
+            width: 14px;
+            height: 14px;
+        }
+    }
+}
+
+.edit-action-btn {
+    background: #f3f4f6;
+    color: #374151;
+
+    &:hover:not(:disabled) {
+        background: #e5e7eb;
+        transform: translateY(-1px);
+    }
+}
+
+.delete-action-btn {
+    background: #fee2e2;
+    color: #dc2626;
+
+    &:hover:not(:disabled) {
+        background: #fecaca;
+        transform: translateY(-1px);
+    }
+}
+
+.no-data-message {
+    text-align: center;
+    padding: vars.$spacing-xl;
+    color: #6b7280;
+    font-family: vars.$font-paragraph;
+    font-size: vars.$font-size-base;
+
+    @include m.mobile {
+        padding: vars.$spacing-lg;
+        font-size: vars.$font-size-sm;
     }
 }
 
@@ -476,17 +735,33 @@
     text-align: center;
     margin-bottom: vars.$spacing-2xl;
 
+    @include m.mobile {
+        margin-bottom: vars.$spacing-xl;
+    }
+
     h1 {
         @include m.heading(vars.$font-size-3xl);
         color: vars.$dark-blue;
         margin-bottom: vars.$spacing-sm;
         font-weight: vars.$font-weight-bold;
+
+        @media (max-width: 768px) {
+            font-size: vars.$font-size-2xl;
+        }
+
+        @include m.mobile {
+            font-size: vars.$font-size-xl;
+        }
     }
 
     p {
         font-family: vars.$font-paragraph;
         font-size: vars.$font-size-base;
         color: #6b7280;
+
+        @include m.mobile {
+            font-size: vars.$font-size-sm;
+        }
     }
 }
 
@@ -496,9 +771,17 @@
     gap: vars.$spacing-lg;
     margin-bottom: vars.$spacing-2xl;
 
+    // Tablet: 2 colonne
+    @media (min-width: 481px) and (max-width: 768px) {
+        grid-template-columns: repeat(2, 1fr);
+        gap: vars.$spacing-base;
+    }
+
+    // Mobile: 1 colonna
     @include m.mobile {
         grid-template-columns: 1fr;
         gap: vars.$spacing-base;
+        margin-bottom: vars.$spacing-xl;
     }
 }
 
@@ -514,6 +797,11 @@
     transition: all vars.$transition-base;
     position: relative;
     overflow: hidden;
+
+    @include m.mobile {
+        padding: vars.$spacing-base;
+        gap: vars.$spacing-sm;
+    }
 
     &::before {
         content: '';
@@ -531,6 +819,11 @@
 
         &::before {
             width: 8px;
+        }
+
+        @include m.mobile {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
     }
 
@@ -587,18 +880,28 @@
         height: 28px;
     }
 
+    @media (max-width: 768px) {
+        @include m.size(55px);
+
+        svg {
+            width: 26px;
+            height: 26px;
+        }
+    }
+
     @include m.mobile {
         @include m.size(50px);
-        
+
         svg {
-            width: 30px;
-            height: 30px;
+            width: 24px;
+            height: 24px;
         }
     }
 }
 
 .stat-content {
     flex: 1;
+    min-width: 0; // Previene overflow del testo
 
     h3 {
         font-family: vars.$font-paragraph;
@@ -608,6 +911,11 @@
         margin-bottom: vars.$spacing-xs;
         text-transform: uppercase;
         letter-spacing: 0.5px;
+
+        @include m.mobile {
+            font-size: 0.7rem;
+            margin-bottom: 4px;
+        }
     }
 
     .stat-number {
@@ -618,8 +926,12 @@
         margin: 0;
         line-height: 1;
 
-        @include m.mobile {
+        @media (max-width: 768px) {
             font-size: vars.$font-size-2xl;
+        }
+
+        @include m.mobile {
+            font-size: vars.$font-size-xl;
         }
     }
 
@@ -629,6 +941,11 @@
         color: #9ca3af;
         margin-top: vars.$spacing-xs;
         display: block;
+
+        @include m.mobile {
+            font-size: 0.65rem;
+            margin-top: 4px;
+        }
     }
 }
 
@@ -639,8 +956,13 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     border: 1px solid #e5e7eb;
 
+    @media (max-width: 768px) {
+        padding: vars.$spacing-xl;
+    }
+
     @include m.mobile {
-        padding: vars.$spacing-lg;
+        padding: vars.$spacing-base;
+        border-radius: vars.$border-radius-md;
     }
 
     h2 {
@@ -649,16 +971,38 @@
         margin-bottom: vars.$spacing-xl;
         font-weight: vars.$font-weight-bold;
         text-align: center;
+
+        @media (max-width: 768px) {
+            font-size: vars.$font-size-xl;
+            margin-bottom: vars.$spacing-lg;
+        }
+
+        @include m.mobile {
+            font-size: vars.$font-size-lg;
+            margin-bottom: vars.$spacing-base;
+        }
     }
 }
 
 .summary-table {
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch; // Smooth scrolling su iOS
+
+    @include m.mobile {
+        margin: 0 calc(-1 * vars.$spacing-base); // Expand to full width on mobile
+        padding: 0 vars.$spacing-base;
+    }
 
     table {
         width: 100%;
         border-collapse: collapse;
         font-family: vars.$font-paragraph;
+        table-layout: fixed;
+
+        @include m.mobile {
+            min-width: 100%;
+            table-layout: auto;
+        }
 
         thead {
             background: #f9fafb;
@@ -669,16 +1013,23 @@
 
             th {
                 padding: vars.$spacing-base vars.$spacing-lg;
-                text-align: left;
+                text-align: center;
                 font-size: vars.$font-size-sm;
                 font-weight: vars.$font-weight-semibold;
                 color: #374151;
                 text-transform: uppercase;
                 letter-spacing: 0.5px;
+                white-space: nowrap;
+
+                @media (max-width: 768px) {
+                    padding: vars.$spacing-sm vars.$spacing-base;
+                    font-size: 0.7rem;
+                }
 
                 @include m.mobile {
-                    padding: vars.$spacing-sm vars.$spacing-base;
-                    font-size: vars.$font-size-xs;
+                    padding: vars.$spacing-xs vars.$spacing-sm;
+                    font-size: 0.65rem;
+                    letter-spacing: 0.3px;
                 }
             }
         }
@@ -690,6 +1041,10 @@
 
                 &:hover {
                     background: #f9fafb;
+
+                    @include m.mobile {
+                        background: transparent; // Disabilita hover su mobile
+                    }
                 }
 
                 &:last-child {
@@ -701,10 +1056,16 @@
                 padding: vars.$spacing-lg;
                 font-size: vars.$font-size-base;
                 color: #374151;
+                text-align: center;
 
-                @include m.mobile {
+                @media (max-width: 768px) {
                     padding: vars.$spacing-base;
                     font-size: vars.$font-size-sm;
+                }
+
+                @include m.mobile {
+                    padding: vars.$spacing-sm;
+                    font-size: 0.75rem;
                 }
 
                 &.number {
@@ -712,29 +1073,47 @@
                     font-size: vars.$font-size-xl;
                     font-weight: vars.$font-weight-bold;
                     color: vars.$turquoise;
-                    text-align: center;
-                    width: 120px;
+                    white-space: nowrap;
+
+                    @media (max-width: 768px) {
+                        font-size: vars.$font-size-lg;
+                    }
 
                     @include m.mobile {
-                        font-size: vars.$font-size-lg;
-                        width: 80px;
+                        font-size: vars.$font-size-base;
                     }
                 }
 
                 &:first-child {
                     font-weight: vars.$font-weight-medium;
+                    white-space: nowrap;
+
+                    .text-only {
+                        @media (max-width: 768px) {
+                            display: none; // Nascondi il testo su tablet
+                        }
+
+                        @include m.mobile {
+                            display: none; // Nascondi il testo su mobile
+                        }
+                    }
+
+                    .icon-only {
+                        @media (max-width: 768px) {
+                            font-size: vars.$font-size-xl;
+                        }
+
+                        @include m.mobile {
+                            font-size: vars.$font-size-lg;
+                        }
+                    }
                 }
 
                 &:last-child {
                     color: #6b7280;
                     font-size: vars.$font-size-sm;
-
-                    @include m.mobile {
-                        display: none;
-                    }
                 }
             }
         }
     }
 }
-
