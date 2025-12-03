@@ -23,7 +23,7 @@ const NotFound = lazy(() => import('../pages/NotFound'));
 
 const StepMultiForm = lazy(() => import('../pages/StepMultiForm'));
 
-import PrenotaVisitaForm from '../components/PrenotaVisitaForm';
+const PrenotaVisitaForm = lazy(() => import('../components/PrenotaVisitaForm'));
 
 // Admin sections 
 import AdminLayout from '../layout/AdminLayout'
@@ -104,19 +104,10 @@ const routes = [
   },
   {
     path: 'prenota-visita/:id',
-    Component: PrenotaVisitaForm,
+    // Component: PrenotaVisitaForm,
+    Component: () => withSuspense(() => <ProtectedRoute Component={PrenotaVisitaForm} requiredRole="CLIENTE" />),
     title: 'Valuta Immobile'
   },
-  // {
-  //   path: 'dashboard',
-  //   Component: () => withSuspense(() => <ProtectedRoute Component={AdminDashboard} requiredRole="ADMIN" />),
-  //   title: 'Admin Dashboard'
-  // },
-  // {
-  //   path: 'dashboard/agente',
-  //   Component: () => withSuspense(() => <ProtectedRoute Component={AgenteDashboard} requiredRole="AGENTE" />),
-  //   title: 'Agente Dashboard'
-  // },
   {
     path: 'login',
     Component: () => withSuspense(Login),
