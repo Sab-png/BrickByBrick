@@ -214,7 +214,7 @@ Giovanni Acatrinei: [@giovanniacatrinei](https://github.com/giovanniacatrinei).
 #### Web Developer
 Jacopo dell'Oste: [@jacopodellostee](https://github.com/Jacopodellostee).
 
-Martino Placano: [@Marti-guti](https://github.com/Marti-guti).
+Martino Placano: [@Marti-guti](https://github.com/Marti-guti)[@Doc10040](https://github.com/Doc10040).
 
 Cao Vy Beltrame: [@CaoVy03](https://github.com/CaoVy03).
 
