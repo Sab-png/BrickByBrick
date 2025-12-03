@@ -1,3 +1,12 @@
+/**
+ * @fileoverview Sezione step con lista numerata e CTA finale.
+ * Utilizzata per mostrare processi multi-step.
+ * 
+ * @module StepsSection
+ * @requires ./StepItem
+ * @requires ./CTAButton
+ */
+
 import StepItem from './StepItem';
 import CTAButton from './CTAButton';
 

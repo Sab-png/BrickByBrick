@@ -1,3 +1,16 @@
+/**
+ * @fileoverview Pagina servizi vendita immobiliare.
+ * Spiega il processo di vendita con tecnologia + agenti.
+ * 
+ * @module pages/Vendi
+ * @requires ../components/HeroSection
+ * @requires ../components/VendiTech
+ * @requires ../components/Timeline
+ * @requires ../components/PrenotaVisita
+ * @requires ../components/NewsLetter
+ * @requires ../hooks/useSEO
+ */
+
 import HeroSection from '../components/HeroSection';
 import VendiTech from '../components/VendiTech';
 import Timeline from '../components/Timeline';
@@ -10,6 +23,25 @@ import vendiBgJpg from "../assets/images/jpg/hero-vendi.jpg";
 import vendiBgWebP from "../assets/images/webp/hero-vendi.webp";
 import vendiBgAvif from "../assets/images/avif/hero-vendi.avif";
 
+/**
+ * Pagina Vendi Casa
+ * 
+ * Sezioni:
+ * - Hero section "Vendi casa in modo chiaro, veloce e sicuro"
+ * - VendiTech: 3 card (Stima automatica, Verifica agente, Trasparenza)
+ * - Timeline: "Dal clic al rogito" con 4 step
+ * - Prenota Visita: CTA per appuntamento con agente
+ * - Newsletter subscription
+ * 
+ * SEO: Ottimizzata per "vendere casa torino, servizi vendita immobiliare"
+ * 
+ * @page
+ * @returns {JSX.Element} Pagina vendita servizi
+ * 
+ * @example
+ * // Route
+ * <Route path="/vendi" element={<Vendi />} />
+ */
 export default function Vendi() {
 
     useSEO({

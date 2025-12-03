@@ -1,3 +1,16 @@
+/**
+ * @fileoverview Pagina Chi Siamo con storia aziendale e team.
+ * Include hero, mission, story e sezione agenti.
+ * 
+ * @module pages/About
+ * @requires ../components/NewsLetter
+ * @requires ../components/HeroSection
+ * @requires ../components/MissionSection
+ * @requires ../components/StorySection
+ * @requires ../components/AgentSection
+ * @requires ../hooks/useSEO
+ */
+
 import Newsletter from "../components/NewsLetter"
 import HeroSection from "../components/HeroSection"
 import MissionSection from "../components/MissionSection"
@@ -10,6 +23,25 @@ import aboutBgJpg from "../assets/images/jpg/hero-about.jpg";
 import aboutBgWebP from "../assets/images/webp/hero-about.webp";
 import aboutBgAvif from "../assets/images/avif/hero-about.avif";
 
+/**
+ * Pagina Chi Siamo
+ * 
+ * Sezioni:
+ * - Hero section con immagine responsive
+ * - Mission e valori aziendali
+ * - Storia di Immobiliaris
+ * - Team agenti con foto
+ * - Newsletter subscription
+ * 
+ * SEO: Ottimizzata per "chi siamo agenzia immobiliare"
+ * 
+ * @page
+ * @returns {JSX.Element} Pagina about completa
+ * 
+ * @example
+ * // Route
+ * <Route path="/chi-siamo" element={<About />} />
+ */
 export default function About() {
 
     useSEO({

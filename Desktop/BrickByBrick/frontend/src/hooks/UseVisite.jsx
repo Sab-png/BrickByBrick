@@ -1,10 +1,46 @@
+/**
+ * @fileoverview Hook personalizzato per gestione visite immobili.
+ * Supporta filtro per agente specifico e gestione CRUD completa.
+ * 
+ * @module UseVisite
+ * @requires react
+ */
+
 import { useState, useEffect, useCallback } from 'react';
 
 const API_BASE_URL = 'http://localhost:8085';
 
 /**
- * Hook personalizzato per la gestione delle visite
- * Gestisce fetch, filtri, eliminazione e recupero singola visita
+ * Hook per gestione visite
+ * 
+ * Funzionalità:
+ * - Fetch lista visite (tutte o filtrate per agente)
+ * - Recupero singola visita per ID
+ * - Modifica visita esistente
+ * - Eliminazione visita
+ * - Filtro ricerca testuale
+ * - Auto-refresh al mount
+ * 
+ * @hook
+ * @param {number|null} [idAgente=null] - ID agente per filtrare visite (null = tutte)
+ * @returns {Object} Oggetto con stati e funzioni
+ * @returns {Array<Object>} returns.data - Lista visite
+ * @returns {boolean} returns.isLoading - Stato caricamento
+ * @returns {Error|null} returns.error - Errore eventuale
+ * @returns {Function} returns.fetchVisite - Recupera lista visite
+ * @returns {Function} returns.getVisitaById - Recupera singola visita
+ * @returns {Function} returns.updateVisita - Aggiorna visita
+ * @returns {Function} returns.deleteVisita - Elimina visita
+ * @returns {Function} returns.applyFilters - Applica filtri ricerca
+ * 
+ * @example
+ * // Tutte le visite
+ * const { data, deleteVisita } = useVisite();
+ * 
+ * @example
+ * // Solo visite di un agente
+ * const { data, updateVisita } = useVisite(42);
+ * await updateVisita(10, { stato: 'completata' });
  */
 const useVisite = (idAgente = null) => {
     const [data, setData] = useState([]);

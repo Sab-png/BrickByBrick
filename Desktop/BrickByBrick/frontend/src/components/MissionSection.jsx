@@ -1,3 +1,11 @@
+/**
+ * @fileoverview Sezione Mission e Valori con card dei principi aziendali.
+ * Mostra territorialità, innovazione e affidabilità.
+ * 
+ * @module MissionSection
+ * @requires ./Card
+ */
+
 import Card from './Card';
 
 import iconAffidabilita from '../assets/images/svg/affidabilita.svg';

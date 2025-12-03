@@ -1,10 +1,57 @@
+/**
+ * @fileoverview Provider per contesto autenticazione utente.
+ * Gestisce login, logout, registrazione e persistenza sessione.
+ * 
+ * @module AuthContextProvider
+ * @requires react
+ * @requires ../store/auth-context
+ */
+
 import { useState, useContext, useEffect, useMemo } from 'react';
 import AuthContext from '../store/auth-context';
 
+/** @constant {string} - Chiave localStorage per dati utente */
 const LOCAL_STORAGE_KEY_USER = 'brickByBrickUser';
+/** @constant {string} - Chiave localStorage per token JWT */
 const LOCAL_STORAGE_KEY_TOKEN = 'brickByBrickToken';
+/** @constant {string} - Chiave localStorage per preferenza remember me */
 const STORAGE_KEY_REMEMBER = 'brickByBrickRemember';
 
+/**
+ * Provider per Autenticazione
+ * 
+ * Funzionalità:
+ * - Login con email/password
+ * - Registrazione nuovo utente
+ * - Logout con pulizia storage
+ * - Persistenza sessione (localStorage/sessionStorage)
+ * - Check ruoli (isAdmin, isAgente, isCliente)
+ * - Auto-caricamento sessione al mount
+ * 
+ * Dati gestiti:
+ * - user: oggetto utente (id, nome, cognome, email, ruolo, ecc.)
+ * - token: JWT token per autenticazione API
+ * - loading: stato caricamento iniziale
+ * - isAuthenticated: boolean se utente autenticato
+ * 
+ * @component
+ * @param {Object} props - Proprietà del provider
+ * @param {React.ReactNode} props.children - Componenti figli
+ * @returns {JSX.Element} Provider con contesto auth
+ * 
+ * @example
+ * // Avvolgi l'app con il provider
+ * <AuthContextProvider>
+ *   <App />
+ * </AuthContextProvider>
+ * 
+ * @example
+ * // Uso del contesto
+ * const { user, login, logout, isAdmin } = useAuthData();
+ * 
+ * await login('user@example.com', 'password', true);
+ * if (isAdmin) { // Accesso admin }
+ */
 export default function AuthContextProvider({ children }) {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);

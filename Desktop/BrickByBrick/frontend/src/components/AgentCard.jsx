@@ -1,3 +1,31 @@
+/**
+ * @fileoverview Card per visualizzazione agente con immagine responsive.
+ * Supporta formati moderni (AVIF, WebP) con fallback JPG.
+ * 
+ * @module AgentCard
+ */
+
+/**
+ * Componente Agent Card
+ * 
+ * @component
+ * @param {Object} props - Proprietà del componente
+ * @param {string} props.imageAvif - URL immagine AVIF
+ * @param {string} props.imageWebp - URL immagine WebP
+ * @param {string} props.imageJpg - URL immagine JPG (fallback)
+ * @param {string} props.name - Nome dell'agente
+ * @param {string} props.location - Città di competenza
+ * @returns {JSX.Element} Card con foto e info agente
+ * 
+ * @example
+ * <AgentCard
+ *   imageAvif="/img/agent.avif"
+ *   imageWebp="/img/agent.webp"
+ *   imageJpg="/img/agent.jpg"
+ *   name="Marco Rossi"
+ *   location="Torino"
+ * />
+ */
 export default function AgentCard({ imageAvif, imageWebp, imageJpg, name, location }) {
     return (
         <div className="agent-card">

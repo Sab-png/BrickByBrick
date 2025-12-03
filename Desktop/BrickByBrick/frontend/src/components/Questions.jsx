@@ -1,3 +1,20 @@
+/**
+ * @fileoverview Form contatti "Hai domande sui nostri servizi?".
+ * 
+ * @module Questions
+ */
+
+/**
+ * Componente Questions
+ * 
+ * Form con nome, cognome, email, telefono, messaggio.
+ * 
+ * @component
+ * @returns {JSX.Element} Form contatti
+ * 
+ * @example
+ * <Questions />
+ */
 export default function Questions() {
 
   const handleSubmit = (e) => {

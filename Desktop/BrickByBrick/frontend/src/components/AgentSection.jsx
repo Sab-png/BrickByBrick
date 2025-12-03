@@ -1,3 +1,11 @@
+/**
+ * @fileoverview Sezione team con griglia di agenti.
+ * Visualizza tutti gli agenti disponibili con immagini responsive.
+ * 
+ * @module AgentSection
+ * @requires ./AgentCard
+ */
+
 import AgentCard from './AgentCard';
 
 import marcoAvif from '../assets/images/avif/marco-nuvola.avif';

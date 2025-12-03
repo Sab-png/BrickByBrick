@@ -1,3 +1,14 @@
+/**
+ * @fileoverview Pagina login con form autenticazione.
+ * Gestisce login, validazione e redirect basato su ruolo.
+ * 
+ * @module pages/Login
+ * @requires react
+ * @requires react-router-dom
+ * @requires ../providers/AuthContextProvider
+ * @requires ../hooks/useSEO
+ */
+
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuthData } from '../providers/AuthContextProvider';
@@ -8,6 +19,31 @@ import ImageLoginAvif from '../assets/images/avif/accedi-registrati.avif';
 import ImageLoginWebp from '../assets/images/webp/accedi-registrati.webp'; 
 import ImageLoginJpg from '../assets/images/jpg/accedi-registrati.jpg';
 
+/**
+ * Pagina Login
+ * 
+ * Funzionalità:
+ * - Form con email e password
+ * - Checkbox "Ricordami" per persistenza sessione
+ * - Validazione lato client
+ * - Chiamata API login
+ * - Redirect automatico basato su ruolo:
+ *   - ADMIN -> /admin
+ *   - AGENTE -> /agente
+ *   - CLIENTE -> /
+ * - Gestione errori con messaggi utente
+ * - Link a registrazione
+ * - Immagine decorativa responsive
+ * 
+ * SEO: noindex (pagina di autenticazione)
+ * 
+ * @page
+ * @returns {JSX.Element} Pagina login con form
+ * 
+ * @example
+ * // Route pubblica
+ * <Route path="/login" element={<Login />} />
+ */
 const Login = () => {
   const navigate = useNavigate();
   const { login } = useAuthData();

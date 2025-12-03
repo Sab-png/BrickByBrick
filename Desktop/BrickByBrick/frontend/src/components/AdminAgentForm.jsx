@@ -1,13 +1,26 @@
-// src/components/AgentForm.jsx
+/**
+ * @fileoverview Form unificato per la gestione degli agenti (creazione e modifica).
+ * Gestisce validazione lato client, comunicazione con API REST e feedback tramite modali.
+ * 
+ * @module AdminAgentForm
+ * @requires react
+ * @requires react-router-dom
+ * @requires ./ConfirmModal
+ * @requires ../hooks/UseConfirmModal
+ */
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import ConfirmModal from './ConfirmModal';
 import useConfirmModal from '../hooks/UseConfirmModal';
 
+/** @constant {string} URL base per le chiamate API */
 const API_BASE_URL = 'http://localhost:8085';
 
-// --- REGOLE DI VALIDAZIONE ---
+/**
+ * Regole di validazione per i campi del form agente
+ * @constant {Object.<string, {regex: RegExp, message: string}>}
+ */
 const validationRules = {
     nome: { regex: /^[a-zA-Z\s']{2,50}$/, message: 'Il nome è obbligatorio e deve contenere solo lettere e spazi (2-50 caratteri)' },
     cognome: { regex: /^[a-zA-Z\s']{2,50}$/, message: 'Il cognome è obbligatorio e deve contenere solo lettere e spazi (2-50 caratteri)' },
@@ -17,34 +30,62 @@ const validationRules = {
     passw: { regex: /^.{6,}$/, message: 'La password deve contenere almeno 6 caratteri' }
 };
 
-// Stato iniziale del form.
+/**
+ * Stato iniziale del form
+ * @constant {Object}
+ */
 const initialFormData = {
     nome: '', cognome: '', email: '', telefono: '', città: '', passw: ''
 };
 
 /**
- * Componente Form Unificato per Agenti.
+ * Componente Form Unificato per Agenti
+ * 
  * Gestisce sia la creazione che la modifica di un agente.
- * Il mode viene rilevato automaticamente: se c'è un ID nell'URL è 'edit', altrimenti 'add'.
+ * La modalità viene rilevata automaticamente dall'URL:
+ * - Se presente un ID → modalità 'edit'
+ * - Se assente l'ID → modalità 'add'
+ * 
+ * @component
+ * @returns {JSX.Element} Form per aggiunta/modifica agente
+ * 
+ * @example
+ * // Modalità aggiunta
+ * <Route path="/admin/agenti/aggiungi-agente" element={<AgentForm />} />
+ * 
+ * @example
+ * // Modalità modifica
+ * <Route path="/admin/agenti/modifica-agente/:id" element={<AgentForm />} />
  */
 const AgentForm = () => {
     const navigate = useNavigate();
     const { id: agentId } = useParams();
     const { modalState, showConfirm, handleClose, handleConfirm } = useConfirmModal();
     
-    // Rileva automaticamente il mode: se c'è un ID nell'URL è edit, altrimenti add
+    /** @type {'add'|'edit'} Modalità del form rilevata automaticamente dall'URL */
     const mode = agentId ? 'edit' : 'add';
 
-    // Stati locali del componente (completamente separati dall'hook)
+    /** @type {[Object, Function]} Dati del form */
     const [formData, setFormData] = useState(initialFormData);
+    /** @type {[Object, Function]} Errori di validazione per campo */
     const [errors, setErrors] = useState({});
+    /** @type {[boolean, Function]} Stato di caricamento durante operazioni async */
     const [isFormLoading, setIsFormLoading] = useState(false); 
+    /** @type {[string|null, Function]} Messaggio di errore API */
     const [apiError, setApiError] = useState(null);
     
     // Debug: logga lo stato di loading
     console.log('AgentForm - mode:', mode, 'isFormLoading:', isFormLoading, 'agentId:', agentId);
     
-    // Funzione per ottenere un agente per ID (chiamata diretta all'API)
+    /**
+     * Recupera un agente dal server tramite ID
+     * 
+     * @function
+     * @async
+     * @param {number|string} id - ID dell'agente da recuperare
+     * @returns {Promise<Object>} Dati dell'agente
+     * @throws {Error} Se l'agente non viene trovato o errore di rete
+     */
     const getAgentById = useCallback(async (id) => {
         const url = `${API_BASE_URL}/api/agenti/${id}`; 
         const response = await fetch(url);
@@ -54,7 +95,24 @@ const AgentForm = () => {
         return await response.json();
     }, []);
     
-    // Funzione per salvare un agente (chiamata diretta all'API)
+    /**
+     * Salva un agente (crea nuovo o aggiorna esistente)
+     * 
+     * @function
+     * @async
+     * @param {number|string|null} agentId - ID dell'agente (null per creazione)
+     * @param {Object} payload - Dati dell'agente da salvare
+     * @param {string} payload.nome - Nome dell'agente
+     * @param {string} payload.cognome - Cognome dell'agente
+     * @param {string} payload.email - Email dell'agente
+     * @param {string} payload.telefono - Telefono dell'agente
+     * @param {string} payload.città - Città dell'agente
+     * @param {string} [payload.passw] - Password (obbligatoria in add, opzionale in edit)
+     * @param {number} payload.Id_ruolo - ID del ruolo (2 per agente)
+     * @param {'add'|'edit'} mode - Modalità operazione
+     * @returns {Promise<void>}
+     * @throws {Error} Se il salvataggio fallisce
+     */
     const saveAgent = useCallback(async (agentId, payload, mode) => {
         let url = '';
         let method = '';
@@ -81,7 +139,13 @@ const AgentForm = () => {
         }
     }, []); 
 
-    // --- Logica di Validazione ---
+    /**
+     * Valida tutti i campi del form secondo le regole definite
+     * 
+     * @function
+     * @returns {Object.<string, string>} Oggetto con errori di validazione (chiave=campo, valore=messaggio)
+     * @returns {Object} Oggetto vuoto se non ci sono errori
+     */
     const validateForm = useCallback(() => {
         const newErrors = {};
         
@@ -106,7 +170,13 @@ const AgentForm = () => {
         return newErrors;
     }, [formData, mode]);
 
-    // Gestore generico per l'aggiornamento dei campi del form
+    /**
+     * Gestisce i cambiamenti nei campi del form
+     * Aggiorna lo stato e rimuove gli errori di validazione per il campo modificato
+     * 
+     * @function
+     * @param {React.ChangeEvent<HTMLInputElement>} e - Evento di change dell'input
+     */
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prevState => ({ ...prevState, [name]: value }));
@@ -116,7 +186,18 @@ const AgentForm = () => {
         setApiError(null); 
     };
 
-    // --- Caricamento Dati Esistenti (useEffect per "edit") ---
+    /**
+     * Effect per caricare i dati dell'agente in modalità modifica
+     * Si attiva al mount e quando cambiano mode, agentId o navigate
+     * 
+     * In modalità 'edit':
+     * - Recupera i dati dell'agente dal server
+     * - Popola il form con i dati recuperati
+     * - Gestisce errori di caricamento con modale
+     * 
+     * In modalità 'add':
+     * - Resetta il form allo stato iniziale
+     */
     useEffect(() => {
         const loadAgentData = async () => {
             // Logica di gestione: se siamo in 'add' o manca l'ID, usciamo
@@ -167,7 +248,21 @@ const AgentForm = () => {
     // Dipendenze: mode, agentId, navigate e le funzioni sono stabili con useCallback
     }, [mode, agentId, navigate, getAgentById]); 
 
-    // --- Gestione Invio (handleSubmit) ---
+    /**
+     * Gestisce l'invio del form
+     * 
+     * Processo:
+     * 1. Previene submit default
+     * 2. Esegue validazione lato client
+     * 3. Prepara payload per API
+     * 4. Invia richiesta al server
+     * 5. Mostra modale di successo/errore
+     * 6. Reindirizza alla lista agenti se successo
+     * 
+     * @function
+     * @async
+     * @param {React.FormEvent<HTMLFormElement>} e - Evento di submit del form
+     */
     const handleSubmit = async (e) => {
         e.preventDefault();
         setApiError(null);

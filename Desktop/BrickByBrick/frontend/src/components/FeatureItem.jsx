@@ -1,3 +1,27 @@
+/**
+ * @fileoverview Componente per singola feature con icona e descrizione.
+ * Utilizzato in FeatureSection.
+ * 
+ * @module FeatureItem
+ */
+
+/**
+ * Componente Feature Item
+ * 
+ * @component
+ * @param {Object} props - Proprietà del componente
+ * @param {string} props.icon - URL immagine icona
+ * @param {string} props.title - Titolo della feature
+ * @param {string} props.description - Descrizione dettagliata
+ * @returns {JSX.Element} Feature item con icona e testo
+ * 
+ * @example
+ * <FeatureItem
+ *   icon="/img/valutazione.svg"
+ *   title="Valutazione garantita"
+ *   description="Stima precisa entro 72 ore"
+ * />
+ */
 export default function FeatureItem({ icon, title, description }) {
     return (
         <div className="feature-item">

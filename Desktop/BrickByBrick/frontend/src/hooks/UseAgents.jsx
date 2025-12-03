@@ -1,9 +1,46 @@
+/**
+ * @fileoverview Hook personalizzato per gestione CRUD agenti.
+ * Fornisce funzioni per fetch, creazione, modifica, eliminazione e filtri.
+ * 
+ * @module UseAgents
+ * @requires react
+ */
+
 import { useState, useEffect, useCallback } from 'react';
 
+const API_BASE_URL = 'http://localhost:8085';
 
-const API_BASE_URL = 'http://localhost:8085'; // Sostituisci con l'URL reale del tuo backend
-
-
+/**
+ * Hook per gestione agenti
+ * 
+ * Funzionalità:
+ * - Fetch lista agenti con filtri
+ * - Creazione nuovo agente
+ * - Modifica agente esistente
+ * - Eliminazione agente
+ * - Gestione stato loading/error
+ * 
+ * @hook
+ * @returns {Object} Oggetto con stati e funzioni
+ * @returns {Array<Object>} returns.data - Lista agenti
+ * @returns {boolean} returns.isLoading - Stato caricamento
+ * @returns {Error|null} returns.error - Errore eventuale
+ * @returns {Object} returns.filters - Filtri attivi
+ * @returns {Function} returns.fetchAgents - Recupera lista agenti
+ * @returns {Function} returns.createAgent - Crea nuovo agente
+ * @returns {Function} returns.updateAgent - Aggiorna agente
+ * @returns {Function} returns.deleteAgent - Elimina agente
+ * @returns {Function} returns.applyFilters - Applica filtri ricerca
+ * 
+ * @example
+ * const { data, isLoading, createAgent, deleteAgent } = useAgents();
+ * 
+ * // Creazione
+ * await createAgent({ nome: 'Mario', cognome: 'Rossi', ... });
+ * 
+ * // Eliminazione
+ * await deleteAgent(123);
+ */
 const useAgents = () => {
     // 1. STATI PRINCIPALI
     const [data, setData] = useState([]);

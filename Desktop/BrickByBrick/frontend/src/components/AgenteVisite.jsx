@@ -1,3 +1,17 @@
+/**
+ * @fileoverview Componente per la gestione delle visite dell'agente.
+ * Visualizza solo le visite associate all'agente autenticato.
+ * 
+ * @module AgenteVisite
+ * @requires react
+ * @requires react-router-dom
+ * @requires ../hooks/UseVisite
+ * @requires ./AdminTableReusable
+ * @requires ../providers/AuthContextProvider
+ * @requires ./ConfirmModal
+ * @requires ../hooks/UseConfirmModal
+ */
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useVisite from '../hooks/UseVisite';
@@ -8,17 +22,32 @@ import useConfirmModal from '../hooks/UseConfirmModal';
 
 /**
  * Componente per la visualizzazione e gestione delle visite dell'agente
- * Mostra solo le visite associate all'agente loggato
+ * 
+ * Responsabilità:
+ * - Visualizza solo visite associate all'agente loggato
+ * - Gestisce ricerca/filtro visite
+ * - Permette eliminazione visite
+ * - Mostra feedback tramite modali personalizzati
+ * 
+ * Nota: La funzionalità di modifica è commentata
+ * 
+ * @component
+ * @returns {JSX.Element} Interfaccia gestione visite agente
+ * 
+ * @example
+ * <Route path="/agente/visite" element={<VisiteAgente />} />
  */
 const VisiteAgente = () => {
     const navigate = useNavigate();
+    /** @type {[string, Function]} Termine di ricerca inserito dall'utente */
     const [searchTerm, setSearchTerm] = useState('');
     const { user } = useAuthData();
     const { modalState, showConfirm, handleClose, handleConfirm } = useConfirmModal();
     
-    // Recupera l'ID dell'agente loggato dal context
+    /** @type {number|undefined} ID dell'agente loggato recuperato dal context */
     const idAgenteLoggato = user?.id;
 
+    /** Hook personalizzato per operazioni CRUD sulle visite (filtrate per agente) */
     const {
         data: visiteList,
         isLoading,
@@ -27,17 +56,32 @@ const VisiteAgente = () => {
         setFilters
     } = useVisite(idAgenteLoggato);
 
-    // Gestisce l'attivazione della ricerca
+    /**
+     * Attiva la ricerca aggiornando i filtri
+     * @function
+     */
     const handleSearchClick = () => {
         setFilters({ search: searchTerm.trim() });
     };
 
-    // Reindirizza al form per modificare una visita
-    const handleEditVisita = (visitaId) => {
-        navigate(`/agente/visite/modifica/${visitaId}`);
-    };
+    // Funzionalità di modifica commentata
+    // const handleEditVisita = (visitaId) => {
+    //     navigate(`/agente/visite/modifica/${visitaId}`);
+    // };
 
-    // Gestisce l'eliminazione di una visita
+    /**
+     * Gestisce l'eliminazione di una visita
+     * 
+     * Processo:
+     * 1. Valida l'ID visita
+     * 2. Mostra modale di conferma
+     * 3. Elimina visita se confermato
+     * 4. Mostra modale di successo/errore
+     * 
+     * @function
+     * @async
+     * @param {number|string} visitaId - ID della visita da eliminare
+     */
     const handleDeleteVisita = async (visitaId) => {
         if (!visitaId) {
             await showConfirm({
@@ -168,9 +212,9 @@ const VisiteAgente = () => {
                     <ReusableTable
                         data={visiteList}
                         columns={visiteColumns}
-                        onEdit={handleEditVisita}
+                        onEdit={null}
                         onDelete={handleDeleteVisita}
-                        showEdit={true}
+                        showEdit={false}
                         showDelete={true}
                     />
                 )}

@@ -1,5 +1,43 @@
+/**
+ * @fileoverview Sezione hero con immagine di sfondo e CTA.
+ * Supporta immagini responsive con picture element e formati moderni.
+ * 
+ * @module HeroSection
+ * @requires react-router-dom
+ */
+
 import { Link } from "react-router-dom";
 
+/**
+ * Componente Hero Section
+ * 
+ * Caratteristiche:
+ * - Immagini responsive (mobile/desktop)
+ * - Supporto formati moderni (AVIF, WebP) con fallback
+ * - Overlay semi-trasparente
+ * - CTA opzionale
+ * 
+ * @component
+ * @param {Object} props - Proprietà del componente
+ * @param {string} props.title - Titolo principale
+ * @param {string} props.subtitle - Sottotitolo descrittivo
+ * @param {boolean} [props.showCTA=true] - Mostra call-to-action
+ * @param {string} props.imageDesktop - Immagine desktop (formato base)
+ * @param {string} [props.imageDesktopWebP] - Immagine desktop WebP
+ * @param {string} [props.imageDesktopAvif] - Immagine desktop AVIF
+ * @param {string} [props.imageMobile] - Immagine mobile
+ * @param {string} props.alt - Testo alternativo immagine
+ * @returns {JSX.Element} Sezione hero
+ * 
+ * @example
+ * <HeroSection
+ *   title="Trova la tua casa ideale"
+ *   subtitle="Scopri le migliori opportunità"
+ *   imageDesktop="/img/hero.jpg"
+ *   imageDesktopWebP="/img/hero.webp"
+ *   alt="Casa moderna"
+ * />
+ */
 export default function HeroSection({ 
   title, 
   subtitle, 

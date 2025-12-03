@@ -1,16 +1,59 @@
+/**
+ * @fileoverview Componente modale riutilizzabile per conferme e notifiche.
+ * Supporta 4 tipi (danger, warning, success, info) con stili e icone dedicate.
+ * 
+ * @module ConfirmModal
+ * @requires react
+ */
+
 import React, { useEffect } from 'react';
 
 /**
  * Componente Modale Riutilizzabile
- * @param {boolean} isOpen - Controlla la visibilità del modale
- * @param {function} onClose - Callback per chiudere il modale
- * @param {string} title - Titolo del modale
- * @param {string} message - Messaggio principale
- * @param {function} onConfirm - Callback per conferma
- * @param {string} confirmText - Testo pulsante conferma (default: "Conferma")
- * @param {string} cancelText - Testo pulsante annulla (default: "Annulla")
- * @param {string} type - Tipo modale: 'danger', 'warning', 'success', 'info' (default: 'info')
- * @param {boolean} showCancel - Mostra pulsante annulla (default: true)
+ * 
+ * Caratteristiche:
+ * - 4 varianti di stile: danger, warning, success, info
+ * - Chiusura con ESC o click overlay
+ * - Blocco scroll body quando aperto
+ * - Supporto pulsante singolo o doppio
+ * - Icone SVG personalizzate per tipo
+ * 
+ * @component
+ * @param {Object} props - Proprietà del componente
+ * @param {boolean} props.isOpen - Controlla la visibilità del modale
+ * @param {Function} props.onClose - Callback per chiudere il modale
+ * @param {string} [props.title='Conferma'] - Titolo del modale
+ * @param {string} props.message - Messaggio principale
+ * @param {Function} props.onConfirm - Callback per conferma
+ * @param {string} [props.confirmText='Conferma'] - Testo pulsante conferma
+ * @param {string} [props.cancelText='Annulla'] - Testo pulsante annulla
+ * @param {'danger'|'warning'|'success'|'info'} [props.type='info'] - Tipo modale
+ * @param {boolean} [props.showCancel=true] - Mostra pulsante annulla
+ * @returns {JSX.Element|null} Modale o null se chiuso
+ * 
+ * @example
+ * // Modale di conferma eliminazione
+ * <ConfirmModal
+ *   isOpen={isOpen}
+ *   onClose={handleClose}
+ *   onConfirm={handleDelete}
+ *   title="Conferma Eliminazione"
+ *   message="Sei sicuro di voler eliminare?"
+ *   type="danger"
+ *   confirmText="Elimina"
+ * />
+ * 
+ * @example
+ * // Modale di notifica (solo conferma)
+ * <ConfirmModal
+ *   isOpen={isOpen}
+ *   onClose={handleClose}
+ *   onConfirm={handleClose}
+ *   title="Successo"
+ *   message="Operazione completata!"
+ *   type="success"
+ *   showCancel={false}
+ * />
  */
 const ConfirmModal = ({
     isOpen,

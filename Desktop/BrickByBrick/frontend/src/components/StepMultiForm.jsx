@@ -1,3 +1,14 @@
+/**
+ * @fileoverview Form multi-step per valutazione immobile.
+ * 5 step: dati proprietario, ubicazione, tipologia, dettagli, riepilogo.
+ * 
+ * @module StepMultiForm
+ * @requires react
+ * @requires react-router-dom
+ * @requires ./CardStep
+ * @requires ../store/auth-context
+ */
+
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CardStep from './CardStep';

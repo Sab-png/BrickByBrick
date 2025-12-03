@@ -1,9 +1,45 @@
+/**
+ * @fileoverview Hook personalizzato per gestione CRUD immobili.
+ * Fornisce funzioni complete per gestire immobili e caratteristiche.
+ * 
+ * @module UseImmobili
+ * @requires react
+ */
+
 import { useState, useEffect, useCallback } from 'react';
 
-// Sostituisci con l'URL reale del tuo backend
 const API_BASE_URL = 'http://localhost:8085';
 
-
+/**
+ * Hook per gestione immobili
+ * 
+ * Funzionalità:
+ * - Fetch lista immobili con ricerca
+ * - Recupero singolo immobile per ID
+ * - Creazione nuovo immobile
+ * - Modifica immobile esistente
+ * - Eliminazione immobile
+ * - Gestione caratteristiche immobile
+ * - Filtri e ordinamento
+ * 
+ * @hook
+ * @returns {Object} Oggetto con stati e funzioni
+ * @returns {Array<Object>} returns.data - Lista immobili
+ * @returns {boolean} returns.isLoading - Stato caricamento
+ * @returns {Error|null} returns.error - Errore eventuale
+ * @returns {Function} returns.fetchImmobili - Recupera lista
+ * @returns {Function} returns.getImmobileById - Recupera singolo immobile
+ * @returns {Function} returns.createImmobile - Crea nuovo immobile
+ * @returns {Function} returns.updateImmobile - Aggiorna immobile
+ * @returns {Function} returns.deleteImmobile - Elimina immobile
+ * @returns {Function} returns.applyFilters - Applica filtri
+ * 
+ * @example
+ * const { data, createImmobile, updateImmobile } = useImmobiliManager();
+ * 
+ * await createImmobile({ indirizzo: 'Via Roma 1', ... });
+ * await updateImmobile(10, { prezzo: 250000 });
+ */
 const useImmobiliManager = () => {
     // 1. STATI PRINCIPALI
     const [data, setData] = useState([]); // Lista degli immobili

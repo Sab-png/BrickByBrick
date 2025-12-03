@@ -1,3 +1,11 @@
+/**
+ * @fileoverview Sezione "Perché Immobiliaris" con feature items e immagine.
+ * Mostra i vantaggi principali del servizio.
+ * 
+ * @module FeatureSection
+ * @requires ./FeatureItem
+ */
+
 import FeatureItem from './FeatureItem';
 
 import imageOneFeatItem from '../assets/images/svg/valutazione.svg';

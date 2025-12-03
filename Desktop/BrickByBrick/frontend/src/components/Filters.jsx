@@ -1,3 +1,14 @@
+/**
+ * @fileoverview Componente filtri principale con SearchBar e AdvancedFilters.
+ * Gestisce visibilità condizionale dei filtri avanzati.
+ * 
+ * @module Filters
+ * @requires react
+ * @requires ../store/filters-context
+ * @requires ./SearchBar
+ * @requires ./AdvancedFilters
+ */
+
 import { useContext } from 'react';
 import  FiltersContext  from '../store/filters-context';
 

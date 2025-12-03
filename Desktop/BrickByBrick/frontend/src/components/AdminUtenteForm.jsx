@@ -1,13 +1,26 @@
-// src/components/AdminUtenteForm.jsx
+/**
+ * @fileoverview Form unificato per la gestione degli utenti/clienti (creazione e modifica).
+ * Gestisce validazione campi utente, codice fiscale e comunicazione con API.
+ * 
+ * @module AdminUtenteForm
+ * @requires react
+ * @requires react-router-dom
+ * @requires ./ConfirmModal
+ * @requires ../hooks/UseConfirmModal
+ */
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import ConfirmModal from './ConfirmModal';
 import useConfirmModal from '../hooks/UseConfirmModal';
 
+/** @constant {string} URL base per le chiamate API */
 const API_BASE_URL = 'http://localhost:8085';
 
-// --- REGOLE DI VALIDAZIONE ---
+/**
+ * Regole di validazione per i campi del form utente
+ * @constant {Object.<string, {regex: RegExp, message: string}>}
+ */
 const validationRules = {
     nome: { regex: /^[a-zA-Z\s']{2,50}$/, message: 'Il nome è obbligatorio e deve contenere solo lettere e spazi (2-50 caratteri)' },
     cognome: { regex: /^[a-zA-Z\s']{2,50}$/, message: 'Il cognome è obbligatorio e deve contenere solo lettere e spazi (2-50 caratteri)' },
@@ -17,7 +30,10 @@ const validationRules = {
     passw: { regex: /^.{6,}$/, message: 'La password deve contenere almeno 6 caratteri' }
 };
 
-// Stato iniziale del form
+/**
+ * Stato iniziale del form utente
+ * @constant {Object}
+ */
 const initialFormData = {
     nome: '',
     cognome: '',
@@ -28,9 +44,17 @@ const initialFormData = {
 };
 
 /**
- * Componente Form Unificato per Utenti/Clienti.
- * Gestisce sia la creazione che la modifica di un utente.
- * Il mode viene rilevato automaticamente: se c'è un ID nell'URL è 'edit', altrimenti 'add'.
+ * Form Unificato per Utenti/Clienti
+ * 
+ * Gestisce creazione e modifica utenti con ruolo cliente (Id_ruolo: 3).
+ * Validazione include controllo codice fiscale italiano.
+ * 
+ * @component
+ * @returns {JSX.Element} Form per aggiunta/modifica utente
+ * 
+ * @example
+ * <Route path="/admin/utenti/aggiungi-utente" element={<UtenteForm />} />
+ * <Route path="/admin/utenti/modifica-utente/:id" element={<UtenteForm />} />
  */
 const UtenteForm = () => {
     const navigate = useNavigate();

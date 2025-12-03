@@ -1,3 +1,16 @@
+/**
+ * @fileoverview Componente per la gestione dei contratti esclusivi.
+ * Fornisce interfaccia per visualizzare, cercare, aggiungere, modificare ed eliminare contratti.
+ * 
+ * @module AdminContratti
+ * @requires react
+ * @requires react-router-dom
+ * @requires ../hooks/UseContratti
+ * @requires ./AdminTableReusable
+ * @requires ./ConfirmModal
+ * @requires ../hooks/UseConfirmModal
+ */
+
 import React, { useState } from 'react';
 import useContratti from '../hooks/UseContratti';
 import ReusableTable from './AdminTableReusable';
@@ -6,15 +19,27 @@ import ConfirmModal from './ConfirmModal';
 import useConfirmModal from '../hooks/UseConfirmModal';
 
 /**
- * Componente AdminContratti - Gestione Contratti Esclusivi
- * Visualizza e gestisce i contratti esistenti
+ * Componente per la Gestione Contratti Esclusivi
+ * 
+ * Responsabilità:
+ * - Visualizza lista contratti in formato tabella
+ * - Gestisce ricerca/filtro contratti
+ * - Permette aggiunta, modifica ed eliminazione contratti
+ * - Mostra feedback tramite modali personalizzati
+ * 
+ * @component
+ * @returns {JSX.Element} Interfaccia gestione contratti
+ * 
+ * @example
+ * <Route path="/admin/contratti" element={<AdminContratti />} />
  */
 const AdminContratti = () => {
+    /** @type {[string, Function]} Termine di ricerca inserito dall'utente */
     const [searchTerm, setSearchTerm] = useState('');
     const navigate = useNavigate();
     const { modalState, showConfirm, handleClose, handleConfirm } = useConfirmModal();
 
-    // Hook per gestire i contratti
+    /** Hook personalizzato per operazioni CRUD sui contratti */
     const { 
         data: contrattiList,
         isLoading: contrattiLoading,
@@ -23,17 +48,30 @@ const AdminContratti = () => {
         setFilters: setContrattiFilters
     } = useContratti();
 
-    // Gestisce la ricerca
+    /**
+     * Attiva la ricerca aggiornando i filtri
+     * @function
+     */
     const handleSearchClick = () => {
         setContrattiFilters({ search: searchTerm.trim() });
     };
 
-    // Naviga al form per creare un nuovo contratto da zero
+    /**
+     * Reindirizza al form di creazione nuovo contratto
+     * @function
+     */
     const handleNuovoContratto = () => {
         navigate('/admin/contratti/nuovo');
     };
 
-    // Naviga al form per modificare un contratto esistente
+    /**
+     * Reindirizza al form di modifica contratto esistente
+     * Gestisce sia oggetti contratto che ID diretti
+     * 
+     * @function
+     * @async
+     * @param {Object|number|string} contrattoOrId - Contratto o ID del contratto
+     */
     const handleEditContratto = async (contrattoOrId) => {
         // Gestisce sia l'oggetto contratto che l'ID diretto
         let contrattoId;

@@ -1,6 +1,19 @@
+/**
+ * @fileoverview Sezione FAQ completa con categorie e filtri.
+ * Include domande generali, processo, tecnologia, legale.
+ * 
+ * @module FAQSection
+ * @requires react
+ * @requires ./FAQItem
+ */
+
 import { useState } from 'react';
 import FAQItem from './FAQItem';
 
+/**
+ * Oggetto con tutte le FAQ divise per categoria
+ * @constant {Object.<string, Array<{id: number, question: string, answer: string}>>}
+ */
 const allFAQs = {
   "Generali": [
     {
