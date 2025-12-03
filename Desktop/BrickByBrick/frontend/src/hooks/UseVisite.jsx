@@ -29,6 +29,8 @@ const useVisite = (idAgente = null) => {
 
             let visite = await response.json();
 
+            console.log(visite)
+
             // Se c'è un idAgente, filtra solo le visite di quell'agente
             if (idAgente) {
                 visite = visite.filter(v => 
