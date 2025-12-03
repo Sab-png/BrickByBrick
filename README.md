@@ -38,9 +38,13 @@
 - **Styling**: SCSS
 - **Linguaggio**: JavaScript
 
+### Design Mockup / Wireframe
+
+- **Figma**: [Figma Byta](https://www.figma.com/design/D1yx69gQt4W6WZzSomRDwI/Laboratorio-integrato)
+
 ### Versionamento
 
-- **Versionamento**: GitHub
+- **Versionamento**: Git
 - **Gestione del progetto**: GitHub Projects
 
 
