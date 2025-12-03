@@ -13,10 +13,9 @@ const PrenotaVisitaForm = ({ onClose }) => {
   const [status, setStatus] = useState('idle');
 
   const [immobile, setImmobile] = useState(null);
-  const [agenti, setAgenti] = useState([]);
   const [agenteRandom, setAgenteRandom] = useState(null);
 
-  // Fetch immobile
+
   useEffect(() => {
     const fetchImmobile = async () => {
       try {
@@ -24,8 +23,6 @@ const PrenotaVisitaForm = ({ onClose }) => {
         if (res.ok) {
           const data = await res.json();
           console.log("Immobile caricato:", data);
-          console.log("- id_immobile:", data.id_immobile);
-          console.log("- Id_immobile:", data.Id_immobile);
           setImmobile(data);
         }
       } catch (err) {
@@ -36,7 +33,6 @@ const PrenotaVisitaForm = ({ onClose }) => {
     fetchImmobile();
   }, [id]);
 
-  // Fetch agenti
   useEffect(() => {
     const fetchAgenti = async () => {
       try {
@@ -44,14 +40,11 @@ const PrenotaVisitaForm = ({ onClose }) => {
         if (res.ok) {
           const data = await res.json();
           console.log("Agenti caricati:", data);
-          setAgenti(data);
+          // setAgenti(data);
 
           if (data.length > 0) {
             const random = data[Math.floor(Math.random() * data.length)];
             console.log("Agente random selezionato:", random);
-            console.log("   - id_agente:", random.id_agente);
-            console.log("   - Id_agente:", random.Id_agente);
-            console.log("   - idAgente:", random.idAgente);
             setAgenteRandom(random);
           }
         }
@@ -75,25 +68,9 @@ const PrenotaVisitaForm = ({ onClose }) => {
     const sqlDateTime = `${date}T${time}:00`;
     console.log("Data formattata:", sqlDateTime);
 
-    // Prova tutti i possibili nomi di proprietà
-    const immobileId = immobile?.id_immobile || immobile?.Id_immobile || immobile?.idImmobile;
-    const agenteId = agenteRandom?.id_agente || agenteRandom?.Id_agente || agenteRandom?.idAgente;
-    const utenteId = user?.id || user?.id_utente || user?.Id_utente || 1;
-
-    console.log("DEBUG - Valori estratti:");
-    console.log("   - immobileId:", immobileId);
-    console.log("   - agenteId:", agenteId);
-    console.log("   - utenteId:", utenteId);
-
-    const payload = {
-      Id_immobile: immobileId,
-      Id_utente: utenteId,
-      Id_agente: agenteId,
-      data: sqlDateTime
-    };
-
-    console.log("Payload finale da inviare:", payload);
-    console.log("Payload JSON:", JSON.stringify(payload, null, 2));
+    const immobileId = immobile?.Id_immobile || immobile?.id_immobile || immobile?.idImmobile;
+    const agenteId = agenteRandom?.Id_agente || agenteRandom?.id_agente || agenteRandom?.idAgente;
+    const utenteId = user?.Id_utente || user?.id_utente || user?.id || 1;
 
     if (!immobileId) {
       console.error("ERRORE: immobileId è null/undefined!");
@@ -102,9 +79,26 @@ const PrenotaVisitaForm = ({ onClose }) => {
     }
     if (!agenteId) {
       console.error("ERRORE: agenteId è null/undefined!");
+      console.error("Agente random object:", agenteRandom);
       setStatus('error');
       return;
     }
+    if (!utenteId) {
+      console.error("ERRORE: utenteId è null/undefined!");
+      setStatus('error');
+      return;
+    }
+
+
+    const payload = {
+      data: sqlDateTime,
+      id_agente: Number(agenteId),
+      id_immobile: Number(immobileId),  
+      id_utente: Number(utenteId)        
+    };
+
+    console.log("=== PAYLOAD COMPLETO ===");
+    console.log(JSON.stringify(payload, null, 2));
 
     try {
       const response = await fetch('http://localhost:8085/api/visite', {
