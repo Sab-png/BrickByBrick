@@ -1,3 +1,13 @@
+/**
+ * @fileoverview Pagina registrazione nuovo utente.
+ * Form completo con validazione e creazione account cliente.
+ * 
+ * @module pages/Registrati
+ * @requires react
+ * @requires react-router-dom
+ * @requires ../hooks/useSEO
+ */
+
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
@@ -7,6 +17,34 @@ import ImageRegistratiAvif from '../assets/images/avif/accedi-registrati.avif';
 import ImageRegistratiWebp from '../assets/images/webp/accedi-registrati.webp'; 
 import ImageRegistratiJpg from '../assets/images/jpg/accedi-registrati.jpg';
 
+/**
+ * Pagina Registrazione
+ * 
+ * Funzionalità:
+ * - Form completo registrazione utente
+ * - Campi: nome, cognome, email, telefono, codice fiscale, password
+ * - Validazione lato client:
+ *   - Email formato valido
+ *   - Password min 6 caratteri
+ *   - Conferma password match
+ *   - Codice fiscale lunghezza 16
+ *   - Telefono formato italiano
+ * - Checkbox accettazione termini
+ * - Chiamata API registrazione
+ * - Redirect a login dopo successo
+ * - Gestione errori e messaggi successo
+ * - Link a login per utenti esistenti
+ * - Immagine decorativa responsive
+ * 
+ * SEO: noindex (pagina di registrazione)
+ * 
+ * @page
+ * @returns {JSX.Element} Pagina registrazione con form
+ * 
+ * @example
+ * // Route pubblica
+ * <Route path="/registrati" element={<Registrati />} />
+ */
 const Registrati = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({

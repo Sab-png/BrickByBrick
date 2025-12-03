@@ -1,8 +1,34 @@
+/**
+ * @fileoverview Pagina 404 errore pagina non trovata.
+ * 
+ * @module pages/NotFound
+ * @requires ../components/CTAButton
+ * @requires ../hooks/useSEO
+ */
+
 import CTAButton from '../components/CTAButton';
 import notFoundImg from '../assets/images/svg/not-found.svg';
 
 import useSEO from '../hooks/useSEO';
 
+/**
+ * Pagina 404 Not Found
+ * 
+ * Elementi:
+ * - Immagine SVG errore 404
+ * - Titolo "Ops...Si è verificato un errore"
+ * - Messaggio descrittivo
+ * - CTA "Torna Alla Home"
+ * 
+ * SEO: noindex (pagina errore)
+ * 
+ * @page
+ * @returns {JSX.Element} Pagina 404
+ * 
+ * @example
+ * // Route catch-all
+ * <Route path="*" element={<NotFound />} />
+ */
 export default function NotFound() {
 
     useSEO({

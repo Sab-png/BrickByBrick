@@ -1,3 +1,12 @@
+/**
+ * @fileoverview Barra ricerca principale con toggle filtri avanzati.
+ * Ricerca per città con aggiornamento live.
+ * 
+ * @module SearchBar
+ * @requires react
+ * @requires ../store/filters-context
+ */
+
 import { useContext } from 'react';
 import  FiltersContext  from '../store/filters-context';
 

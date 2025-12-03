@@ -1,3 +1,25 @@
+/**
+ * @fileoverview Galleria immagini immobile con picture responsive.
+ * Supporta AVIF, WebP, JPG.
+ * 
+ * @module ImmobileGallery
+ */
+
+/**
+ * Componente Immobile Gallery
+ * 
+ * @component
+ * @param {Object} props - Proprietà del componente
+ * @param {string} props.immagine - Nome file immagine
+ * @param {string} props.altText - Testo alternativo
+ * @returns {JSX.Element} Galleria con immagine responsive
+ * 
+ * @example
+ * <ImmobileGallery
+ *   immagine="villa-torino.jpg"
+ *   altText="Villa moderna a Torino"
+ * />
+ */
 export default function ImmobileGallery({ immagine, altText }) {
 
   const BASE_PATH = "/immobili"; 

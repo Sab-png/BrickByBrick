@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Header pagina dettaglio immobile con titolo, prezzo e back button.
+ * 
+ * @module HeaderImmobile
+ * @requires react-icons/fa
+ */
+
 import { FaArrowLeft, FaMapMarkerAlt } from "react-icons/fa";
 
 export default function HeaderImmobile({ immobile, formattedPrice, onBackClick }) {

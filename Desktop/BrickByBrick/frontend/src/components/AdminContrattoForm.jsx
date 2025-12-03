@@ -1,10 +1,26 @@
+/**
+ * @fileoverview Form unificato per la gestione dei contratti esclusivi (creazione e modifica).
+ * Gestisce validazione, caricamento liste utenti/immobili e comunicazione con API.
+ * 
+ * @module AdminContrattoForm
+ * @requires react
+ * @requires react-router-dom
+ * @requires ./ConfirmModal
+ * @requires ../hooks/UseConfirmModal
+ */
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import ConfirmModal from './ConfirmModal';
 import useConfirmModal from '../hooks/UseConfirmModal';
 
+/** @constant {string} URL base per le chiamate API */
 const API_BASE_URL = 'http://localhost:8085';
 
+/**
+ * Stato iniziale del form contratto
+ * @constant {Object}
+ */
 const initialFormData = {
     id_utente: '',
     id_immobile: '',
@@ -14,9 +30,21 @@ const initialFormData = {
 
 /**
  * Form Unificato per Contratti Esclusivi
- * Gestisce 3 modalità:
+ * 
+ * Modalità:
  * - 'add': crea nuovo contratto (contrattoId assente)
  * - 'edit': modifica contratto esistente (contrattoId presente)
+ * 
+ * @component
+ * @returns {JSX.Element} Form per aggiunta/modifica contratto
+ * 
+ * @example
+ * // Modalità aggiunta
+ * <Route path="/admin/contratti/nuovo" element={<AdminContrattoForm />} />
+ * 
+ * @example
+ * // Modalità modifica
+ * <Route path="/admin/contratti/modifica/:id" element={<AdminContrattoForm />} />
  */
 const AdminContrattoForm = () => {
     const navigate = useNavigate();

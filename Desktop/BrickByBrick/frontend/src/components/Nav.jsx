@@ -1,8 +1,34 @@
+/**
+ * @fileoverview Navbar principale con autenticazione e menu responsive.
+ * Gestisce menu mobile, dashboard dinamica e logout.
+ * 
+ * @module Nav
+ * @requires react-router-dom
+ * @requires ../providers/AuthContextProvider
+ */
+
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuthData } from '../providers/AuthContextProvider';
 import routes from '../routes/routes';
 
+/**
+ * Componente Navbar
+ * 
+ * Funzionalità:
+ * - Menu responsive (mobile/desktop)
+ * - Link autenticati (Dashboard) o pubblici (Login/Registrati)
+ * - Logout con conferma
+ * - Blocco scroll quando menu aperto
+ * - Dashboard dinamica basata su ruolo (Admin/Agente)
+ * 
+ * @component
+ * @returns {JSX.Element|null} Navbar o null se loading
+ * 
+ * @example
+ * // Utilizzato in Header
+ * <Nav />
+ */
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, isAuthenticated, logout, isAdmin, isAgente, loading } = useAuthData();

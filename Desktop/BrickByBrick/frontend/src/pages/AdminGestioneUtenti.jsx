@@ -1,3 +1,13 @@
+/**
+ * @fileoverview Pagina amministratore per gestione utenti e agenti.
+ * Implementa navigazione a tab tra Agenti e Utenti.
+ * 
+ * @module pages/AdminGestioneUtenti
+ * @requires react
+ * @requires ../components/AdminAgenti
+ * @requires ../components/AdminUtenti
+ */
+
 import React, { useState } from 'react';
 // Importa i componenti delle pagine di gestione reali.
 // Questi componenti (Agenti, UtentiAdmin) conterranno la TableManager e la logica CRUD.
@@ -5,10 +15,23 @@ import Agenti from '../components/AdminAgenti'; // Il componente che gestisce gl
 import UtentiAdmin from '../components/AdminUtenti'; // Il componente che gestisce gli Utenti base
 
 /**
- * Componente Contenitore: GestioneUtenti
- * * RUOLO: Implementa la navigazione a schede (tabbed navigation) per passare 
- * tra la gestione degli Agenti e la gestione degli Utenti normali, mantenendo l'URL pulito.
- * Utilizza lo stato locale per determinare quale componente figlio (tab) deve essere mostrato.
+ * Pagina Gestione Utenti (Admin)
+ * 
+ * Funzionalità:
+ * - Navigazione a tab (Agenti / Utenti)
+ * - Stato locale per tab attiva
+ * - Renderizza AdminAgenti o AdminUtenti in base alla selezione
+ * 
+ * Tab disponibili:
+ * - agents: Gestione agenti (CRUD completo)
+ * - users: Gestione utenti clienti (solo visualizzazione/modifica/elimina)
+ * 
+ * @page
+ * @returns {JSX.Element} Pagina con tab navigation
+ * 
+ * @example
+ * // Route protetta admin
+ * <Route path="/admin/utenti" element={<GestioneUtenti />} />
  */
 const GestioneUtenti = () => {
     

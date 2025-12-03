@@ -1,3 +1,11 @@
+/**
+ * @fileoverview Sezione "Come funziona" con cards dei passaggi.
+ * Visualizza i 3 step principali del processo.
+ * 
+ * @module CardSection
+ * @requires ./Card
+ */
+
 import Card from './Card';
 
 import cardOneImg from '../assets/images/svg/card-one-home.svg';

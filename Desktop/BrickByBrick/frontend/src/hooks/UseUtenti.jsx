@@ -1,7 +1,46 @@
+/**
+ * @fileoverview Hook personalizzato per gestione CRUD utenti.
+ * Fornisce funzioni per fetch, modifica ed eliminazione utenti.
+ * Nota: La creazione utenti avviene tramite registrazione pubblica.
+ * 
+ * @module UseUtenti
+ * @requires react
+ */
+
 import { useState, useEffect, useCallback } from 'react';
 
 const API_BASE_URL = 'http://localhost:8085';
 
+/**
+ * Hook per gestione utenti
+ * 
+ * Funzionalità:
+ * - Fetch lista utenti con ricerca
+ * - Recupero singolo utente per ID
+ * - Modifica utente esistente
+ * - Eliminazione utente
+ * - Gestione filtri
+ * 
+ * Nota: Non include createUtente perché la registrazione
+ * avviene tramite endpoint pubblico di registrazione.
+ * 
+ * @hook
+ * @returns {Object} Oggetto con stati e funzioni
+ * @returns {Array<Object>} returns.data - Lista utenti
+ * @returns {boolean} returns.isLoading - Stato caricamento
+ * @returns {Error|null} returns.error - Errore eventuale
+ * @returns {Function} returns.fetchUtenti - Recupera lista
+ * @returns {Function} returns.getUtenteById - Recupera singolo utente
+ * @returns {Function} returns.updateUtente - Aggiorna utente
+ * @returns {Function} returns.deleteUtente - Elimina utente
+ * @returns {Function} returns.applyFilters - Applica filtri
+ * 
+ * @example
+ * const { data, updateUtente, deleteUtente } = useUtenti();
+ * 
+ * await updateUtente(5, { ruolo: 'AGENTE' });
+ * await deleteUtente(10);
+ */
 const useUtenti = () => {
     // 1. STATI PRINCIPALI
     const [data, setData] = useState([]);

@@ -1,3 +1,12 @@
+/**
+ * @fileoverview Card immobile per risultati ricerca.
+ * Supporta immagini responsive (AVIF/WebP/JPG) e formattazione prezzi.
+ * 
+ * @module ImmobileCard
+ * @requires react-router-dom
+ * @requires react-icons/fa
+ */
+
 import { Link } from 'react-router-dom';
 
 import { FaHome, FaBed, FaBath, FaArrowRight } from "react-icons/fa";

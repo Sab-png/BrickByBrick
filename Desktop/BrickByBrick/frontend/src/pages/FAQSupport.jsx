@@ -1,3 +1,15 @@
+/**
+ * @fileoverview Pagina FAQ e supporto clienti.
+ * Include hero, sezione FAQ con categorie e form contatti.
+ * 
+ * @module pages/FAQSupport
+ * @requires ../components/HeroSection
+ * @requires ../components/FAQSection
+ * @requires ../components/Questions
+ * @requires ../components/NewsLetter
+ * @requires ../hooks/useSEO
+ */
+
 import HeroSection from "../components/HeroSection"
 import FAQSection from "../components/FAQSection"
 import Questions from "../components/Questions"
@@ -9,6 +21,24 @@ import supportoBgJpg from "../assets/images/jpg/hero-supporto.jpg";
 import supportoBgWebP from "../assets/images/webp/hero-supporto.webp";
 import supportoBgAvif from "../assets/images/avif/hero-supporto.avif";
 
+/**
+ * Pagina FAQ e Supporto
+ * 
+ * Sezioni:
+ * - Hero section con immagine supporto
+ * - FAQ con categorie (Generali, Processo, Tecnologia, Legale)
+ * - Form contatti per domande personalizzate
+ * - Newsletter subscription
+ * 
+ * SEO: Ottimizzata per "faq immobiliare, documenti vendita casa"
+ * 
+ * @page
+ * @returns {JSX.Element} Pagina FAQ completa
+ * 
+ * @example
+ * // Route
+ * <Route path="/faq" element={<FAQSupport />} />
+ */
 export default function FAQSupport() {
 
     useSEO({

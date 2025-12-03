@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Sezione "La nostra storia" con immagine e testo.
+ * 
+ * @module StorySection
+ */
+
 import storyImageAvif from '../assets/images/avif/story-image.avif';
 import storyImageWebp from '../assets/images/webp/story-image.webp';
 import storyImageJpg from '../assets/images/jpg/story-image.jpg'; 

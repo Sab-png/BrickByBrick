@@ -1,10 +1,26 @@
+/**
+ * @fileoverview Form per la modifica delle visite da parte dell'agente.
+ * Permette solo modifica data/ora, non creazione nuove visite.
+ * 
+ * @module FormAgenteVisite
+ * @requires react
+ * @requires react-router-dom
+ * @requires ./ConfirmModal
+ * @requires ../hooks/UseConfirmModal
+ */
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import ConfirmModal from './ConfirmModal';
 import useConfirmModal from '../hooks/UseConfirmModal';
 
+/** @constant {string} URL base per le chiamate API */
 const API_BASE_URL = 'http://localhost:8085';
 
+/**
+ * Stato iniziale del form visita
+ * @constant {Object}
+ */
 const initialFormData = {
     id_immobile: '',
     id_agente: '',
@@ -14,7 +30,17 @@ const initialFormData = {
 
 /**
  * Form per modificare una visita esistente
- * L'agente può modificare solo data/ora della visita
+ * 
+ * Limitazioni:
+ * - Solo modifica (no creazione)
+ * - L'agente può modificare solo data/ora della visita
+ * - ID immobile, agente e utente non modificabili
+ * 
+ * @component
+ * @returns {JSX.Element} Form per modifica visita
+ * 
+ * @example
+ * <Route path="/agente/visite/modifica/:id" element={<FormAgenteVisite />} />
  */
 const FormAgenteVisite = () => {
     const navigate = useNavigate();

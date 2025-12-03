@@ -1,3 +1,11 @@
+/**
+ * @fileoverview Sezione "Tecnologia e competenza" con 3 card.
+ * Spiega la combinazione algoritmo + agente locale.
+ * 
+ * @module VendiTech
+ * @requires ./Card
+ */
+
 import Card from './Card';
 
 import iconStima from '../assets/images/svg/stima-automatica.svg';

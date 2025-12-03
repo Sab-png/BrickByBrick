@@ -1,17 +1,54 @@
-// src/components/ReusableTable.jsx
+/**
+ * @fileoverview Componente tabella riutilizzabile per visualizzazione dati con azioni.
+ * Utilizzato in tutte le pagine di gestione del backoffice.
+ * 
+ * @module AdminTableReusable
+ * @requires react
+ */
 
 import React from 'react';
-// Importa il tuo file SCSS
-// import '../../styles/components/_tableReusable.scss';
 
 /**
- * Componente Tabella Riutilizzabile (Senza ottimizzazione React.memo)
- * @param {Array<Object>} data - L'array di dati da visualizzare.
- * @param {Array<Object>} columns - La configurazione delle colonne (key, header, render).
- * @param {function} onEdit - Funzione da chiamare quando viene cliccato il bottone modifica.
- * @param {function} onDelete - Funzione da chiamare quando viene cliccato il bottone elimina.
- * @param {boolean} showEdit - Mostra il bottone modifica (default: true).
- * @param {boolean} showDelete - Mostra il bottone elimina (default: true).
+ * Componente Tabella Riutilizzabile
+ * 
+ * Caratteristiche:
+ * - Rendering dinamico colonne configurabili
+ * - Supporto render personalizzato per celle
+ * - Azioni modifica/elimina opzionali
+ * - Gestione automatica ID (supporta varianti case-sensitive)
+ * - Messaggio per dati vuoti
+ * 
+ * @component
+ * @param {Object} props - Proprietà del componente
+ * @param {Array<Object>} props.data - Array di dati da visualizzare
+ * @param {Array<{key: string, header: string, render?: Function}>} props.columns - Configurazione colonne
+ * @param {Function} [props.onEdit] - Callback per azione modifica
+ * @param {Function} [props.onDelete] - Callback per azione elimina
+ * @param {boolean} [props.showEdit=true] - Mostra pulsante modifica
+ * @param {boolean} [props.showDelete=true] - Mostra pulsante elimina
+ * @returns {JSX.Element} Tabella con dati e azioni
+ * 
+ * @example
+ * // Uso base con tutte le funzionalità
+ * <ReusableTable
+ *   data={users}
+ *   columns={[
+ *     { key: 'nome', header: 'Nome' },
+ *     { key: 'email', header: 'Email' }
+ *   ]}
+ *   onEdit={handleEdit}
+ *   onDelete={handleDelete}
+ * />
+ * 
+ * @example
+ * // Con render personalizzato
+ * <ReusableTable
+ *   data={items}
+ *   columns={[
+ *     { key: 'price', header: 'Prezzo', render: (item) => `€ ${item.price}` }
+ *   ]}
+ *   showEdit={false}
+ * />
  */
 const ReusableTable = ({ 
     data, 

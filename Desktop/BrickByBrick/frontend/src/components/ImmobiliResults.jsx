@@ -1,3 +1,14 @@
+/**
+ * @fileoverview Risultati ricerca immobili con filtri e mappa.
+ * Fetch da API, applicazione filtri dinamici, ordinamento.
+ * 
+ * @module ImmobiliResults
+ * @requires react
+ * @requires ../store/filters-context
+ * @requires ./MapSection
+ * @requires ./ImmobileCard
+ */
+
 import { useState,useEffect, useMemo } from 'react';
 
 import { useContext } from 'react';

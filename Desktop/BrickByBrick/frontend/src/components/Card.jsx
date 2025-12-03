@@ -1,3 +1,27 @@
+/**
+ * @fileoverview Componente card riutilizzabile per step process.
+ * Utilizzato in CardSection per mostrare i passaggi.
+ * 
+ * @module Card
+ */
+
+/**
+ * Componente Card
+ * 
+ * @component
+ * @param {Object} props - Proprietà del componente
+ * @param {string} props.image - URL immagine icona
+ * @param {string} props.subtitle - Titolo della card
+ * @param {string} props.text - Descrizione del passaggio
+ * @returns {JSX.Element} Card con icona, titolo e testo
+ * 
+ * @example
+ * <Card
+ *   image="/img/icon.svg"
+ *   subtitle="Valuta Online"
+ *   text="Ricevi la prima stima entro 72 ore"
+ * />
+ */
 export default function Card({ image, subtitle, text }) {
   return (
     <div className="card">
