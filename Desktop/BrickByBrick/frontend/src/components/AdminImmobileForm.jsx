@@ -1,13 +1,26 @@
-// src/components/ImmobileForm.jsx
+/**
+ * @fileoverview Form unificato per la gestione degli immobili (creazione e modifica).
+ * Gestisce validazione, caratteristiche immobile e comunicazione con API.
+ * 
+ * @module AdminImmobileForm
+ * @requires react
+ * @requires react-router-dom
+ * @requires ./ConfirmModal
+ * @requires ../hooks/UseConfirmModal
+ */
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import ConfirmModal from './ConfirmModal';
 import useConfirmModal from '../hooks/UseConfirmModal';
 
+/** @constant {string} URL base per le chiamate API */
 const API_BASE_URL = 'http://localhost:8085';
 
-// --- REGOLE DI VALIDAZIONE ---
+/**
+ * Regole di validazione per i campi principali dell'immobile
+ * @constant {Object.<string, {regex: RegExp, message: string}>}
+ */
 const validationRules = {
     indirizzo: { regex: /^[a-zA-Z0-9\s,.'-]{5,100}$/, message: 'L\'indirizzo è obbligatorio (5-100 caratteri)' },
     citta: { regex: /^[a-zA-Z\s']{2,50}$/, message: 'La città è obbligatoria (2-50 caratteri)' },

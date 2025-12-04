@@ -1,4 +1,15 @@
-// AdminUtenti.jsx - Gestione Clienti
+/**
+ * @fileoverview Componente per la gestione degli utenti/clienti.
+ * Fornisce interfaccia per visualizzare, cercare ed eliminare utenti.
+ * 
+ * @module AdminUtenti
+ * @requires react
+ * @requires ../hooks/UseUtenti
+ * @requires ./AdminTableReusable
+ * @requires ./ConfirmModal
+ * @requires ../hooks/UseConfirmModal
+ */
+
 import React, { useState } from 'react';
 import useUtenti from '../hooks/UseUtenti';
 import ReusableTable from './AdminTableReusable';
@@ -6,16 +17,28 @@ import ConfirmModal from './ConfirmModal';
 import useConfirmModal from '../hooks/UseConfirmModal';
 
 /**
- * Componente per la Gestione Clienti/Utenti.
- * Visualizza la lista, permette ricerca ed eliminazione.
- * NON include modifica o aggiunta (solo visualizzazione e delete).
+ * Componente per la Gestione Clienti/Utenti
+ * 
+ * Responsabilità:
+ * - Visualizza lista utenti in formato tabella
+ * - Gestisce ricerca/filtro utenti
+ * - Permette eliminazione utenti
+ * - Mostra feedback tramite modali personalizzati
+ * 
+ * Nota: NON include funzionalità di modifica o aggiunta
+ * 
+ * @component
+ * @returns {JSX.Element} Interfaccia gestione utenti
+ * 
+ * @example
+ * <Route path="/admin/utenti" element={<UtentiAdmin />} />
  */
 const UtentiAdmin = () => {
-    // Stato locale per l'input di ricerca
+    /** @type {[string, Function]} Termine di ricerca inserito dall'utente */
     const [searchTerm, setSearchTerm] = useState('');
     const { modalState, showConfirm, handleClose, handleConfirm } = useConfirmModal();
 
-    // Hook per gestire i dati degli utenti
+    /** Hook personalizzato per operazioni CRUD sugli utenti */
     const { 
         data: usersList,
         isLoading,
@@ -24,12 +47,27 @@ const UtentiAdmin = () => {
         setFilters
     } = useUtenti();
 
-    // Gestisce l'attivazione della ricerca
+    /**
+     * Attiva la ricerca aggiornando i filtri
+     * @function
+     */
     const handleSearchClick = () => {
         setFilters({ search: searchTerm.trim() });
     };
 
-    // Gestisce la rimozione di un singolo utente
+    /**
+     * Gestisce l'eliminazione di un singolo utente
+     * 
+     * Processo:
+     * 1. Valida l'ID utente
+     * 2. Mostra modale di conferma
+     * 3. Elimina utente se confermato
+     * 4. Mostra modale di successo/errore
+     * 
+     * @function
+     * @async
+     * @param {number|string} userId - ID dell'utente da eliminare
+     */
     const handleDeleteUser = async (userId) => {
         if (!userId) {
             await showConfirm({

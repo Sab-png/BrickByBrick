@@ -1,3 +1,20 @@
+/**
+ * @fileoverview Pagina dettaglio singolo immobile.
+ * Mostra gallery, informazioni, caratteristiche e pulsante prenotazione.
+ * 
+ * @module pages/DettaglioImmobile
+ * @requires react-router-dom
+ * @requires react
+ * @requires ../components/HeaderImmobile
+ * @requires ../components/ImmobileGallery
+ * @requires ../components/InformazioneImmobile
+ * @requires ../components/FeatureImmobile
+ * @requires ../components/InfoEdificioImmobile
+ * @requires ../components/DescrizioneImmobile
+ * @requires ../components/NewsLetter
+ * @requires ../hooks/useSEO
+ */
+
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
@@ -12,6 +29,27 @@ import Newsletter from '../components/NewsLetter';
 
 import useSEO from '../hooks/useSEO';
 
+/**
+ * Pagina Dettaglio Immobile
+ * 
+ * Funzionalità:
+ * - Fetch immobile singolo da API tramite ID params
+ * - Header con indirizzo, prezzo e back button
+ * - Gallery immagini responsive
+ * - Dettagli tecnici (superficie, locali, bagni, piano)
+ * - Badge caratteristiche (arredato, balcone, ecc.)
+ * - Info edificio (anno, piani, disponibilità)
+ * - Descrizione testuale
+ * - Pulsante prenota visita
+ * - SEO dinamico basato su dati immobile
+ * 
+ * @page
+ * @returns {JSX.Element} Pagina dettaglio completa
+ * 
+ * @example
+ * // Route dinamica
+ * <Route path="/immobili/:id" element={<DettaglioImmobile />} />
+ */
 export default function DettaglioImmobile() {
 
   const { id } = useParams();

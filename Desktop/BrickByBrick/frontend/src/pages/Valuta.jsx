@@ -1,3 +1,14 @@
+/**
+ * @fileoverview Pagina valutazione immobile con step process.
+ * Mostra il percorso per richiedere una valutazione.
+ * 
+ * @module pages/Valuta
+ * @requires ../components/HeroSection
+ * @requires ../components/StepsSection
+ * @requires ../components/NewsLetter
+ * @requires ../hooks/useSEO
+ */
+
 import HeroSection from '../components/HeroSection';
 import StepsSection from '../components/StepsSection';
 import Newsletter from "../components/NewsLetter"
@@ -24,6 +35,27 @@ import valutaBgJpg from "../assets/images/jpg/hero-valuta.jpg";
 import valutaBgWebP from "../assets/images/webp/hero-valuta.webp";
 import valutaBgAvif from "../assets/images/avif/hero-valuta.avif";
 
+/**
+ * Pagina Valuta Immobile
+ * 
+ * Sezioni:
+ * - Hero section "Valuta il tuo immobile online"
+ * - Steps Section con 3 passaggi:
+ *   1. Compila il form online
+ *   2. Ricevi la valutazione AI in 72h
+ *   3. Conferma con sopralluogo agente
+ * - CTA finale "Valuta il tuo immobile" -> redirect a form
+ * - Newsletter subscription
+ * 
+ * SEO: Ottimizzata per "valuta immobile online, stima gratuita 72h"
+ * 
+ * @page
+ * @returns {JSX.Element} Pagina valutazione
+ * 
+ * @example
+ * // Route
+ * <Route path="/valuta-immobile" element={<Valuta />} />
+ */
 export default function Valuta() {
 
     useSEO({

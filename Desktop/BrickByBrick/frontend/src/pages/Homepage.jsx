@@ -1,3 +1,15 @@
+/**
+ * @fileoverview Pagina homepage principale del sito.
+ * Include hero, features, come funziona e newsletter.
+ * 
+ * @module pages/Homepage
+ * @requires ../components/HeroSection
+ * @requires ../components/FeatureSection
+ * @requires ../components/NewsLetter
+ * @requires ../components/CardSection
+ * @requires ../hooks/useSEO
+ */
+
 import HeroSection from "../components/HeroSection"
 import FeaturesSection from "../components/FeatureSection"
 import Newsletter from "../components/NewsLetter"
@@ -9,6 +21,24 @@ import heroBgJpg from "../assets/images/jpg/hero-homepage.jpg";
 import heroBgWebP from "../assets/images/webp/hero-homepage.webp";
 import heroBgAvif from "../assets/images/avif/hero-homepage.avif";
 
+/**
+ * Pagina Homepage
+ * 
+ * Sezioni:
+ * - Hero section con CTA "Valuta il tuo immobile"
+ * - Features "Perché Immobiliaris" (4 vantaggi)
+ * - Card Section "Come funziona" (3 step)
+ * - Newsletter subscription
+ * 
+ * SEO: Ottimizzata per "agenzia immobiliare torino, valutazione casa"
+ * 
+ * @page
+ * @returns {JSX.Element} Homepage completa
+ * 
+ * @example
+ * // Route principale
+ * <Route path="/" element={<Homepage />} />
+ */
 export default function Homepage() {
 
   useSEO({

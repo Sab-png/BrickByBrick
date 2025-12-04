@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Badge caratteristiche immobile (contratto, arredato, balcone, ecc.).
+ * 
+ * @module FeatureImmobile
+ * @requires react-icons/fa
+ */
+
 import { 
   FaFileContract, 
   FaCouch, 

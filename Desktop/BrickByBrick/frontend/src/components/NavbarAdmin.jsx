@@ -1,7 +1,19 @@
+/**
+ * @fileoverview Sidebar di navigazione per il pannello amministratore.
+ * Include menu items con icone SVG e navigazione verso sezioni admin.
+ * 
+ * @module NavbarAdmin
+ * @requires react-router-dom
+ * @requires react
+ */
+
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-
+/**
+ * Configurazione voci menu amministratore
+ * @constant {Array<{name: string, path: string, end?: boolean, icon: JSX.Element}>}
+ */
 const navbarItems = [
     { 
         name: "Statistiche", 
@@ -63,6 +75,19 @@ const navbarItems = [
     },
 ];
 
+/**
+ * Componente SideBar Admin
+ * 
+ * Sidebar navigazione amministratore con toggle apertura/chiusura.
+ * Include logo, menu items, logout.
+ * 
+ * @component
+ * @returns {JSX.Element} Sidebar admin completa
+ * 
+ * @example
+ * import { SideBar } from './NavbarAdmin';
+ * <SideBar />
+ */
 export const SideBar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();

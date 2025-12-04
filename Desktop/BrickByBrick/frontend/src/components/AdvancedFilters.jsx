@@ -1,3 +1,12 @@
+/**
+ * @fileoverview Filtri avanzati per ricerca immobili.
+ * Include contratto, tipologia, range prezzo, locali, bagni, superficie, piano.
+ * 
+ * @module AdvancedFilters
+ * @requires react
+ * @requires ../store/filters-context
+ */
+
 import { useContext } from 'react';
 import FiltersContext from '../store/filters-context';
 

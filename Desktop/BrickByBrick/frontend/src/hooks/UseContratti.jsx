@@ -1,7 +1,44 @@
+/**
+ * @fileoverview Hook personalizzato per gestione CRUD contratti.
+ * Fornisce funzioni per fetch, creazione, modifica ed eliminazione contratti.
+ * 
+ * @module UseContratti
+ * @requires react
+ */
+
 import { useState, useEffect, useCallback } from 'react';
 
 const API_BASE_URL = 'http://localhost:8085';
 
+/**
+ * Hook per gestione contratti
+ * 
+ * Funzionalità:
+ * - Fetch lista contratti con ricerca
+ * - Recupero singolo contratto per ID
+ * - Creazione nuovo contratto
+ * - Modifica contratto esistente
+ * - Eliminazione contratto
+ * - Gestione filtri e stato
+ * 
+ * @hook
+ * @returns {Object} Oggetto con stati e funzioni
+ * @returns {Array<Object>} returns.data - Lista contratti
+ * @returns {boolean} returns.isLoading - Stato caricamento
+ * @returns {Error|null} returns.error - Errore eventuale
+ * @returns {Function} returns.fetchContratti - Recupera lista
+ * @returns {Function} returns.getContrattoById - Recupera singolo contratto
+ * @returns {Function} returns.createContratto - Crea nuovo contratto
+ * @returns {Function} returns.updateContratto - Aggiorna contratto
+ * @returns {Function} returns.deleteContratto - Elimina contratto
+ * @returns {Function} returns.applyFilters - Applica filtri
+ * 
+ * @example
+ * const { data, createContratto, deleteContratto } = useContratti();
+ * 
+ * await createContratto({ tipo: 'Vendita', id_immobile: 1, ... });
+ * await deleteContratto(5);
+ */
 const useContratti = () => {
     // 1. STATI PRINCIPALI
     const [data, setData] = useState([]);

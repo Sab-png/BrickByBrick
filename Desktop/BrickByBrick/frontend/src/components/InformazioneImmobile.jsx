@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Sezione dettagli tecnici immobile (superficie, locali, bagni, ecc.).
+ * 
+ * @module InformazioneImmobile
+ * @requires react-icons/fa
+ */
+
 import { 
     FaHome, 
     FaExpandArrowsAlt, 

@@ -1,6 +1,51 @@
+/**
+ * @fileoverview Hook per gestione SEO e meta tag dinamici.
+ * Aggiorna title, description, Open Graph e Twitter Card.
+ * 
+ * @module useSEO
+ * @requires react
+ * @requires react-router-dom
+ */
+
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 
+/**
+ * Hook per SEO dinamico
+ * 
+ * Aggiorna automaticamente:
+ * - Title tag
+ * - Meta description
+ * - Open Graph tags (og:title, og:description, og:image, og:url)
+ * - Twitter Card tags
+ * - Keywords
+ * - Robots (index/noindex)
+ * 
+ * @hook
+ * @param {Object} options - Configurazione SEO
+ * @param {string} options.title - Titolo pagina (verrà suffissato con " - Immobiliaris")
+ * @param {string} [options.description] - Descrizione meta tag
+ * @param {string} [options.image] - URL immagine per Open Graph
+ * @param {string} [options.imageAlt] - Alt text immagine
+ * @param {string} [options.type='website'] - Tipo Open Graph (website/article)
+ * @param {string} [options.keywords] - Keywords SEO
+ * @param {boolean} [options.noindex=false] - Impedisce indicizzazione
+ * 
+ * @example
+ * // In una pagina
+ * useSEO({
+ *   title: 'Chi Siamo',
+ *   description: 'Scopri la storia di Immobiliaris',
+ *   keywords: 'agenzia immobiliare, Torino, Piemonte'
+ * });
+ * 
+ * @example
+ * // Per pagina non indicizzabile
+ * useSEO({
+ *   title: 'Admin Panel',
+ *   noindex: true
+ * });
+ */
 export default function useSEO({
     title,
     description = 'Scopri il portale Immobiliaris: valutazioni, vendita e gestione di immobili in Piemonte e a Torino.',

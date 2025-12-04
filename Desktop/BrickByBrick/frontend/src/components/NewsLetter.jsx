@@ -1,3 +1,11 @@
+/**
+ * @fileoverview Componente newsletter con form di iscrizione.
+ * Gestisce validazione email e feedback stato.
+ * 
+ * @module NewsLetter
+ * @requires react
+ */
+
 import { useState } from 'react';
 
 import newsletterImage from '../assets/images/svg/newsletter.svg';

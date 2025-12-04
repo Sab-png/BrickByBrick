@@ -1,3 +1,20 @@
+/**
+ * @fileoverview Timeline "Dal clic al rogito" con 4 step principali.
+ * 
+ * @module Timeline
+ */
+
+/**
+ * Componente Timeline
+ * 
+ * Visualizza i 4 step del processo: valutazione, verifica agente, pubblicazione, rogito.
+ * 
+ * @component
+ * @returns {JSX.Element} Sezione timeline con step
+ * 
+ * @example
+ * <Timeline />
+ */
 export default function Timeline() {
     const steps = [
         { number: 1, title: "Richiedi la valutazione", text: "Inserisci i dati online e ricevi subito una stima automatica." },

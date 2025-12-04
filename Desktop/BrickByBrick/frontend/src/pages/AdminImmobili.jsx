@@ -1,3 +1,16 @@
+/**
+ * @fileoverview Pagina amministratore per gestione immobili.
+ * Include tabella, ricerca, modifica ed eliminazione con modale conferma.
+ * 
+ * @module pages/AdminImmobili
+ * @requires react
+ * @requires react-router-dom
+ * @requires ../hooks/UseImmobili
+ * @requires ../components/AdminTableReusable
+ * @requires ../components/ConfirmModal
+ * @requires ../hooks/UseConfirmModal
+ */
+
 // src/pages/Immobili.jsx
 
 import React, { useState } from 'react';
@@ -10,12 +23,25 @@ import ConfirmModal from '../components/ConfirmModal';
 import useConfirmModal from '../hooks/UseConfirmModal';
 
 /**
- * Componente principale per la Gestione Immobili.
- * Responsabile di:
- * 1. Caricare e visualizzare la lista degli immobili tramite useImmobiliManager.
- * 2. Gestire la logica di ricerca/filtro.
- * 3. Gestire la selezione delle righe per le azioni di massa (Modifica, Rimuovi).
- * 4. Reindirizzare ai form Aggiungi/Modifica.
+ * Pagina Gestione Immobili (Admin)
+ * 
+ * Funzionalità:
+ * - Lista immobili con tabella riutilizzabile
+ * - Ricerca per indirizzo/città
+ * - Pulsante aggiungi immobile
+ * - Modifica immobile (redirect a form)
+ * - Eliminazione con modale conferma
+ * - Gestione caratteristiche immobile
+ * 
+ * Colonne tabella:
+ * - ID, Foto, Indirizzo, Città, Prezzo, Tipologia, Contratto, Azioni
+ * 
+ * @page
+ * @returns {JSX.Element} Pagina gestione immobili admin
+ * 
+ * @example
+ * // Route protetta admin
+ * <Route path="/admin/immobili" element={<Immobili />} />
  */
 const Immobili = () => {
     const navigate = useNavigate();

@@ -1,3 +1,11 @@
+/**
+ * @fileoverview Footer principale con sezioni, link e social media.
+ * Include servizi, informazioni, contatti e icone social.
+ * 
+ * @module Footer
+ * @requires react-icons/fa
+ */
+
 import { 
     FaFacebookF, 
     FaTwitter, 
@@ -6,6 +14,20 @@ import {
     FaYoutube 
 } from "react-icons/fa"; 
 
+/**
+ * Componente Footer
+ * 
+ * Struttura:
+ * - Sezione social media con icone
+ * - Colonne con link a servizi, informazioni, contatti
+ * - Copyright e privacy policy
+ * 
+ * @component
+ * @returns {JSX.Element} Footer completo
+ * 
+ * @example
+ * <Footer />
+ */
 export default function Footer() {
     return (
         <footer className="footer">

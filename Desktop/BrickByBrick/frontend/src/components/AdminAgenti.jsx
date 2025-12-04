@@ -1,3 +1,17 @@
+/**
+ * @fileoverview Componente per la gestione della lista agenti.
+ * Fornisce interfaccia per visualizzare, cercare, aggiungere, modificare ed eliminare agenti.
+ * Utilizza modali per conferme e feedback utente.
+ * 
+ * @module AdminAgenti
+ * @requires react
+ * @requires react-router-dom
+ * @requires ../hooks/UseAgents
+ * @requires ./AdminTableReusable
+ * @requires ./ConfirmModal
+ * @requires ../hooks/UseConfirmModal
+ */
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAgents from '../hooks/UseAgents'; 
@@ -6,18 +20,31 @@ import ConfirmModal from './ConfirmModal';
 import useConfirmModal from '../hooks/UseConfirmModal'; 
 
 /**
- * Componente principale per la Gestione Agenti.
- * Questa pagina è responsabile di:
- * 1. Caricare e visualizzare la lista degli agenti tramite useAgents.
- * 2. Gestire la logica di ricerca/filtro.
- * 3. Gestire la selezione delle righe per le azioni di massa (Modifica, Rimuovi).
- * 4. Reindirizzare ai form Aggiungi/Modifica.
+ * Componente principale per la Gestione Agenti
+ * 
+ * Responsabilità:
+ * - Visualizza lista agenti in formato tabella
+ * - Gestisce ricerca/filtro agenti
+ * - Permette aggiunta, modifica ed eliminazione agenti
+ * - Mostra feedback tramite modali personalizzati
+ * 
+ * @component
+ * @returns {JSX.Element} Interfaccia gestione agenti
+ * 
+ * @example
+ * // Utilizzo nelle routes
+ * <Route path="/admin/agenti" element={<Agenti />} />
  */
 const Agenti = () => {
     const navigate = useNavigate();
+    
+    /** @type {[string, Function]} Termine di ricerca inserito dall'utente */
     const [searchTerm, setSearchTerm] = useState('');
+    
+    /** Hook per gestire modali di conferma */
     const { modalState, showConfirm, handleClose, handleConfirm } = useConfirmModal();
 
+    /** Hook personalizzato per operazioni CRUD sugli agenti */
     const { 
         data: usersList,
         isLoading,
@@ -26,24 +53,48 @@ const Agenti = () => {
         setFilters
     } = useAgents(); 
 
-    // --- LOGICA DI CONTROLLO ---
-
-    // Gestisce l'attivazione della ricerca. Aggiorna lo stato dei filtri nell'hook.
+    /**
+     * Attiva la ricerca aggiornando i filtri
+     * Passa il termine di ricerca all'hook useAgents
+     * 
+     * @function
+     */
     const handleSearchClick = () => {
         setFilters({ search: searchTerm.trim() });
     };
 
-    // Reindirizza al form unificato in modalità Aggiunta.
+    /**
+     * Reindirizza al form di aggiunta nuovo agente
+     * 
+     * @function
+     */
     const handleAddAgent = () => {
         navigate('/admin/agenti/aggiungi-agente');
     };
 
-    // Reindirizza al form unificato in modalità Modifica, includendo l'ID nell'URL.
+    /**
+     * Reindirizza al form di modifica agente esistente
+     * 
+     * @function
+     * @param {number|string} agentId - ID dell'agente da modificare
+     */
     const handleEditAgent = (agentId) => {
         navigate(`/admin/agenti/modifica-agente/${agentId}`);
     };
   
-    // Gestisce la rimozione di un singolo agente
+    /**
+     * Gestisce l'eliminazione di un singolo agente
+     * 
+     * Processo:
+     * 1. Valida l'ID agente
+     * 2. Mostra modale di conferma
+     * 3. Elimina agente se confermato
+     * 4. Mostra modale di successo/errore
+     * 
+     * @function
+     * @async
+     * @param {number|string} agentId - ID dell'agente da eliminare
+     */
     const handleDeleteAgent = async (agentId) => {
         if (!agentId) {
             await showConfirm({
@@ -87,7 +138,11 @@ const Agenti = () => {
         }
     };
     
-    // Configurazione delle colonne da passare al ReusableTable
+    /**
+     * Configurazione delle colonne per la tabella agenti
+     * 
+     * @constant {Array<{key: string, header: string}>}
+     */
     const userColumns = [
         { key: 'nome', header: 'Nome' },
         { key: 'cognome', header: 'Cognome' },

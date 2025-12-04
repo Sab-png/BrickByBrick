@@ -1,7 +1,37 @@
+/**
+ * @fileoverview Pagina dashboard statistiche amministratore.
+ * Mostra conteggi totali di immobili, agenti, utenti e contratti.
+ * 
+ * @module pages/AdminStatistiche
+ * @requires react
+ */
+
 import React, { useState, useEffect } from 'react';
 
 const API_BASE_URL = 'http://localhost:8085';
 
+/**
+ * Pagina Statistiche Dashboard (Admin)
+ * 
+ * Funzionalità:
+ * - Fetch parallelo di tutte le risorse (immobili, agenti, utenti, contratti)
+ * - Calcolo conteggi totali
+ * - Visualizzazione card con icone e numeri
+ * - Gestione stati loading/error
+ * 
+ * Card visualizzate:
+ * - Immobili totali
+ * - Agenti attivi
+ * - Utenti registrati
+ * - Contratti gestiti
+ * 
+ * @page
+ * @returns {JSX.Element} Dashboard con statistiche
+ * 
+ * @example
+ * // Route protetta admin (index)
+ * <Route path="/admin" element={<Statistiche />} />
+ */
 export default function Statistiche() {
     const [stats, setStats] = useState({
         immobili: 0,
